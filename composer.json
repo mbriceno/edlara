@@ -1,4 +1,38 @@
 {
+    "name": "grans/edulara",
+    "description": "e-Learning System using Laravel Framework",
+    "type": "project",
+    "homepage": "http://gnanakeethan.info/edulara/",
+    "license": "GPL -3.0+",
+    "authors": [
+        {
+            "name": "Gnanakeethan Balasubramaniam",
+            "email": "gnanakeethan@gmail.com",
+            "homepage": "http://gnanakeethan.info",
+            "role": "Lead-Developer"
+        },
+        {
+            "name": "Sivarathan Sivarajah",
+            "email": "sivarathan@gmail.com",
+            "homepage": "srathan.blogspot.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Anushanth Balabaskaran",
+            "email": "banush28@gmail.com",
+            "role": "Designer"
+        },
+        {
+            "name": "Ramkishan Puvanayokeswaran",
+            "email": "ramkishan0000@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Nishanthan Kathirkamanathan",
+            "email": "knbrothers@hotmail.com",
+            "role": "Designer"
+        }
+    ],
     "require": {
         "laravel/framework": "4.0.*",
         "cartalyst/sentry": "2.0.*"
