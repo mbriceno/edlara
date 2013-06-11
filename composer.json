@@ -35,7 +35,10 @@
     ],
     "require": {
         "laravel/framework": "4.0.*",
-        "cartalyst/sentry": "2.0.*"
+        "cartalyst/sentry": "2.0.*",
+        "jasonlewis/basset": "dev-master",
+        "zizaco/mongolid-laravel": "dev-master",
+        "jasonlewis/enhanced-router": "1.0.*"
     },
     "autoload": {
         "classmap": [

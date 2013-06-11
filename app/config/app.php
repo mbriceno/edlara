@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'https://laravel.dev',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'Asia/Colombo',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => 'RXu1DzzFEuhQZbv6krQuFYJzVowdxo3O',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -114,7 +114,9 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
                 'Cartalyst\Sentry\SentryServiceProvider',
-
+                'Zizaco\MongolidLaravel\MongolidServiceProvider',
+                'Basset\BassetServiceProvider',
+                'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider'
 	),
 
 	/*
@@ -179,7 +181,9 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-                'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+                'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+                'Basset'          => 'Basset\Facade',
+                'MongoLid'        => 'Zizaco\MongolidLaravel\MongoLid',
 	),
 
 );
