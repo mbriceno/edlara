@@ -11,6 +11,14 @@
 |
 */
 
+Route::group(array('domain' => 'account.laravel.dev'), function()
+{
+    
+        Route::get('/', function()
+        {
+                return View::make('accounts.index');
+        });
+});
 Route::get('/', function()
 {
 	return View::make('home');
