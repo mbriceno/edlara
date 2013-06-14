@@ -5,6 +5,8 @@
         @stylesheets('bootstrap')
     </head>
     <body>
-        
+
+        {{-- Bootstrap JS Compiled --}}
+        @javascripts('bootstrap')
     </body>
 </html>
