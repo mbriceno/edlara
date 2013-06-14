@@ -16,7 +16,23 @@ Route::group(array('domain' => 'account.laravel.dev'), function()
     
         Route::get('/', function()
         {
-                return View::make('accounts.index');
+                return View::make('account.index');
+        });
+});
+Route::group(array('domain' => 'dashboard.laravel.dev'), function()
+{
+    
+        Route::get('/', function()
+        {
+                return View::make('dashboard.index');
+        });
+});
+Route::group(array('domain' => 'statistics.laravel.dev'), function()
+{
+    
+        Route::get('/', function()
+        {
+                return View::make('statistics.index');
         });
 });
 Route::get('/', function()
