@@ -36,9 +36,12 @@
     "require": {
         "laravel/framework": "4.0.*",
         "cartalyst/sentry": "2.0.*",
-        "jasonlewis/basset": "dev-master",
+        "jasonlewis/basset": "4.0.*@dev",
         "zizaco/mongolid-laravel": "dev-master",
-        "jasonlewis/enhanced-router": "1.0.*"
+        "jasonlewis/enhanced-router": "1.0.*",
+        "way/generators": "dev-master",
+        "twitter/bootstrap": "dev-master",
+        "leafo/lessphp": "v0.3.9"
     },
     "autoload": {
         "classmap": [
