@@ -81,3 +81,11 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+Basset::collection('bootstrap', function($collection)
+{
+    // Collection definition.
+    $collection->add('../public/css/bootstrap.min.css');
+    $collection->add('../public/css/bootstrap-responsive.min.css');
+    $collection->add('../public/js/bootstrap.min.js');
+})->apply('Less');
