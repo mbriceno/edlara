@@ -40,7 +40,6 @@
         "zizaco/mongolid-laravel": "dev-master",
         "jasonlewis/enhanced-router": "1.0.*",
         "way/generators": "dev-master",
-        "twitter/bootstrap": "dev-master",
         "leafo/lessphp": "v0.3.9"
     },
     "autoload": {
