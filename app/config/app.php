@@ -117,7 +117,7 @@ return array(
                 'Zizaco\MongolidLaravel\MongolidServiceProvider',
                 'Basset\BassetServiceProvider',
                 'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider',
-                'Gnanakeethan\Edlara\EdlaraServiceProvider',
+                'Grans\Learn\LearnServiceProvider',
 	),
 
 	/*
