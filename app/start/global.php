@@ -88,4 +88,11 @@ Basset::collection('bootstrap', function($collection)
     $collection->add('../public/css/bootstrap.min.css');
     $collection->add('../public/css/bootstrap-responsive.min.css');
     $collection->add('../public/js/bootstrap.min.js');
+    $collection->add('../public/js/jquery-1.10.0.min.js');
+})->apply('Less');
+Basset::collection('grans', function($collection)
+{
+    // Collection definition.
+    $collection->add('../public/css/system/main.css');
+    $collection->add('../public/js/jquery.fittext.js');
 })->apply('Less');
