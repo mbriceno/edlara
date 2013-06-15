@@ -116,7 +116,8 @@ return array(
                 'Cartalyst\Sentry\SentryServiceProvider',
                 'Zizaco\MongolidLaravel\MongolidServiceProvider',
                 'Basset\BassetServiceProvider',
-                'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider'
+                'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider',
+                'Grans\Learn\LearnServiceProvider'
 	),
 
 	/*
