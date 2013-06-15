@@ -1,0 +1,23 @@
+{
+    "name": "grans/learn",
+    "description": "",
+    "authors": [
+        {
+            "name": "Gnanakeethan Balasubramaniam",
+            "email": "gnanakeethan@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Grans\\Learn": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
