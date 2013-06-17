@@ -39,8 +39,10 @@
         "jasonlewis/basset": "4.0.*@dev",
         "zizaco/mongolid-laravel": "dev-master",
         "jasonlewis/enhanced-router": "1.0.*",
-        "way/generators": "dev-master",
         "leafo/lessphp": "v0.3.9"
+    },
+    "require-dev": {    
+        "way/generators": "dev-master"
     },
     "autoload": {
         "classmap": [
