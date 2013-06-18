@@ -118,6 +118,7 @@ return array(
                 'Basset\BassetServiceProvider',
                 'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider',
                 'Grans\Learn\LearnServiceProvider',
+                'Way\Generators\GeneratorsServiceProvider'
 	),
 
 	/*
