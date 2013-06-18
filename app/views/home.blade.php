@@ -17,12 +17,7 @@
                     <div class="cloud x5"></div>
                 </div>
                 <span class="brand-name" id='top-header'>
-                    EdLara
-                </span>
             </div>
-
-        </div>        
-
             {{-- Bootstrap JS Compiled --}}
             @javascripts('bootstrap')
             @javascripts('grans')
