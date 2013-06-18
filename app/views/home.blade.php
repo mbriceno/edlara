@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Edulara</title>
+        <title>Edulara</title>        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="test/parallax/css/reset.css">
@@ -18,11 +18,11 @@
                     <div class="cloud x4"></div>
                     <div class="cloud x5"></div>
                 </div>
-                <span class="brand-name" id='top-header'> EdLara </span>
+                <span class="brand-name" id='top-header'>
+                    EdLara
+                </span>
             </div>
 
-<<<<<<< Updated upstream
-=======
             <div id="main" role="main">
 
                 <!-- Section #1 / Intro -->
@@ -79,15 +79,11 @@
 
             </div>
             <!-- // End of #main -->
->>>>>>> Stashed changes
         </div>
 
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')
         @javascripts('grans')
-
-        <script src="test/parallax/js/libs/jquery-1.6.1.min.js"></script>
-        <script src="test/parallax/js/script.js"></script>
         <script type="text/javascript">
             // $("#top-header").fitText(1.0, { minFontSize: '24px', maxFontSize: '480px' });
         </script>
