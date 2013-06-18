@@ -16,7 +16,7 @@
                     <div class="cloud x4"></div>
                     <div class="cloud x5"></div>
                 </div>
-                <span class="brand-name" id='top-header'>
+                <span class="brand-name" id='top-header'>EdLara</span>
             </div>
             {{-- Bootstrap JS Compiled --}}
             @javascripts('bootstrap')
