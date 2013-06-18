@@ -85,6 +85,7 @@ require app_path().'/filters.php';
 Basset::collection('bootstrap', function($collection)
 {
     // Collection definition.
+    $collection->add('../public/css/system/reset.css');
     $collection->add('../public/css/bootstrap.min.css');
     $collection->add('../public/css/bootstrap-responsive.min.css');
     $collection->add('../public/js/bootstrap.min.js');
@@ -93,6 +94,10 @@ Basset::collection('bootstrap', function($collection)
 Basset::collection('grans', function($collection)
 {
     // Collection definition.
+    
     $collection->add('../public/css/system/main.css');
-    $collection->add('../public/js/jquery.fittext.js');
+    $collection->add('../public/js/jquery.fittext.js');    
+    $collection->add('../public/css/system/parallax.css');  
+    $collection->add('../public/js/system/parallax.js');
+        
 })->apply('Less');
