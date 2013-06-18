@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Edulara</title>        
+        <title>Edulara</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans')
@@ -23,11 +23,8 @@
 
         </div>        
 
-        {{-- Bootstrap JS Compiled --}}
-        @javascripts('bootstrap')
-        @javascripts('grans')
-        <script type="text/javascript">
-            // $("#top-header").fitText(1.0, { minFontSize: '24px', maxFontSize: '480px' });
-        </script>
+            {{-- Bootstrap JS Compiled --}}
+            @javascripts('bootstrap')
+            @javascripts('grans')
     </body>
 </html>

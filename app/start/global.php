@@ -94,5 +94,5 @@ Basset::collection('grans', function($collection)
 {
     // Collection definition.
     $collection->add('../public/css/system/main.css');
-    $collection->add('../public/js/jquery.fittext.js');
+    $collection->add('../public/js/jquery.fittext.js');            
 })->apply('Less');
