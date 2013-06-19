@@ -183,9 +183,10 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-                'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
-                'Basset'          => 'Basset\Facade',
-                'MongoLid'        => 'Zizaco\MongolidLaravel\MongoLid',
+        'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Basset'          => 'Basset\Facade',
+        'MongoLid'        => 'Zizaco\MongolidLaravel\MongoLid',                
+        'Basset' => 'Basset\Facade'
 	),
 
 );
