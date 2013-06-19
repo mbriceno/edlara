@@ -3,7 +3,7 @@
     "description": "e-Learning System using Laravel Framework",
     "type": "project",
     "homepage": "http://gnanakeethan.info/edulara/",
-    "license": "GPL -3.0+",
+    "license": "GPL 3.0+",
     "authors": [
         {
             "name": "Gnanakeethan Balasubramaniam",
@@ -40,7 +40,7 @@
         "jasonlewis/basset": "4.0.*@dev",
         "zizaco/mongolid-laravel": "dev-master",
         "jasonlewis/enhanced-router": "1.0.*",
-        "leafo/lessphp": "v0.3.9",
+        "leafo/lessphp": "*",
         "phpunit/phpunit": "3.8.*"
     
     },
