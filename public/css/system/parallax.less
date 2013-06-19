@@ -1,0 +1,77 @@
+/**
+ *     TODO: Add Parallax Styling 
+ */
+
+@import url(//fonts.googleapis.com/css?family=Lobster+Two:700);
+div.parallax div article h2 {
+    font-family: "Lobster Two";
+    font-size: 11vmin;
+    margin: 0px;
+    color: #0077B3;
+}
+
+section.plx-story {
+    height: 100vmin;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width:1920px;
+    position: absolute;
+    top:200px;
+    left:0px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+section.plx-story {
+    #first {
+        background: url(/img/bg/plx-1.png) 50% 0 no-repeat fixed;
+    }
+    #second {        
+        background: url(/img/bg/plx-2.png) 50% 0 no-repeat fixed;
+    }
+    #third {
+        background: url(/img/bg/plx-3.png) 50% 0 no-repeat fixed;
+    }
+    #fourth {
+        background: url(/img/bg/plx-4.png) 50% 0 no-repeat fixed;
+    }
+} 
+#first {
+  article {
+    width:100vmin;
+    top:25vmin;
+    left:25vmin;
+    position:absolute;
+    text-align:center;
+    font:"Lobster Two";
+    p,a {
+      color:#090909;
+    }
+    a:hover {
+      color:#050505;
+    }
+    p:hover {
+      color:#ff00ff;
+    }
+  }  
+}
+
+#second {
+  padding:0;
+  article {
+    color:#fff;
+    width:50vmin;
+    margin-left:0vmin;
+    padding:10px 20px;
+    line-height:20vmin;
+    border: 1px solid rgba(150,150,150,0.1);
+    p {
+      margin-bottom:25px;
+    }
+    a {
+      color:#ff0;      
+    }
+  }
+}
