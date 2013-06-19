@@ -68,6 +68,32 @@ App::down(function()
 {
 	return Response::make("Be right back!", 503);
 });
+/**
+ * Custom Less compiling
+ */
+
+function autoCompileLess($inputFile, $outputFile) {
+  // load the cache
+  $cacheFile = $inputFile.".cache";
+
+  if (file_exists($cacheFile)) {
+    $cache = unserialize(file_get_contents($cacheFile));
+  } else {
+    $cache = $inputFile;
+  }
+
+  $less = new lessc;
+  $newCache = $less->cachedCompile($cache);
+
+  if (!is_array($cache) || $newCache["updated"] > $cache["updated"]) {
+    file_put_contents($cacheFile, serialize($newCache));
+    file_put_contents($outputFile, $newCache['compiled']);
+  }
+}
+//var_dump(__DIR__);
+$publicdir = __DIR__.'/../../public/';
+autoCompileLess('/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.less','/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.css');
+require app_path().'/filters.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -80,8 +106,6 @@ App::down(function()
 |
 */
 
-require app_path().'/filters.php';
-
 Basset::collection('bootstrap', function($collection)
 {
     // Collection definition.
@@ -90,9 +114,13 @@ Basset::collection('bootstrap', function($collection)
     $collection->add('../public/js/bootstrap.min.js');
     $collection->add('../public/js/jquery-1.10.0.min.js');
 })->apply('Less');
+
 Basset::collection('grans', function($collection)
 {
     // Collection definition.
     $collection->add('../public/css/system/main.css');
-    $collection->add('../public/js/jquery.fittext.js');            
-})->apply('Less');
+   // $collection->add('../public/css/system/parallax.css');
+    $collection->add('../public/js/jquery.fittext.js');    
+    $collection->add('../public/js/system/parallax.js');
+});
+
