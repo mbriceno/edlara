@@ -8,7 +8,7 @@
 /*Lets start with the cloud formation rather*/
 
 /*The container will also serve as the SKY*/
-@import url(http://fonts.googleapis.com/css?family=Metamorphous);
+@import url(//fonts.googleapis.com/css?family=Metamorphous);
 
 #top-header {
     font-family: 'Metamorphous', sans-serif;
@@ -128,16 +128,16 @@ body {
 }
 
 @-webkit-keyframes moveclouds {
-0% {margin-left: 1000px;}
-100% {margin-left: -1000px;}
+0% {margin-left: 1200px;}
+100% {margin-left: -1200px;}
 }
 @-moz-keyframes moveclouds {
-0% {margin-left: 1000px;}
-100% {margin-left: -1000px;}
+0% {margin-left: 1200px;}
+100% {margin-left: -1200px;}
 }
 @-o-keyframes moveclouds {
-0% {margin-left: 1000px;}
-100% {margin-left: -1000px;}
+0% {margin-left: 1200px;}
+100% {margin-left: -1200px;}
 }
 .container-fluid#top-heading {
     padding-right: 0px !important;
