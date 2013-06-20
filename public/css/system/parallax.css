@@ -31,12 +31,12 @@ section.plx-story #fourth {
   background: url(/img/bg/plx-4.png) 50% 0 no-repeat fixed;
 }
 #first article {
-  width: 100vmin;
-  top: 25vmin;
-  left: 25vmin;
-  position: absolute;
+  width: 100%;
+  max-width: 1920px;
+  height: 1000px;
   text-align: center;
-  font: "Lobster Two";
+  font-family: "Lobster Two";
+  position: relative;
 }
 #first article p,
 #first article a {
@@ -52,16 +52,21 @@ section.plx-story #fourth {
   padding: 0;
 }
 #second article {
-  color: #fff;
-  width: 50vmin;
-  margin-left: 0vmin;
-  padding: 10px 20px;
-  line-height: 20vmin;
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  height: 1000px;
+  text-align: center;
+  font-family: "Lobster Two";
   border: 1px solid rgba(150,150,150,0.1);
 }
 #second article p {
-  margin-bottom: 25px;
+  margin-bottom: 0px;
 }
 #second article a {
   color: #ff0;
+}
+#third article {
+  color: #fff;
+  padding: 0;
 }
