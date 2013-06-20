@@ -33,7 +33,7 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+/*Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::guest('login');
 });
@@ -43,7 +43,7 @@ Route::filter('auth.basic', function()
 {
 	return Auth::basic();
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
@@ -78,3 +78,13 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+/*
+Route::filter('auth',function(){
+    
+    if (!Sentry::check()){
+            
+    }    
+    else {        
+        //User is Logged In
+    }
+});*/
