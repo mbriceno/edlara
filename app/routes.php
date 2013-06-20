@@ -11,21 +11,21 @@
 |
 */
         
-Route::get('login/{returnTo?}',function ($returnTo='/'){
+Route::get('login/urlto/{urlTo?}',function ($urlTo=NULL){
     
     //Return The Account Login View.
-    return View::make('account.login')->with('returnTo',$returnTo);
+    return View::make('account.login')->with('urlTo',$urlTo);
+    
 });
 
 //Accounts Subdomain
 Route::group(array('domain' => 'account.laravel.dev','before'=>'auth'), function()
 {
-         Route::get('/', function()
+         Route::get('/',array('before'=>'auth' ,function()
         {
                 return View::make('account.index');
-        });
-});
-
+        }));
+})->before('auth');
 
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev'), function()
@@ -35,32 +35,32 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
         {
                 return View::make('dashboard.index');
         });
-})->before('auth');
+});
 
-
-
-//
-Route::group(array('domain' => 'statistics.laravel.dev'), function()
+//Statistics Subdomain
+Route::group(array('domain' => 'statistics.laravel.dev','before'=>'auth'), function()
 {
     
-        Route::get('/', function()
+        Route::get('/',function()
         {
                 return View::make('statistics.index');
         });
-})->before('auth');
-
-Route::get('/', function()
-{
-	return View::make('home');
 });
 
+Route::get('/',array('before'=>'auth',  function()
+{
+	return View::make('home');
+}));
 
 Route::filter('auth',function(){
-    if (!Sentry::check()){ 
-        Redirect::to('/login/');
+    if (!Sentry::check()){
+        //User is not Logged In        
+        $currentURL = URL::current();
+        $currentURL = substr($currentURL, 8);
+        return Redirect::to('/login/urlto/'.$currentURL);
     }    
     else {        
         //User is Logged In
-        //Redirect::to('/');
+        return Redirect::to('/');
     }
 });
