@@ -14,9 +14,6 @@ section.plx-story {
   position: absolute;
   top: 200px;
   left: 0px;
-  border-top: 1px solid rgba(255,255,255,0.3);
-  border-bottom: 1px solid rgba(0,0,0,0.3);
-  box-shadow: 0 0 50px rgba(0,0,0,0.8);
 }
 section.plx-story #first {
   background: url(/img/bg/plx-1.png) 50% 0 no-repeat fixed;
@@ -36,7 +33,9 @@ section.plx-story #fourth {
   height: 1000px;
   text-align: center;
   font-family: "Lobster Two";
-  position: relative;
+  position: absolute;
+  left: 0px;
+  top: 50vmax;
 }
 #first article p,
 #first article a {
@@ -52,13 +51,14 @@ section.plx-story #fourth {
   padding: 0;
 }
 #second article {
-  position: relative;
+  position: absolute;
+  left: 0px;
+  top: 150vmax;
   width: 100%;
   max-width: 1920px;
   height: 1000px;
   text-align: center;
   font-family: "Lobster Two";
-  border: 1px solid rgba(150,150,150,0.1);
 }
 #second article p {
   margin-bottom: 0px;
@@ -69,4 +69,20 @@ section.plx-story #fourth {
 #third article {
   color: #fff;
   padding: 0;
+}
+div#main-nav {
+  position: absolute;
+  left: 75vmin;
+  top: 10vmin;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+  color: #555555;
+  text-decoration: none;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }

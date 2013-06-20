@@ -33,7 +33,7 @@ App::after(function($request, $response)
 |
 */
 
-/*Route::filter('auth', function()
+Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::guest('login');
 });
@@ -43,7 +43,7 @@ Route::filter('auth.basic', function()
 {
 	return Auth::basic();
 });
-*/
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
@@ -80,11 +80,27 @@ Route::filter('csrf', function()
 });
 /*
 Route::filter('auth',function(){
-    
     if (!Sentry::check()){
-            
+        //User is not Logged In        
+        $currentURL = URL::current();
+        
+        Redirect::to('/login/urlto/'.$currentURL);
     }    
     else {        
         //User is Logged In
+        Redirect::to('/');
+    }
+});
+
+/*
+Route::filter('auth',function(){
+    
+    if (!Sentry::check()){
+        //User is not Logged In
+         return FALSE;   
+    }    
+    else {        
+        //User is Logged In        
+         return TRUE;   
     }
 });*/
