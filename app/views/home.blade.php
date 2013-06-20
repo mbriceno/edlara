@@ -20,15 +20,35 @@
                 <span class="brand-name" id='top-header'>EdLara</span>
             </div>
         </div>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="#">Title</a>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="parallax">
             <section id="first" class="plx-story">
                 <article>
-                    <p>Test</p>
+                    <p>
+                        Test
+                    </p>
                 </article>
             </section>
             <section id="second" class="plx-story">
                 <article>
-                    <p>Test</p>
+                    <p>
+                        Test
+                    </p>
                 </article>
             </section>
         </div>
