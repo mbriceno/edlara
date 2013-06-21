@@ -12,9 +12,9 @@ class CreateTeacherTable extends Migration {
      */
     public function up()
     {
-        Schema::create('teacher', function(Blueprint $table) {
-            $table->increments('id');
-            $table->
+        Schema::create('teachers', function(Blueprint $table) {
+            $table->integer('user_id')->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->string('username',32);
             $table->timestamps();
         });
     }
@@ -26,7 +26,7 @@ class CreateTeacherTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('teacher');
+     //   Schema::drop('teachers');
     }
 
 }

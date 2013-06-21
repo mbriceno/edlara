@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateStudentTable extends Migration {
 
@@ -11,9 +12,9 @@ class CreateStudentTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('student', function(Blueprint $table) {
-            $table->increments('id');
-            $table->
+		Schema::create('students', function(Blueprint $table) {
+		    $table->integer('user_id')->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->string('username',32);
             $table->timestamps();
         });
 	}
@@ -25,7 +26,7 @@ class CreateStudentTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('student');		
+     //   Schema::drop('students');		
 	}
 
 }
