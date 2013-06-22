@@ -23,7 +23,7 @@ Route::get('login',function (){
 Route::post('login',array('before' => 'csrf','uses' => 'LoginController@authenticate'));
 
 //Accounts Subdomain
-Route::group(array('domain' => 'account.laravel.dev','before'=>'auth'), function()
+Route::group(array('domain' => 'account.laravel.dev'), function()
 {
          Route::get('/',array('before'=>'auth' ,function()
         {
