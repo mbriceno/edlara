@@ -10,13 +10,17 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-        
-Route::get('login/urlto/{urlTo?}',function ($urlTo=NULL){
+
+//Outputting the Login Page
+Route::get('login',function (){
     
     //Return The Account Login View.
-    return View::make('account.login')->with('urlTo',$urlTo);
+    return View::make('account.login');
     
 });
+
+//Authencticating User with Controller
+Route::post('login',array('before' => 'csrf','uses' => 'LoginController@authenticate'));
 
 //Accounts Subdomain
 Route::group(array('domain' => 'account.laravel.dev','before'=>'auth'), function()
@@ -35,32 +39,10 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
         {
                 return View::make('dashboard.index');
         });
-});
+})->before('auth');
 
-//Statistics Subdomain
-Route::group(array('domain' => 'statistics.laravel.dev','before'=>'auth'), function()
-{
-    
-        Route::get('/',function()
-        {
-                return View::make('statistics.index');
-        });
-});
-
+//HomePage Catcher
 Route::get('/', function()
 {
 	return View::make('home');
-});
-
-Route::filter('auth',function(){
-    if (!Sentry::check()){
-        //User is not Logged In        
-        $currentURL = URL::current();
-        $currentURL = substr($currentURL, 8);
-        return Redirect::to('/login/urlto/'.$currentURL);
-    }    
-    else {        
-        //User is Logged In
-        return Redirect::to('/');
-    }
 });

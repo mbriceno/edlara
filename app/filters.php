@@ -78,29 +78,20 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
-/*
+
+
+//Main Authentication Filter
+
 Route::filter('auth',function(){
     if (!Sentry::check()){
         //User is not Logged In        
-        $currentURL = URL::current();
-        
-        Redirect::to('/login/urlto/'.$currentURL);
+        $currentURL=URL::current();
+        $currentURL = substr($currentURL, 8);
+        Session::put('intendedURL',$currentURL);
+        return Redirect::to('/login/');
     }    
-    else {        
+    else {  
         //User is Logged In
-        Redirect::to('/');
+        return  Redirect::intended('dashboard');;
     }
 });
-
-/*
-Route::filter('auth',function(){
-    
-    if (!Sentry::check()){
-        //User is not Logged In
-         return FALSE;   
-    }    
-    else {        
-        //User is Logged In        
-         return TRUE;   
-    }
-});*/
