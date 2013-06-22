@@ -149,3 +149,9 @@ body {
     padding-left: 0px !important;
     padding-left-value: 0px !important;
 }
+
+div#login-form {
+    margin-top:35vmin;    
+    padding-left:30px;
+    
+}

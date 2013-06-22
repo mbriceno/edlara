@@ -15,35 +15,27 @@ class LoginController extends BaseController {
             );
 
             // Try to authenticate the user
-            $user = Sentry::authenticate($credentials, false);
-            if ( ! Sentry::check())
-            {
-            // User is not logged in, or is not activated
-            }
-            else
-            {
-            // User is logged in
-            }
+            $user = Sentry::authenticate($credentials, false);            
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
         {
-            echo 'Login field is required.';
+            View::make('account.login')->with('error',"Username is Required");
         }
         catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
         {
-            echo 'Password field is required.';
+            View::make('account.login')->with('error',"Password is Required");
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
         {
-            echo 'User was not found.';
+            View::make('account.login')->with('error',"Username or Password is wrong");
         }
         catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
         {
-            echo 'Wrong password, try again.';
+            View::make('account.login')->with('error',"Username or Password is wrong");
         }
         catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
         {
-            echo 'User is not activated.';
+            View::make('account.login')->with('error',"Account Not Activated");
         }
 
         // The following is only required if throttle is enabled
@@ -55,6 +47,14 @@ class LoginController extends BaseController {
         {
             echo 'User is banned.';
         }
+        if ( ! Sentry::check())
+            {
+            // User is not logged in, or is not activated
+            }
+            else
+            {
+            // User is logged in
+            }
     }
 
 }
