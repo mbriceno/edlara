@@ -6,15 +6,6 @@ class Student extends Eloquent {
     public static $rules = array();
     
     //Setting UserID as primary key
-    protected $primaryKey="user_id";
-    
-    
-    /**
-     * Function to get dob of Student from userid
-     */
-    public function dob(){
-        return $this->hasOne('dob');
-    }
-    
+    protected $primaryKey="user_id";    
     
 }
