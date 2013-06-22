@@ -47,10 +47,10 @@ Route::group(array('domain' => 'statistics.laravel.dev','before'=>'auth'), funct
         });
 });
 
-Route::get('/',array('before'=>'auth',  function()
+Route::get('/', function()
 {
 	return View::make('home');
-}));
+});
 
 Route::filter('auth',function(){
     if (!Sentry::check()){
