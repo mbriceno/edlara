@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder {
 
         try {
             // Create the user
-            $user = Sentry::getUserProvider() -> create(array('email' => 'johndoe@example.com', 'password' => 'test234', 'first_name' => 'John', 'last_name' => 'Doe', 'permissions' => array('user.create' => -1, 'user.delete' => -1, 'user.view' => 1, 'user.update' => 1, ), ));
+            $user = Sentry::getUserProvider() -> create(array('email' => 'johndoe@example.com', 'password' => 'test234','activation_code'=>'8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb', 'first_name' => 'John', 'last_name' => 'Doe', 'permissions' => array('user.create' => -1, 'user.delete' => -1, 'user.view' => 1, 'user.update' => 1, ), ));
 
             // Find the group using the group id
             $adminGroup = Sentry::getGroupProvider() -> findById(1);
@@ -35,8 +35,56 @@ class DatabaseSeeder extends Seeder {
         } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
             echo 'User with this login already exists.';
         } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
-            echo 'Group was not found.';
-        }
+            echo 'Group was not found.';        }
+        try
+{
+    // Find the user using the user id
+    $user = Sentry::getUserProvider()->findById(1);
+
+    // Update the user details
+    $user->activation_code = '8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb';
+
+    // Update the user
+    if ($user->save())
+    {
+        // User information was updated
+    }
+    else
+    {
+        // User information was not updated
+    }
+}
+catch (Cartalyst\Sentry\Users\UserExistsException $e)
+{
+    echo 'User with this login already exists.';
+}
+catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+{
+    echo 'User was not found.';
+}
+try
+{
+    // Find the user using the user id
+    $user = Sentry::getUserProvider()->findById(1);
+
+    // Attempt to activate the user
+    if ($user->attemptActivation('8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb'))
+    {
+        // User activation passed
+    }
+    else
+    {
+        // User activation failed
+    }
+}
+catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+{
+    echo 'User was not found.';
+}
+catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
+{
+    echo 'User is already activated.';
+}
 
         $this -> call('StudentTableSeeder');
     }
