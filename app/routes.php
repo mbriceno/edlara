@@ -10,36 +10,33 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-//Outputting the Login Page
-Route::get('login',function (){
-    
-    //Return The Account Login View.
-    return View::make('account.login');
-    
-});
-
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf','uses' => 'LoginController@authenticate'));
 
-//Accounts Subdomain
-Route::group(array('domain' => 'account.laravel.dev'), function()
-{
-         Route::get('/',array('before'=>'auth' ,function()
-        {
-                return View::make('account.index');
-        }));
-})->before('auth');
 
-//Dashboard Subdomain
-Route::group(array('domain' => 'dashboard.laravel.dev'), function()
+//Accounts Subdomain
+Route::group(array('domain' => 'account.laravel.dev','before'=>'auth'), function()
 {
     
+        //Making the Default View after authenticating
+         Route::get('/',function()
+        {
+                return View::make('account.index');
+        });
+        //TODO: Settings controller
+});
+
+//Dashboard Subdomain
+Route::group(array('as'=>'dashboard','domain' => 'dashboard.laravel.dev'), function()
+{    
         Route::get('/', function()
         {
-                return View::make('dashboard.index');
+                return View::make('dashboard.index')->with('error','OK');
         });
+        
 })->before('auth');
+
+Route::get('logout','LoginController@logout');
 
 //HomePage Catcher
 Route::get('/', function()

@@ -14,8 +14,13 @@
          
         <div class='container-fluid'>
             <div class='row-fluid'>
+                
                 <div id="login-form" class="span-4 offset4">
-                   <?php
+                    
+                   <?php      
+                   if ($error !== 'OK'){
+                       echo "<div class='alert alert-error error-loginpage-alert'>$error</div>";
+                   }
                     //setting a Variable NULL to be used in FORM elements
                     $val=NULL;
                     //Opening the FORM
@@ -50,14 +55,16 @@
                     echo Form::token();
                     echo Form::close();
                     ?>
+                    <a class="btn btn-large btn-danger" href="https://laravel.dev">Return to HomePage</a>
                 </div>
             </div>
         </div>
-        {{--
-        -- Bootstrap JS Compiled --
-        -- @javascripts('bootstrap') --
-        -- @javascripts('grans') --
-        --}}
+        
+        {{-- Bootstrap JS Compiled --}}
+        
+         @javascripts('bootstrap')
+         @javascripts('grans') 
+        
     </body>
 
 </html>

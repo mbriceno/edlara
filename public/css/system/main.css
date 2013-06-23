@@ -151,7 +151,11 @@ body {
 }
 
 div#login-form {
-    margin-top:35vmin;    
+    margin-top:25vmin;    
     padding-left:30px;
     
+}
+.error-loginpage-alert {
+    width:200px;
+    margin-bottom:50px;
 }

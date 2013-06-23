@@ -6,7 +6,7 @@
         @stylesheets('bootstrap')
     </head>
     <body>
-        
+        <h1>DashBoard Test</h1>
         
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')

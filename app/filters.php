@@ -24,44 +24,6 @@ App::after(function($request, $response)
 
 /*
 |--------------------------------------------------------------------------
-| Authentication Filters
-|--------------------------------------------------------------------------
-|
-| The following filters are used to verify that the user of the current
-| session is logged into this application. The "basic" filter easily
-| integrates HTTP Basic authentication for quick, simple checking.
-|
-*/
-
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::guest('login');
-});
-
-
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
-});
-
-/*
-|--------------------------------------------------------------------------
-| Guest Filter
-|--------------------------------------------------------------------------
-|
-| The "guest" filter is the counterpart of the authentication filters as
-| it simply checks that the current user is not logged in. A redirect
-| response will be issued if they are, which you may freely change.
-|
-*/
-
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
-});
-
-/*
-|--------------------------------------------------------------------------
 | CSRF Protection Filter
 |--------------------------------------------------------------------------
 |
@@ -87,11 +49,11 @@ Route::filter('auth',function(){
         //User is not Logged In        
         $currentURL=URL::current();
         $currentURL = substr($currentURL, 8);
-        Session::put('intendedURL',$currentURL);
-        return Redirect::to('/login/');
-    }    
-    else {  
-        //User is Logged In
-        return  Redirect::intended('dashboard');;
+        $cutLength = strrpos($currentURL, '.');
+        $cutLength = $cutLength + 4;
+        $currentURL = substr($currentURL,$cutLength);
+        Session::put('url.intended',$currentURL);
+        return View::make('account.login',array('error'=>'OK'));
+        //return Redirect::to('/login/')->with('error','OK');
     }
 });
