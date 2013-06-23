@@ -41,20 +41,24 @@ class LoginController extends BaseController {
         // The following is only required if throttle is enabled
         catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
         {
-            echo 'User is suspended.';
+            View::make('account.login')->with('error',"Suspended");
         }
         catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
         {
-            echo 'User is banned.';
+            View::make('account.login')->with('error',"Banned");
         }
         if ( ! Sentry::check())
             {
-            // User is not logged in, or is not activated
+                //User is not Logged In                
             }
             else
             {
-            // User is logged in
+                // User is logged in            
+                return  Redirect::intended('/');;
             }
+    }
+    public function logout(){        
+        Sentry::logout();
     }
 
 }
