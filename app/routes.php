@@ -23,9 +23,6 @@ Route::group(array('domain' => 'account.laravel.dev','before'=>'auth'), function
         {
                 return View::make('account.index');
         });
-        Route::get('abort',function(){
-            return "Test.OK";
-        });
         //TODO: Settings controller
 });
 
