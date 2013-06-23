@@ -19,46 +19,47 @@ class LoginController extends BaseController {
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
         {
-            View::make('account.login')->with('error',"Username is Required");
+            return View::make('account.login')->with('error',"Username is Required");
         }
         catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
         {
-            View::make('account.login')->with('error',"Password is Required");
+            return View::make('account.login')->with('error',"Password is Required");
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
         {
-            View::make('account.login')->with('error',"Username or Password is wrong");
+            return View::make('account.login')->with('error',"Username or Password is wrong");
         }
         catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
         {
-            View::make('account.login')->with('error',"Username or Password is wrong");
+            return View::make('account.login')->with('error',"Username or Password is wrong");
         }
         catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
         {
-            View::make('account.login')->with('error',"Account Not Activated");
+            return View::make('account.login')->with('error',"Account Not Activated");
         }
 
         // The following is only required if throttle is enabled
         catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
         {
-            View::make('account.login')->with('error',"Suspended");
+            return View::make('account.login')->with('error',"Suspended");
         }
         catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
         {
-            View::make('account.login')->with('error',"Banned");
+            return View::make('account.login')->with('error',"Banned");
         }
         if ( ! Sentry::check())
             {
-                //User is not Logged In                
+                //User is not Logged In
+            //    return Redirect::to('');            
             }
             else
             {
                 // User is logged in            
-                return  Redirect::intended('/');;
+                return  Redirect::intended('/')->with('error','OK');
             }
     }
     public function logout(){        
-        Sentry::logout();
+        return Sentry::logout();        
     }
 
 }
