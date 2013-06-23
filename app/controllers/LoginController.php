@@ -19,32 +19,39 @@ class LoginController extends BaseController {
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
         {
-            return View::make('account.login')->with('error',"Username is Required");
+            Log::error('A User without Login tried to authenticate');   
+            return View::make('account.login')->with('error',"Username is Required.");
         }
         catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
         {
+            Log::error('User with Login '.$username.' Tried to access without password.');
             return View::make('account.login')->with('error',"Password is Required");
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
         {
+            Log::error('User with Login '.$username.' Tried to access.But  Username was wrong');
             return View::make('account.login')->with('error',"Username or Password is wrong");
         }
         catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
         {
+            Log::error('User with Login '.$username.' Tried to access.The Entered password was Wrong.');            
             return View::make('account.login')->with('error',"Username or Password is wrong");
         }
         catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
         {
+            Log::error('User with Login '.$username.' Tried to access.But the Account was not activated yet.');           
             return View::make('account.login')->with('error',"Account Not Activated");
         }
 
         // The following is only required if throttle is enabled
         catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
         {
+            Log::error('User with Login '.$username.' Tried to access.But the Account was Suspended.');
             return View::make('account.login')->with('error',"Suspended");
         }
         catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
-        {
+        {            
+            Log::error('User with Login '.$username.' Tried to access.But the Account was Banned.');
             return View::make('account.login')->with('error',"Banned");
         }
         if ( ! Sentry::check())
@@ -54,7 +61,9 @@ class LoginController extends BaseController {
             }
             else
             {
-                // User is logged in            
+                // User is logged in   
+                
+            Log::error('User with Login '.$username.' Logged In Successfully.');         
                 return  Redirect::intended('/')->with('error','OK');
             }
     }
