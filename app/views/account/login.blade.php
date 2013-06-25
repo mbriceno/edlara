@@ -11,8 +11,7 @@
         {{  HTML::style('css/bootstrap-responsive.min.css') }}
         {{  HTML::style('css/system/main.css') }}
     </head>
-    <body>
-         
+    <body>         
         <div class='container-fluid'>
             <div class='row-fluid'>                
                 <div id="login-form" class="span-4 offset4">                    
@@ -64,5 +63,5 @@
          @javascripts('grans') 
         
     </body>
-    
+
 </html>

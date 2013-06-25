@@ -10,13 +10,14 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+$baseurl = Config::get('app.baseurl', 'laravel.dev');
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf',
     'uses' => 'LoginController@authenticate'));
 
 
 //Accounts Subdomain
-Route::group(array('domain' => 'account.laravel.dev',
+Route::group(array('domain' => 'account.'.$baseurl,
     'before'=>'auth'), function()
 {
     //Making the Default View after authenticating
@@ -29,7 +30,7 @@ Route::group(array('domain' => 'account.laravel.dev',
 
 //Dashboard Subdomain
 Route::group(array('as'=>'dashboard',
-    'domain' => 'dashboard.laravel.dev'), function()
+    'domain' => 'dashboard.'.$baseurl), function()
 {    
     Route::get('/', function()
     {
