@@ -3,9 +3,14 @@
     <head>
         <title>Edlara</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        @stylesheets('bootstrap')
-        @stylesheets('grans')
-        {{ HTML::style('/css/system/parallax.css'); }}
+        {{-- @stylesheets('bootstrap') --}}
+        {{-- @stylesheets('grans') --}}
+        {{  HTML::style('/css/system/parallax.css'); }}
+
+        {{--Non Compiled CSS Code --}}
+        {{  HTML::style('css/bootstrap.min.css') }}
+        {{  HTML::style('css/bootstrap-responsive.min.css') }}
+        {{  HTML::style('css/system/main.css') }}
     </head>
     <body>
         <div class="container-fluid" id='top-heading'>
@@ -67,14 +72,14 @@
                                 </ul>
                             </li>
                         </ul>
-                        <form class="navbar-search pull-left" action="">
-                            <input class="search-query span2" placeholder="Search" type="text">
+                        <form class="transparent navbar-search pull-left" action="">
+                            <input id='search' class="search-query span2" placeholder="Search" type="text">
                         </form>
                         <ul class="nav pull-right">
                             <li>
                                 <a href="#">Link</a>
                             </li>
-                            <li class="divider-vertical"></li>
+                            <li id="transparent" class="divider-vertical"></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -87,7 +92,7 @@
                                     <li>
                                         <a href="#">Something else here</a>
                                     </li>
-                                    <li class="divider"></li>
+                                    <li  class="divider"></li>
                                     <li>
                                         <a href="#">Separated link</a>
                                     </li>

@@ -11,28 +11,30 @@
 |
 */
 //Authencticating User with Controller
-Route::post('login',array('before' => 'csrf','uses' => 'LoginController@authenticate'));
+Route::post('login',array('before' => 'csrf',
+    'uses' => 'LoginController@authenticate'));
 
 
 //Accounts Subdomain
-Route::group(array('domain' => 'account.laravel.dev','before'=>'auth'), function()
+Route::group(array('domain' => 'account.laravel.dev',
+    'before'=>'auth'), function()
 {
-    
-        //Making the Default View after authenticating
-         Route::get('/',function()
-        {
-                return View::make('account.index');
-        });
-        //TODO: Settings controller
+    //Making the Default View after authenticating
+    Route::get('/',function()
+    {
+        return View::make('account.index');
+    });
+    //TODO: Settings controller
 });
 
 //Dashboard Subdomain
-Route::group(array('as'=>'dashboard','domain' => 'dashboard.laravel.dev'), function()
+Route::group(array('as'=>'dashboard',
+    'domain' => 'dashboard.laravel.dev'), function()
 {    
-        Route::get('/', function()
-        {
-                return View::make('dashboard.index')->with('error','OK');
-        });
+    Route::get('/', function()
+    {
+        return View::make('dashboard.index')->with('error','OK');
+    });
         
 })->before('auth');
 

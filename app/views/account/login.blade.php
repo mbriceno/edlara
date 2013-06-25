@@ -3,25 +3,23 @@
     <head>
         <title>Edlara -Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       {{-- @stylesheets('bootstrap') --}}
-      {{-- @stylesheets('grans') --}}
+        {{-- @stylesheets('bootstrap') --}}
+        {{-- @stylesheets('grans') --}}
       
-      {{  HTML::style('css/bootstrap.min.css') }}
-      {{  HTML::style('css/bootstrap-responsive.min.css') }}
-      {{  HTML::style('css/system/main.css') }}
+        {{--Non Compiled CSS Code --}}
+        {{  HTML::style('css/bootstrap.min.css') }}
+        {{  HTML::style('css/bootstrap-responsive.min.css') }}
+        {{  HTML::style('css/system/main.css') }}
     </head>
     <body>         
         <div class='container-fluid'>
             <div class='row-fluid'>                
                 <div id="login-form" class="span-4 offset4">                    
-                   <?php      
-                   
-                   if ($error !== 'OK'){
+                    <?php
+                    //Error message will be shown if user has a failed attempt.
+                    if ($error !== 'OK'){
                        echo "<div class='alert alert-error error-loginpage-alert'>$error</div>";
-                   }
-                    //setting a Variable NULL to be used in FORM elements
-                    $val=NULL;
-                    //Opening the FORM
+                    }
                     echo Form::open(array('url' => 'login',
                         'method' => 'post'));
                     
@@ -29,9 +27,8 @@
                     echo Form::label('email', 'E-Mail Address', array(
                         'class' => 'lbl-email-addr-login'));
 
-
                     //Echo FORM Element for Email address
-                    echo Form::text('email', $val,array(
+                    echo Form::text('email', "",array(
                         'class' => 'email-addr-login',
                         'placeholder' => 'johndoe@example.com',
                         'autocomplete' => 'off'));
@@ -41,11 +38,13 @@
                         'class' => 'lbl-pwd-login'));
                     
                     //Echo FORM Element for Password
-                    echo Form::password('password',$val,
-                            array('class' => 'pwd-login',
-                                'placeholder' => 'Password',
-                                'autocomplete' => 'off'));
+                    echo Form::password('password',"",array(
+                        'class' => 'pwd-login',
+                        'placeholder' => 'Password',
+                        'autocomplete' => 'off'));
+
                     echo "<br>";
+
                     //Echo FORM Element for Submit
                     echo Form::submit('Login',
                             array('class'=>'btn btn-large btn-info'));

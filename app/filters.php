@@ -54,6 +54,5 @@ Route::filter('auth',function(){
         $currentURL = substr($currentURL,$cutLength);
         Session::put('url.intended',$currentURL);
         return View::make('account.login',array('error'=>'OK'));
-        //return Redirect::to('/login/')->with('error','OK');
     }
 });
