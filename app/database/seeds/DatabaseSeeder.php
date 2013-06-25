@@ -12,8 +12,10 @@ class DatabaseSeeder extends Seeder {
 
         try {
             // Create the group
-            $group = Sentry::getGroupProvider() -> create(array('name' => 'Users', 'permissions' => array('admin' => 1, 'users' => 1, ), ));
-        } catch (Cartalyst\Sentry\Groups\NameRequiredException $e) {
+            $group = Sentry::getGroupProvider() -> create(array(
+                'name' => 'Users', 
+                'permissions' => array('admin' => 1, 'users' => 1, ), ));
+	} catch (Cartalyst\Sentry\Groups\NameRequiredException $e) {
             echo 'Name field is required';
         } catch (Cartalyst\Sentry\Groups\GroupExistsException $e) {
             echo 'Group already exists';
@@ -21,7 +23,17 @@ class DatabaseSeeder extends Seeder {
 
         try {
             // Create the user
-            $user = Sentry::getUserProvider() -> create(array('email' => 'johndoe@example.com', 'password' => 'test234','activation_code'=>'8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb', 'first_name' => 'John', 'last_name' => 'Doe', 'permissions' => array('user.create' => -1, 'user.delete' => -1, 'user.view' => 1, 'user.update' => 1, ), ));
+            $user = Sentry::getUserProvider() -> create(array(
+                 'email' => 'johndoe@example.com',
+                 'password' => 'test234',
+                 'activation_code'=>'8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb',
+                 'first_name' => 'John',
+                 'last_name' => 'Doe',
+                 'permissions' => array(
+                             'user.create' => -1,
+                             'user.delete' => -1,
+                             'user.view' => 1,
+                             'user.update' => 1, ), ));
 
             // Find the group using the group id
             $adminGroup = Sentry::getGroupProvider() -> findById(1);
@@ -86,7 +98,8 @@ catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
     echo 'User is already activated.';
 }
 
-        $this -> call('StudentTableSeeder');
+        $this -> call('StudentTableSeeder');        
+        $this->call('SubjectTableSeeder');
     }
 
 }
