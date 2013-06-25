@@ -4,15 +4,15 @@ class SubjectTableSeeder extends Seeder {
 
     public function run()
     {
-    	// Uncomment the below to wipe the table clean before populating
-    	// DB::table('subjectmap')->delete();
-
-        $subjectmap = array(
-
-        );
-
-        // Uncomment the below to run the seeder
-        // DB::table('subjectmap')->insert($subjectmap);
+    	DB::table('subjects') -> delete();
+    	Subject::create(array('subjectcode' => 'CM12',
+    		'grade'=>'12','subjectname'=>'Combined Maths'));
+    	Subject::create(array('subjectcode' => 'C12',
+    		'grade'=>'12','subjectname'=>'Chemistry'));
+    	Subject::create(array('subjectcode' => 'P12',
+    		'grade'=>'12','subjectname'=>'Physics'));
+    	Subject::create(array('subjectcode' => 'B12',
+    		'grade'=>'12','subjectname'=>'Biology'));
     }
 
 }
