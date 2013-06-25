@@ -16,7 +16,9 @@ class CreateSubjectsTable extends Migration {
             $table->increments('id');
             $table->string('subjectcode',6);
             $table->integer('grade');
+            $table->text('subjectname');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
