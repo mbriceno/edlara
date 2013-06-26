@@ -108,11 +108,11 @@ require app_path().'/filters.php';
 
 Basset::collection('bootstrap', function($collection)
 {
-    // Collection definition.
+    // Collection definition.  
+    $collection->add('../public/js/jquery-1.10.0.min.js');
     $collection->add('../public/css/bootstrap.min.css');
     $collection->add('../public/css/bootstrap-responsive.min.css');
     $collection->add('../public/js/bootstrap.min.js');
-    $collection->add('../public/js/jquery-1.10.0.min.js');
 })->apply('Less');
 
 Basset::collection('grans', function($collection)
