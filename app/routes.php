@@ -40,12 +40,17 @@ Route::group(array('as'=>'dashboard',
     });
 });
 
-Route::get('register','UserController@showRegistation');
+Route::get('register','UserController@showReg');
 
 Route::get('logout','UserController@logout');
+
+Route::get('தமிழ்',function(){
+    return "தமிழ்";
+});
 
 //HomePage Catcher
 Route::get('/', function()
 {
 	return View::make('home');
 });
+
