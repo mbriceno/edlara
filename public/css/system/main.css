@@ -184,3 +184,20 @@ input#search{
 }
 
 /* End - Menu Bar Transparent */
+
+/**
+ |-------------------------------
+ | Login Box on Home Page
+ |-------------------------------
+*/
+
+.loginbox{
+    padding:20px;
+    margin:5px;
+    border:none !important;
+    background-color: none !important;
+
+}
+.btn-login{
+    border: none !important;
+}
