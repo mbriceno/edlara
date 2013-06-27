@@ -117,5 +117,9 @@
                 </div>
             </div>
         </div>
+        
+        {{-- Bootstrap JS Compiled --}}
+        @javascripts('bootstrap')
+        @javascripts('grans')
     </body>
 </html>                
