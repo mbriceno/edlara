@@ -3,13 +3,8 @@
     <head>
         <title>Edlara -Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {{-- @stylesheets('bootstrap') --}}
-        {{-- @stylesheets('grans') --}}
-      
-        {{--Non Compiled CSS Code --}}
-        {{  HTML::style('css/bootstrap.min.css') }}
-        {{  HTML::style('css/bootstrap-responsive.min.css') }}
-        {{  HTML::style('css/system/main.css') }}
+        @stylesheets('bootstrap')
+        @stylesheets('grans')      
     </head>
     <body>         
         <div class='container-fluid'>

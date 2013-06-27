@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Edlara</title>
+        <title>Edlara -Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
-        @stylesheets('grans')
+        @stylesheets('grans')      
     </head>
     <body>
-        <div class="container-fluid" id='top-heading'>
+    <div class="container-fluid" id='top-heading'>
             <div class="row-fluid" >
                 <div id="clouds">
                     <div class="cloud x1"></div>
@@ -117,24 +117,5 @@
                 </div>
             </div>
         </div>
-        <div class="parallax">
-            <section id="first" class="plx-story">
-                <article>
-                    <p>
-                        Test
-                    </p>
-                </article>
-            </section>
-            <section id="second" class="plx-story">
-                <article>
-                    <p>
-                        Test
-                    </p>
-                </article>
-            </section>
-        </div>
-        {{-- Bootstrap JS Compiled --}}
-        @javascripts('bootstrap')
-        @javascripts('grans')
     </body>
-</html>
+</html>                
