@@ -13,11 +13,13 @@
 $baseurl = Config::get('app.baseurl', 'laravel.dev');
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf',
-    'uses' => 'LoginController@authenticate'));
-
+    'uses' => 'UserController@authenticate'));
+//New User Registration
+Route::post('register',array('before'=>'csrf',
+    'uses' => 'UserController@register'));
 
 //Accounts Subdomain
-Route::group(array('domain' => 'account.'.$baseurl,
+Route::group(array('domain' => 'account.laravel.dev',
     'before'=>'auth'), function()
 {
     //Making the Default View after authenticating
@@ -30,16 +32,17 @@ Route::group(array('domain' => 'account.'.$baseurl,
 
 //Dashboard Subdomain
 Route::group(array('as'=>'dashboard',
-    'domain' => 'dashboard.'.$baseurl), function()
+    'domain' => 'dashboard.laravel.dev','before'=>'auth'), function()
 {    
     Route::get('/', function()
     {
         return View::make('dashboard.index')->with('error','OK');
     });
-        
-})->before('auth');
+});
 
-Route::get('logout','LoginController@logout');
+Route::get('register','UserController@showRegistation');
+
+Route::get('logout','UserController@logout');
 
 //HomePage Catcher
 Route::get('/', function()
