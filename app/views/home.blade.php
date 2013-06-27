@@ -68,35 +68,47 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <?php
+                                        if ( ! Sentry::check()){
+                                            echo "Login";
+                                        }
+                                        else{
+                                            echo "Account";
+                                        }
+                                    ?>
+                                    <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li>
                                         <?php
-                                                                                
-                                        echo Form::open(array('url' => 'login', 'method' => 'post'));
+                                        if ( ! Sentry::check()){
+                                            echo " <li class='loginbox'>";                                        
+                                            echo Form::open(array('url' => 'login', 'method' => 'post'));
 
-                                        //Echo FORM Label for Email address
-                                        echo Form::label('email', 'E-Mail Address', array('class' => 'lbl-email-addr-login'));
+                                            //Echo FORM Label for Email address
+                                            echo Form::label('email', 'E-Mail Address', array('class' => 'lbl-email-addr-login'));
 
-                                        //Echo FORM Element for Email address
-                                        echo Form::text('email', "", array('class' => 'email-addr-login', 'placeholder' => 'johndoe@example.com', 'autocomplete' => 'off'));
+                                            //Echo FORM Element for Email address
+                                            echo Form::text('email', "", array('class' => 'email-addr-login', 'placeholder' => 'johndoe@example.com', 'autocomplete' => 'off'));
 
-                                        //Echo FORM Label for Password address
-                                        echo Form::label('password', 'Password', array('class' => 'lbl-pwd-login'));
+                                            //Echo FORM Label for Password address
+                                            echo Form::label('password', 'Password', array('class' => 'lbl-pwd-login'));
 
-                                        //Echo FORM Element for Password
-                                        echo Form::password('password', "", array('class' => 'pwd-login', 'placeholder' => 'Password', 'autocomplete' => 'off'));
+                                            //Echo FORM Element for Password
+                                            echo Form::password('password', "", array('class' => 'pwd-login', 'placeholder' => 'Password', 'autocomplete' => 'off'));
 
-                                        echo "<br>";
+                                            echo "<br>";
 
-                                        //Echo FORM Element for Submit
-                                        echo Form::submit('Login', array('class' => 'btn btn-large btn-info'));
+                                            //Echo FORM Element for Submit
+                                            echo Form::submit('Login', array('class' => 'btn btn-large btn-info btn-login'));
 
-                                        echo Form::token();
-                                        echo Form::close();
-                                        ?>
-                                    </li>
-
+                                            echo Form::token();
+                                            echo Form::close();
+                                            echo "</li> <li><a href=\"/register\">Don't Have a Account!!!</a></li>";
+                                        }
+                                        else{
+                                            echo "<li><a href='/logout'>Logout</a></li>";
+                                        }
+                                    ?>      
                                 </ul>
                             </li>
                         </ul>
