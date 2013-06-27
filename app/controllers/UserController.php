@@ -1,6 +1,6 @@
 <?php
 
-class LoginController extends BaseController {
+class UserController extends BaseController {
 
     //Login
     public function authenticate(){
@@ -67,8 +67,26 @@ class LoginController extends BaseController {
                 return  Redirect::intended('/')->with('error','OK');
             }
     }
-    public function logout(){        
-        return Sentry::logout();        
+    public function logout(){     
+    Sentry::logout()   ;
+        return Redirect::to('/');        
+    }
+
+    public function register(){
+        //TODO: Code to Add
+    }
+
+
+    public function showRegistration(){
+        if ( ! Sentry::check())
+            {
+                // User is not Logged in. So Lets Show the registration form.
+                return View::make('account.register');     
+            }
+            else
+            {
+                // User is logged in   
+            }
     }
 
 }
