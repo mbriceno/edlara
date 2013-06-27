@@ -74,10 +74,12 @@ class UserController extends BaseController {
 
     public function register(){
         //TODO: Code to Add
+        return 'test';
     }
 
 
-    public function showRegistration(){
+
+    public function showReg(){
         if ( ! Sentry::check())
             {
                 // User is not Logged in. So Lets Show the registration form.
@@ -86,6 +88,7 @@ class UserController extends BaseController {
             else
             {
                 // User is logged in   
+                return Redirect::to('/');
             }
     }
 
