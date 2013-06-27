@@ -38,6 +38,7 @@ Route::group(array('as'=>'dashboard',
     {
         return View::make('dashboard.index')->with('error','OK');
     });
+    Route::get('sendmail', 'MailerController@test');
 });
 
 Route::get('register','UserController@showReg');
