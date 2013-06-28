@@ -1,5 +1,4 @@
-<?php
-use Purekid\Mongodm\Model;
+<?php use Purekid\Mongodm\Model;
 
 class Results extends Model 
 {
