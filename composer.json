@@ -38,7 +38,7 @@
         "way/generators": "dev-master",
         "cartalyst/sentry": "2.0.*",
         "jasonlewis/basset": "4.0.*@dev",
-        "zizaco/mongolid-laravel": "dev-master",
+        "purekid/mongodm": "dev-master",
         "jasonlewis/enhanced-router": "1.0.*",
         "leafo/lessphp": "*",
         "phpunit/phpunit": "3.8.*"
