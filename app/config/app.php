@@ -120,7 +120,6 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
                 'Cartalyst\Sentry\SentryServiceProvider',
-                'Zizaco\MongolidLaravel\MongolidServiceProvider',
                 'Basset\BassetServiceProvider',
                 'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider',
                 'Grans\Learn\LearnServiceProvider',
@@ -190,8 +189,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
         'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
-        'Basset'          => 'Basset\Facade',
-        'MongoLid'        => 'Zizaco\MongolidLaravel\MongoLid',                
+        'Basset'          => 'Basset\Facade',           
         'Basset' => 'Basset\Facade'
 	),
 
