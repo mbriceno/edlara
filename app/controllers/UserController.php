@@ -63,7 +63,7 @@ class UserController extends BaseController {
             {
                 // User is logged in   
                 
-            Log::error('User with Login '.$username.' Logged In Successfully.');         
+            Log::info('User with Login '.$username.' Logged In Successfully.');         
                 return  Redirect::intended('/')->with('error','OK');
             }
     }

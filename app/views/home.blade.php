@@ -117,21 +117,11 @@
                 </div>
             </div>
         </div>
-        <div class="parallax">
-            <section id="first" class="plx-story">
-                <article>
-                    <p>
-                        Test
-                    </p>
-                </article>
-            </section>
-            <section id="second" class="plx-story">
-                <article>
-                    <p>
-                        Test
-                    </p>
-                </article>
-            </section>
+        <div class='container-fluid'>
+            <div class='row-fluid'>
+                <div class=span4>
+                </div>
+            </div>
         </div>
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')
