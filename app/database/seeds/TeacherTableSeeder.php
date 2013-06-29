@@ -6,7 +6,7 @@ class StudentTableSeeder extends DatabaseSeeder {
         DB::table('teachers') -> delete();
         $extra = array('subjects'=>array('M','E','S'));
         $extra = serialize($extra);
-        Student::create(array('user_id' => 1, 'username' => 'johndoe', 'email' => 'johndoe@example.com', 'dob' => '1996-01-01', 'extra' => $extra));
+        Student::create(array('user_id' => 1, 'email' => 'johndoe@example.com', 'dob' => '1996-01-01', 'extra' => $extra));
     }
 
 }
