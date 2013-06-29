@@ -74,6 +74,15 @@ class UserController extends BaseController {
 
     public function register(){
         //TODO: Code to Add
+
+        $firstname = Input::get('fname');
+        $lastname = Input::get('lname');
+        $email = Input::get('email');
+        $password = Input::get('password');
+        $actype = Input::get('actype','Student');
+
+
+
         return 'test';
     }
 
@@ -90,6 +99,12 @@ class UserController extends BaseController {
                 // User is logged in   
                 return Redirect::to('/');
             }
+    }
+
+    public function checkUser($user){
+
+           $user =  Input::all();
+           Log::info($user);
     }
 
 }
