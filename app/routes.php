@@ -14,9 +14,6 @@ $baseurl = Config::get('app.baseurl', 'laravel.dev');
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf',
     'uses' => 'UserController@authenticate'));
-//New User Registration
-Route::post('register',array('before'=>'csrf',
-    'uses' => 'UserController@register'));
 
 //Accounts Subdomain
 Route::group(array('domain' => 'account.laravel.dev',
@@ -41,14 +38,23 @@ Route::group(array('as'=>'dashboard',
     Route::get('sendmail', 'MailerController@test');
 });
 
-Route::get('register','UserController@showReg');
+
+Route::group([],function(){
+    Route::get('register','UserController@showReg');
+    //New User Registration
+    Route::post('register',array('before'=>'csrf',
+        'uses' => 'UserController@register'));
+
+});
 
 Route::get('logout','UserController@logout');
 
 Route::get('தமிழ்',function(){
     return "தமிழ்";
 });
-
+Route::get('phpinfo', function(){
+    return phpinfo();
+});
 //HomePage Catcher
 Route::get('/', function()
 {
