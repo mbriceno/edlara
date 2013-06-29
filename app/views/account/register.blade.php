@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edlara -Login</title>
+        <title>EdLara - SignUp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans')      
     </head>
     <body>
-    <div class="container-fluid" id='top-heading'>
+        <div class="container-fluid" id='top-heading'>
             <div class="row-fluid" >
                 <div id="clouds">
                     <div class="cloud x1"></div>
@@ -21,8 +21,7 @@
         </div>
         <div class="navbar">
             <div class="navbar-inner"  id="main-nav">
-                <div class="container">
-
+                <div class="container-fluid">
                     <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 
@@ -68,7 +67,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <?php
                                         if ( ! Sentry::check()){
                                             echo "Login";
@@ -78,7 +77,7 @@
                                         }
                                     ?>
                                     <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu">
                                         <?php
                                         if ( ! Sentry::check()){
                                             echo " <li class='loginbox'>";                                        
@@ -108,16 +107,65 @@
                                         else{
                                             echo "<li><a href='/logout'>Logout</a></li>";
                                         }
-                                    ?>      
+                                        ?>      
                                 </ul>
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
-        
+        <div class='container-fluid' >
+            <div class='row-fluid' id="main-container">
+
+                    <div class="registration-box offset1 span6" id="registration-box">
+                        <div class="container-fluid">
+                            
+                    <?php
+                        echo Form::open(['url'=> 'register','method'=>'post']);
+
+
+                        echo "<div class=\"row-fluid\"><div class='span6'>";
+                        echo Form::label('fname',"First Name",array('class'=>'fname-reg-box-label'));
+                        echo Form::text('fname',"",array('class'=>'fname-reg-box','placeholder'=>'John'));
+                        echo "</div>";
+                        echo "<div class='span6 pull-right'>";
+                        echo Form::label('lname',"Last Name",array('class'=>'lname-reg-box-label'));
+                        echo Form::text('lname',"",array('class'=>'lname-reg-box','placeholder'=>'Doe'));
+                        echo "</div></div>";
+
+
+                        echo "<div class='row-fluid'><div class='span12'>";
+                        echo Form::label('email',"Email Address",array('class'=>'email-reg-box-label'));
+                        echo Form::email('email',"",array('class'=>'email-reg-box','placeholder'=>'johndoe@example.com'));
+                        echo '</div></div>';
+
+
+                        echo "<div class=\"row-fluid\"><div class='span6'>";
+                        echo Form::label('username',"Username",array('class'=>'username-reg-box-label'));
+                        echo Form::text('username',"",array('class'=>'username-reg-box','placeholder'=>'johndoe'));
+                        echo "</div>";
+                        echo "<div class='span6 pull-right'>";
+                        echo Form::label('password',"Password",array('class'=>'pwd-reg-box-label'));
+                        echo Form::password('password','',array('class'=>'password-reg-box'));
+                        echo "</div></div><br><br>";
+
+
+                        echo "<div class=\"row-fluid\"><div class='offset1 span6'>";
+                        echo Form::label('ac_type',"Acccount Type",array('class'=>'actype-reg-box-label pull-left'));
+                        echo "</div>";
+                        echo "<div class='span4'>";
+                        echo Form::select('size', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'ac_type'));
+                        echo "</div></div><br><br>";
+                        echo "<div id='policy'>By Clicking Register . You Agree to our <a href=\"about/tos\"> Terms of Service </a> and <a href=\"about/privacy-policy\">Privacy Policy.</a></div>";
+                        echo Form::submit('Register', array('value'=>'Register','class' => 'btn btn-info btn-register pull-right'));
+                        echo Form::token();                     
+                        echo Form::close();
+                    ?>
+                    </div>
+                    </div>
+                </div>            
+            </div>
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')
         @javascripts('grans')
