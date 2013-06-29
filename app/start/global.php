@@ -113,6 +113,8 @@ Basset::collection('bootstrap', function($collection)
     $collection->add('../public/css/bootstrap.min.css');
     $collection->add('../public/css/bootstrap-responsive.min.css');
     $collection->add('../public/js/bootstrap.min.js');
+    $collection->add('../public/js/jquery.validate.min.js');
+    $collection->add('../public/js/additional-methods.min.js');
 })->apply('Less');
 
 Basset::collection('grans', function($collection)

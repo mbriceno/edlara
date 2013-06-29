@@ -55,6 +55,8 @@ Route::get('தமிழ்',function(){
 Route::get('phpinfo', function(){
     return phpinfo();
 });
+Route::post('api/searchuser', 'UserController@checkUser');
+
 //HomePage Catcher
 Route::get('/', function()
 {
