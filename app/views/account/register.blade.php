@@ -122,44 +122,46 @@
                         <div class="container-fluid">
                             
                     <?php
-                        echo Form::open(['url'=> 'register','method'=>'post']);
+                        echo Form::open(['url'=> 'register','method'=>'post','id'=>'registration-form']);
 
-
+                        // First Name and Last Name
                         echo "<div class=\"row-fluid\"><div class='span6'>";
-                        echo Form::label('fname',"First Name",array('class'=>'fname-reg-box-label'));
-                        echo Form::text('fname',"",array('class'=>'fname-reg-box','placeholder'=>'John'));
+                        echo Form::label('fname',"First Name *",array('class'=>'fname-reg-box-label'));
+                        echo Form::text('fname',"",array('class'=>'fname-reg-box','placeholder'=>'John','required',));
                         echo "</div>";
                         echo "<div class='span6 pull-right'>";
-                        echo Form::label('lname',"Last Name",array('class'=>'lname-reg-box-label'));
-                        echo Form::text('lname',"",array('class'=>'lname-reg-box','placeholder'=>'Doe'));
+                        echo Form::label('lname',"Last Name *",array('class'=>'lname-reg-box-label'));
+                        echo Form::text('lname',"",array('class'=>'lname-reg-box','placeholder'=>'Doe','required'));
                         echo "</div></div>";
 
-
-                        echo "<div class='row-fluid'><div class='span12'>";
-                        echo Form::label('email',"Email Address",array('class'=>'email-reg-box-label'));
-                        echo Form::email('email',"",array('class'=>'email-reg-box','placeholder'=>'johndoe@example.com'));
-                        echo '</div></div>';
-
-
-                        echo "<div class=\"row-fluid\"><div class='span6'>";
-                        echo Form::label('username',"Username",array('class'=>'username-reg-box-label'));
-                        echo Form::text('username',"",array('class'=>'username-reg-box','placeholder'=>'johndoe'));
-                        echo "</div>";
+                        // Email Address
+                        echo "<div class='row-fluid'><div class='span6'>";
+                        echo Form::label('email',"Email Address *",array('class'=>'email-reg-box-label'));
+                        echo Form::email('email',"",array('class'=>'email-reg-box','placeholder'=>'johndoe@example.com','required'));
+                        echo "</div><div id=\"usercheck\"></div>";
                         echo "<div class='span6 pull-right'>";
-                        echo Form::label('password',"Password",array('class'=>'pwd-reg-box-label'));
-                        echo Form::password('password','',array('class'=>'password-reg-box'));
-                        echo "</div></div><br><br>";
+                        echo Form::label('password',"Password *",array('class'=>'pwd-reg-box-label'));
+                        echo Form::password('password','',array('class'=>'password-reg-box','required'=>'required'));
+                        echo '</div></div>';
+                        
+                        echo "<br><br>";
 
-
+                        // Account Type.
                         echo "<div class=\"row-fluid\"><div class='offset1 span6'>";
-                        echo Form::label('ac_type',"Acccount Type",array('class'=>'actype-reg-box-label pull-left'));
+                        echo Form::label('actype',"Acccount Type",array('class'=>'actype-reg-box-label pull-left','required'));
                         echo "</div>";
                         echo "<div class='span4'>";
-                        echo Form::select('size', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'ac_type'));
-                        echo "</div></div><br><br>";
+                        echo Form::select('actype', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
+                        echo "</div></div>
+                        <br>* Required
+                        <br><br>";
                         echo "<div id='policy'>By Clicking Register . You Agree to our <a href=\"about/tos\"> Terms of Service </a> and <a href=\"about/privacy-policy\">Privacy Policy.</a></div>";
                         echo Form::submit('Register', array('value'=>'Register','class' => 'btn btn-info btn-register pull-right'));
-                        echo Form::token();                     
+
+                        // Token
+                        echo Form::token();   
+
+                        // Close Form
                         echo Form::close();
                     ?>
                     </div>
@@ -169,5 +171,36 @@
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')
         @javascripts('grans')
+        <script type="text/javascript">
+            $("#registration-form").validate({
+                rules: {
+                    fname: {
+                        required: true,
+                        minlength:3
+                    },
+                    lname: {
+                        required: true,
+                        minlength:3
+                    },
+                    username: {
+                        required: true,
+                        minlength:4
+                    },
+                    email: {
+                        required: true,
+                        email:true,
+                        remote:"api/searchuser",
+                    },
+                    password:{
+                        required: true,
+                        minlength: 8,
+                    }
+                }
+                
+                             
+            });             
+      
+        </script>
+
     </body>
 </html>                
