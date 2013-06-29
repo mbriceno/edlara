@@ -41,13 +41,24 @@ Route::group(array('as'=>'dashboard',
     Route::get('sendmail', 'MailerController@test');
 });
 
+
+Route::group([],function(){
 Route::get('register','UserController@showReg');
+    //New User Registration
+    Route::post('register',array('before'=>'csrf',
+        'uses' => 'UserController@register'));
+
+});
 
 Route::get('logout','UserController@logout');
 
 Route::get('தமிழ்',function(){
     return "தமிழ்";
 });
+Route::get('phpinfo', function(){
+    return phpinfo();
+});
+Route::post('api/searchuser', 'UserController@checkUser');
 
 //HomePage Catcher
 Route::get('/', function()
