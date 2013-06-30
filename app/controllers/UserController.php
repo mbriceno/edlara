@@ -74,15 +74,16 @@ class UserController extends BaseController {
 
     public function register(){
         $validator = Validator::make(Input::all(),
-                            array('fname'=>'required|min:3',
-                                'lname'=>'required|min:3',
-                                'password'=>'required|min:8',
-                                'email'=>'required|min:5',
+                            array('fname'=>'required|min:3|alpha',
+                                'lname'=>'required|min:3|alpha',
+                                'email'=>'required|min:5|email',
+                                'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 'captcha'=>'required|min:5|captcha'));
         if ($validator->fails())
         {
-            //TODO: Adding Redirect Routes.
-        }  
+            Session::set('error.return',true);
+            return Redirect::to('register')->withErrors($validator);
+        } 
         else
         {
             //TODO: Adding DB Interactions.
