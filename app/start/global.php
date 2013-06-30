@@ -109,7 +109,8 @@ require app_path().'/filters.php';
 Basset::collection('bootstrap', function($collection)
 {
     // Collection definition.  
-    $collection->add('../public/js/jquery-1.10.0.min.js');
+    $collection->add('../public/js/jquery-2.0.2.min.js');
+    $collection->add('../public/js/jquery-migrate-1.2.0.min.js');
     $collection->add('../public/css/bootstrap.min.css');
     $collection->add('../public/css/bootstrap-responsive.min.css');
     $collection->add('../public/js/bootstrap.min.js');
