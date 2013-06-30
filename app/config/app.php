@@ -123,7 +123,9 @@ return array(
                 'Basset\BassetServiceProvider',
                 'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider',
                 'Grans\Learn\LearnServiceProvider',
-                'Way\Generators\GeneratorsServiceProvider'
+                'Way\Generators\GeneratorsServiceProvider',
+        		'Mews\Captcha\CaptchaServiceProvider',
+
 	),
 
 	/*
@@ -190,7 +192,8 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
         'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
         'Basset'          => 'Basset\Facade',           
-        'Basset' => 'Basset\Facade'
+        'Basset' => 'Basset\Facade',        
+        'Captcha' => 'Mews\Captcha\Facades\Captcha',
 	),
 
 );
