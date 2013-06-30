@@ -73,17 +73,21 @@ class UserController extends BaseController {
     }
 
     public function register(){
-        //TODO: Code to Add
+        $validator = Validator::make(Input::all(),
+                            array('fname'=>'required|min:3',
+                                'lname'=>'required|min:3',
+                                'password'=>'required|min:8',
+                                'email'=>'required|min:5',
+                                'captcha'=>'required|min:5|captcha'));
+        if ($validator->fails())
+        {
+            //TODO: Adding Redirect Routes.
+        }  
+        else
+        {
+            //TODO: Adding DB Interactions.
+        }
 
-        $firstname = Input::get('fname');
-        $lastname = Input::get('lname');
-        $email = Input::get('email');
-        $password = Input::get('password');
-        $actype = Input::get('actype','Student');
-
-
-
-        return 'test';
     }
 
 
