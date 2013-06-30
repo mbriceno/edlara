@@ -41,7 +41,8 @@
         "purekid/mongodm": "dev-master",
         "jasonlewis/enhanced-router": "1.0.*",
         "leafo/lessphp": "*",
-        "phpunit/phpunit": "3.8.*"
+        "phpunit/phpunit": "3.8.*",
+        "mews/captcha": "dev-master"
     
     },
     "autoload": {
