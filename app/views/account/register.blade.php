@@ -4,7 +4,73 @@
         <title>EdLara - SignUp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
-        @stylesheets('grans')      
+        @stylesheets('grans') 
+        {{-- Bootstrap JS Compiled --}}
+        @javascripts('bootstrap')
+        @javascripts('grans')
+        <script type="text/javascript">
+            $("#registration-form").validate({
+                rules: {
+                    fname: {
+                        required: true,
+                        minlength:3
+                    },
+                    lname: {
+                        required: true,
+                        minlength:3
+                    },
+                    username: {
+                        required: true,
+                        minlength:4
+                    },
+                    email: {
+                        required: true,
+                        minlength: 5
+                    },
+                    password:{
+                        required: true,
+                        minlength: 8,
+                    },
+                    password_confirmation:{
+                        required:true,
+                        equalTo: "#password"
+                    }
+                    ,
+                    captcha:{
+                        required: true,
+                        minlength:5,
+                        maxlength:5
+                    }
+
+                },
+                messages: {
+                    fname: {
+                        required: "Enter your firstname",
+                        minlength: "Should be 3 or more letters."
+                    },
+                    lname: {
+                        required: "Enter your lastname",
+                        minlength: "Should be 3 or more letters."                        
+                    },
+                    email: {
+                        required: "We Need email to send You Regular Updates.",
+                        minlength: "Your Email should not be less than 7 letters."
+                    },
+                    password: {
+                        required: "Provide a password",
+                        rangelength: jQuery.format("Enter at least {0} characters")
+                    },
+                    password_confirmation: {
+                        required: "Repeat your password",
+                        minlength: jQuery.format("Enter at least {0} characters"),
+                        equalTo: "Enter the same password as above"
+                    }
+                }
+                
+                             
+            });             
+      
+        </script>     
     </head>
     <body>
         <div class="container-fluid" id='top-heading'>
@@ -122,8 +188,22 @@
                         <div class="container-fluid">
                             
                     <?php
+                    if (Session::get('error.return')){
+                            echo "<div class='alert'>";
+                            echo $errors->first('email');
+                            echo $errors->first('password');
+                            echo $errors->first('password-chk');
+                            echo $errors->first('fname');
+                            echo $errors->first('lname');
+                            if($errors->first('captcha')){
+                                echo "Please Re-Enter Captcha Code";
+                            }
+                            echo "</div>";
+                        }
                         echo Form::open(['url'=> 'register','method'=>'post','id'=>'registration-form']);
-
+                        
+                        
+                        
                         // First Name and Last Name
                         echo "<div class=\"row-fluid\"><div class='span6'>";
                         echo Form::label('fname',"First Name *",array('class'=>'fname-reg-box-label'));
@@ -143,6 +223,11 @@
                         echo Form::label('password',"Password *",array('class'=>'pwd-reg-box-label'));
                         echo Form::password('password','',array('class'=>'password-reg-box'));
                         echo '</div></div>';
+
+                        echo "<div class='span6 pull-right'>";
+                        echo Form::label('password_confirmation',"Re-Enter Password",array('class'=>'pwd-chk-reg-box-label'));
+                        echo Form::password('password_confirmation','',array('class'=>'password-chk-reg-box'));
+                        echo '</div>';
                         
                         echo "<br><br>";
 
@@ -169,43 +254,7 @@
                     </div>
                 </div>            
             </div>
-        {{-- Bootstrap JS Compiled --}}
-        @javascripts('bootstrap')
-        @javascripts('grans')
-        <script type="text/javascript">
-            $("#registration-form").validate({
-                rules: {
-                    fname: {
-                        required: true,
-                        minlength:3
-                    },
-                    lname: {
-                        required: true,
-                        minlength:3
-                    },
-                    username: {
-                        required: true,
-                        minlength:4
-                    },
-                    email: {
-                        required: true,
-                        minlength: 5
-                    },
-                    password:{
-                        required: true,
-                        minlength: 8,
-                    },
-                    captcha:{
-                        required: true,
-                        minlength:5,
-                        maxlength:5
-                    }
-                }
-                
-                             
-            });             
-      
-        </script>
+        
 
     </body>
 </html>                
