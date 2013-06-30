@@ -5,72 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans') 
-        {{-- Bootstrap JS Compiled --}}
-        @javascripts('bootstrap')
-        @javascripts('grans')
-        <script type="text/javascript">
-            $("#registration-form").validate({
-                rules: {
-                    fname: {
-                        required: true,
-                        minlength:3
-                    },
-                    lname: {
-                        required: true,
-                        minlength:3
-                    },
-                    username: {
-                        required: true,
-                        minlength:4
-                    },
-                    email: {
-                        required: true,
-                        minlength: 5
-                    },
-                    password:{
-                        required: true,
-                        minlength: 8,
-                    },
-                    password_confirmation:{
-                        required:true,
-                        equalTo: "#password"
-                    }
-                    ,
-                    captcha:{
-                        required: true,
-                        minlength:5,
-                        maxlength:5
-                    }
-
-                },
-                messages: {
-                    fname: {
-                        required: "Enter your firstname",
-                        minlength: "Should be 3 or more letters."
-                    },
-                    lname: {
-                        required: "Enter your lastname",
-                        minlength: "Should be 3 or more letters."                        
-                    },
-                    email: {
-                        required: "We Need email to send You Regular Updates.",
-                        minlength: "Your Email should not be less than 7 letters."
-                    },
-                    password: {
-                        required: "Provide a password",
-                        rangelength: jQuery.format("Enter at least {0} characters")
-                    },
-                    password_confirmation: {
-                        required: "Repeat your password",
-                        minlength: jQuery.format("Enter at least {0} characters"),
-                        equalTo: "Enter the same password as above"
-                    }
-                }
-                
-                             
-            });             
-      
-        </script>     
+        
     </head>
     <body>
         <div class="container-fluid" id='top-heading'>
@@ -156,7 +91,7 @@
                                             echo Form::text('email', "", array('class' => 'email-addr-login', 'placeholder' => 'johndoe@example.com', 'autocomplete' => 'off'));
 
                                             //Echo FORM Label for Password address
-                                            echo Form::label('password', 'Password', array('class' => 'lbl-pwd-login'));
+                                            echo Form::label('password-lbl', 'Password', array('class' => 'lbl-pwd-login'));
 
                                             //Echo FORM Element for Password
                                             echo Form::password('password', "", array('class' => 'pwd-login', 'placeholder' => 'Password', 'autocomplete' => 'off'));
@@ -255,6 +190,72 @@
                 </div>            
             </div>
         
+        {{-- Bootstrap JS Compiled --}}
+        @javascripts('bootstrap')
+        @javascripts('grans')
+        <script type="text/javascript">
+            $("#registration-form").validate({
+                rules: {
+                    fname: {
+                        required: true,
+                        minlength:3
+                    },
+                    lname: {
+                        required: true,
+                        minlength:3
+                    },
+                    username: {
+                        required: true,
+                        minlength:4
+                    },
+                    email: {
+                        required: true,
+                        minlength: 5
+                    },
+                    password:{
+                        required: true,
+                        minlength: 8,
+                    },
+                    password_confirmation:{
+                        required:true,
+                        equalTo: "#password",
+                        minlength:8,
+                    }
+                    ,
+                    captcha:{
+                        required: true,
+                        minlength:5,
+                        maxlength:5
+                    }
 
+                },
+                messages: {
+                    fname: {
+                        required: "Enter your firstname",
+                        minlength: "Should be 3 or more letters."
+                    },
+                    lname: {
+                        required: "Enter your lastname",
+                        minlength: "Should be 3 or more letters."                        
+                    },
+                    email: {
+                        required: "We Need email to send You Regular Updates.",
+                        minlength: "Your Email should not be less than 7 letters."
+                    },
+                    password: {
+                        required: "Provide a password",
+                        rangelength: jQuery.format("Enter at least {0} characters")
+                    },
+                    password_confirmation: {
+                        required: "Repeat your password",
+                        minlength: jQuery.format("Enter at least {0} characters"),
+                        equalTo: "Enter the same password as above"
+                    }
+                }
+                
+                             
+            });             
+      
+        </script>     
     </body>
 </html>                
