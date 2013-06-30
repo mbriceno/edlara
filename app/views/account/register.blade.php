@@ -127,11 +127,11 @@
                         // First Name and Last Name
                         echo "<div class=\"row-fluid\"><div class='span6'>";
                         echo Form::label('fname',"First Name *",array('class'=>'fname-reg-box-label'));
-                        echo Form::text('fname',"",array('class'=>'fname-reg-box','placeholder'=>'John','required',));
+                        echo Form::text('fname',"",array('class'=>'fname-reg-box','placeholder'=>'John'));
                         echo "</div>";
                         echo "<div class='span6 pull-right'>";
                         echo Form::label('lname',"Last Name *",array('class'=>'lname-reg-box-label'));
-                        echo Form::text('lname',"",array('class'=>'lname-reg-box','placeholder'=>'Doe','required'));
+                        echo Form::text('lname',"",array('class'=>'lname-reg-box','placeholder'=>'Doe'));
                         echo "</div></div>";
 
                         // Email Address
@@ -141,7 +141,7 @@
                         echo "</div><div id=\"usercheck\"></div>";
                         echo "<div class='span6 pull-right'>";
                         echo Form::label('password',"Password *",array('class'=>'pwd-reg-box-label'));
-                        echo Form::password('password','',array('class'=>'password-reg-box','required'=>'required'));
+                        echo Form::password('password','',array('class'=>'password-reg-box'));
                         echo '</div></div>';
                         
                         echo "<br><br>";
@@ -152,12 +152,13 @@
                         echo "</div>";
                         echo "<div class='span4'>";
                         echo Form::select('actype', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
-                        echo "</div></div>
-                        <br>* Required
-                        <br><br>";
+                        echo "</div></div><br>* Required<br><br>";
+
+                        echo Form::captcha();
+
                         echo "<div id='policy'>By Clicking Register . You Agree to our <a href=\"about/tos\"> Terms of Service </a> and <a href=\"about/privacy-policy\">Privacy Policy.</a></div>";
                         echo Form::submit('Register', array('value'=>'Register','class' => 'btn btn-info btn-register pull-right'));
-
+                        
                         // Token
                         echo Form::token();   
 
@@ -188,12 +189,16 @@
                     },
                     email: {
                         required: true,
-                        email:true,
-                        remote:"api/searchuser",
+                        minlength: 5
                     },
                     password:{
                         required: true,
                         minlength: 8,
+                    },
+                    captcha:{
+                        required: true,
+                        minlength:5,
+                        maxlength:5
                     }
                 }
                 
