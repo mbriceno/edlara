@@ -74,8 +74,8 @@ class UserController extends BaseController {
 
     public function register(){
         $validator = Validator::make(Input::all(),
-                            array('fname'=>'required|min:3|alpha',
-                                'lname'=>'required|min:3|alpha',
+                            array('fname'=>'required|min:3|alpha|different:lname',
+                                'lname'=>'required|min:3|alpha|different:fname',
                                 'email'=>'required|min:5|email',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 'captcha'=>'required|min:5|captcha'));
