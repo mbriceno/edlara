@@ -92,7 +92,7 @@
                                             echo Form::text('email', "", array('class' => 'email-addr-login', 'placeholder' => 'johndoe@example.com', 'autocomplete' => 'off'));
 
                                             //Echo FORM Label for Password address
-                                            echo Form::label('password', 'Password', array('class' => 'lbl-pwd-login'));
+                                            echo Form::label('password-lbl', 'Password', array('class' => 'lbl-pwd-login'));
 
                                             //Echo FORM Element for Password
                                             echo Form::password('password', "", array('class' => 'pwd-login', 'placeholder' => 'Password', 'autocomplete' => 'off'));
@@ -190,7 +190,7 @@
                         echo '</div></div>';
 
                         echo "<div class='span6 pull-right'>";
-                        echo Form::label('password_confirmation',"Re-Enter Password",array('class'=>'pwd-chk-reg-box-label'));
+                        echo Form::label('password_confirmation_lbl',"Re-Enter Password",array('class'=>'pwd-chk-reg-box-label'));
                         echo Form::password('password_confirmation','',array('class'=>'password-chk-reg-box'));
                         echo '</div>';
                         
@@ -288,7 +288,7 @@ var validator =  $("#registration-form").validate({
                 }           
             });             
 
-           })
+           });
       
         </script>     
     </body>
