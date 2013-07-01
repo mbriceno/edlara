@@ -190,7 +190,7 @@
                         echo '</div></div>';
 
                         echo "<div class='span6 pull-right'>";
-                        echo Form::label('password_confirmation',"Re-Enter Password",array('class'=>'pwd-chk-reg-box-label'));
+                        echo Form::label('password_confirmation_lbl',"Re-Enter Password",array('class'=>'pwd-chk-reg-box-label'));
                         echo Form::password('password_confirmation','',array('class'=>'password-chk-reg-box'));
                         echo '</div>';
                         
@@ -286,10 +286,10 @@ var validator =  $("#registration-form").validate({
                         minlength: jQuery.format("Enter at least {0} characters"),
                         equalTo: "Enter the same password as above"
                     }
-                }
-                
-                             
+                }           
             });             
+
+           });
       
         </script>     
     </body>
