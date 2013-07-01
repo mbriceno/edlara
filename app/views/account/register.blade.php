@@ -5,72 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans') 
-        {{-- Bootstrap JS Compiled --}}
-        @javascripts('bootstrap')
-        @javascripts('grans')
-        <script type="text/javascript">
-            $("#registration-form").validate({
-                rules: {
-                    fname: {
-                        required: true,
-                        minlength:3
-                    },
-                    lname: {
-                        required: true,
-                        minlength:3
-                    },
-                    username: {
-                        required: true,
-                        minlength:4
-                    },
-                    email: {
-                        required: true,
-                        minlength: 5
-                    },
-                    password:{
-                        required: true,
-                        minlength: 8,
-                    },
-                    password_confirmation:{
-                        required:true,
-                        equalTo: "#password"
-                    }
-                    ,
-                    captcha:{
-                        required: true,
-                        minlength:5,
-                        maxlength:5
-                    }
+        
 
-                },
-                messages: {
-                    fname: {
-                        required: "Enter your firstname",
-                        minlength: "Should be 3 or more letters."
-                    },
-                    lname: {
-                        required: "Enter your lastname",
-                        minlength: "Should be 3 or more letters."                        
-                    },
-                    email: {
-                        required: "We Need email to send You Regular Updates.",
-                        minlength: "Your Email should not be less than 7 letters."
-                    },
-                    password: {
-                        required: "Provide a password",
-                        rangelength: jQuery.format("Enter at least {0} characters")
-                    },
-                    password_confirmation: {
-                        required: "Repeat your password",
-                        minlength: jQuery.format("Enter at least {0} characters"),
-                        equalTo: "Enter the same password as above"
-                    }
-                }
-                
-                             
-            });             
-      
-        </script>     
     </head>
     <body>
         <div class="container-fluid" id='top-heading'>
@@ -267,8 +203,13 @@
                         echo "<div class='span4'>";
                         echo Form::select('actype', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
                         echo "</div></div><br>* Required<br><br>";
-
-                        echo Form::captcha();
+                        $captcha_type = Config::get('app.captcha');
+                        if($captcha_type=="captcha"){
+                            echo Form::captcha();
+                        } 
+                        elseif($captcha_type == "recaptcha"){
+                            echo Form::recaptcha();
+                        }
 
                         echo "<div id='policy'>By Clicking Register . You Agree to our <a href=\"about/tos\"> Terms of Service </a> and <a href=\"about/privacy-policy\">Privacy Policy.</a></div>";
                         echo Form::submit('Register', array('value'=>'Register','class' => 'btn btn-info btn-register pull-right'));
@@ -283,7 +224,72 @@
                     </div>
                 </div>            
             </div>
-        
+        {{-- Bootstrap JS Compiled --}}
+        @javascripts('bootstrap')
+        @javascripts('grans')
+        <script type="text/javascript">
+           $(document).ready(function(){
+var validator =  $("#registration-form").validate({
+                rules: {
+                    fname: {
+                        required: true,
+                        minlength:3
+                    },
+                    lname: {
+                        required: true,
+                        minlength:3
+                    },
+                    username: {
+                        required: true,
+                        minlength:4
+                    },
+                    email: {
+                        required: true,
+                        minlength: 5
+                    },
+                    password:{
+                        required: true,
+                        minlength: 8,
+                    },
+                    password_confirmation: {
+                        required: true,
+                        minlength: 8,
+                        equalTo: "#password"
+                    }
+                    ,
+                    captcha:{
+                        required: true,
+                        minlength:5,
+                        maxlength:5
+                    }
 
+                },
+                messages: {
+                    fname: {
+                        required: "Enter your firstname",
+                        minlength: "Should be 3 or more letters."
+                    },
+                    lname: {
+                        required: "Enter your lastname",
+                        minlength: "Should be 3 or more letters."                        
+                    },
+                    email: {
+                        required: "We Need email to send You Regular Updates.",
+                        minlength: "Your Email should not be less than 7 letters."
+                    },
+                    password: {
+                        required: "Provide a password",
+                        rangelength: jQuery.format("Enter at least {0} characters")
+                    },
+                    password_confirmation: {
+                        required: "Repeat your password",
+                        equalTo: "Enter the same password as above"
+                    }
+                }           
+            });             
+
+           })
+      
+        </script>     
     </body>
 </html>                
