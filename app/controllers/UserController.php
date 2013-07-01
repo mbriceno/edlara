@@ -80,13 +80,29 @@ class UserController extends BaseController {
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 'captcha'=>'required|min:5|captcha'));
         if ($validator->fails())
-        {
-            Session::set('error.return',true);
+        {           
             return Redirect::to('register')->withErrors($validator);
         } 
         else
         {
             //TODO: Adding DB Interactions.
+            try
+            {
+                // Let's register a user.
+                $user = Sentry::register(array(
+            'email'    => Input::get('email');,
+            'password' => Input::get('password');,
+                ));
+
+                // Let's get the activation code
+                $activationCode = $user->getActivationCode();
+
+                // Send activation code to the user so he can activate the account
+            }
+            catch (Cartalyst\Sentry\Users\UserExistsException $e)
+            {                
+                return Redirect::to('register')->with('errormessage','User Already exists.');
+            }
         }
 
     }
