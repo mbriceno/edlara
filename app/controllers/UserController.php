@@ -90,8 +90,8 @@ class UserController extends BaseController {
             {
                 // Let's register a user.
                 $user = Sentry::register(array(
-            'email'    => Input::get('email');,
-            'password' => Input::get('password');,
+            'email'    => Input::get('email'),
+            'password' => Input::get('password'),
                 ));
 
                 // Let's get the activation code
