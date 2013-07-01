@@ -6,6 +6,7 @@
         @stylesheets('bootstrap')
         @stylesheets('grans') 
         
+
     </head>
     <body>
         <div class="container-fluid" id='top-heading'>
@@ -202,8 +203,13 @@
                         echo "<div class='span4'>";
                         echo Form::select('actype', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
                         echo "</div></div><br>* Required<br><br>";
-
-                        echo Form::captcha();
+                        $captcha_type = Config::get('app.captcha');
+                        if($captcha_type=="captcha"){
+                            echo Form::captcha();
+                        } 
+                        elseif($captcha_type == "recaptcha"){
+                            echo Form::recaptcha();
+                        }
 
                         echo "<div id='policy'>By Clicking Register . You Agree to our <a href=\"about/tos\"> Terms of Service </a> and <a href=\"about/privacy-policy\">Privacy Policy.</a></div>";
                         echo Form::submit('Register', array('value'=>'Register','class' => 'btn btn-info btn-register pull-right'));
@@ -218,12 +224,12 @@
                     </div>
                 </div>            
             </div>
-        
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')
         @javascripts('grans')
         <script type="text/javascript">
-            $("#registration-form").validate({
+           $(document).ready(function(){
+var validator =  $("#registration-form").validate({
                 rules: {
                     fname: {
                         required: true,

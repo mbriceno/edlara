@@ -73,36 +73,45 @@ class UserController extends BaseController {
     }
 
     public function register(){
+        $captcha_type = Config::get('app.captcha');
+        if($captcha_type=="captcha"){
+            $captcha_field = "captcha";
+            $captcha_validation = 'required|min:5|captcha';
+        } 
+        elseif($captcha_type == "recaptcha"){
+            $captcha_field = "recaptcha_response_field";
+            $captcha_validation = 'required|min:5|recaptcha';
+        }
         $validator = Validator::make(Input::all(),
                             array('fname'=>'required|min:3|alpha|different:lname',
                                 'lname'=>'required|min:3|alpha|different:fname',
                                 'email'=>'required|min:5|email',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
-                                'captcha'=>'required|min:5|captcha'));
+                                $captcha_field =>$captcha_validation));
         if ($validator->fails())
         {           
             return Redirect::to('register')->withErrors($validator);
         } 
         else
-        {
+        {/*
             //TODO: Adding DB Interactions.
             try
             {
                 // Let's register a user.
-                $user = Sentry::register(array(
+          /*      $user = Sentry::register(array(
             'email'    => Input::get('email'),
             'password' => Input::get('password'),
-                ));
+                ));*/
 
                 // Let's get the activation code
-                $activationCode = $user->getActivationCode();
+              /*  $activationCode = $user->getActivationCode();
 
                 // Send activation code to the user so he can activate the account
             }
             catch (Cartalyst\Sentry\Users\UserExistsException $e)
             {                
                 return Redirect::to('register')->with('errormessage','User Already exists.');
-            }
+            }*/
         }
 
     }
