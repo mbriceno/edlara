@@ -10,6 +10,12 @@ return array(
 	'baseurl'=> 'laravel.dev',
 	/*
 	|--------------------------------------------------------------------------
+	| Captcha Type Used in the System.
+	|--------------------------------------------------------------------------
+	*/
+	'captcha' =>'captcha',
+	/*
+	|--------------------------------------------------------------------------
 	| Application Debug Mode
 	|--------------------------------------------------------------------------
 	|
@@ -125,6 +131,7 @@ return array(
                 'Grans\Learn\LearnServiceProvider',
                 'Way\Generators\GeneratorsServiceProvider',
         		'Mews\Captcha\CaptchaServiceProvider',
+        		'Greggilbert\Recaptcha\RecaptchaServiceProvider'
 
 	),
 
