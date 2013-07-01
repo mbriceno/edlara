@@ -120,21 +120,50 @@
             <div class='row-fluid' id="main-container">
 
                     <div class="registration-box offset1 span6" id="registration-box">
-                        <div class="container-fluid">
-                            
+                        <div class="container-fluid">        
                     <?php
-                    if (Session::get('error.return')){
-                            echo "<div class='alert'>";
-                            echo $errors->first('email');
-                            echo $errors->first('password');
-                            echo $errors->first('password-chk');
-                            echo $errors->first('fname');
-                            echo $errors->first('lname');
-                            if($errors->first('captcha')){
-                                echo "Please Re-Enter Captcha Code";
-                            }
+                    if($errors->first('email')){
+
+                            echo "<div class='alert alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo $errors->first('email');                            
                             echo "</div>";
-                        }
+                    }
+                    if($errors->first('password')){
+
+                            echo "<div class='alert  alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo $errors->first('password');                            
+                            echo "</div>";
+                    }
+                    if($errors->first('password-chk')){
+
+                            echo "<div class='alert  alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo $errors->first('password-chk');                            
+                            echo "</div>";
+                    }
+                    if($errors->first('lname')){
+
+                            echo "<div class='alert  alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo $errors->first('lname');                            
+                            echo "</div>";
+                    }
+                    if($errors->first('fname')){
+
+                            echo "<div class='alert alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo $errors->first('fname');                            
+                            echo "</div>";
+                    }
+                    if($errors->first('captcha')){
+
+                            echo "<div class='alert alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo "Please Re-Enter Captcha. and Also the Form";                            
+                            echo "</div>";
+                    }
                         echo Form::open(['url'=> 'register','method'=>'post','id'=>'registration-form']);
                         
                         
