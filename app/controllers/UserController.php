@@ -72,7 +72,7 @@ class UserController extends BaseController {
         return Redirect::to('/');        
     }
 
-    public function register(){
+    public function register(){        
         $captcha_type = Config::get('app.captcha');
         if($captcha_type=="captcha"){
             $captcha_field = "captcha";
@@ -81,6 +81,10 @@ class UserController extends BaseController {
         elseif($captcha_type == "recaptcha"){
             $captcha_field = "recaptcha_response_field";
             $captcha_validation = 'required|min:5|recaptcha';
+        }
+        elseif($captcha_type == "checkbox"){
+            $captcha_field = "checkbox_captcha";
+            $captcha_validation = "required|checkbox_captcha";
         }
         $validator = Validator::make(Input::all(),
                             array('fname'=>'required|min:3|alpha|different:lname',
@@ -93,7 +97,9 @@ class UserController extends BaseController {
             return Redirect::to('register')->withErrors($validator);
         } 
         else
-        {/*
+        {
+            return "Passed";
+        /*
             //TODO: Adding DB Interactions.
             try
             {
