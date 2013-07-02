@@ -165,6 +165,13 @@
                             echo "Please Re-Enter Captcha. and Also the Form";                            
                             echo "</div>";
                     }
+                    if($errors->first('checkbox_captcha')){
+
+                            echo "<div class='alert alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo "Please Re-Enter Captcha. and Also the Form";                            
+                            echo "</div>";
+                    }
                         echo Form::open(['url'=> 'register','method'=>'post','id'=>'registration-form']);
                         
                         
@@ -210,7 +217,9 @@
                         elseif($captcha_type == "recaptcha"){
                             echo Form::recaptcha();
                         }
-
+                        elseif($captcha_type == "checkbox"){
+                            echo Form::checkbox_captcha();      
+                        }
                         echo "<div id='policy'>By Clicking Register . You Agree to our <a href=\"about/tos\"> Terms of Service </a> and <a href=\"about/privacy-policy\">Privacy Policy.</a></div>";
                         echo Form::submit('Register', array('value'=>'Register','class' => 'btn btn-info btn-register pull-right'));
                         
