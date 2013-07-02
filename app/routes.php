@@ -60,6 +60,6 @@ Route::post('api/searchuser', 'UserController@checkUser');
 //HomePage Catcher
 Route::get('/', function()
 {
-	return View::make('home');
+	return View::make('home')->nest('loginsnippet','account.loginsnippet');
 });
 
