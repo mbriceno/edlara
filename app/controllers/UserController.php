@@ -5,15 +5,16 @@ class UserController extends BaseController {
     //Login
     public function authenticate(){
 
-        if(!isset($username)){
             $username = Input::get('email');
-        }
-        elseif (!isset($password)){
-            $password = Input::get('password-login');
-        }
-        elseif(!isset($password)){
-            $password = Input::get('password');
-        }
+            $password = Input::get('password-login');      
+            if(!isset($password))
+            {
+              $password =   Input::get('password');
+            }
+            elseif($password == '')
+            {                
+              $password =   Input::get('password');
+            }  
 
         try
         {
@@ -92,7 +93,7 @@ class UserController extends BaseController {
         $validator = Validator::make(Input::all(),
                             array('fname'=>'required|min:3|alpha|different:lname',
                                 'lname'=>'required|min:3|alpha|different:fname',
-                                'email'=>'required|min:5|email',
+                                'email'=>'required|min:5|email|username:password',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 $captcha_field =>$captcha_validation));
         if ($validator->fails())
@@ -101,8 +102,8 @@ class UserController extends BaseController {
         } 
         else
         {
-            self::authenticate();
-            return Redirect::to('/', 200);
+            //self::authenticate();
+            return Redirect::to('/');
 
         }
 
