@@ -65,6 +65,6 @@ Route::post('api/searchuser', 'UserController@checkUser');
 //HomePage Catcher
 Route::get('/', function()
 {
-	return View::make('home')->nest('menubar','main.menu');
+	return View::make('home')->nest('header','main.header');
 });
 
