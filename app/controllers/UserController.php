@@ -4,8 +4,17 @@ class UserController extends BaseController {
 
     //Login
     public function authenticate(){
-        $username= Input::get('email');
-        $password= Input::get('password-login');
+
+        if(!isset($username)){
+            $username = Input::get('email');
+        }
+        elseif (!isset($password)){
+            $password = Input::get('password-login');
+        }
+        elseif(!isset($password)){
+            $password = Input::get('password');
+        }
+
         try
         {
             // Set login credentials
@@ -92,26 +101,9 @@ class UserController extends BaseController {
         } 
         else
         {
-            return "Passed";
-        /*
-            //TODO: Adding DB Interactions.
-            try
-            {
-                // Let's register a user.
-          /*      $user = Sentry::register(array(
-            'email'    => Input::get('email'),
-            'password' => Input::get('password'),
-                ));*/
+            self::authenticate();
+            return Redirect::to('/', 200);
 
-                // Let's get the activation code
-              /*  $activationCode = $user->getActivationCode();
-
-                // Send activation code to the user so he can activate the account
-            }
-            catch (Cartalyst\Sentry\Users\UserExistsException $e)
-            {                
-                return Redirect::to('register')->with('errormessage','User Already exists.');
-            }*/
         }
 
     }
@@ -122,7 +114,7 @@ class UserController extends BaseController {
         if ( ! Sentry::check())
             {
                 // User is not Logged in. So Lets Show the registration form. Main Menu Attached
-                return View::make('account.register')->nest('menubar','main.menu');     
+                return View::make('account.register')->nest('header','main.header');     
             }
             else
             {
