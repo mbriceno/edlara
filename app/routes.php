@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+require_once('viewcomposer.php');
 $baseurl = Config::get('app.baseurl', 'laravel.dev');
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf',
@@ -57,9 +58,10 @@ Route::get('phpinfo', function(){
 });
 Route::post('api/searchuser', 'UserController@checkUser');
 
+
 //HomePage Catcher
 Route::get('/', function()
 {
-	return View::make('home')->nest('loginsnippet','account.loginsnippet');
+	return View::make('home')->nest('menubar','main.menu');
 });
 
