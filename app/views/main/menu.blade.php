@@ -14,19 +14,19 @@
                         <!-- .nav, .navbar-search, .navbar-form, etc -->
                     <ul class="nav">
                         <li class="active">
-                            <a href="#">Home</a>
+                            <a href="/#top">Home</a>
                         </li>
                         <li>
-                            <a href="#">Getting Started</a>
+                            <a href="/#gettingstarted">Getting Started</a>
                         </li>
                         <li>
-                            <a href="#">About Us</a>
+                            <a href="/#aboutus">About Us</a>
                         </li>
                         <li>
-                            <a href="#">Contact Us</a>
+                            <a href="/#contactus">Contact Us</a>
                         </li>
                         <li>
-                            <a href="#">Tutorials</a>
+                            <a href="/#tutorials">Tutorials</a>
                         </li>
                     </ul>
                     <ul class="nav pull-right">
@@ -34,7 +34,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Exams<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">How to do the Online Exams</a>
+                                    <a href="/#">How to do the Online Exams</a>
                                 </li>
                                 <li>
                                     <a href="#">Benefits of doing e-Exams</a>
