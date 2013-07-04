@@ -131,7 +131,8 @@ return array(
                 'Grans\Learn\LearnServiceProvider',
                 'Way\Generators\GeneratorsServiceProvider',
         		'Mews\Captcha\CaptchaServiceProvider',
-        		'Greggilbert\Recaptcha\RecaptchaServiceProvider'
+        		'Greggilbert\Recaptcha\RecaptchaServiceProvider',
+        		'Grans\Uservalidator\UservalidatorServiceProvider'
 
 	),
 

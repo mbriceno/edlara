@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder {
             // Create the user
             $user = Sentry::getUserProvider() -> create(array(
                  'email' => 'johndoe@example.com',
-                 'password' => 'test234',
+                 'password' => 'user123456',
                  'activation_code'=>'8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb',
                  'first_name' => 'John',
                  'last_name' => 'Doe',

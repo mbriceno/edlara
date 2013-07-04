@@ -4,8 +4,13 @@ class UserController extends BaseController {
 
     //Login
     public function authenticate(){
-        $username= Input::get('email');
-        $password= Input::get('password-login');
+
+            $username = Input::get('email');
+            $password = Input::get('password-login');      
+            if(!isset($password)){
+              $password =   Input::get('password');
+            }  
+
         try
         {
             // Set login credentials
@@ -83,7 +88,7 @@ class UserController extends BaseController {
         $validator = Validator::make(Input::all(),
                             array('fname'=>'required|min:3|alpha|different:lname',
                                 'lname'=>'required|min:3|alpha|different:fname',
-                                'email'=>'required|min:5|email',
+                                'email'=>'required|min:5|email|username:password',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 $captcha_field =>$captcha_validation));
         if ($validator->fails())
@@ -92,16 +97,8 @@ class UserController extends BaseController {
         } 
         else
         {
-            return "Passed";
-        /*
-            //TODO: Adding DB Interactions.
-            try
-            {
-                // Let's register a user.
-          /*      $user = Sentry::register(array(
-            'email'    => Input::get('email'),
-            'password' => Input::get('password'),
-                ));*/
+            //self::authenticate();
+            return Redirect::to('/');
 
                 // Let's get the activation code
               /*  $activationCode = $user->getActivationCode();
@@ -122,7 +119,7 @@ class UserController extends BaseController {
         if ( ! Sentry::check())
             {
                 // User is not Logged in. So Lets Show the registration form. Main Menu Attached
-                return View::make('account.register')->nest('menubar','main.menu');     
+                return View::make('account.register')->nest('header','main.header');     
             }
             else
             {

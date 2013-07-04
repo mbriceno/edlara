@@ -37,7 +37,12 @@
         {
             "type": "git",
             "url": "https://github.com/gnanakeethan/recaptcha"
+        },
+        {
+            "type": "git",
+            "url": "/home/gnanakeethan/Downloads/uservalidator/"
         }
+
     ],
     "require": {
         "laravel/framework": "4.0.*",        
@@ -48,7 +53,8 @@
         "jasonlewis/enhanced-router": "1.0.*",
         "leafo/lessphp": "*",
         "phpunit/phpunit": "3.8.*",
-        "greggilbert/recaptcha": "dev-master"
+        "greggilbert/recaptcha": "dev-master",
+        "grans/uservalidator":"dev-master"
     
     },
     "autoload": {
