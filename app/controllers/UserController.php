@@ -5,7 +5,7 @@ class UserController extends BaseController {
     //Login
     public function authenticate(){
         $username= Input::get('email');
-        $password= Input::get('password');
+        $password= Input::get('password-login');
         try
         {
             // Set login credentials

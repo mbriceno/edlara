@@ -23,7 +23,7 @@
                         'class' => 'lbl-pwd-login'));
                     
                     //Echo FORM Element for Password
-                    echo Form::password('password-login',"",array(
+                    echo Form::password('password-login',array(
                         'class' => 'pwd-login',
                         'placeholder' => 'Password',
                         'autocomplete' => 'off'));
