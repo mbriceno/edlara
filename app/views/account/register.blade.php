@@ -171,7 +171,7 @@
                         echo Form::email('email',"",array('class'=>'email-reg-box','placeholder'=>'johndoe@example.com','required'));
                         echo "</div><div id=\"usercheck\"></div>";
                         echo "<div class='span6 pull-right'>";
-                        echo Form::label('password',"Password *",array('class'=>'pwd-reg-box-label'));
+                        echo Form::label('password_lbl',"Password *",array('class'=>'pwd-reg-box-label'));
                         echo Form::password('password','',array('class'=>'password-reg-box'));
                         echo '</div></div>';
 
