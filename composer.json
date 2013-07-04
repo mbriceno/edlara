@@ -33,6 +33,12 @@
             "role": "Designer"
         }
     ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/gnanakeethan/recaptcha"
+        }
+    ],
     "require": {
         "laravel/framework": "4.0.*",        
         "way/generators": "dev-master",
