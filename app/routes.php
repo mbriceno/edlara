@@ -11,7 +11,8 @@
 |
 */
 require_once('viewcomposer.php');
-$baseurl = Config::get('app.baseurl', 'laravel.dev');
+require_once('filters.php');
+
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf',
     'uses' => 'UserController@authenticate'));
