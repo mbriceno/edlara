@@ -19,14 +19,15 @@
                         'autocomplete' => 'off'));
                         
                     //Echo FORM Label for Password address
-                    echo Form::label('password', 'Password', array(
+                    echo Form::label('pwd-login', 'Password', array(
                         'class' => 'lbl-pwd-login'));
                     
                     //Echo FORM Element for Password
                     echo Form::password('password',"",array(
                         'class' => 'pwd-login',
                         'placeholder' => 'Password',
-                        'autocomplete' => 'off'));
+                        'autocomplete' => 'off',
+                        'id'=> 'pwd-login' ));
 
                     echo "<br>";
 
