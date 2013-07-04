@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'smtp.gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'info@edlara.com', 'name' => 'Edlara Team'),
+	'from' => array('address' => 'gransjhc@gmail.com', 'name' => 'Edlara Team'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'postmaster@edlara.mailgun.org',
+	'username' => 'gransjhc@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => '5jg9e9223j78',
+	'password' => '0%7x206CDSf4X!N',
 
 	/*
 	|--------------------------------------------------------------------------
