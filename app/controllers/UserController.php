@@ -54,21 +54,15 @@ class UserController extends BaseController {
             Log::error('User with Login '.$username.' Tried to access.But the Account was Banned.');
             return View::make('account.login')->with('error',"Banned");
         }
-        if ( ! Sentry::check())
+        if (Sentry::check())
             {
-                //User is not Logged In
-            //    return Redirect::to('');            
-            }
-            else
-            {
-                // User is logged in   
-                
-            Log::info('User with Login '.$username.' Logged In Successfully.');         
+                // User is logged in  
+                Log::info('User with Login '.$username.' Logged In Successfully.');         
                 return  Redirect::intended('/')->with('error','OK');
             }
     }
     public function logout(){     
-    Sentry::logout()   ;
+        Sentry::logout();
         return Redirect::to('/');        
     }
 
@@ -127,8 +121,8 @@ class UserController extends BaseController {
     public function showReg(){
         if ( ! Sentry::check())
             {
-                // User is not Logged in. So Lets Show the registration form.
-                return View::make('account.register');     
+                // User is not Logged in. So Lets Show the registration form. Main Menu Attached
+                return View::make('account.register')->nest('menubar','main.menu');     
             }
             else
             {
