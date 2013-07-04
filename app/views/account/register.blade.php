@@ -86,25 +86,33 @@
                         echo Form::label('fname',"First Name *",array('class'=>'fname-reg-box-label'));
                         echo Form::text('fname',"",array('class'=>'fname-reg-box','placeholder'=>'John'));
                         echo "</div>";
+                        
                         echo "<div class='span6 pull-right'>";
                         echo Form::label('lname',"Last Name *",array('class'=>'lname-reg-box-label'));
                         echo Form::text('lname',"",array('class'=>'lname-reg-box','placeholder'=>'Doe'));
                         echo "</div></div>";
 
+
                         // Email Address
                         echo "<div class='row-fluid'><div class='span6'>";
                         echo Form::label('email',"Email Address *",array('class'=>'email-reg-box-label'));
                         echo Form::email('email',"",array('class'=>'email-reg-box','placeholder'=>'johndoe@example.com','required'));
+
+
                         echo "</div><div id=\"usercheck\"></div>";
                         echo "<div class='span6 pull-right'>";
-                        echo Form::label('password_lbl',"Password *",array('class'=>'pwd-reg-box-label'));
-                        echo Form::password('password','',array('class'=>'password-reg-box'));
+                        echo Form::label('password',"Password *",array('class'=>'pwd-reg-box-label'));
+                        echo Form::password('password',array('class'=>'password-reg-box'));
                         echo '</div></div>';
 
+
+
                         echo "<div class='span6 pull-right'>";
-                        echo Form::label('password_confirmation_lbl',"Re-Enter Password",array('class'=>'pwd-chk-reg-box-label'));
-                        echo Form::password('password_confirmation','',array('class'=>'password-chk-reg-box'));
+                        echo Form::label('password_confirmation',"Re-Enter Password",array('class'=>'pwd-chk-reg-box-label'));
+                        echo Form::password('password_confirmation',array('class'=>'password-chk-reg-box'));
                         echo '</div>';
+
+
                         
                         echo "<br><br>";
 
@@ -112,9 +120,13 @@
                         echo "<div class=\"row-fluid\"><div class='offset1 span6'>";
                         echo Form::label('actype',"Acccount Type",array('class'=>'actype-reg-box-label pull-left','required'));
                         echo "</div>";
+
+
                         echo "<div class='span4'>";
                         echo Form::select('actype', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
                         echo "</div></div><br>* Required<br><br>";
+
+
                         $captcha_type = Config::get('app.captcha');
                         if($captcha_type=="captcha"){
                             echo Form::captcha();
@@ -125,8 +137,11 @@
                         elseif($captcha_type == "checkbox"){
                             echo Form::checkbox_captcha();      
                         }
+
                         echo "<div id='policy'>By Clicking Register . You Agree to our <a href=\"about/tos\"> Terms of Service </a> and <a href=\"about/privacy-policy\">Privacy Policy.</a></div>";
+
                         echo Form::submit('Register', array('value'=>'Register','class' => 'btn btn-info btn-register pull-right'));
+
                         
                         // Token
                         echo Form::token();   
