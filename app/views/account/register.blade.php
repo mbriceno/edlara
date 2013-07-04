@@ -9,19 +9,7 @@
 
     </head>
     <body>
-        <div class="container-fluid" id='top-heading'>
-            <div class="row-fluid" >
-                <div id="clouds">
-                    <div class="cloud x1"></div>
-                    <div class="cloud x2"></div>
-                    <div class="cloud x3"></div>
-                    <div class="cloud x4"></div>
-                    <div class="cloud x5"></div>
-                </div>
-                <span class="brand-name" id='top-header'>EdLara</span>
-            </div>
-        </div>
-        {{ $menubar }}
+        {{ $header }}
         <div class='container-fluid' >
             <div class='row-fluid' id="main-container">
 
@@ -128,7 +116,7 @@
 
 
                         $captcha_type = Config::get('app.captcha');
-                        if($captcha_type=="captcha"){
+                        if($captcha_type == "captcha"){
                             echo Form::captcha();
                         } 
                         elseif($captcha_type == "recaptcha"){
@@ -158,7 +146,7 @@
         @javascripts('grans')
         <script type="text/javascript">
            $(document).ready(function(){
-var validator =  $("#registration-form").validate({
+            var validator =  $("#registration-form").validate({
                 rules: {
                     fname: {
                         required: true,
