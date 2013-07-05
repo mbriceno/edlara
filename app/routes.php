@@ -52,10 +52,12 @@ Route::get('phpinfo', function(){
     return phpinfo();
 });
 Route::post('api/searchuser', 'UserController@checkUser');
-
+Route::get('/gohome',function(){
+    return Redirect::route('home');
+}); 
 
 //HomePage Catcher
-Route::get('/', function()
+Route::get('/',array( 'as'=>'home',function()
 {
     return View::make('home')->nest('header','main.header');
-});
+}));
