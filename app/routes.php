@@ -11,34 +11,28 @@
 |
 */
 require_once('viewcomposer.php');
-require_once('filters.php');
 
 //Authencticating User with Controller
-Route::post('login',array('before' => 'csrf',
-    'uses' => 'UserController@authenticate'));
+Route::post('login',array('before' => 'csrf','uses' => 'UserController@authenticate'));
 
-//Accounts Subdomain
-Route::group(array('domain' => 'account.laravel.dev',
-    'before'=>'auth'), function()
+Route::group(array('domain' => 'account.laravel.dev'), function()
 {
-    //Making the Default View after authenticating
-    Route::get('/',function()
-    {
-        return View::make('account.index');
-    });
-    //TODO: Settings controller
-});
+        Route::get('/',function()
+        {
+                return View::make('account.index');
+        });
+})->before('auth');
 
 //Dashboard Subdomain
-Route::group(array('as'=>'dashboard',
-    'domain' => 'dashboard.laravel.dev','before'=>'auth'), function()
+Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 {    
     Route::get('/', function()
     {
         return View::make('dashboard.index')->with('error','OK');
     });
+
     Route::get('sendmail', 'MailerController@test');
-});
+})->before('auth');
 
 
 Route::group([],function(){
@@ -63,6 +57,5 @@ Route::post('api/searchuser', 'UserController@checkUser');
 //HomePage Catcher
 Route::get('/', function()
 {
-	return View::make('home')->nest('header','main.header');
+    return View::make('home')->nest('header','main.header');
 });
-
