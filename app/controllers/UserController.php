@@ -112,10 +112,6 @@ class UserController extends BaseController {
     public function showReg(){
         if ( ! Sentry::check())
             {
-                // User is not Logged in. So Lets Show the registration form. Main Menu Attached
-                Cache::increment('key');
-
-                Cache::increment('key', 1);
                 return View::make('account.register')->nest('header','main.header');
 
             }
