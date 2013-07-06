@@ -102,9 +102,19 @@ class UserController extends BaseController {
         } 
         else
         {
-            return 'OK';
-        }
+                $username = Input::get('email');
+                $password =   Input::get('password');
+                // Let's register a user.
+                $user = Sentry::register(array(
+                    'email'    => $username,
+                    'password' => $password,
+                ));
 
+                // Let's get the activation code
+                $activationCode = $user->getActivationCode();                
+                Session::put('user.activationcode',$activationcode);
+                MailerController::welcomeMail();
+        }
     }
 
 
@@ -112,7 +122,7 @@ class UserController extends BaseController {
     public function showReg(){
         if ( ! Sentry::check())
             {
-                return View::make('account.register')->nest('header','main.header');
+                return Redirect::to('/');
 
             }
             else
