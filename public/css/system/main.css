@@ -5,10 +5,14 @@
  Description:
  Main CSS code relies here
  */
+@font-face {
+font-family: 'Metamorphous';
+src: url("/fonts/Metamorphous-Regular.otf") format("opentype");
+}
+
 /*Lets start with the cloud formation rather*/
 
 /*The container will also serve as the SKY*/
-@import url(//fonts.googleapis.com/css?family=Metamorphous);
 
 #top-header {
     font-family: 'Metamorphous', sans-serif;
