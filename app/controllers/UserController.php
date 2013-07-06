@@ -93,7 +93,7 @@ class UserController extends BaseController {
         $validator = Validator::make(Input::all(),
                             array('fname'=>'required|min:3|alpha|different:lname',
                                 'lname'=>'required|min:3|alpha|different:fname',
-                                'email'=>'required|min:5|email|username:password',
+                                'email'=>'required|min:5|email|usercheck:password',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 $captcha_field =>$captcha_validation));
         if ($validator->fails())
@@ -102,9 +102,7 @@ class UserController extends BaseController {
         } 
         else
         {
-            //self::authenticate();
-            return Redirect::to('/');
-
+            return 'OK';
         }
 
     }
@@ -115,7 +113,11 @@ class UserController extends BaseController {
         if ( ! Sentry::check())
             {
                 // User is not Logged in. So Lets Show the registration form. Main Menu Attached
-                return View::make('account.register')->nest('header','main.header');     
+                Cache::increment('key');
+
+                Cache::increment('key', 1);
+                return View::make('account.register')->nest('header','main.header');
+
             }
             else
             {
@@ -128,6 +130,15 @@ class UserController extends BaseController {
 
            $user =  Input::all();
            Log::info($user);
+    }
+
+    protected function addUser($userdata){
+        // $username = $userdata['username'];
+        // $password = $userdata['password'];
+        // $fname = $userdata['fname'];
+        // $lname = $userdata['lname'];
+        // $email = $userdata['email'];
+
     }
 
 }
