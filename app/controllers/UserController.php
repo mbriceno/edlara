@@ -104,10 +104,14 @@ class UserController extends BaseController {
         {
                 $username = Input::get('email');
                 $password =   Input::get('password');
+                $fname    = Input::get('fname');
+                $lname    = Input::get('lname');
                 // Let's register a user.
                 $user = Sentry::register(array(
                     'email'    => $username,
                     'password' => $password,
+                    'first_name'=>$fname,
+                    'last_name'=>$lname
                 ));
 
                 // Let's get the activation code
@@ -121,10 +125,11 @@ class UserController extends BaseController {
                     'email'=>$email,
                     'fullname'=>$fname.' '.$lname];
         Mail::queue('emails.welcome',$data,function($message) use ($user)
-        {
-            $usermail = DB::table('users')->where('email', $user->getLogin())->first();
+        {   
+            $email =  $user->getLogin();
+            $usermail = DB::table('users')->where('email',$email)->first();
             $fullname = $usermail->first_name . ' '. $usermail->last_name;
-            $message->to($user->getLogin(),$fullname)->subject('Welcome! to EdLara');
+            $message->to($email,$fullname)->subject('Welcome! to EdLara');
         });
                 return Redirect::to('/');
         }
