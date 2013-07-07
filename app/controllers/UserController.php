@@ -120,16 +120,15 @@ class UserController extends BaseController {
 
 
     public function showReg(){
-        if ( ! Sentry::check())
-            {
-                return Redirect::to('/');
-
-            }
-            else
-            {
-                // User is logged in   
-                return Redirect::to('/');
-            }
+        if (!Sentry::check())
+        {
+            return View::make('account.register')->nest('header','main.header');
+        }
+        else
+        {
+            // User is logged in   
+            return Redirect::to('/');
+        }
     }
 
     public function checkUser($user){
