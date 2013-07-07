@@ -93,7 +93,7 @@ class UserController extends BaseController {
         $validator = Validator::make(Input::all(),
                             array('fname'=>'required|min:3|alpha|different:lname',
                                 'lname'=>'required|min:3|alpha|different:fname',
-                                'email'=>'required|min:5|email|usercheck:password',
+                                'email'=>'required|min:5|email|usercheck',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 $captcha_field =>$captcha_validation));
         if ($validator->fails())
@@ -111,40 +111,67 @@ class UserController extends BaseController {
                 ));
 
                 // Let's get the activation code
-                $activationCode = $user->getActivationCode();                
-                Session::put('user.activationcode',$activationcode);
-                MailerController::welcomeMail();
+                $activationcode = $user->getActivationCode();       
+        $fname = Input::get('fname');
+        $lname = Input::get('lname');
+        $email = Input::get('email');
+        $data = ['activation_code'=>$activationcode,
+                    'fname'=> $fname,
+                    'lname'=>$lname,
+                    'email'=>$email,
+                    'fullname'=>$fname.' '.$lname];
+        Mail::queue('emails.welcome',$data,function($message) use ($user)
+        {
+            $usermail = DB::table('users')->where('email', $user->getLogin())->first();
+            $fullname = $usermail->first_name . ' '. $usermail->last_name;
+            $message->to($user->getLogin(),$fullname)->subject('Welcome! to EdLara');
+        });
+                return Redirect::to('/');
         }
     }
 
 
 
     public function showReg(){
-        if ( ! Sentry::check())
-            {
-                return Redirect::to('/');
+        if (!Sentry::check())
+        {
+            return View::make('account.register')->nest('header','main.header');
+        }
+        else
+        {
+            // User is logged in   
+            return Redirect::to('/');
+        }
+    }
+    public function activateUser(){
+        try
+        {
+            $login = $this->app('Input')->get('login');
+            $activationcode = $this->app('Input')->get('code');
+            // Find the user using the user id
+            $user = \Sentry::getUserProvider()->findByLogin($login);
 
+            // Attempt to activate the user
+            if ($user->attemptActivation($activationcode))
+            {
+                // User activation passed
+                return Redirect::to('/login');
             }
             else
             {
-                // User is logged in   
-                return Redirect::to('/');
+                // User activation failed
+                return \View::make('account.activationfail')->with('type','codemismatch');
             }
+        }
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            \Log::warning($login.' \'s account wasnt found in the system. Tried to activate the account.');            
+            return \View::make('account.activationfail')->with('type','notfound');
+        }
+        catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
+        {
+            \Log::warning($login.' \'s account was already activated');
+            return \View::make('account.activationfail')->with('type','alreadyactivated');
+        }
     }
-
-    public function checkUser($user){
-
-           $user =  Input::all();
-           Log::info($user);
-    }
-
-    protected function addUser($userdata){
-        // $username = $userdata['username'];
-        // $password = $userdata['password'];
-        // $fname = $userdata['fname'];
-        // $lname = $userdata['lname'];
-        // $email = $userdata['email'];
-
-    }
-
 }

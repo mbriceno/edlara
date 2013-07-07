@@ -65,6 +65,12 @@
                             echo "Please Re-Enter Captcha. and Also the Form";                            
                             echo "</div>";
                     }
+                    if(Session::get('forgottenpassword')){
+                            echo "<div class='alert alert-error alert-block fade in'>";
+                            echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+                            echo "We think that you lost your password<a href='/forgottenpassword'>Click Here to reset Password</a>";                            
+                            echo "</div>";
+                    }
                         echo Form::open(['url'=> 'register','method'=>'post','id'=>'registration-form']);
                         
                         
