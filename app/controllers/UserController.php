@@ -130,20 +130,35 @@ class UserController extends BaseController {
             return Redirect::to('/');
         }
     }
+    public function activateUser(){
+        try
+        {
+            $login = $this->app('Input')->get('login');
+            $activationcode = $this->app('Input')->get('code');
+            // Find the user using the user id
+            $user = \Sentry::getUserProvider()->findByLogin($login);
 
-    public function checkUser($user){
-
-           $user =  Input::all();
-           Log::info($user);
+            // Attempt to activate the user
+            if ($user->attemptActivation($activationcode))
+            {
+                // User activation passed
+                return Redirect::to('/login');
+            }
+            else
+            {
+                // User activation failed
+                return \View::make('account.activationfail')->with('type','codemismatch');
+            }
+        }
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            \Log::warning($login.' \'s account wasnt found in the system. Tried to activate the account.');            
+            return \View::make('account.activationfail')->with('type','notfound');
+        }
+        catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
+        {
+            \Log::warning($login.' \'s account was already activated');
+            return \View::make('account.activationfail')->with('type','alreadyactivated');
+        }
     }
-
-    protected function addUser($userdata){
-        // $username = $userdata['username'];
-        // $password = $userdata['password'];
-        // $fname = $userdata['fname'];
-        // $lname = $userdata['lname'];
-        // $email = $userdata['email'];
-
-    }
-
 }
