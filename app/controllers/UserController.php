@@ -93,7 +93,7 @@ class UserController extends BaseController {
         $validator = Validator::make(Input::all(),
                             array('fname'=>'required|min:3|alpha|different:lname',
                                 'lname'=>'required|min:3|alpha|different:fname',
-                                'email'=>'required|min:5|email|usercheck:password',
+                                'email'=>'required|min:5|email|usercheck',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
                                 $captcha_field =>$captcha_validation));
         if ($validator->fails())
@@ -111,9 +111,22 @@ class UserController extends BaseController {
                 ));
 
                 // Let's get the activation code
-                $activationCode = $user->getActivationCode();                
-                Session::put('user.activationcode',$activationcode);
-                MailerController::welcomeMail();
+                $activationcode = $user->getActivationCode();       
+        $fname = Input::get('fname');
+        $lname = Input::get('lname');
+        $email = Input::get('email');
+        $data = ['activation_code'=>$activationcode,
+                    'fname'=> $fname,
+                    'lname'=>$lname,
+                    'email'=>$email,
+                    'fullname'=>$fname.' '.$lname];
+        Mail::queue('emails.welcome',$data,function($message) use ($user)
+        {
+            $usermail = DB::table('users')->where('email', $user->getLogin())->first();
+            $fullname = $usermail->first_name . ' '. $usermail->last_name;
+            $message->to($user->getLogin(),$fullname)->subject('Welcome! to EdLara');
+        });
+                return Redirect::to('/');
         }
     }
 
