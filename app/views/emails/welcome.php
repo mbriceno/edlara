@@ -2,12 +2,10 @@
 <html lang="en-US">
     <head>
         <meta charset="utf-8">
+        <title>
+        	Welcome to Edlara Educational System.
+        </title>
     </head>
     <body>
-        <h2>Test Mail</h2>
- 
-        <div>
-            Test
-        </div>
     </body>
 </html>
