@@ -5,6 +5,12 @@
         <title>
         	Welcome to Edlara Educational System.
         </title>
+        <style type="text/css">
+        h2#heading{
+        	font:Metamorphus;
+        	color: #ccddss;
+        }
+        </style>
     </head>
     <body>
     </body>
