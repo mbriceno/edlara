@@ -112,20 +112,22 @@ class UserController extends BaseController {
 
                 // Let's get the activation code
                 $activationcode = $user->getActivationCode();       
-        $fname = Input::get('fname');
-        $lname = Input::get('lname');
-        $email = Input::get('email');
-        $data = ['activation_code'=>$activationcode,
+                $fname = Input::get('fname');
+                $lname = Input::get('lname');
+                $email = Input::get('email');
+                $data = ['activation_code'=>$activationcode,
                     'fname'=> $fname,
                     'lname'=>$lname,
                     'email'=>$email,
                     'fullname'=>$fname.' '.$lname];
-        Mail::queue('emails.welcome',$data,function($message) use ($user)
-        {
-            $usermail = DB::table('users')->where('email', $user->getLogin())->first();
-            $fullname = $usermail->first_name . ' '. $usermail->last_name;
-            $message->to($user->getLogin(),$fullname)->subject('Welcome! to EdLara');
-        });
+
+
+                Mail::queue('emails.welcome',$data,function($message) use ($user)
+                {
+                    $usermail = DB::table('users')->where('email', $user->getLogin())->first();
+                    $fullname = $usermail->first_name . ' '. $usermail->last_name;
+                    $message->to($user->getLogin(),$fullname)->subject('Welcome! to EdLara');
+                });
                 return Redirect::to('/');
         }
     }
