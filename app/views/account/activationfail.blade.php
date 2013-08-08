@@ -1,1 +1,0 @@
-activationfail.blade.php
