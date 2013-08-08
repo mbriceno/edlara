@@ -13,7 +13,7 @@ return array(
 	| Captcha Type Used in the System.
 	|--------------------------------------------------------------------------
 	*/
-	'captcha' =>'captcha',
+	'captcha' =>'checkbox',
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -38,7 +38,7 @@ return array(
 	|
 	*/
 
-	'url' => 'https://laravel.dev',
+	'url' => 'https://laravel.dev/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -132,7 +132,8 @@ return array(
                 'Way\Generators\GeneratorsServiceProvider',
         		'Mews\Captcha\CaptchaServiceProvider',
         		'Greggilbert\Recaptcha\RecaptchaServiceProvider',
-        		'Grans\Uservalidator\UservalidatorServiceProvider'
+        		'Grans\Uservalidator\UservalidatorServiceProvider',
+        		'Grans\Checkboxcaptcha\CheckboxcaptchaServiceProvider'
 
 	),
 
