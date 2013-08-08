@@ -102,19 +102,20 @@ class UserController extends BaseController {
         } 
         else
         {
-                $username = Input::get('email');
+                $email = Input::get('email');
                 $password =   Input::get('password');
                 // Let's register a user.
                 $user = Sentry::register(array(
-                    'email'    => $username,
+                    'email'    => $email,
                     'password' => $password,
                 ));
-
+                $useract = \Sentry::getUserProvider()->findByLogin($email);
                 // Let's get the activation code
-                $activationcode = $user->getActivationCode();       
+                $activationcode = $useract->getActivationCode();       
                 $fname = Input::get('fname');
                 $lname = Input::get('lname');
-                $email = Input::get('email');
+
+
                 $data = ['activation_code'=>$activationcode,
                     'fname'=> $fname,
                     'lname'=>$lname,
