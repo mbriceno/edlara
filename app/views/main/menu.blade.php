@@ -70,6 +70,7 @@
                                 }
                                 else
                                 {
+                                    echo "<li><a href='/dash'>Dashboard</a><li>";
                                     echo "<li><a href='/logout'>Logout</a></li>";
                                 }
                             ?>      
