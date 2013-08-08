@@ -10,27 +10,6 @@
             "email": "gnanakeethan@gmail.com",
             "homepage": "http://gnanakeethan.info",
             "role": "Lead-Developer"
-        },
-        {
-            "name": "Sivarathan Sivarajah",
-            "email": "sivarathan@gmail.com",
-            "homepage": "srathan.blogspot.com",
-            "role": "Developer"
-        },
-        {
-            "name": "Anushanth Balabaskaran",
-            "email": "banush28@gmail.com",
-            "role": "Designer"
-        },
-        {
-            "name": "Ramkishan Puvanayokeswaran",
-            "email": "ramkishan0000@gmail.com",
-            "role": "Developer"
-        },
-        {
-            "name": "Nishanthan Kathirkamanathan",
-            "email": "knbrothers@hotmail.com",
-            "role": "Designer"
         }
     ],
     "repositories": [
@@ -39,10 +18,13 @@
             "url": "https://github.com/gnanakeethan/recaptcha"
         },
         {
-            "type": "git",
-            "url": "/home/gnanakeethan/Downloads/uservalidator/"
+            "type":"git",
+            "url":"https://github.com/gnanakeethan/checkboxcaptcha"
+        },
+        {
+            "type":"git",
+            "url":"https://github.com/gnanakeethan/uservalidator"
         }
-
     ],
     "require": {
         "laravel/framework": "4.0.*",        
@@ -50,10 +32,11 @@
         "cartalyst/sentry": "2.0.*",
         "jasonlewis/basset": "4.0.*@dev",
         "purekid/mongodm": "dev-master",
-        "jasonlewis/enhanced-router": "1.0.*",
+        "jasonlewis/enhanced-router": "dev-master",
         "leafo/lessphp": "*",
         "phpunit/phpunit": "3.8.*",
         "greggilbert/recaptcha": "dev-master",
+        "grans/checkboxcaptcha":"dev-master",
         "grans/uservalidator":"dev-master",
         "pda/pheanstalk": "dev-master"
     
