@@ -40,7 +40,33 @@ Route::group([],function(){
     //New User Registration
     Route::post('register',array('before'=>'csrf',
         'uses' => 'UserController@register'));
+    Route::get('/activateuser/{hash}/{email}',function($hash,$email){
+    try
+        {
+        // Find the user using the user id
+        $user = Sentry::getUserProvider()->findByLogin($email);
 
+        // Attempt to activate the user
+        if ($user->attemptActivation($hash))
+        {
+            // User activation passed
+            echo "Passed";
+        }
+    
+        else
+        {
+            echo "Failed";
+        }
+    }
+    catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+    {
+            echo 'User was not found.';
+    }
+    catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
+    {
+            echo 'User is already activated.';
+    }
+    });
 });
 
 Route::get('logout','UserController@logout');
