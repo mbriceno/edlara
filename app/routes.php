@@ -93,9 +93,9 @@ Route::group([],function(){
 
 
 Route::group([],function(){
-    Route::get('u/{username}.html','StudentController@showProfile');
+    Route::get('u/{username}.html','UserController@showProfile');
 
-    Route::get('u/{username}.html?edit=true',array('uses'=>'StudentController@editProfile','before'=>'auth'));
+    Route::get('u/{username}.html?edit=true',array('uses'=>'UserController@editProfile','before'=>'auth'));
 
 });
 
