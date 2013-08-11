@@ -18,7 +18,7 @@ class CreateTeacherTable extends Migration {
             $table->integer('user_id')->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                                     
             //Creating Colomn email. Setting it as unique.
-            $table->string('email',64)->unique()->unique()->foreign('email')->references('email')->on('users')->onDelete('cascade');
+            $table->string('email',64)->unique()->foreign('email')->references('email')->on('users')->onDelete('cascade');
             
             //Creating Colomn DateOfBith.Setting it as unique.
             $table->date('dob');
