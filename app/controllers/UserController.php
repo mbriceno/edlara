@@ -13,7 +13,7 @@ class UserController extends BaseController {
             }
             elseif($password == '')
             {                
-              $password =   Input::get('password');
+              $password =   Input::get('pwd');
             }  
 
         try
@@ -162,12 +162,12 @@ class UserController extends BaseController {
             if ($user->attemptActivation($activationcode))
             {
                 // User activation passed
-                return Redirect::to('/login');
+                return \View::make('account.login')->with('loginpass',1);
             }
             else
             {
                 // User activation failed
-                return \View::make('account.activationfail')->with('type','codemismatch');
+                return \View::make('account.activation')->with('type','codemismatch');
             }
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
@@ -180,5 +180,16 @@ class UserController extends BaseController {
             \Log::warning($login.' \'s account was already activated');
             return \View::make('account.activationfail')->with('type','alreadyactivated');
         }
+    }
+    public function showProfile(){
+        return View::make('account.profile.show');
+    }
+
+    public function editProfile(){
+        return View::make('account.profile.edit');
+    }
+
+    public function updateProfile(){
+        return View::make('account.profile.show');
     }
 }
