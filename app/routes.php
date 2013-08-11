@@ -12,8 +12,13 @@
 */
 require_once('viewcomposer.php');
 
+
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf','uses' => 'UserController@authenticate'));
+
+
+
+
 
 Route::group(array('domain' => 'account.laravel.dev'), function()
 {
@@ -22,6 +27,10 @@ Route::group(array('domain' => 'account.laravel.dev'), function()
                 return View::make('account.index');
         });
 })->before('auth');
+
+
+
+
 
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev'), function()
@@ -35,52 +44,90 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 })->before('auth');
 
 
+
+
+
 Route::group([],function(){
+
+
     Route::get('register','UserController@showReg');
     //New User Registration
+
     Route::post('register',array('before'=>'csrf',
         'uses' => 'UserController@register'));
+
+
     Route::get('/activateuser/{hash}/{email}',function($hash,$email){
     try
-        {
+    {
         // Find the user using the user id
         $user = Sentry::getUserProvider()->findByLogin($email);
 
-        // Attempt to activate the user
-        if ($user->attemptActivation($hash))
-        {
-            // User activation passed
-            echo "Passed";
+            // Attempt to activate the user
+            if ($user->attemptActivation($hash))
+            {
+                // User activation passed
+                return \View::make('account.login')->with('loginpass',1);
+            }
+            else
+            {
+                // User activation failed
+                return \View::make('account.activation')->with('error','codemismatch');
+            }
         }
-    
-        else
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
         {
-            echo "Failed";
+            \Log::warning($login.' \'s account wasnt found in the system. Tried to activate the account.');            
+            return \View::make('account.activationfail')->with('type','notfound');
         }
-    }
-    catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-    {
-            echo 'User was not found.';
-    }
-    catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
-    {
-            echo 'User is already activated.';
-    }
+        catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
+        {
+            \Log::warning($login.' \'s account was already activated');
+            return \View::make('account.activationfail')->with('type','alreadyactivated');
+        }
     });
+
 });
 
+
+
+
+Route::group([],function(){
+    Route::get('u/{username}.html','StudentController@showProfile');
+
+    Route::get('u/{username}.html?edit=true',array('uses'=>'StudentController@editProfile','before'=>'auth'));
+
+});
+
+
+
 Route::get('logout','UserController@logout');
+
+
+
 
 Route::get('தமிழ்',function(){
     return "தமிழ்";
 });
+
+
+
 Route::get('phpinfo', function(){
     return phpinfo();
 });
+
+
+
 Route::post('api/searchuser', 'UserController@checkUser');
+
+
+
 Route::get('/gohome',function(){
     return Redirect::route('home');
 }); 
+
+
+
 
 //HomePage Catcher
 Route::get('/',array( 'as'=>'home',function()
