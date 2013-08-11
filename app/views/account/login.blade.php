@@ -15,6 +15,9 @@
                     if ($error !== 'OK'){
                        echo "<div class='alert alert-error error-loginpage-alert'>$error</div>";
                     }
+                    if (isset($loginpass == 1)){
+                        echo "<div class='alert alert-success success-loginpage-alert'>You have successfully activated Your account</div>";
+                    }
                     echo Form::open(array('url' => 'login',
                         'method' => 'post'));
                     
