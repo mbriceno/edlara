@@ -127,3 +127,31 @@ Basset::collection('grans', function($collection)
     $collection->add('../public/js/system/parallax.js');
 });
 
+Basset::collection('dashboard',function($collection)
+{
+    $collection->add('../public/css/bootstrap-responsive.css');
+    $collection->add('../public/css/charisma-app.css');
+    $collection->add('../public/css/jquery-ui-1.8.21.custom.css');
+    $collection->add('../public/css/fullcalendar.css');
+    $collection->add('../public/css/fullcalendar.print.css');
+    $collection->add('../public/css/chosen.css');
+    $collection->add('../public/css/uniform.default.css');
+    $collection->add('../public/css/colorbox.css');
+    $collection->add('../public/css/jquery.cleditor.css');
+    $collection->add('../public/css/jquery.noty.css');
+    $collection->add('../public/css/noty_theme_default.css');
+    $collection->add('../public/css/elfinder.min.css');
+    $collection->add('../public/css/elfinder.theme.css');
+    $collection->add('../public/css/jquery.iphone.toggle.css');
+    $collection->add('../public/css/opa-icons.css');
+    $collection->add('../public/css/uploadify.css');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+    $collection->add('../public/css/');
+});
