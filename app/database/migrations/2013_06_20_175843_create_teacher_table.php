@@ -16,9 +16,12 @@ class CreateTeacherTable extends Migration {
             
             //Creating UserID Colomn && Making Foreign Key reference to UserID
             $table->integer('user_id')->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-                                    
+               
+            //Creating UserName colomn
+            $table->string('username',64)->unique();
+                                 
             //Creating Colomn email. Setting it as unique.
-            $table->string('email',64)->unique()->foreign('email')->references('email')->on('users')->onDelete('cascade');
+            $table->string('email',64)->unique()->unique()->foreign('email')->references('email')->on('users')->onDelete('cascade');
             
             //Creating Colomn DateOfBith.Setting it as unique.
             $table->date('dob');
