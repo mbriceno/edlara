@@ -33,14 +33,13 @@ Route::group(array('domain' => 'account.laravel.dev'), function()
 
 
 //Dashboard Subdomain
-Route::group(array('domain' => 'dashboard.laravel.dev'), function()
+Route::group(array('as'=>'dash','domain' => 'dashboard.laravel.dev'), function()
 {    
     Route::get('/', function()
     {
         return View::make('dashboard.index')->with('error','OK');
     });
 
-    Route::get('sendmail', 'MailerController@test');
 })->before('auth');
 
 
@@ -126,7 +125,9 @@ Route::get('/gohome',function(){
     return Redirect::route('home');
 }); 
 
-
+Route::get('/dash',function(){
+    return Redirect::route('dash');
+});
 
 
 //HomePage Catcher
