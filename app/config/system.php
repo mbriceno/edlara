@@ -16,6 +16,8 @@ return array(
 
     "schoolname"=>"Jaffna Hindu College",
 
+    "schoolnameabbr" => "JHC",
+
     "schooladdress"=>"Jaffna",
 
     "logo_src" => "img/logo.png",
