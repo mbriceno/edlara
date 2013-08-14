@@ -48,10 +48,11 @@ Route::group(array('as'=>'dash','domain' => 'dashboard.laravel.dev'), function()
 
 Route::group([],function(){
 
-
+    //Show New User registration
     Route::get('register','UserController@showReg');
-    //New User Registration
 
+
+    //New User Registration - POST
     Route::post('register',array('before'=>'csrf',
         'uses' => 'UserController@register'));
 
