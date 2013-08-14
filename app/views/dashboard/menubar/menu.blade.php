@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/"> <img alt="Charisma Logo" src="img/logo.jpg" /> <span>JHC</span></a>
+                <a class="brand" href="/"> <img alt='{{ Config::get('system.schoolnameabbr','Demo School Name Abbr') }}' src="{{ Config::get('system.schoollogo','img/logo.jpg')}}" /> <span>{{ Config::get('system.schoolnameabbr','Demo School Name Abbr') }}</span></a>
                 
                 <!-- theme selector starts -->
                 <div class="btn-group pull-right theme-container" >
@@ -32,20 +32,20 @@
                 <!-- user dropdown starts -->
                 <div class="btn-group pull-right" >
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="icon-user"></i><span class="hidden-phone"> admin</span>
+                        <i class="icon-user"></i><span class="hidden-phone">Admin</span>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Profile</a></li>
                         <li class="divider"></li>
-                        <li><a href="login.html">Logout</a></li>
+                        <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
                 <!-- user dropdown ends -->
                 
                 <div class="top-nav nav-collapse">
                     <ul class="nav">
-                        <li><a href="#">Visit Site</a></li>
+                        <li><a href="{{ Config::get('app.url') }}">Visit Site</a></li>
                         <li>
                             <form class="navbar-search pull-left">
                                 <input placeholder="Search" class="search-query span2" name="query" type="text">

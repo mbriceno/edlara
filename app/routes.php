@@ -33,13 +33,20 @@ Route::group(array('domain' => 'account.laravel.dev'), function()
 
 
 //Dashboard Subdomain
-Route::group(array('as'=>'dash','domain' => 'dashboard.laravel.dev'), function()
-{    
-    Route::get('/', function()
+Route::group(array('domain' => 'dashboard.laravel.dev'), function()
+{     
+    Route::get('settings', function()
     {
-        return View::make('dashboard.index')->with('error','OK');
+        return View::make('dashboard.settings');
+    });    
+    Route::get('tutorials',function()
+    {
+        return View::make('dashboard.tutorials');
     });
-
+    Route::get('/',array('as'=>'dashboard',function()
+    {
+        return View::make('dashboard.index');
+    }));    
 })->before('auth');
 
 
@@ -122,17 +129,17 @@ Route::post('api/searchuser', 'UserController@checkUser');
 
 
 
-Route::get('/gohome',function(){
+
+Route::get('gohome',function(){
     return Redirect::route('home');
 }); 
 
-Route::get('/dash',function(){
-    return Redirect::route('dash');
+Route::get('dash',function(){
+    return Redirect::route('dashboard');
 });
 
-
 //HomePage Catcher
-Route::get('/',array( 'as'=>'home',function()
+Route::get('/',array('as'=>'home',function()
 {
     return View::make('home')->nest('header','main.header');
 }));
