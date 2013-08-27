@@ -13,7 +13,7 @@ return array(
 	| Captcha Type Used in the System.
 	|--------------------------------------------------------------------------
 	*/
-	'captcha' =>'checkbox',
+	'captcha' =>'recaptcha',
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
