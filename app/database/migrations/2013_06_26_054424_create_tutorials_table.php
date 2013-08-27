@@ -23,6 +23,9 @@ class CreateTutorialsTable extends Migration {
             $table->timestamps();            
             $table->softDeletes();
         });
+
+        //Setting extra data to LongText to allow much data to be put in
+        DB::statement('ALTER TABLE `tutorials` MODIFY `content` LONGTEXT;');
     }
 
     /**

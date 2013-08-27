@@ -34,14 +34,7 @@
         {{$breadcrumbs}}
             </div>
 
-            {{$status}}
-            <!-- Status Box -->
-
-            {{$intro}}
-            <!-- Intro Box -->
-
-            {{$content}}
-            <!-- 6 Box of Information -->
+            <!--TODO: Editing Template  -->
                   
 
           
