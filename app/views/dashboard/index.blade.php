@@ -8,7 +8,7 @@
     <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
-    <link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">
+    <link id="bs-css" href="/css/bootstrap-cerulean.css" rel="stylesheet">
     <style type="text/css">      
     </style>
     @stylesheets('dashboard')
