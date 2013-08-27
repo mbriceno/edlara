@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/"> <img alt='{{ Config::get('system.schoolnameabbr','Demo School Name Abbr') }}' src="{{ Config::get('system.schoollogo','img/logo.jpg')}}" /> <span>{{ Config::get('system.schoolnameabbr','Demo School Name Abbr') }}</span></a>
+                <a class="brand" href="/"> <img alt='{{ Config::get('system.schoolnameabbr','Demo School Name Abbr') }}' src="{{ Config::get('system.schoollogo','img/logo.jpg') }}" /></a>
                 
                 <!-- theme selector starts -->
                 <div class="btn-group pull-right theme-container" >
