@@ -87,7 +87,7 @@ Route::group([],function(){
             \Log::warning($login.' \'s account wasnt found in the system. Tried to activate the account.');            
             return \View::make('account.activation')->with('error','notfound');
         }
-        catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
+        catch (Cartalyst\Sentry\Users\UserAlreadyActivatedException $e)
         {
             \Log::warning($login.' \'s account was already activated');
             return \View::make('account.activation')->with('error','alreadyactivated');
