@@ -61,3 +61,18 @@ View::composer('dashboard.tutorials',function($view)
     $view->nest('noscript','dashboard.warnings.noscript');
     return $view;
 });
+
+View::composer('dashboard.tutorials.edit',function($view){
+
+    $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
+    $view->nest('topmenu','dashboard.menubar.menu');
+    $view->nest('sidebar','dashboard.sidebar.sidebar');
+    $view->nest('noscript','dashboard.warnings.noscript');
+});
+View::composer('dashboard.tutorials.create',function($view){
+
+    $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
+    $view->nest('topmenu','dashboard.menubar.menu');
+    $view->nest('sidebar','dashboard.sidebar.sidebar');
+    $view->nest('noscript','dashboard.warnings.noscript');
+});
