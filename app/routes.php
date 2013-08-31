@@ -98,14 +98,23 @@ Route::group([],function(){
             return \View::make('account.activation')->with('error','alreadyactivated');
         }
     });
-    Route::get('forgottenpass/{key}/{username}',function($key,$username){
-        return View::make('account.onreset');
+    Route::get('forgotpass',function(){
+        return View::make('account.forgottenpass');
     });
     Route::post('acceptreset',['before'=>'csrf','uses'=>'UserController@acceptReset']);
-    Route::get('forgotpass',function(){
-        return View::make('account.passwordreset');
+    Route::get('acceptreset',function(){
+        return View::make('account.acceptreset');
     });
-    Route::post('resetpass',['before'=>'csrf','uses'=>'UserController@resetPass'])
+    Route::get('forgottenpass/{key}/{username}',function($key,$username){
+         $user = Sentry::getUserProvider()->findByResetPasswordCode($key);
+         if($user->getLogin() == $username){
+            Session::flash('key',$key);
+            Session::flash('username',$username);
+            return View::make('account.passwordreset');
+         }
+         return View::make('account.login');
+    });
+    Route::post('resetpass',['before'=>'csrf','uses'=>'UserController@resetPass']);
 
 });
 
@@ -156,3 +165,9 @@ Route::get('/',array('as'=>'home',function()
 {
     return View::make('home')->nest('header','main.header');
 }));
+
+    // Find the user using the user id
+    $throttle = Sentry::getThrottleProvider()->findByUserId(1);
+
+    // Unsuspend the user
+    $throttle->unsuspend();
