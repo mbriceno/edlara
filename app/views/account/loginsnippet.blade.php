@@ -36,4 +36,4 @@
 
                     echo Form::token();
                     echo Form::close();
-                    echo "</li> <li><a href=\"/register\">Don't Have a Account!!!</a></li>";
+                    echo "</li> <li><a href=\"/register\">I Don't Have a Account!!!</a></li>";
