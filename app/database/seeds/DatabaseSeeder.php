@@ -9,15 +9,73 @@ class DatabaseSeeder extends Seeder {
      */
     public function run() {
         Eloquent::unguard();
-
-        try {
+        try
+        {
             // Create the group
-            $group = Sentry::getGroupProvider() -> create(array(
-                'name' => 'Users', 
-                'permissions' => array('admin' => 1, 'users' => 1, ), ));
-	} catch (Cartalyst\Sentry\Groups\NameRequiredException $e) {
+            $group = Sentry::getGroupProvider()->create(array(
+            'name'        => 'admin',
+                'permissions' => array(
+                    'admin' => 1
+                    ),
+            ));
+        }
+        catch (Cartalyst\Sentry\Groups\NameRequiredException $e)
+        {
             echo 'Name field is required';
-        } catch (Cartalyst\Sentry\Groups\GroupExistsException $e) {
+        }
+        catch (Cartalyst\Sentry\Groups\GroupExistsException $e)
+        {
+            echo 'Group already exists';
+        }
+
+            $admin = Sentry::getGroupProvider()->findById(1);
+
+            $user = Sentry::getUserProvider()->findById(1);
+            $user->addGroup($admin);
+            unset($admin);
+            unset($user);
+
+        try
+        {
+            // Create the group
+            $group = Sentry::getGroupProvider()->create(array(
+            'name'        => 'teachers',
+                'permissions' => array(
+                    'create_tutorial'=> 1,
+                    'update_tutorial'=> 1,
+                    'create_exam' =>1,
+                    'update_exam' =>1,
+                    'see_results' => 1,
+                    'see_result' => 1
+                    ),
+            ));
+        }
+        catch (Cartalyst\Sentry\Groups\NameRequiredException $e)
+        {
+            echo 'Name field is required';
+        }
+        catch (Cartalyst\Sentry\Groups\GroupExistsException $e)
+        {
+            echo 'Group already exists';
+        }
+        try
+        {
+            // Create the group
+            $group = Sentry::getGroupProvider()->create(array(
+            'name'        => 'students',
+                'permissions' => array(
+                    'see_tutorial'=> 1,                    
+                    'do_exam' =>1,
+                    'see_result' => 1
+                    ),
+            ));
+        }
+        catch (Cartalyst\Sentry\Groups\NameRequiredException $e)
+        {
+            echo 'Name field is required';
+        }
+        catch (Cartalyst\Sentry\Groups\GroupExistsException $e)
+        {
             echo 'Group already exists';
         }
 
@@ -30,8 +88,8 @@ class DatabaseSeeder extends Seeder {
                  'first_name' => 'John',
                  'last_name' => 'Doe',
                  'permissions' => array(
-                             'user.create' => -1,
-                             'user.delete' => -1,
+                             'user.create' => 1,
+                             'user.delete' => 1,
                              'user.view' => 1,
                              'user.update' => 1, ), ));
 
@@ -49,7 +107,7 @@ class DatabaseSeeder extends Seeder {
         } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
             echo 'Group was not found.';        }
         try
-{
+    {
     // Find the user using the user id
     $user = Sentry::getUserProvider()->findById(1);
 
