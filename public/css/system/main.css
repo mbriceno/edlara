@@ -198,3 +198,6 @@ input#search{
 .btn-login{
     border: none !important;
 }
+#pwd-reset-form {
+    margin-top:50px;
+}
