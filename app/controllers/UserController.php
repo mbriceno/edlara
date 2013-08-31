@@ -199,10 +199,87 @@ class UserController extends BaseController {
         }
     }
     public function acceptReset(){
-        return;
+        if (Input::has('email')){
+                 $validator = Validator::make(Input::all(),
+                                              array('email'=>'required|min:7|exists:users,email')
+                                              );
+                 if ($validator->fails())
+                {           
+            
+                    Input::flash();
+                    return Redirect::to('forgotpass')->withErrors($validator);
+                } 
+                $email = Input::get('email');
+                // Find the user using the user email address
+                $user = Sentry::getUserProvider()->findByLogin($email);
+
+                // Get the password reset code
+                $resetCode = $user->getResetPasswordCode();
+
+                $fname = $user->first_name;
+                $lname = $user->last_name;
+
+
+                $data = ['reset_code'=>$resetCode,
+                    'fname'=> $fname,
+                    'lname'=>$lname,
+                    'email'=>$email,
+                    'fullname'=>$fname.' '.$lname];
+
+
+                Mail::send('emails.resetpass',$data,function($message) use ($user)
+                {
+                    $usermail = DB::table('users')->where('email', $user->getLogin())->first();
+                    $fullname = $usermail->first_name . ' '. $usermail->last_name;
+                    $message->to($user->getLogin(),$fullname)->subject('EdLara - Reset Password');
+                });
+                Input::flash();
+                return Redirect::to('account.acceptreset')->withInput();
+        }
+        return Redirect::to('forgotpass');
     }
     public function resetPass(){
-        return;
+
+            $email = Session::get('username',NULL);
+            $resetcode = Session::get('key', NULL);
+
+            $validator = Validator::make(Input::all(),
+                                         array(
+                                               'password'=>'required|min:8|max:20'
+                                               )
+                                         );
+                if($validator->fails()){                    
+                    return Redirect::to('account.acceptreset')->withErrors($validator);
+                }
+                else
+                {
+                $newpass = Input::get('password');
+                // Find the user using the user id
+                $user = Sentry::getUserProvider()->findByLogin($email);
+
+                // Check if the reset password code is valid
+                if ($user->checkResetPasswordCode($resetcode))
+                {
+                    // Attempt to reset the user password
+                    if ($user->attemptResetPassword($resetcode,$newpass))
+                    {
+                        // Password reset passed
+                        return  "Success";
+                    }
+                    else
+                    {
+                        // Password reset failed
+                       return  "Fail";
+                    }
+                }
+                else
+                {
+                    return  "CodeFail";
+                    // The provided password reset code is Invalid
+                }
+            }
+            return "Complete Fail";
+        
     }
     public function showProfile(){
         return View::make('account.profile.show');
