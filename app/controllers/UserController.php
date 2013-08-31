@@ -95,9 +95,12 @@ class UserController extends BaseController {
                                 'lname'=>'required|min:3|alpha|different:fname',
                                 'email'=>'required|min:5|email|usercheck',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
+                                'actype'=>'required',
                                 $captcha_field =>$captcha_validation));
         if ($validator->fails())
         {           
+            
+            Input::flash();
             return Redirect::to('register')->withErrors($validator);
         } 
         else
@@ -106,6 +109,7 @@ class UserController extends BaseController {
                 $password =   Input::get('password');
                 $fname    = Input::get('fname');
                 $lname    = Input::get('lname');
+                $actype   = Input::get('actype');
                 // Let's register a user.
                 $user = Sentry::register(array(
                     'email'    => $email,
@@ -113,7 +117,20 @@ class UserController extends BaseController {
                     'first_name'=>$fname,
                     'last_name'=>$lname
                 ));
+                $group = Sentry::getGroupProvider()->findByName($actype);
+
                 $useract = \Sentry::getUserProvider()->findByLogin($email);
+                if ($user->addGroup($group))
+                {
+                    // Group assigned successfully
+                }
+                else
+                {
+                    // Group was not assigned
+
+                    //Log the Error of User Group set                
+                    Log::error("assigning $useract to $group failed.");
+                }
                 // Let's get the activation code
                 $activationcode = $useract->getActivationCode();       
                 $fname = Input::get('fname');
@@ -127,7 +144,7 @@ class UserController extends BaseController {
                     'fullname'=>$fname.' '.$lname];
 
 
-                Mail::queue('emails.welcome',$data,function($message) use ($user)
+                Mail::send('emails.welcome',$data,function($message) use ($user)
                 {
                     $usermail = DB::table('users')->where('email', $user->getLogin())->first();
                     $fullname = $usermail->first_name . ' '. $usermail->last_name;
@@ -180,6 +197,12 @@ class UserController extends BaseController {
             \Log::warning($login.' \'s account was already activated');
             return \View::make('account.activationfail')->with('type','alreadyactivated');
         }
+    }
+    public function acceptReset(){
+        return;
+    }
+    public function resetPass(){
+        return;
     }
     public function showProfile(){
         return View::make('account.profile.show');
