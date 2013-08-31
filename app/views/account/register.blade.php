@@ -117,7 +117,7 @@
 
 
                         echo "<div class='span4'>";
-                        echo Form::select('actype', array('S' => 'Student', 'T' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
+                        echo Form::select('actype', array('S' => 'student', 'T' => 'teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
                         echo "</div></div><br>* Required<br><br>";
 
 
@@ -170,6 +170,9 @@
                         required: true,
                         minlength: 5
                     },
+                    actype:{
+                        required:true;
+                    }
                     password:{
                         required: true,
                         minlength: 8,
