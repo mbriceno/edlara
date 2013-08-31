@@ -46,13 +46,13 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+');
 
-    Route::post('tutorial/edit/update',array('before'=>'csrf','uses'=>'TutorialsController@update'));
+    Route::post('tutorial/edit/{id}/update',array('before'=>'csrf','uses'=>'TutorialsController@update'));
 
     Route::get('/',array('as'=>'dashboard',function()
     {
         return View::make('dashboard.index');
     }));    
-})->before('auth');
+})->before('auth|admin');
 
 
 
@@ -98,6 +98,14 @@ Route::group([],function(){
             return \View::make('account.activation')->with('error','alreadyactivated');
         }
     });
+    Route::get('forgottenpass/{key}/{username}',function($key,$username){
+        return View::make('account.onreset');
+    });
+    Route::post('acceptreset',['before'=>'csrf','uses'=>'UserController@acceptReset']);
+    Route::get('forgotpass',function(){
+        return View::make('account.passwordreset');
+    });
+    Route::post('resetpass',['before'=>'csrf','uses'=>'UserController@resetPass'])
 
 });
 
