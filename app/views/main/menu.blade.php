@@ -65,7 +65,8 @@
                                 if ( ! Sentry::check())
                                 {
                                     echo "<div class='loginbox'>";
-                                    echo $loginsnippet;
+                                    echo $loginsnippet;                                    
+                                    echo "<li><a href='/forgotpass'>Forgotten Password</a></li>";
                                     echo '</div>';
                                 }
                                 else
