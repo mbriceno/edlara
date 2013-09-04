@@ -2,16 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Free HTML5 Bootstrap Admin Template</title>
+    <title>{{ Config::get('system.sitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
+
+<base href="https://laravel.dev/" target="_blank">
 
     <!-- The styles -->
-    <link id="bs-css" href="/css/bootstrap-cerulean.css" rel="stylesheet">
+    <style type="text/css">      
+    </style>
+
     <style type="text/css">      
     </style>
     @stylesheets('dashboard')
+
+
+    <link href='/css/jquery.cleditor.css' rel='stylesheet'>
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -25,8 +30,7 @@
         {{$sidebar}}
         <div class="container-fluid">
         <div class="row-fluid">                
-           {{$noscript}}
-
+         
                  <!-- content starts -->
             <div id="content" class="span10"> 
 
@@ -35,7 +39,54 @@
             </div>
 
             <!--TODO: Editing Template  -->
-                  
+                <div class="box span12">
+                    <div class="box-header well">
+                        <h2><i class="icon-info-sign"></i>Create a New Tutorial</h2>
+                    </div>
+                    <div class="box-content" style="display: block;">
+                        <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span6">
+                            <?php
+
+                            echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'post','class'=>'form-horizontal'));
+                            echo "<fieldset>";
+                            echo Form::label('id','id',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
+
+                            echo Form::text('id',$id,array('disabled'=>'','class'=>'disabled pull-right','style'=>'margin:10px;'));
+
+                            echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+
+                            echo Form::text("title","",array('placeholder'=>'Title of the Tutorial','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+
+                            echo Form::label('description','Description',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+
+                            echo Form::text("description","",array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+
+                            echo '
+                            <div class="control-group" style="clear:left;">';
+                            echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
+                            echo "<div class='controls'>";
+                            echo Form::textarea('tutorial',"",array('class'=>'cleditor pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
+                            echo '</div>';
+                            echo '</div>';
+                            echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+                            echo Form::file('attachment', array('class'=>"pull-right",'style'=>'clear:right;margin:25px;'));
+                            
+                            echo "</fieldset>";
+                            echo Form::submit('Create',array('class'=>'','value'=>'submit'));
+                            echo Form::close();
+                            ?>
+                            </div>
+                            <div class="offset2 span3">
+                                DISPLAY
+                            </div>
+                        </div>
+                    </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
 
           
             <!-- content ends -->
@@ -43,20 +94,6 @@
         </div><!--/fluid-row-->
                 
         <hr>
-
-        <div class="modal hide fade" id="myModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Settings</h3>
-            </div>
-            <div class="modal-body">
-                <p>Here settings can be configured...</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Close</a>
-                <a href="#" class="btn btn-primary">Save changes</a>
-            </div>
-        </div>
 
         <footer>
             <p class="pull-left">&copy; Gnanakeethan Balasubramaniam 2013</p>
