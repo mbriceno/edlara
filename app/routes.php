@@ -46,7 +46,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+');
 
-    Route::post('tutorial/edit/update',array('before'=>'csrf','uses'=>'TutorialsController@update'));
+    Route::post('tutorial/edit/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
 
     Route::get('/',array('as'=>'dashboard',function()
     {
