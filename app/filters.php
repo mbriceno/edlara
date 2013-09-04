@@ -63,6 +63,9 @@ Route::filter('auth',function(){
 //Teacher Authentication Filter
 
 //TODO: create a filter
+Route::filter('teacher',function(){
+    //Complete this
+});
 
 //Student Authentication Filter
 
