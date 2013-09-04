@@ -56,3 +56,14 @@ Route::filter('auth',function(){
         return View::make('account.login',array('error'=>'OK'));
     }
 });
+
+//Admin Authentication Filter
+//TODO: create a filter to allow only admins to access sensitive parts of dashboard.
+
+//Teacher Authentication Filter
+
+//TODO: create a filter
+
+//Student Authentication Filter
+
+//TODO:create a filter
