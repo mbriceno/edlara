@@ -9,7 +9,52 @@ class DatabaseSeeder extends Seeder {
      */
     public function run() {
         Eloquent::unguard();
+       
+        try {
+            // Create the user
+            $user = Sentry::getUserProvider() -> create(array(
+                 'email' => 'johndoe@example.com',
+                 'password' => 'user123456',
+                 'activation_code'=>'8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb',
+                 'first_name' => 'John',
+                 'last_name' => 'Doe',
+                 'permissions' => array(
+                             'user.create' => 1,
+                             'user.delete' => 1,
+                             'user.view' => 1,
+                             'user.update' => 1, ), ));
+
+            // Find the group using the group id
+            $adminGroup = Sentry::getGroupProvider() -> findById(1);
+
+            // Assign the group to the user
+            $user -> addGroup($adminGroup);
+        } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
+            echo 'Login field is required.';
+        } catch (Cartalyst\Sentry\Users\PasswordRequiredException $e) {
+            echo 'Password field is required.';
+        } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
+            echo 'User with this login already exists.';
+        } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
+            echo 'Group was not found.';        }
         try
+    {
+    // Find the user using the user id
+    $user = Sentry::getUserProvider()->findById(1);
+
+    // Update the user details
+    $user->activation_code = '8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb';
+
+    // Update the user
+    if ($user->save())
+    {
+        // User information was updated
+    }
+    else
+    {
+        // User information was not updated
+    }
+ try
         {
             // Create the group
             $group = Sentry::getGroupProvider()->create(array(
@@ -58,6 +103,7 @@ class DatabaseSeeder extends Seeder {
         {
             echo 'Group already exists';
         }
+
         try
         {
             // Create the group
@@ -79,50 +125,6 @@ class DatabaseSeeder extends Seeder {
             echo 'Group already exists';
         }
 
-        try {
-            // Create the user
-            $user = Sentry::getUserProvider() -> create(array(
-                 'email' => 'johndoe@example.com',
-                 'password' => 'user123456',
-                 'activation_code'=>'8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb',
-                 'first_name' => 'John',
-                 'last_name' => 'Doe',
-                 'permissions' => array(
-                             'user.create' => 1,
-                             'user.delete' => 1,
-                             'user.view' => 1,
-                             'user.update' => 1, ), ));
-
-            // Find the group using the group id
-            $adminGroup = Sentry::getGroupProvider() -> findById(1);
-
-            // Assign the group to the user
-            $user -> addGroup($adminGroup);
-        } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
-            echo 'Login field is required.';
-        } catch (Cartalyst\Sentry\Users\PasswordRequiredException $e) {
-            echo 'Password field is required.';
-        } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
-            echo 'User with this login already exists.';
-        } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
-            echo 'Group was not found.';        }
-        try
-    {
-    // Find the user using the user id
-    $user = Sentry::getUserProvider()->findById(1);
-
-    // Update the user details
-    $user->activation_code = '8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb';
-
-    // Update the user
-    if ($user->save())
-    {
-        // User information was updated
-    }
-    else
-    {
-        // User information was not updated
-    }
 }
 catch (Cartalyst\Sentry\Users\UserExistsException $e)
 {
