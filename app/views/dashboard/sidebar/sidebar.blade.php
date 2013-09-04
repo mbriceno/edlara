@@ -4,8 +4,9 @@
                     <ul class="nav nav-tabs nav-stacked main-menu">
                         <li class="nav-header hidden-tablet">Main</li>
                         <li><a class="ajax-link" href="/"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
-                        <li><a class="ajax-link" href="/tutorials"><i class="icon-edit"></i><span class="hidden-tablet"> Tutorials</span></a></li>                     
-                        <li class="nav-header hidden-tablet">Sample Section</li>
+                        <li><a class="ajax-link" href="/tutorials"><i class="icon-edit"></i><span class="hidden-tablet"> Tutorials</span></a></li>      
+                        <li><a class="ajax-link" href="/assessments"><i class="icon-edit"></i><span class="hidden-tablet"> Assessments</span></a></li>                     
+                        <li class="nav-header hidden-tablet">Admin</li>
                         
                         <li><a class="ajax-link" href="/settings"><i class="icon-cog"></i><span class="hidden-tablet"> Settings</span></a></li>
                     </ul>
