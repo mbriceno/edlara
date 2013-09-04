@@ -129,6 +129,7 @@ Basset::collection('grans', function($collection)
 
 Basset::collection('dashboard',function($collection)
 {
+    $collection->add('../public/css/bootstrap-cerulean.css');
     $collection->add('../public/css/bootstrap-responsive.css');
     $collection->add('../public/css/charisma-app.css');
     $collection->add('../public/css/jquery-ui-1.8.21.custom.css');

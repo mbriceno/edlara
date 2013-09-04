@@ -4,31 +4,19 @@
     <meta charset="utf-8">
     <title>{{ Config::get('system.sitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
+
+<base href="https://laravel.dev/" target="_blank">
 
     <!-- The styles -->
-    <link id="bs-css" href="/css/bootstrap-cerulean.css" rel="stylesheet">
     <style type="text/css">      
     </style>
 
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/css/charisma-app.css" rel="stylesheet">
-    <link href="/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
-    <link href='/css/fullcalendar.css' rel='stylesheet'>
-    <link href='/css/fullcalendar.print.css' rel='stylesheet'  media='print'>
-    <link href='/css/chosen.css' rel='stylesheet'>
-    <link href='/css/uniform.default.css' rel='stylesheet'>
-    <link href='/css/colorbox.css' rel='stylesheet'>
-    <link href='/css/jquery.cleditor.css' rel='stylesheet'>
-    <link href='/css/jquery.noty.css' rel='stylesheet'>
-    <link href='/css/noty_theme_default.css' rel='stylesheet'>
-    <link href='/css/elfinder.min.css' rel='stylesheet'>
-    <link href='/css/elfinder.theme.css' rel='stylesheet'>
-    <link href='/css/jquery.iphone.toggle.css' rel='stylesheet'>
-    <link href='/css/opa-icons.css' rel='stylesheet'>
-    <link href='/css/uploadify.css' rel='stylesheet'>
+    <style type="text/css">      
+    </style>
+    @stylesheets('dashboard')
 
+
+    <link href='/css/jquery.cleditor.css' rel='stylesheet'>
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -42,8 +30,7 @@
         {{$sidebar}}
         <div class="container-fluid">
         <div class="row-fluid">                
-           {{$noscript}}
-
+         
                  <!-- content starts -->
             <div id="content" class="span10"> 
 
@@ -52,12 +39,12 @@
             </div>
 
             <!--TODO: Editing Template  -->
-                  <div class="row-fluid">
                 <div class="box span12">
                     <div class="box-header well">
                         <h2><i class="icon-info-sign"></i>Create a New Tutorial</h2>
                     </div>
                     <div class="box-content" style="display: block;">
+                        <div class="container-fluid">
                         <div class="row-fluid">
                             <div class="span6">
                             <?php
@@ -95,6 +82,7 @@
                                 DISPLAY
                             </div>
                         </div>
+                    </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
