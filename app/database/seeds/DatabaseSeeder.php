@@ -98,7 +98,8 @@ catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
     echo 'User is already activated.';
 }
 
-        $this -> call('StudentTableSeeder');        
+        $this -> call('StudentTableSeeder');   
+        $this -> call('TeacherTableSeeder');        
         $this->call('SubjectTableSeeder');
     }
 
