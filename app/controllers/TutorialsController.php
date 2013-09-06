@@ -12,38 +12,48 @@ class TutorialsController extends BaseController {
 
     public function update($id){
         if($id == 0){
-            self::newtutorial($id);
-        }
-        else {
-            self::updatetutorial($id);
-        }
-    }
-
-    private function newtutorial($id){
-        $validator = Validator::make(Input::all(),
+            $validator = Validator::make(Input::all(),
                             array('id'=>'required',
                                   'title'=>'required|min:3|max:256|alpha',
                                   'description'=> 'max:1024|alpha',
                                   'content'=>'required',
                                   'attachment'=>'mime:jpeg,png,bmp,pdf|size:10240'
                                 ));
-        $messages = array(
-            'required' => 'The :attribute field is required.',
-        );
-        if ($validator->fails())
-        {           
-            Input::flash();
-            return Redirect::to('tutorial/edit/'.$id)->withErrors($validator);
-        } 
-        else
-        {              
-                return Redirect::to('/');
+            $messages = array(
+                'required' => 'The :attribute field is required.',
+            );
+            if ($validator->fails())
+            {           
+                    Input::flash();
+                    return Redirect::to('tutorial/edit/'.$id)->withErrors($validator);
+            } 
+            else
+            {              
+                    return Redirect::to('/tutorial/edit/'.$id);
+            }
         }
-        return;
+        else {
+            self::updatetutorial($id);
+            return Redirect::to('/tutorial/edit/'.$id.'');
+        }
     }
-    private function updatetutorial($id){
 
-        return;
+    private function updatetutorial($id){
+        $tutorial = Tutorials::find($id);
+        $tutorial->name         =   Input::get('title') ;
+        $tutorial->description  =   Input::get('description');
+        $tutorial->content      =   Input::get('tutorial');
+        if(Input::has('attachment')){
+            $file = Input::file('attachment');
+            if($file){
+                $file->move($app['path.app'].'/attachments/',$file->getClientOriginalName());
+            }
+        }
+        $tutorial->save();
+    }
+
+    public function redirect(){
+        return Redirect::to('/tutorial/edit/0');
     }
 
 

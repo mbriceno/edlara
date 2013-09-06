@@ -5,7 +5,7 @@
     <title>{{ Config::get('system.sitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<base href="https://laravel.dev/" target="_blank">
+<base href="https://laravel.dev/">
 
     <!-- The styles -->
     <style type="text/css">      
