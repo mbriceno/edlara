@@ -60,18 +60,39 @@ Route::filter('auth',function(){
 //Admin Authentication Filter
 //TODO: create a filter to allow only admins to access sensitive parts of dashboard.
 Route::filter('admin',function(){
-        // Get the current active/logged in user
-        $user = Sentry::getUser();
+      if ( ! Sentry::check())
+    {
+    // User is not logged in, or is not activated
+    }
+    else
+    {
 
-        // Find the Administrator group
-        $admin = Sentry::findGroupByName('admin');
-
-        // Check if the user is in the administrator group
-        if (!$user->inGroup($admin))
+        try
         {
-            // User is not in Administrator group
-            return View::make('access.notauthorised');
+            // Get the current active/logged in user
+            $usera = Sentry::getUser();
+            // Find the Administrator group
+            $admin = Sentry::findGroupByName('admin');
+
+            // Check if the user is in the administrator group
+            if ($usera->inGroup($admin))
+            {
+                // User is in Administrator group
+            }
+            else
+            {
+                // User is not in Administrator group
+                return View::make('access.notauthorised');
+            }
         }
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            // User wasn't found, should only happen if the user was deleted
+            // when they were already logged in or had a "remember me" cookie set
+            // and they were deleted.
+        }
+    }  
+        
 });
 //Teacher Authentication Filter
 
