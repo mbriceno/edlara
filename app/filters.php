@@ -59,7 +59,20 @@ Route::filter('auth',function(){
 
 //Admin Authentication Filter
 //TODO: create a filter to allow only admins to access sensitive parts of dashboard.
+Route::filter('admin',function(){
+        // Get the current active/logged in user
+        $user = Sentry::getUser();
 
+        // Find the Administrator group
+        $admin = Sentry::findGroupByName('admin');
+
+        // Check if the user is in the administrator group
+        if (!$user->inGroup($admin))
+        {
+            // User is not in Administrator group
+            return View::make('access.notauthorised');
+        }
+});
 //Teacher Authentication Filter
 
 //TODO: create a filter

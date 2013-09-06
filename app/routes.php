@@ -46,12 +46,14 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+');
 
-    Route::post('tutorial/edit/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
+    Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
 
-    Route::get('/',array('as'=>'dashboard',function()
+    Route::get('/',array('before'=>'admin','as'=>'dashboard',function()
     {
         return View::make('dashboard.index');
     }));    
+    
+
 })->before('auth');
 
 

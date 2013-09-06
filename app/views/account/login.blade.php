@@ -50,7 +50,7 @@
                     echo Form::token();
                     echo Form::close();
                     ?>
-                    <a class="btn btn-large btn-danger" href="/gohome">Return to HomePage</a>
+                    <a class="btn btn-large btn-danger" href="<?php echo Config::get('app.url'); ?>">Return to HomePage</a>
                 </div>
             </div>
         </div>
