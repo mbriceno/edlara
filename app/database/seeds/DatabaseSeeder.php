@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder {
             echo 'Group already exists';
         }
 
-            $admin = Sentry::getGroupProvider()->findById(1);
+            $admin = Sentry::getGroupProvider()->findByName('admin');
 
             $user = Sentry::getUserProvider()->findById(1);
             $user->addGroup($admin);
