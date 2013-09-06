@@ -1,3 +1,8 @@
+<?php
+$tutorial = Tutorials::find('1');
+// var_dump($tutorial);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +10,7 @@
     <title>{{ Config::get('system.sitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<base href="https://laravel.dev/" target="_blank">
+<base href="https://laravel.dev/">
 
     <!-- The styles -->
     <style type="text/css">      
@@ -56,7 +61,7 @@
             <!--TODO: Editing Template  -->
                 <div class="box span12">
                     <div class="box-header well">
-                        <h2><i class="icon-info-sign"></i>Create a New Tutorial</h2>
+                        <h2><i class="icon-info-sign"></i>Edit Existing Tutorial   </h2>
                     </div>
                     <div class="box-content" style="display: block;">
                         <div class="container-fluid">
@@ -64,7 +69,7 @@
                             <div class="span6">
                             <?php
 
-                            echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'post','class'=>'form-horizontal'));
+                            echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'POST','class'=>'form-horizontal'));
                             echo "<fieldset>";
                             echo Form::label('id','id',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
 
@@ -72,24 +77,24 @@
 
                             echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-                            echo Form::text("title","",array('placeholder'=>'Title of the Tutorial','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                            echo Form::text("title",$tutorial->name,array('placeholder'=>'Title of the Tutorial','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
 
                             echo Form::label('description','Description',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-                            echo Form::text("description","",array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                            echo Form::text("description",$tutorial->description,array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
 
                             echo '
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
                             echo "<div class='controls'>";
-                            echo Form::textarea('tutorial',"",array('class'=>'cleditor pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
+                            echo Form::textarea('tutorial',$tutorial->content,array('class'=>'cleditor pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
                             echo '</div>';
                             echo '</div>';
                             echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
                             echo Form::file('attachment', array('class'=>"pull-right",'style'=>'clear:right;margin:25px;'));
                             
                             echo "</fieldset>";
-                            echo Form::submit('Create',array('class'=>'','value'=>'submit'));
+                            echo Form::submit('Save',array('class'=>'','value'=>'submit'));
                             echo Form::close();
                             ?>
                             </div>
