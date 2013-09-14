@@ -35,10 +35,10 @@ Route::group(array('domain' => 'account.laravel.dev'), function()
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 {     
-    Route::get('settings', function()
+    Route::get('settings',array('before'=>'admin',function()
     {
         return View::make('dashboard.settings');
-    });    
+    }));    
     Route::get('tutorials',function()
     {
         return View::make('dashboard.tutorials');
