@@ -1,6 +1,6 @@
 <?php
 
-class StudentTableSeeder extends DatabaseSeeder {
+class TeacherTableSeeder extends Seeder {
     public function run() {
 
         DB::table('teachers') -> delete();
