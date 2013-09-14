@@ -42,15 +42,19 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     Route::get('users',array('before'=>'admin|teacher',function()
     {
         return View::make('dashboard.users');
-    }));    
-    Route::get('tutorials',function()
+    }));
+    Route::get('user/{id}/{mode}',array('before'=>'admin|teacher','uses'=>'UserController@manage'));
+    Route::get('tutorials',array('before'=>'admin|teacher',function()
     {
         return View::make('dashboard.tutorials');
-    });
-    Route::get('assessments',function()
+    }));
+    Route::get('assessments',array('before'=>'admin|teacher',function()
     {
         return View::make('dashboard.assessments');
-    });
+    }));
+    Route::get('students',array('before'=>'admin|teacher',function(){
+        return View::make('dashboard.students');
+    }));
     Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+');
 
     Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
