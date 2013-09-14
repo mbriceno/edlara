@@ -48,7 +48,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
 
-    Route::get('/',array('before'=>'admin','as'=>'dashboard',function()
+    Route::get('/',array('before'=>'teacher|admin','as'=>'dashboard',function()
     {
         return View::make('dashboard.index');
     }));    
