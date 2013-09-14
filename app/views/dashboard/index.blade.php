@@ -73,7 +73,7 @@
 
     <!-- external javascript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->e document so the pages load faster -->
+    <!-- Placed at the end of the document so the pages load faster -->
 
     <!-- jQuery -->
     <script src="/js/jquery-1.7.2.min.js"></script>
