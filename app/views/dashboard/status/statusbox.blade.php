@@ -1,16 +1,26 @@
+<?php
+
+$todayusercount = User::where('created_at', '=', 'CURDATE()')->count();
+$usercountall = User::all()->count();
+$usercountall -= 1;
+$todaystudentcount = Student::where('created_at', '=', 'CURDATE()')->count();
+$studentcountall = Student::all()->count();
+$studentcountall -=1;
+?>
+
 <div class="sortable row-fluid">
-                <a data-rel="tooltip" title="6 new members." class="well span3 top-block" href="#">
+                <a data-rel="tooltip" title="{{ $todayusercount }} new members." class="well span3 top-block" href="#">
                     <span class="icon32 icon-red icon-user"></span>
                     <div>Total Members</div>
-                    <div>507</div>
-                    <span class="notification">6</span>
+                    <div>{{ $usercountall }}</div>
+                    <span class="notification">{{ $todayusercount }}</span>
                 </a>
 
-                <a data-rel="tooltip" title="4 new pro members." class="well span3 top-block" href="#">
-                    <span class="icon32 icon-color icon-star-on"></span>
-                    <div>Pro Members</div>
-                    <div>228</div>
-                    <span class="notification green">4</span>
+                <a data-rel="tooltip" title="{{ $todaystudentcount }} new students." class="well span3 top-block" href="#">
+                    <span class="icon32 icon-blue icon-user"></span>
+                    <div>Students</div>
+                    <div>{{ $studentcountall }} </div>
+                    <span class="notification blue">{{ $todaystudentcount }}</span>
                 </a>
 
                 <a data-rel="tooltip" title="$34 new sales." class="well span3 top-block" href="#">
