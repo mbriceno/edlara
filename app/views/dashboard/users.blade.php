@@ -74,8 +74,21 @@
             						echo "<span class='label label-failure'>Not Activated</span>";
             					}
             					echo "</td>";
-            					echo "<td class='center'>";
-            					echo "</td>";
+                                echo '<td class="center">
+                                    <a class="btn btn-success" href="/user/'.$user->id.'/view">
+                                        <i class="icon-zoom-in icon-white"></i>  
+                                        View                                            
+                                    </a>
+                                    <a class="btn btn-info" href="/user/'.$user->id.'/edit">
+                                        <i class="icon-edit icon-white"></i>  
+                                        Edit                                            
+                                    </a>
+                                    <a class="btn btn-danger" href="/user/'.$user->id.'/delete">
+                                        <i class="icon-trash icon-white"></i> 
+                                        Delete
+                                    </a>
+                                    </td>';
+
             					echo "</tr>";
             				}
             				?>
