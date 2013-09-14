@@ -281,6 +281,18 @@ class UserController extends BaseController {
             return "Complete Fail";
         
     }
+    public function manage($id,$mode){
+        switch ($mode) {
+            case 'view':
+                return View::make('dashboard.user.view');
+                break;
+            case 'edit':
+                return View::make('dashboard.user.edit');
+                break;
+            case 'delete':
+                return;
+        }
+    }
     public function showProfile(){
         return View::make('account.profile.show');
     }
