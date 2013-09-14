@@ -34,7 +34,7 @@
         {{$breadcrumbs}}
             </div>
             <div id="test">
-            Testing Charisma</div>          
+                     
             <!-- content ends -->
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->
