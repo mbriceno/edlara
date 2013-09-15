@@ -39,20 +39,20 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     {
         return View::make('dashboard.settings');
     }));    
-    Route::get('users',array('before'=>'admin|teacher',function()
+    Route::get('users',array('before'=>'teacher',function()
     {
         return View::make('dashboard.users');
     }));
-    Route::get('user/{id}/{mode}',array('before'=>'admin|teacher','uses'=>'UserController@manage'));
-    Route::get('tutorials',array('before'=>'admin|teacher',function()
+    Route::get('user/{id}/{mode}',array('before'=>'teacher','uses'=>'UserController@manage'));
+    Route::get('tutorials',array('before'=>'teacher',function()
     {
         return View::make('dashboard.tutorials');
     }));
-    Route::get('assessments',array('before'=>'admin|teacher',function()
+    Route::get('assessments',array('before'=>'teacher',function()
     {
         return View::make('dashboard.assessments');
     }));
-    Route::get('students',array('before'=>'admin|teacher',function(){
+    Route::get('students',array('before'=>'teacher',function(){
         return View::make('dashboard.students');
     }));
 
@@ -63,12 +63,12 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
 
-    Route::get('tutorial/{mode}/{id}',array('before'=>'teacher|admin','uses'=>'TutorialsController@modder'));
+    Route::get('tutorial/{mode}/{id}',array('before'=>'teacher','uses'=>'TutorialsController@modder'));
 
 
 
 
-    Route::get('/',array('before'=>'teacher|admin','as'=>'dashboard',function()
+    Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
     {
         return View::make('dashboard.index');
     }));    
@@ -92,6 +92,8 @@ Route::group([],function(){
 
 
     Route::get('/activateuser/{hash}/{email}',function($hash,$email){
+        
+        $login =$email;
     try
     {
         // Find the user using the user id

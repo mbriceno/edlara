@@ -129,11 +129,7 @@ Route::filter('teacher',function(){
             $admin = Sentry::findGroupByName('teachers');
 
             // Check if the user is in the administrator group
-            if ($usera->inGroup($admin))
-            {
-                // User is in Administrator group
-            }
-            else
+            if (!$userab->inGroup($admin))
             {
                 // User is not in Administrator group
                 return View::make('access.notauthorised');
