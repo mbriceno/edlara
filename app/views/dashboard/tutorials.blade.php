@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <title>{{ Config::get('system.sitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
     <link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">
@@ -33,26 +31,83 @@
             <div>
         {{$breadcrumbs}}
             </div>
-            <div id="test">Tutorials</div>          
+
+        <div class="sortable pull-right">
+            <a href="/tutorial/edit/0">
+             <span class="btn btn-primary">New</span>
+            </a>
+
+        </div>
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Title</th>
+                        <th>Created Date</th>
+                        <th>Modified Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+
+                    $tutorials = Tutorials::all();
+                    foreach ($tutorials as $tutorial){
+                        echo "<tr>";
+                        echo "<td>";
+                        echo $tutorial->id;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->name;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->created_at;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->updated_at;
+                        echo "</td>";
+                        echo "<td>";
+                        if($tutorial->published){
+                            echo "<a href='/tutorial/unpub/$tutorial->id/'><div class='btn btn-success'>Published</div></a>";
+                        }
+                        else {
+                            echo "<a href='/tutorial/pub/$tutorial->id/'><div class='btn btn-warning'>Unpublished</div></a>";
+                        }
+                        echo "</td>";
+                        echo '<td class="center">
+                                    <a class="btn btn-success" href="/tutorial/view/'.$tutorial->id.'/">
+                                        <i class="icon-zoom-in icon-white"></i>  
+                                        View                                            
+                                    </a>
+                                    <a class="btn btn-info" href="/tutorial/edit/'.$tutorial->id.'">
+                                        <i class="icon-edit icon-white"></i>  
+                                        Edit                                            
+                                    </a>';
+
+                        $cuser = Sentry::getUser();
+                        $admingroup = Sentry::findGroupByName('admin');
+                        if ($cuser->inGroup($admingroup))
+                        {
+                            echo '<a class="btn btn-danger" href="/tutorial/'.$tutorial->id.'/delete">
+                                        <i class="icon-trash icon-white"></i> 
+                                        Delete
+                                    </a>';
+                        }
+                                    
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+
+                </tbody>
+
+            </table>
             <!-- content ends -->
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->
                 
         <hr>
-
-        <div class="modal hide fade" id="myModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Settings</h3>
-            </div>
-            <div class="modal-body">
-                <p>Here settings can be configured...</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Close</a>
-                <a href="#" class="btn btn-primary">Save changes</a>
-            </div>
-        </div>
 
         <footer>
             <p class="pull-left">&copy; Gnanakeethan Balasubramaniam 2013</p>
