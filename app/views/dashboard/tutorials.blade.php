@@ -68,10 +68,34 @@
                         echo $tutorial->updated_at;
                         echo "</td>";
                         echo "<td>";
+                        if($tutorial->published){
+                            echo "<a href='/tutorial/unpub/$tutorial->id/'><div class='btn btn-success'>Published</div></a>";
+                        }
+                        else {
+                            echo "<a href='/tutorial/pub/$tutorial->id/'><div class='btn btn-warning'>Unpublished</div></a>";
+                        }
                         echo "</td>";
-                        echo "<td>";
-                        echo "</td>";
+                        echo '<td class="center">
+                                    <a class="btn btn-success" href="/tutorial/view/'.$tutorial->id.'/">
+                                        <i class="icon-zoom-in icon-white"></i>  
+                                        View                                            
+                                    </a>
+                                    <a class="btn btn-info" href="/tutorial/edit/'.$tutorial->id.'">
+                                        <i class="icon-edit icon-white"></i>  
+                                        Edit                                            
+                                    </a>';
 
+                        $cuser = Sentry::getUser();
+                        $admingroup = Sentry::findGroupByName('admin');
+                        if ($cuser->inGroup($admingroup))
+                        {
+                            echo '<a class="btn btn-danger" href="/tutorial/'.$tutorial->id.'/delete">
+                                        <i class="icon-trash icon-white"></i> 
+                                        Delete
+                                    </a>';
+                        }
+                                    
+                        echo "</td>";
                         echo "</tr>";
                     }
                     ?>
@@ -84,20 +108,6 @@
         </div><!--/fluid-row-->
                 
         <hr>
-
-        <div class="modal hide fade" id="myModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Settings</h3>
-            </div>
-            <div class="modal-body">
-                <p>Here settings can be configured...</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Close</a>
-                <a href="#" class="btn btn-primary">Save changes</a>
-            </div>
-        </div>
 
         <footer>
             <p class="pull-left">&copy; Gnanakeethan Balasubramaniam 2013</p>
