@@ -21,7 +21,8 @@ class CreateExamsTable extends Migration {
 			$table->text('questions');
 			$table->text('created_by', 255);
 			$table->text('modified_by', 255);
-            $table->timestamps();
+            $table->timestamps();                       
+            $table->softDeletes();
         });
         //Setting extra data to LongText to allow much data to be put in
         DB::statement('ALTER TABLE `exams`  MODIFY `questions` LONGTEXT;');
