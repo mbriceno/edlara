@@ -1,5 +1,5 @@
 <?php
-$tutorial = Tutorials::find('1');
+$tutorial = Tutorials::find($id);
 // var_dump($tutorial);
 ?>
 
@@ -10,8 +10,7 @@ $tutorial = Tutorials::find('1');
     <title>{{ Config::get('system.sitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<base href="https://laravel.dev/">
-
+    <base href="https://dashboard.laravel.dev/"/>
     <!-- The styles -->
     <style type="text/css">      
     </style>
@@ -19,22 +18,7 @@ $tutorial = Tutorials::find('1');
     <link id="bs-css" href="https://laravel.dev/css/bootstrap-cerulean.css" rel="stylesheet">
     <style type="text/css">      
     </style>
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/css/charisma-app.css" rel="stylesheet">
-    <link href="/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
-    <link href='/css/fullcalendar.css' rel='stylesheet'>
-    <link href='/css/fullcalendar.print.css' rel='stylesheet'  media='print'>
-    <link href='/css/chosen.css' rel='stylesheet'>
-    <link href='/css/uniform.default.css' rel='stylesheet'>
-    <link href='/css/colorbox.css' rel='stylesheet'>
-    <link href='/css/jquery.cleditor.css' rel='stylesheet'>
-    <link href='/css/jquery.noty.css' rel='stylesheet'>
-    <link href='/css/noty_theme_default.css' rel='stylesheet'>
-    <link href='/css/elfinder.min.css' rel='stylesheet'>
-    <link href='/css/elfinder.theme.css' rel='stylesheet'>
-    <link href='/css/jquery.iphone.toggle.css' rel='stylesheet'>
-    <link href='/css/opa-icons.css' rel='stylesheet'>
-    <link href='/css/uploadify.css' rel='stylesheet'>
+    @stylesheets('dashboard')
 
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -69,7 +53,12 @@ $tutorial = Tutorials::find('1');
                             <div class="span6">
                             <?php
 
-                            echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'POST','class'=>'form-horizontal'));
+                            var_dump($errors);
+                            if(isset($input)){
+
+                            var_dump($input);
+                            }
+                            echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'POST','class'=>'form-horizontal','files'=>'true'));
                             echo "<fieldset>";
                             echo Form::label('id','id',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
 
@@ -78,28 +67,56 @@ $tutorial = Tutorials::find('1');
                             echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
                             echo Form::text("title",$tutorial->name,array('placeholder'=>'Title of the Tutorial','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
-
+                            
                             echo Form::label('description','Description',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
                             echo Form::text("description",$tutorial->description,array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
-
+                           
                             echo '
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
                             echo "<div class='controls'>";
                             echo Form::textarea('tutorial',$tutorial->content,array('class'=>'cleditor pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
                             echo '</div>';
-                            echo '</div>';
+                            echo '</div>'; 
+
+
+                            echo Form::label('published','Published',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+                            if($tutorial->published == 1){
+                                $checked ='checked="checked"';
+                            }
+                            else
+                            {
+                                $checked = '';
+                            }
+                            echo '<div style="margin:20px;position:relative;padding-top:10px;"><input 
+                            data-no-uniform="true" type="checkbox" '.$checked.' name="published" id="published" class="iphone-toggle"></div>';
+
+
+
                             echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            echo Form::file('attachment', array('class'=>"pull-right",'style'=>'clear:right;margin:25px;'));
+                            echo Form::file('attachment', array('class'=>"pull-right",'style'=>'clear:right;margin:20px;padding-top:10px;'));
                             
                             echo "</fieldset>";
-                            echo Form::submit('Save',array('class'=>'','value'=>'submit'));
+
+                            echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit'));
+                            echo '
+                            <a class="btn btn-danger" href="/tutorials">Close</a>';
                             echo Form::close();
                             ?>
                             </div>
                             <div class="offset2 span3">
-                                DISPLAY
+                                <div class="control-group">
+                                <label class="control-label">Created Date</label>
+                                    <div class="controls">
+                                        <span class="input-xlarge uneditable-input">{{ $tutorial->created_at }}</span>
+                                    </div>
+                                </div>
+                                <label class="control-label">Updated Date</label>
+                                <div class="controls">
+                                        <span class="input-xlarge uneditable-input">{{ $tutorial->updated_at }}</span>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
