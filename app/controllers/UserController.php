@@ -290,7 +290,7 @@ class UserController extends BaseController {
                 return View::make('dashboard.user.edit');
                 break;
             case 'delete':
-                return;
+                break;
         }
     }
     public function showProfile(){
