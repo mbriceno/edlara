@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <title>{{ Config::get('system.sitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
     <link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">
@@ -33,7 +31,54 @@
             <div>
         {{$breadcrumbs}}
             </div>
-            <div id="test">Tutorials</div>          
+
+        <div class="sortable pull-right">
+            <a href="/tutorial/edit/0">
+             <span class="btn btn-primary">New</span>
+            </a>
+
+        </div>
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Title</th>
+                        <th>Created Date</th>
+                        <th>Modified Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+
+                    $tutorials = Tutorials::all();
+                    foreach ($tutorials as $tutorial){
+                        echo "<tr>";
+                        echo "<td>";
+                        echo $tutorial->id;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->name;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->created_at;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->updated_at;
+                        echo "</td>";
+                        echo "<td>";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "</td>";
+
+                        echo "</tr>";
+                    }
+                    ?>
+
+                </tbody>
+
+            </table>
             <!-- content ends -->
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->
