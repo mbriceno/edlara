@@ -46,7 +46,6 @@
                         <div class="row-fluid">
                             <div class="span6">
                             <?php
-                            var_dump($errors);
                             echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'post','class'=>'form-horizontal'));
                             echo "<fieldset>";
                             echo Form::label('id','id',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
@@ -60,8 +59,7 @@
                             echo Form::label('description','Description',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
                             echo Form::text("description","",array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
-                            echo Form::label('published','Published',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            echo '<span  class="pull-right" style="clear:right;margin:15px;"><input id="published" name="published" data-no-uniform="true" type="checkbox"  class="iphone-toggle"></span>';
+                            
                             echo '
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
@@ -69,6 +67,10 @@
                             echo Form::textarea('tutorial',"",array('class'=>'cleditor pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
                             echo '</div>';
                             echo '</div>';
+                            echo Form::label('published','Published',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+                                $checked = '';
+                            echo '<div style="margin:20px;position:relative;padding-top:10px;"><input 
+                            data-no-uniform="true" type="checkbox" '.$checked.' name="published" id="published" class="iphone-toggle"></div>';
                             echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
                             echo Form::file('attachment', array('class'=>"pull-right",'style'=>'clear:right;margin:25px;'));
                             

@@ -16,7 +16,6 @@ class TutorialsController extends BaseController {
                             array('title'=>'required|min:3|max:256|alpha',
                                   'description'=> 'max:1024|alpha',
                                   'tutorial'=>'required',
-                                  'published'=>'required',
                                   'attachment'=>'mimes:jpeg,JPEG,jpg,JPG,PNG,png,bmp,BMP,gif,GIF,pdf,PDF'
                                 ));
             $messages = array(
@@ -38,7 +37,6 @@ class TutorialsController extends BaseController {
                             array('title'=>'required|min:3|max:256|alpha',
                                   'description'=> 'required|max:1024|alpha',
                                   'tutorial'=>'required',
-                                  'published'=>'required',
                                   'attachment'=>'mimes:jpeg,JPEG,jpg,JPG,PNG,png,bmp,BMP,gif,GIF,pdf,PDF'
                                 ));
             $messages = array(
@@ -79,13 +77,13 @@ class TutorialsController extends BaseController {
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
         if(Input::get('published') == 'on'){
-            $pub = 1;
+        $tutorial->published    =   1;
         }
         else
         {
-            $pub =0;
+        $tutorial->published    =   0;
         }
-        $tutorial->published    =   $pub;
+        Log::error(Input::get('published'));
         if(Input::hasFile('attachment')){
                     $name = Input::file('attachment')->getClientOriginalName();
                    Input::file('attachment')->move(app_path().'/attachments/tutorial-'.$id.'/',$name);  
@@ -98,7 +96,8 @@ class TutorialsController extends BaseController {
         $tutorial->name         =   Input::get('title');
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
-
+            $pub = 1;
+        $tutorial->published    =   $pub;
         if(Input::hasFile('attachment')){
                     $name = Input::file('attachment')->getClientOriginalName();
                    Input::file('attachment')->move(app_path().'/attachments/tutorial-'.$id.'/',$name);                    

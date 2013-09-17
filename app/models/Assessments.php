@@ -1,6 +1,6 @@
 <?php
 
-class Exams extends Eloquent {
+class Assessments extends Eloquent {
     protected $guarded = array();
 
     public static $rules = array();
