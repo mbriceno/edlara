@@ -133,7 +133,9 @@ return array(
         		'Mews\Captcha\CaptchaServiceProvider',
         		'Greggilbert\Recaptcha\RecaptchaServiceProvider',
         		'Grans\Uservalidator\UservalidatorServiceProvider',
-        		'Grans\Checkboxcaptcha\CheckboxcaptchaServiceProvider'
+        		'Grans\Checkboxcaptcha\CheckboxcaptchaServiceProvider',
+				'Juy\Profiler\Providers\ProfilerServiceProvider',
+
 
 	),
 
@@ -203,6 +205,7 @@ return array(
         'Basset'          => 'Basset\Facade',           
         'Basset' => 'Basset\Facade',        
         'Captcha' => 'Mews\Captcha\Facades\Captcha',
+        'Profiler'      => 'Juy\Profiler\Facades\Profiler',
 	),
 
 );
