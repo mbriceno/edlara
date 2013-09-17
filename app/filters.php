@@ -189,3 +189,46 @@ Route::filter('student',function(){
     }  
 });
 //TODO:create a filter
+
+Route::filter('stutea',function(){
+    if ( ! Sentry::check())
+    {
+        //User is not Logged In        
+        $currentURL=URL::current();
+        $currentURL = substr($currentURL, 8);
+        $cutLength = strrpos($currentURL, '.');
+        $cutLength = $cutLength + 4;
+        $currentURL = substr($currentURL,$cutLength);
+        Session::put('url.intended',$currentURL);
+        return View::make('account.login',array('error'=>'OK'));
+
+    }
+    else
+    {
+
+        try
+        {
+            // Get the current active/logged in user
+            $usera = Sentry::getUser();
+            // Find the Administrator group
+            $stu = Sentry::findGroupByName('students');
+            $tea = Sentry::findGroupByName('teachers');
+            // Check if the user is in the administrator group
+            if ($usera->inGroup($stu) || $usera->inGroup($tea))
+            {
+                // User is in Administrator group
+            }
+            else
+            {
+                // User is not in Administrator group
+                return View::make('access.notauthorised');
+            }
+        }
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            // User wasn't found, should only happen if the user was deleted
+            // when they were already logged in or had a "remember me" cookie set
+            // and they were deleted.
+        }
+    }  
+});
