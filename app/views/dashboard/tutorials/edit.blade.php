@@ -53,11 +53,6 @@ $tutorial = Tutorials::find($id);
                             <div class="span6">
                             <?php
 
-                            var_dump($errors);
-                            if(isset($input)){
-
-                            var_dump($input);
-                            }
                             echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'POST','class'=>'form-horizontal','files'=>'true'));
                             echo "<fieldset>";
                             echo Form::label('id','id',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
@@ -82,7 +77,7 @@ $tutorial = Tutorials::find($id);
 
 
                             echo Form::label('published','Published',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            if($tutorial->published == 1){
+                            if($tutorial->published === 1){
                                 $checked ='checked="checked"';
                             }
                             else
@@ -102,7 +97,6 @@ $tutorial = Tutorials::find($id);
                             echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit'));
                             echo '
                             <a class="btn btn-danger" href="/tutorials">Close</a>';
-                            echo Form::close();
                             ?>
                             </div>
                             <div class="offset2 span3">
@@ -116,6 +110,24 @@ $tutorial = Tutorials::find($id);
                                 <div class="controls">
                                         <span class="input-xlarge uneditable-input">{{ $tutorial->updated_at }}</span>
                                 </div>
+                                <label class="control-label">Current Attachments</label>
+                                <?php
+                                if(is_dir(app_path().'/attachments/tutorial-'.$id)){
+                                $types = array(
+                                'jpg', 'png', 'gif', 'JPG', 'PNG', 'GIF','PDF','pdf','bmp','BMP'
+                                 );
+                                $folder = app_path().'/attachments/tutorial-'.$id;
+                                $it = new RecursiveDirectoryIterator($folder);
+                                $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+                                foreach ($files as $file) {
+                                    if (is_file($file)) {
+                                            var_dump($file);   
+                                                }
+                                }
+                                }
+                                echo Form::close();
+                                ?>
+
                             </div>
                             </div>
                         </div>
