@@ -43,8 +43,10 @@
                     <tr>
                         <th>#ID</th>
                         <th>Title</th>
+                        <th>Subject</th>
                         <th>Created Date</th>
                         <th>Modified Date</th>
+                        <th>Created By</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -53,7 +55,11 @@
                     <?php
 
                     $tutorials = Tutorials::all();
+
                     foreach ($tutorials as $tutorial){
+                        $subject = Subject::find($tutorial->subjectid);
+                        $teacher = Teacher::find($tutorial->createdby);
+                        $username = Sentry::findUserByLogin($teacher->email);
                         echo "<tr>";
                         echo "<td>";
                         echo $tutorial->id;
@@ -62,17 +68,23 @@
                         echo $tutorial->name;
                         echo "</td>";
                         echo "<td>";
+                        echo $subject->subjectname;
+                        echo "</td>";
+                        echo "<td>";
                         echo $tutorial->created_at;
                         echo "</td>";
                         echo "<td>";
                         echo $tutorial->updated_at;
                         echo "</td>";
                         echo "<td>";
+                        echo $username->first_name.' '.$username->last_name;
+                        echo "</td>";
+                        echo "<td>";
                         if($tutorial->published){
-                            echo "<a href='/tutorial/unpub/$tutorial->id/'><div class='btn btn-success'>Published</div></a>";
+                            echo "<a class='ajax-link' href='/tutorial/unpub/$tutorial->id/'><div class='btn btn-success'>Published</div></a>";
                         }
                         else {
-                            echo "<a href='/tutorial/pub/$tutorial->id/'><div class='btn btn-warning'>Unpublished</div></a>";
+                            echo "<a class='ajax-link' href='/tutorial/pub/$tutorial->id/'><div class='btn btn-warning'>Unpublished</div></a>";
                         }
                         echo "</td>";
                         echo '<td class="center">
