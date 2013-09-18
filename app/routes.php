@@ -65,7 +65,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::get('tutorial/{mode}/{id}',array('before'=>'teacher','uses'=>'TutorialsController@modder'));
 
-
+    Route::get('tutorial/update/{id}/{attachmentname}/{mode}',array('before'=>'teacher','uses'=>'TutorialsController@attachmentHandler'));
 
 
     Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
