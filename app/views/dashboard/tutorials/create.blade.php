@@ -59,7 +59,14 @@
                             echo Form::label('description','Description',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
                             echo Form::text("description","",array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
-                            
+
+                            echo Form::label('subject','Subject',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+                            $subjects = Subject::all();
+                            $subjectlist = array();
+                            foreach ($subjects as $subject){
+                                $subjectlist[$subject->id] = $subject->subjectname;
+                            }
+                            echo Form::select('subject',$subjectlist,$subject->id,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
                             echo '
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
