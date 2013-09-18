@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder {
             $user = Sentry::getUserProvider()->create(array(
                  'email' => 'johndoe@example.com',
                  'password' => 'user123456',
-                 'activation_code'=>'8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb',
+                 'activated'=>'1',
                  'first_name' => 'John',
                  'last_name' => 'Doe',
                  'permissions' => array(
@@ -100,57 +100,7 @@ class DatabaseSeeder extends Seeder {
         } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
             echo 'User with this login already exists.';
         } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
-            echo 'Group was not found.';        }
-        try
-    {
-    // Find the user using the user id
-    $user = Sentry::getUserProvider()->findById(1);
-
-    // Update the user details
-    $user->activation_code = '8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb';
-
-    // Update the user
-    if ($user->save())
-    {
-        // User information was updated
-    }
-    else
-    {
-        // User information was not updated
-    }
- 
-}
-catch (Cartalyst\Sentry\Users\UserExistsException $e)
-{
-    echo 'User with this login already exists.';
-}
-catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-{
-    echo 'User was not found.';
-}
-try
-{
-    // Find the user using the user id
-    $user = Sentry::getUserProvider()->findById(1);
-
-    // Attempt to activate the user
-    if ($user->attemptActivation('8f1Z7wA4uVt7VemBpGSfaoI9mcjdEwtK8elCnQOb'))
-    {
-        // User activation passed
-    }
-    else
-    {
-        // User activation failed
-    }
-}
-catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-{
-    echo 'User was not found.';
-}
-catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
-{
-    echo 'User is already activated.';
-}
+            echo 'Group was not found.';        }  
             $admin = Sentry::getGroupProvider()->findByName('admin');
             $tea = Sentry::getGroupProvider()->findByName('teachers');
             $stu = Sentry::getGroupProvider()->findByName('students');

@@ -66,7 +66,14 @@ $tutorial = Tutorials::find($id);
                             echo Form::label('description','Description',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
                             echo Form::text("description",$tutorial->description,array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
-                           
+                            
+                            echo Form::label('subject','Subject',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+                            $subjects = Subject::all();
+                            $subjectlist = array();
+                            foreach ($subjects as $subject){
+                                $subjectlist[$subject->id] = $subject->subjectname;
+                            }
+                            echo Form::select('subject',$subjectlist,$subject->id,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
                             echo '
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
@@ -97,6 +104,7 @@ $tutorial = Tutorials::find($id);
                             echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit'));
                             echo '
                             <a class="btn btn-danger" href="/tutorials">Close</a>';
+                            echo Form::close();
                             ?>
                             </div>
                             <div class="offset2 span3">
@@ -110,8 +118,31 @@ $tutorial = Tutorials::find($id);
                                 <div class="controls">
                                         <span class="input-xlarge uneditable-input">{{ $tutorial->updated_at }}</span>
                                 </div>
+                                <label class="control-label">Created By</label>
+                                <div class="controls">
+                                        <span class="input-xlarge eneditable-input">
+                                            <?php
+
+
+                                            $teacher = Teacher::find($tutorial->createdby);
+                                            $username = Sentry::findUserByLogin($teacher->email);
+                                            echo $username->first_name.' '.$username->last_name
+
+                                            ?>
+                                        </span>
+                                </div><br>
                                 <label class="control-label">Current Attachments</label>
-                                <?php
+                                <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>#id</th>
+                                            <th>Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+
                                 if(is_dir(app_path().'/attachments/tutorial-'.$id)){
                                 $types = array(
                                 'jpg', 'png', 'gif', 'JPG', 'PNG', 'GIF','PDF','pdf','bmp','BMP'
@@ -121,12 +152,29 @@ $tutorial = Tutorials::find($id);
                                 $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
                                 foreach ($files as $file) {
                                     if (is_file($file)) {
-                                            var_dump($file);   
+                                        $attachpath = app_path().'/attachments/tutorial-'.$tutorial->id.'/';
+                                        $filename = str_replace($attachpath, '', $file);
+                                             echo "<tr>";
+                                             echo "<td>";
+                                             echo "1";
+                                             echo "</td>";
+                                             echo "<td>";
+                                             echo $filename;
+                                             echo "</td>";
+                                             echo "<td>";
+                                             echo "<a class='btn btn-small' href='/tutorial/update/".$id.'/'.$filename."/download/'>Download</a>";
+                                             echo "</td>";
+                                             echo "</tr>";
                                                 }
                                 }
                                 }
-                                echo Form::close();
                                 ?>
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                                
 
                             </div>
                             </div>

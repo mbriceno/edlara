@@ -71,11 +71,23 @@ class TutorialsController extends BaseController {
                 return View::make('dashboard.tutorials.view')->with('id',$id);
         }
     }
+
+    public function attachmentHandler($id,$attachmentname,$mode){
+        $tutorial = Tutorials::find($id);
+        switch ($mode) {
+            case 'delete':
+                self::delteAttachment($id,$attachmentname);
+                return;
+            case 'download':            
+                return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
+        }
+    }
     private function updatetutorial($id){
         $tutorial = Tutorials::find($id);
         $tutorial->name         =   Input::get('title') ;
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
+        $tutorial->createdby    =   Sentry::getUser()->id;
         if(Input::get('published') == 'on'){
         $tutorial->published    =   1;
         }
@@ -96,6 +108,8 @@ class TutorialsController extends BaseController {
         $tutorial->name         =   Input::get('title');
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
+        $tutorial->createdby    =   Sentry::getUser()->id;
+        $tutorial->subjectid    =   Input::get('subject');
             $pub = 1;
         $tutorial->published    =   $pub;
         if(Input::hasFile('attachment')){
@@ -107,6 +121,8 @@ class TutorialsController extends BaseController {
         $newid = $tutorial->id;
         return $newid;
     }
+    private function deleteAttachment($id,$attachment){
 
+    }
 
 }

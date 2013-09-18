@@ -19,8 +19,9 @@ class CreateTutorialsTable extends Migration {
             $table->string('alias',32);
             $table->integer('published');
             $table->text('subjectname');
-            $table->string('subjectcode');
+            $table->integer('subjectid');
             $table->text('content');
+            $table->integer('createdby');
             $table->timestamps();            
             $table->softDeletes();
         });
