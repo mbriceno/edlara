@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{ Config::get('system.sitename') }}</title>
+    <title>{{ Config::get('system.adminsitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
@@ -33,8 +33,38 @@
             <div>
         {{$breadcrumbs}}
             </div>
-            <div id="test">
-                     
+            <div class="box span12">
+                    <div class="box-header well">
+                        <h2><i class="icon-info-sign"></i>Settings</h2>
+                    </div>
+                    <div class="box-content" style="display: block;">
+                        <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span6">
+                <?php
+                echo Form::open(array('url' => '/settings', 'method' => 'POST','class'=>'form-horizontal'));
+
+                            echo "<fieldset>";
+                echo Form::label('schoolname','School Name',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
+                echo Form::text('schoolname',Config::get('system.schoolname'),array('class'=>'pull-right','style'=>'clear:right;margin:15px;'));
+                echo Form::label('schoolnameabbr','School Name Abbreviation',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
+                echo Form::text('schoolnameabbr',Config::get('system.schoolnameabbr'),array('class'=>'pull-right','style'=>'clear:right;margin:15px;'));
+                echo Form::label('schooladdress','School Address',array('class'=>'pull-left','style'=>'padding:15px;'));
+                echo Form::textarea('schooladdress',Config::get('system.schooladdress'),array('class'=>'pull-right','style'=>'clear:right;margin:15px;','rows'=>'2'));
+                echo Form::label('logo','Logo Path',array('class'=>'pull-left','style'=>'clear:both;padding:15px;position:relative;'));
+                echo Form::text('logo',Config::get('system.logo_src'),array('class'=>'pull-right','style'=>'clear:right;margin:15px;'));
+                echo Form::label('adminsitename','Admin Site Name',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
+                echo Form::text('adminsitename',Config::get('system.adminsitename'),array('class'=>'pull-right','style'=>'clear:right;margin:15px;'));
+
+                            echo "</fieldset>";
+                echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit','style'=>'position:relative;'));
+                echo Form::close();
+                ?>
+            </div>
+             </div>
+             </div>
+             </div>
+             </div>          
             <!-- content ends -->
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->
