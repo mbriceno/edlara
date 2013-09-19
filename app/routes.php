@@ -38,7 +38,8 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     Route::get('settings',array('before'=>'admin',function()
     {
         return View::make('dashboard.settings');
-    }));    
+    }));
+    Route::post('settings',array('before'=>'admin','uses'=>'SettingsController@update'));    
     Route::get('users',array('before'=>'teacher',function()
     {
         return View::make('dashboard.users');
@@ -196,6 +197,13 @@ Route::get('dash',function(){
 Route::get('/tutorial/{id}',array('uses'=>'TutorialsController@siteitemview'));
 Route::get('/tutorials',array('uses'=>'TutorialsController@sitelistview'));
 
+
+//Assessments
+Route::get('assessment/submit',array('uses'=>'AssessmentController@submitview'));
+Route::post('assessment/submit',array('uses'=>'AssessmentController@submit'));
+Route::get('assessment/update',array('uses'=>'AssessmentController@updateList'));
+Route::get('assessment/update/{id}',array('uses'=>'AssessmentController@updateView'));
+Route::post('assessment/update/{id}',array('uses'=>'AssessmentController@update'));
 
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
