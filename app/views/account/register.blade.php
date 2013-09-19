@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>EdLara - SignUp</title>
+        <title>{{ Setting::get('system.schoolname') }} - SignUp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans') 
@@ -121,7 +121,7 @@
                         echo "</div></div><br>* Required<br><br>";
 
 
-                        $captcha_type = Config::get('app.captcha');
+                        $captcha_type = Setting::get('app.captcha');
                         if($captcha_type == "captcha"){
                             echo Form::captcha();
                         } 

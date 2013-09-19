@@ -7,7 +7,7 @@ $tutorial = Tutorials::find($id);
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{ Config::get('system.sitename') }}</title>
+    <title>{{ Setting::get('system.adminsitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <base href="https://dashboard.laravel.dev/"/>
@@ -73,7 +73,7 @@ $tutorial = Tutorials::find($id);
                             foreach ($subjects as $subject){
                                 $subjectlist[$subject->id] = $subject->subjectname;
                             }
-                            echo Form::select('subject',$subjectlist,$subject->id,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                            echo Form::select('subject',$subjectlist,$tutorial->subjectid,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
                             echo '
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
@@ -103,7 +103,7 @@ $tutorial = Tutorials::find($id);
 
                             echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit'));
                             echo '
-                            <a class="btn btn-danger" href="/tutorials">Close</a>';
+                            <a class=" btn btn-danger" href="/tutorials">Close</a>';
                             echo Form::close();
                             ?>
                             </div>

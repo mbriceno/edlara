@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Accounts - Home</title>        
+        <title>{{ Setting::get('system.schoolname') }} - Accounts - Home</title>        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
     </head>
