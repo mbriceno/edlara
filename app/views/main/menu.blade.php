@@ -26,7 +26,7 @@
                             <a href="/#contactus">Contact Us</a>
                         </li>
                         <li>
-                            <a href="/#tutorials">Tutorials</a>
+                            <a href="/tutorials">Tutorials</a>
                         </li>
                     </ul>
                     <ul class="nav pull-right">
