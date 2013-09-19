@@ -40,7 +40,8 @@
         "grans/uservalidator":"dev-master",
         "pda/pheanstalk": "dev-master",
         "juy/profiler":"dev-master",
-        "artdarek/gravatarer": "dev-master"
+        "artdarek/gravatarer": "dev-master",
+        "philf/setting": "dev-master"
     
     },
     "autoload": {

@@ -135,7 +135,9 @@ return array(
         		'Grans\Uservalidator\UservalidatorServiceProvider',
         		'Grans\Checkboxcaptcha\CheckboxcaptchaServiceProvider',
 				'Juy\Profiler\Providers\ProfilerServiceProvider',
-				'Artdarek\Gravatarer\GravatarerServiceProvider'
+				'Artdarek\Gravatarer\GravatarerServiceProvider',
+				'Philf\Setting\SettingServiceProvider',
+
 
 
 	),

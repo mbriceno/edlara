@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "58854b67f616fcc67ddccccd20fdc38c",
+    "hash": "8f5829a4d3aeb8a0c355310c0c20a5e8",
     "packages": [
         {
             "name": "artdarek/gravatarer",
@@ -1528,6 +1528,50 @@
                 "beanstalkd"
             ],
             "time": "2013-04-03 09:09:52"
+        },
+        {
+            "name": "philf/setting",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Phil-F/Setting.git",
+                "reference": "51e6e2ce7f906d527abb694f73c6603a4e9799c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Phil-F/Setting/zipball/51e6e2ce7f906d527abb694f73c6603a4e9799c1",
+                "reference": "51e6e2ce7f906d527abb694f73c6603a4e9799c1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Philf\\Setting": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Foulston",
+                    "email": "info@weztec.com"
+                }
+            ],
+            "description": "Persistent configuration settings for Laravel - Create, Read, Update and Delete settings stored in files using JSON",
+            "keywords": [
+                "config",
+                "laravel"
+            ],
+            "time": "2013-08-18 19:00:34"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3086,7 +3130,8 @@
         "grans/uservalidator": 20,
         "pda/pheanstalk": 20,
         "juy/profiler": 20,
-        "artdarek/gravatarer": 20
+        "artdarek/gravatarer": 20,
+        "philf/setting": 20
     },
     "platform": [
 
