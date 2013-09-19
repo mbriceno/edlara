@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{ Config::get('system.sitename') }}</title>
+    <title>{{ Setting::get('system.adminsitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
 
     <!-- The styles -->
     <link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">
@@ -33,9 +31,59 @@
             <div>
         {{$breadcrumbs}}
             </div>
-            <div id="test">
-            
-            </div>
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Name</th>
+                        <th>Related Tutorial</th>
+                        <th>Submitted To</th>
+                        <th>Submission Date</th>
+                        <th>Score out of 20</th>
+                        <th>Submitted By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $assessments = Assessments::all();
+                    foreach ($assessments as $assessment){
+                        $tutorialid = $assessment->tutorialid;
+                        $tutorial = Tutorials::find($tutorialid);
+                        $studentid = $assessment->studentid;
+                        $student = User::find($studentid);
+                        $teacherid = $assessment->teacherid;
+                        $teacher = User::find($teacherid);
+                        echo "<tr>";
+                        echo "<td>";
+                        echo $assessment->id;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $assessment->title;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $teacher->first_name.' '.$teacher->last_name;                        
+                        echo "</td>";
+                        echo "<td>"; 
+                        echo $assessment->created_at;                      
+                        echo "</td>";
+                        echo "<td>";
+                        echo $assessment->marks;
+                        echo "</td>";
+                        echo "<td>";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+
+
+                    ?>
+                </tbody>
+                <tfoot>
+
+
+                </tfoot>
+            </table>
             <!-- content ends -->
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->

@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/"> <img alt='{{ Config::get('system.schoolnameabbr','Demo School Name Abbr') }}' src="{{ Config::get('app.url')}}{{ Config::get('system.schoollogo','img/logo.jpg') }}" /></a>
+                <a class="brand" href="/"> <img alt='{{ Setting::get('system.schoolnameabbr','Demo School Name Abbr') }}' src="{{ Setting::get('app.url')}}{{ Setting::get('system.schoollogo','img/logo.jpg') }}" /></a>
                 
                 <!-- theme selector starts -->
                 <div class="btn-group pull-right theme-container" >
@@ -45,7 +45,7 @@
                 
                 <div class="top-nav nav-collapse">
                     <ul class="nav">
-                        <li><a href="{{ Config::get('app.url') }}">Visit Site</a></li>
+                        <li><a href="{{ Setting::get('app.url') }}">Visit Site</a></li>
                         <li>
                             <form class="navbar-search pull-left">
                                 <input placeholder="Search" class="search-query span2" name="query" type="text">

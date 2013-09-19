@@ -34,8 +34,8 @@ class TutorialsController extends BaseController {
         }
         else {
             $validator = Validator::make(Input::all(),
-                            array('title'=>'required|min:3|max:256|alpha',
-                                  'description'=> 'required|max:1024|alpha',
+                            array('title'=>'required|min:3|max:256',
+                                  'description'=> 'required|max:1024|alpha_dash',
                                   'tutorial'=>'required',
                                   'attachment'=>'mimes:jpeg,JPEG,jpg,JPG,PNG,png,bmp,BMP,gif,GIF,pdf,PDF'
                                 ));
@@ -45,13 +45,13 @@ class TutorialsController extends BaseController {
             if ($validator->fails())
             {         
                 Input::flash();
-                Log::error(Input::get('published'));
+                // Log::error(Input::get('subject'));
                 return Redirect::to('/tutorial/edit/'.$id.'')->withErrors($validator)->with('input',Input::all());
             } 
             else
             {       
                 self::updatetutorial($id);
-                Log::error(Input::get('published'));
+                // Log::error(Input::get('subject'));
                 return Redirect::to('/tutorial/edit/'.$id.''); 
             }
         }
@@ -71,23 +71,55 @@ class TutorialsController extends BaseController {
                 return View::make('dashboard.tutorials.view')->with('id',$id);
         }
     }
-
+    public function siteAttachmentHandler($id,$attachmentname){
+        $tutorial = Tutorials::find($id);           
+                return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
+        
+    }
     public function attachmentHandler($id,$attachmentname,$mode){
         $tutorial = Tutorials::find($id);
         switch ($mode) {
             case 'delete':
-                self::delteAttachment($id,$attachmentname);
-                return;
+                self::deleteAttachment($id,$attachmentname);
+                return Redirect::to('/tutorial/edit/'.$id.'');
             case 'download':            
                 return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
         }
     }
+
+
+    /*
+     * Site
+     */
+    public function siteitemview($id){
+        if (!Sentry::check()){
+                //User is not Logged In        
+                $currentURL=URL::current();
+                $currentURL = substr($currentURL, 8);
+                $cutLength = strrpos($currentURL, '.');
+                $cutLength = $cutLength + 4;
+                $currentURL = substr($currentURL,$cutLength);
+                Session::put('url.intended',$currentURL);
+                return View::make('site.tutoriallogin')->nest('header','main.header');
+            }
+        return View::make('site.tutorial')->with('id',$id)->nest('header','main.header');
+    }
+    public function sitelistview(){
+        return View::make('site.tutorials')->nest('header','main.header');
+    }
+
+
+
+    /*
+     * Private
+     */
     private function updatetutorial($id){
         $tutorial = Tutorials::find($id);
         $tutorial->name         =   Input::get('title') ;
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
         $tutorial->createdby    =   Sentry::getUser()->id;
+        $tutorial->subjectid    =   Input::get('subject');
         if(Input::get('published') == 'on'){
         $tutorial->published    =   1;
         }
@@ -122,7 +154,7 @@ class TutorialsController extends BaseController {
         return $newid;
     }
     private function deleteAttachment($id,$attachment){
-
+       File::delete(app_path().'/attachments/tutorial-'.$id.'/'.$attachment);
     }
 
 }

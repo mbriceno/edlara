@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edlara -Login</title>
+        <title>{{ Setting::get('system.schoolname') }}-Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans')      
@@ -50,7 +50,7 @@
                     echo Form::token();
                     echo Form::close();
                     ?>
-                    <a class="btn btn-large btn-danger" href="<?php echo Config::get('app.url'); ?>">Return to HomePage</a>
+                    <a class="btn btn-large btn-danger" href="<?php echo Setting::get('app.url'); ?>">Return to HomePage</a>
                 </div>
             </div>
         </div>

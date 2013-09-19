@@ -38,7 +38,8 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     Route::get('settings',array('before'=>'admin',function()
     {
         return View::make('dashboard.settings');
-    }));    
+    }));
+    Route::post('settings',array('before'=>'admin','uses'=>'SettingsController@update'));    
     Route::get('users',array('before'=>'teacher',function()
     {
         return View::make('dashboard.users');
@@ -47,10 +48,6 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     Route::get('tutorials',array('before'=>'teacher',function()
     {
         return View::make('dashboard.tutorials');
-    }));
-    Route::get('assessments',array('before'=>'teacher',function()
-    {
-        return View::make('dashboard.assessments');
     }));
     Route::get('students',array('before'=>'teacher',function(){
         return View::make('dashboard.students');
@@ -67,6 +64,13 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::get('tutorial/update/{id}/{attachmentname}/{mode}',array('before'=>'teacher','uses'=>'TutorialsController@attachmentHandler'));
 
+
+
+
+    Route::get('assessments',array('before'=>'teacher',function()
+    {
+        return View::make('dashboard.assessments');
+    }));
 
     Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
     {
@@ -140,15 +144,19 @@ Route::group([],function(){
     });
     Route::post('resetpass',['before'=>'csrf','uses'=>'UserController@resetPass']);
 
+
 });
 
 
 
 
 Route::group([],function(){
-    Route::get('u/{username}.html','UserController@showProfile');
+    Route::get('profiles',function(){
+        return;
+    });
+    Route::get('profile/{id?}','UserController@showProfile')->where('id', '[0-9]+');
 
-    Route::get('u/{username}.html?edit=true',array('uses'=>'UserController@editProfile','before'=>'auth'));
+    Route::get('profile/{id?}?edit=true',array('uses'=>'UserController@editProfile','before'=>'auth'));
 
 });
 
@@ -183,6 +191,20 @@ Route::get('gohome',function(){
 Route::get('dash',function(){
     return Redirect::route('dashboard');
 });
+
+
+//Tutorials
+Route::get('/tutorial/{id}',array('uses'=>'TutorialsController@siteitemview'));
+Route::get('/tutorials',array('uses'=>'TutorialsController@sitelistview'));
+Route::get('tutorial/{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
+
+
+//Assessments
+Route::get('assessment/submit',array('uses'=>'AssessmentController@submitview'));
+Route::post('assessment/submit',array('uses'=>'AssessmentController@submit'));
+Route::get('assessment/update',array('uses'=>'AssessmentController@updateList'));
+Route::get('assessment/update/{id}',array('uses'=>'AssessmentController@updateView'));
+Route::post('assessment/update/{id}',array('uses'=>'AssessmentController@update'));
 
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()

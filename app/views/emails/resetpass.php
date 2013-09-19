@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>
-            Welcome to Edlara Educational System.
+            Welcome to <?php Setting::get('system.schoolname') ?> Educational System.
         </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"/>
         <style type="text/css">  
@@ -15,13 +15,13 @@
         </style>
     </head>
     <body>
-    <h2 id="heading">Edlara Educational System.</h2>
+    <h2 id="heading"><?php Setting::get('system.schoolname') ?> Educational System.</h2>
 
     Hi <?php echo $fname.' '.$lname ?>,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have recently requested to reset your password.
 
 <?php 
-$url =  Config::get('app.url', 'https://laravel.dev/');
+$url =  Setting::get('app.url', 'https://laravel.dev/');
 echo "<a href='".$url."forgottenpass/".$reset_code.'/'.$email."'>Click Here to Activate</a>";
 ?>
 <br>
@@ -29,7 +29,7 @@ echo "<a href='".$url."forgottenpass/".$reset_code.'/'.$email."'>Click Here to A
 <p>Copy and Paste following URL in Browser</p>
 <?php 
 
-$url =  Config::get('app.url', 'https://laravel.dev/');
+$url =  Setting::get('app.url', 'https://laravel.dev/');
 echo $url."forgottenpass/".$reset_code.'/'.$email;
 ?>
 

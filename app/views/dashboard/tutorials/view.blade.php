@@ -7,7 +7,7 @@ $tutorial = Tutorials::find($id);
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{ Config::get('system.sitename') }}</title>
+    <title>{{ Setting::get('system.adminsitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- The styles -->
@@ -56,29 +56,30 @@ $tutorial = Tutorials::find($id);
                             echo "<fieldset>";
                             echo Form::label('id','id',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
 
-                            echo Form::text('id',$id,array('disabled'=>'','class'=>'disabled pull-right','style'=>'margin:10px;'));
+                            echo Form::text('id',$id,array('disabled'=>'','class'=>'disabled pull-right uneditable-input','style'=>'margin:10px;'));
 
                             echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-                            echo Form::text("title",$tutorial->name,array('placeholder'=>'Title of the Tutorial','class'=>'pull-right uneditable-input','style'=>'clear:right;margin:10px;'));
+                            echo Form::text("title",$tutorial->name,array('placeholder'=>'Title of the Tutorial','class'=>'pull-right uneditable-input disabled','style'=>'clear:right;margin:10px;'));
 
                             echo Form::label('description','Description',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-                            echo Form::text("description",$tutorial->description,array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right uneditable-input','style'=>'clear:right;margin:10px;'));
+                            echo Form::text("description",$tutorial->description,array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right disabled uneditable-input','style'=>'clear:right;margin:10px;'));
 
                             echo '
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
+                            echo "<br>&nbsp;<br>&nbsp;<br>&nbsp;";
                             echo "<div class='controls'>";
-                            echo Form::textarea('tutorial',$tutorial->content,array('class'=>'cleditor pull-right uneditable-input','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
+                            
+                            echo $tutorial->content;
                             echo '</div>';
                             echo '</div>';
-                            echo Form::label('attachment','Attachment',array('class'=>'pull-left ','style'=>'clear:left;margin:15px;'));
-                            echo Form::file('attachment', array('class'=>"pull-right uneditable-input",'style'=>'clear:right;margin:25px;'));
+                          
                             
                             echo "</fieldset>";
-                            echo '<span><a class="btn btn-success" href="/tutorial/edit/'.$id.'">Open Editable</a></span>';
-                            echo '<a class="btn btn-danger" href="/tutorials">Close</a>';
+                            echo '<span><a class="ajax-link btn btn-success" href="/tutorial/edit/'.$id.'">Open Editable</a></span>';
+                            echo '<a class="ajax-link btn btn-danger" href="/tutorials">Close</a>';
                             echo Form::close();
                             ?>
                             </div>
@@ -93,6 +94,50 @@ $tutorial = Tutorials::find($id);
                                     <div class="controls">
                                         <span class="input-xlarge uneditable-input">{{ $tutorial->updated_at }}</span>
                                     </div>
+
+                                 <label class="control-label">Current Attachments</label>
+                                <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>#id</th>
+                                            <th>Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+
+                                if(is_dir(app_path().'/attachments/tutorial-'.$id)){
+                                $types = array(
+                                'jpg', 'png', 'gif', 'JPG', 'PNG', 'GIF','PDF','pdf','bmp','BMP'
+                                 );
+                                $folder = app_path().'/attachments/tutorial-'.$id;
+                                $it = new RecursiveDirectoryIterator($folder);
+                                $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+                                foreach ($files as $file) {
+                                    if (is_file($file)) {
+                                        $attachpath = app_path().'/attachments/tutorial-'.$tutorial->id.'/';
+                                        $filename = str_replace($attachpath, '', $file);
+                                             echo "<tr>";
+                                             echo "<td>";
+                                             echo "1";
+                                             echo "</td>";
+                                             echo "<td>";
+                                             echo $filename;
+                                             echo "</td>";
+                                             echo "<td>";
+                                             echo "<a class='btn btn-small' href='/tutorial/update/".$id.'/'.$filename."/download/'>Download</a>";
+                                             echo "</td>";
+                                             echo "</tr>";
+                                                }
+                                }
+                                }
+                                ?>
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
                                 </div>
                             </div>
                         </div>

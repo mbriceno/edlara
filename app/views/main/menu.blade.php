@@ -26,12 +26,12 @@
                             <a href="/#contactus">Contact Us</a>
                         </li>
                         <li>
-                            <a href="/#tutorials">Tutorials</a>
+                            <a href="/tutorials">Tutorials</a>
                         </li>
                     </ul>
                     <ul class="nav pull-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Exams<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assessments<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="/#">How to do the Online Exams</a>

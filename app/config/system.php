@@ -22,7 +22,7 @@ return array(
 
     "logo_src" => "img/logo.png",
 
-    "sitename" => "JHC - eLearning Admin"
+    "adminsitename" => "JHC - eLearning Admin"
 
 
 );

@@ -293,8 +293,44 @@ class UserController extends BaseController {
                 break;
         }
     }
-    public function showProfile(){
-        return View::make('account.profile.show');
+    public function showProfile($id){
+        if('0' !== $id){
+            if (!Sentry::check()){
+                //User is not Logged In        
+                $currentURL=URL::current();
+                $currentURL = substr($currentURL, 8);
+                $cutLength = strrpos($currentURL, '.');
+                $cutLength = $cutLength + 4;
+                $currentURL = substr($currentURL,$cutLength);
+                Session::put('url.intended',$currentURL);
+                return View::make('account.login',array('error'=>'OK'));
+            }
+            if(Sentry::getUser()->id == $id){
+                return View::make('account.profile.edit')->nest('header','main.header')->with('id',$id);
+            }
+            else {
+                return View::make('account.profile.view')->with('id',$id)->nest('header','main.header');
+            }
+        }
+        else
+        {
+            if (!Sentry::check()){
+                //User is not Logged In        
+                $currentURL=URL::current();
+                $currentURL = substr($currentURL, 8);
+                $cutLength = strrpos($currentURL, '.');
+                $cutLength = $cutLength + 4;
+                $currentURL = substr($currentURL,$cutLength);
+                Session::put('url.intended',$currentURL);
+                return View::make('account.login',array('error'=>'OK'));
+            }
+            if(0 == $id){
+                return View::make('account.profile.edit')->with('id',Sentry::getUser()->id)->nest('header','main.header');
+            }
+            else {
+                return Redirect::to('profile/0');
+            }
+        }
     }
 
     public function editProfile(){
@@ -302,6 +338,6 @@ class UserController extends BaseController {
     }
 
     public function updateProfile(){
-        return View::make('account.profile.show');
+        return View::make('account.profile.view');
     }
 }

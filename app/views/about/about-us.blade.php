@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Edlara - About Us</title>
+        <title>{{ Setting::get('system.schoolname') }}- About Us</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans')
