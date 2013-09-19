@@ -200,11 +200,11 @@ Route::get('tutorial/{id}/{attachmentname}/download',array('before'=>'student','
 
 
 //Assessments
-Route::get('assessment/submit',array('uses'=>'AssessmentController@submitview'));
-Route::post('assessment/submit',array('uses'=>'AssessmentController@submit'));
-Route::get('assessment/update',array('uses'=>'AssessmentController@updateList'));
-Route::get('assessment/update/{id}',array('uses'=>'AssessmentController@updateView'));
-Route::post('assessment/update/{id}',array('uses'=>'AssessmentController@update'));
+Route::get('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submitview'));
+Route::post('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submit'));
+Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
+Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
+Route::post('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@update'));
 
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
