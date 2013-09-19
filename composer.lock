@@ -3,20 +3,69 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f6f626dcd1ea6652b859d1d338eb60a3",
+    "hash": "58854b67f616fcc67ddccccd20fdc38c",
     "packages": [
+        {
+            "name": "artdarek/gravatarer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artdarek/gravatarer.git",
+                "reference": "b703ca2a7a573bc4031e4438d2d4f865560ae3e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artdarek/gravatarer/zipball/b703ca2a7a573bc4031e4438d2d4f865560ae3e0",
+                "reference": "b703ca2a7a573bc4031e4438d2d4f865560ae3e0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.0.*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Artdarek\\Gravatarer": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artdarek",
+                    "email": "artdarek@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Gravatar for Laravel 4.",
+            "homepage": "https://github.com/artdarek/gravatarer",
+            "keywords": [
+                "Gravatar.com",
+                "avatar",
+                "gravatar",
+                "laravel",
+                "laravel4"
+            ],
+            "time": "2013-07-22 10:40:47"
+        },
         {
             "name": "cartalyst/sentry",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/sentry.git",
-                "reference": "5e39585a13248601bbaff826f0632e4d62819c05"
+                "reference": "96f8b8f04c71915ec81fbf86b7b86d6ef9686a12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/5e39585a13248601bbaff826f0632e4d62819c05",
-                "reference": "5e39585a13248601bbaff826f0632e4d62819c05",
+                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/96f8b8f04c71915ec81fbf86b7b86d6ef9686a12",
+                "reference": "96f8b8f04c71915ec81fbf86b7b86d6ef9686a12",
                 "shasum": ""
             },
             "require": {
@@ -102,7 +151,7 @@
                 "laravel",
                 "security"
             ],
-            "time": "2013-09-16 12:40:58"
+            "time": "2013-09-18 20:31:36"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -934,12 +983,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/juy/profiler.git",
-                "reference": "35b7755b624a720a6d96c0e24b092ec9f994afb7"
+                "reference": "faa8d76c52ee6be2eb11cebe1512f15dbfd7f7b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juy/profiler/zipball/35b7755b624a720a6d96c0e24b092ec9f994afb7",
-                "reference": "35b7755b624a720a6d96c0e24b092ec9f994afb7",
+                "url": "https://api.github.com/repos/juy/profiler/zipball/faa8d76c52ee6be2eb11cebe1512f15dbfd7f7b3",
+                "reference": "faa8d76c52ee6be2eb11cebe1512f15dbfd7f7b3",
                 "shasum": ""
             },
             "require": {
@@ -972,7 +1021,7 @@
                 "laravel",
                 "profiler"
             ],
-            "time": "2013-09-11 11:22:51"
+            "time": "2013-09-18 18:18:27"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2187,12 +2236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "11dcdf2a3f485e0b362cfc364b7e9e5ef80562ab"
+                "reference": "be368b7a40f8bf5d38879c1a78fd2aad4e2b1cfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/11dcdf2a3f485e0b362cfc364b7e9e5ef80562ab",
-                "reference": "11dcdf2a3f485e0b362cfc364b7e9e5ef80562ab",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/be368b7a40f8bf5d38879c1a78fd2aad4e2b1cfe",
+                "reference": "be368b7a40f8bf5d38879c1a78fd2aad4e2b1cfe",
                 "shasum": ""
             },
             "require": {
@@ -2233,7 +2282,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-31 06:12:22"
+            "time": "2013-09-18 07:03:56"
         },
         {
             "name": "symfony/console",
@@ -2242,12 +2291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "7a8f90ca3101cbb71abb55a7f42c5ef9476c339a"
+                "reference": "aba4731bf8dafa21b7c4a59bd69c62f73c0a6dcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/7a8f90ca3101cbb71abb55a7f42c5ef9476c339a",
-                "reference": "7a8f90ca3101cbb71abb55a7f42c5ef9476c339a",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/aba4731bf8dafa21b7c4a59bd69c62f73c0a6dcf",
+                "reference": "aba4731bf8dafa21b7c4a59bd69c62f73c0a6dcf",
                 "shasum": ""
             },
             "require": {
@@ -2286,7 +2335,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-13 12:20:37"
+            "time": "2013-09-18 07:03:56"
         },
         {
             "name": "symfony/css-selector",
@@ -2402,12 +2451,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "95233c6d8c09fde5ac5d7f8152abb08c916303e9"
+                "reference": "ee71479f330c21ef431d83095680fd26b48eed35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/95233c6d8c09fde5ac5d7f8152abb08c916303e9",
-                "reference": "95233c6d8c09fde5ac5d7f8152abb08c916303e9",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/ee71479f330c21ef431d83095680fd26b48eed35",
+                "reference": "ee71479f330c21ef431d83095680fd26b48eed35",
                 "shasum": ""
             },
             "require": {
@@ -2446,7 +2495,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-17 09:47:59"
+            "time": "2013-09-18 07:03:56"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -2603,12 +2652,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "0ffbce778188a57f61c79e1ca3e6c1142a6ca56b"
+                "reference": "f074d4b3284d12232a36d2351d7432cbca2daab4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/0ffbce778188a57f61c79e1ca3e6c1142a6ca56b",
-                "reference": "0ffbce778188a57f61c79e1ca3e6c1142a6ca56b",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/f074d4b3284d12232a36d2351d7432cbca2daab4",
+                "reference": "f074d4b3284d12232a36d2351d7432cbca2daab4",
                 "shasum": ""
             },
             "require": {
@@ -2644,7 +2693,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-16 11:23:31"
+            "time": "2013-09-18 07:03:56"
         },
         {
             "name": "symfony/http-kernel",
@@ -2653,12 +2702,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "674a6b021803888e7575537e8dd423007c6aa549"
+                "reference": "6c7684a7c5cdaf491b271253ec730cea129cdc86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/674a6b021803888e7575537e8dd423007c6aa549",
-                "reference": "674a6b021803888e7575537e8dd423007c6aa549",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/6c7684a7c5cdaf491b271253ec730cea129cdc86",
+                "reference": "6c7684a7c5cdaf491b271253ec730cea129cdc86",
                 "shasum": ""
             },
             "require": {
@@ -2715,7 +2764,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-16 11:23:31"
+            "time": "2013-09-18 07:03:56"
         },
         {
             "name": "symfony/process",
@@ -2829,12 +2878,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Translation.git",
-                "reference": "65f888291f0896ad492f9abc6dc05c998373aded"
+                "reference": "3ff36157da68ade1152382dda53ca4a600f47b16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Translation/zipball/65f888291f0896ad492f9abc6dc05c998373aded",
-                "reference": "65f888291f0896ad492f9abc6dc05c998373aded",
+                "url": "https://api.github.com/repos/symfony/Translation/zipball/3ff36157da68ade1152382dda53ca4a600f47b16",
+                "reference": "3ff36157da68ade1152382dda53ca4a600f47b16",
                 "shasum": ""
             },
             "require": {
@@ -2875,7 +2924,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-26 05:49:51"
+            "time": "2013-09-18 07:03:56"
         },
         {
             "name": "symfony/yaml",
@@ -2930,12 +2979,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JeffreyWay/Laravel-4-Generators.git",
-                "reference": "b65b96a8d2294e50e0a2d8e6ebe64f8c3b4bcbec"
+                "reference": "bdcc57b1219bed3ad17d69fa20f55d98484f15f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JeffreyWay/Laravel-4-Generators/zipball/b65b96a8d2294e50e0a2d8e6ebe64f8c3b4bcbec",
-                "reference": "b65b96a8d2294e50e0a2d8e6ebe64f8c3b4bcbec",
+                "url": "https://api.github.com/repos/JeffreyWay/Laravel-4-Generators/zipball/bdcc57b1219bed3ad17d69fa20f55d98484f15f6",
+                "reference": "bdcc57b1219bed3ad17d69fa20f55d98484f15f6",
                 "shasum": ""
             },
             "require": {
@@ -2978,7 +3027,7 @@
                 "generators",
                 "laravel"
             ],
-            "time": "2013-09-17 00:57:22"
+            "time": "2013-09-18 23:38:54"
         },
         {
             "name": "way/laravel-test-helpers",
@@ -3036,7 +3085,8 @@
         "grans/checkboxcaptcha": 20,
         "grans/uservalidator": 20,
         "pda/pheanstalk": 20,
-        "juy/profiler": 20
+        "juy/profiler": 20,
+        "artdarek/gravatarer": 20
     },
     "platform": [
 
