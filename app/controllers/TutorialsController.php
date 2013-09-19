@@ -76,12 +76,29 @@ class TutorialsController extends BaseController {
         $tutorial = Tutorials::find($id);
         switch ($mode) {
             case 'delete':
-                self::delteAttachment($id,$attachmentname);
-                return;
+                self::deleteAttachment($id,$attachmentname);
+                return Redirect::to('/tutorial/edit/'.$id.'');
             case 'download':            
                 return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
         }
     }
+
+
+    /*
+     * Site
+     */
+    public function siteitemview($id){
+        return View::make('site.tutorial')->with('id',$id)->nest('header','main.header');
+    }
+    public function sitelistview(){
+        return View::make('site.tutorials')->nest('header','main.header');
+    }
+
+
+
+    /*
+     * Private
+     */
     private function updatetutorial($id){
         $tutorial = Tutorials::find($id);
         $tutorial->name         =   Input::get('title') ;
@@ -122,7 +139,7 @@ class TutorialsController extends BaseController {
         return $newid;
     }
     private function deleteAttachment($id,$attachment){
-
+       File::delete(app_path().'/attachments/tutorial-'.$id.'/'.$attachment);
     }
 
 }
