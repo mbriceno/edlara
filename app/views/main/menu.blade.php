@@ -34,17 +34,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assessments<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/#">How to do the Online Exams</a>
+                                    <a href="/assessment/submit">Submit a Assessment</a>
                                 </li>
                                 <li>
-                                    <a href="#">Benefits of doing e-Exams</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-                                <li  class="divider"></li>
-                                <li>
-                                    <a href="#">Separated link</a>
+                                    <a href="/assessment/update">Update a submitted Assessment</a>
                                 </li>
                             </ul>
                         </li>
