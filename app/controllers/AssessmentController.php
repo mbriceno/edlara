@@ -12,15 +12,15 @@ class AssessmentController extends BaseController {
 		return;
 	}
 	public function submitview(){
-		return;
+		return View::make('site.assessment.new')->nest('header','main.header');
 	}
 	public function update(){
 		return;
 	}
-	public function updateview(){
-		return;		
+	public function updateview($id){
+		return View::make('site.assessment.update')->with('id',$id)->nest('header','main.header');
 	}
 	public function updatelist(){
-		return;
+		return View::make('site.assessments')->nest('header','main.header');
 	}
 }
