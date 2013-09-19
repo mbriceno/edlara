@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/"> <img alt='{{ Setting::get('system.schoolnameabbr','Demo School Name Abbr') }}' src="{{ Setting::get('app.url')}}{{ Setting::get('system.schoollogo','img/logo.jpg') }}" /></a>
+                <a class="brand" href="/"> <img alt='{{ Setting::get('system.schoolnameabbr','Demo School Name Abbr') }}' src="{{ Setting::get('app.url')}}{{ Setting::get('system.logo_src','/img/logo.jpg') }}" /></a>
                 
                 <!-- theme selector starts -->
                 <div class="btn-group pull-right theme-container" >
