@@ -162,7 +162,7 @@ $tutorial = Tutorials::find($id);
                                              echo $filename;
                                              echo "</td>";
                                              echo "<td>";
-                                             echo "<a class='btn btn-small' href='/tutorial/update/".$id.'/'.$filename."/download/'>Download</a>";
+                                             echo "<a class='btn btn-small' href='/tutorial/update/".$id.'/'.$filename."/download/'>Download</a><a class='btn btn-small btn-danger' href='/tutorial/update/".$id.'/'.$filename."/delete/'>Delete</a>";
                                              echo "</td>";
                                              echo "</tr>";
                                                 }
