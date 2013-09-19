@@ -4,20 +4,21 @@
 class SettingsController extends BaseController{
 	public function update(){
 		 $validator = Validator::make(Input::all(),array(
-		 	 'schoolname'=>'required|alpha|min:3|max:256'
+		 	 'schoolname'=>'required|min:3|max:256'
 		 	,'schoolnameabbr'=>'required|alpha|min:2|max:10'
 		 	,'schooladdress'=>'required|min:4|max:512'
 		 	,'logo'=>'required'
-		 	,'adminsitename'=>'required|alpha|min:2|max:256'));
+		 	,'adminsitename'=>'required|min:2|max:256'));
 		 if($validator->fails()){
 		 	Input::flash();
-			return Redirect::to('/settings');
+			return Redirect::to('/settings')->withErrors($validator);
 		 }
-		 Config::set('schoolname',Input::get('schoolname'));
-		 Config::set('schoolnameabbr',Input::get('schoolnameabbr'));
-		 Config::set('schooladdress',Input::get('schooladdress'));
-		 Config::set('logo',Input::get('logo'));
-		 Config::set('adminsitename',Input::get('adminsitename'));
-		return Redirect::to('/settings');
+		 $schoolname = Input::get('schoolname');
+		 Setting::set('system.schoolname',$schoolname);
+		 Setting::set('system.schoolnameabbr',Input::get('schoolnameabbr'));
+		 Setting::set('system.schooladdress',Input::get('schooladdress'));
+		 Setting::set('system.logo_src',Input::get('logo'));
+		 Setting::set('system.adminsitename',Input::get('adminsitename'));
+		return View::make('dashboard.settings');
 	}
 }
