@@ -20,8 +20,8 @@ class CreateAssessmentsTable extends Migration {
             $table->integer('tutorialid');
             $table->integer('teacherid');
             $table->integer('studentid');
+            $table->integer('subjectid');
             $table->text('groupstudentid');
-			$table->string('subjectcode', 64);
 			$table->text('attachments');
             $table->integer('marks');
             $table->text('result');
