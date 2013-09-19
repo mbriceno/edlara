@@ -140,6 +140,7 @@ Route::group([],function(){
     });
     Route::post('resetpass',['before'=>'csrf','uses'=>'UserController@resetPass']);
 
+
 });
 
 
