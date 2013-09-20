@@ -2,5 +2,5 @@
                 
             {{$contentbox1}}
             {{$contentbox2}}
-            {{$contentbox3}}
+            {{$contentbox6}}
             </div><!--/row-->
