@@ -58,7 +58,10 @@
                         echo $assessment->id;
                         echo "</td>";
                         echo "<td>";
-                        echo $assessment->title;
+                        echo "<a href='/assessment/".$assessment->id."/'>".$assessment->title.'</a>';
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->name;
                         echo "</td>";
                         echo "<td>";
                         echo $teacher->first_name.' '.$teacher->last_name;                        
@@ -70,8 +73,7 @@
                         echo $assessment->marks;
                         echo "</td>";
                         echo "<td>";
-                        echo "</td>";
-                        echo "<td>";
+                        echo $student->first_name.' '.$student->last_name;
                         echo "</td>";
                         echo "</tr>";
                     }

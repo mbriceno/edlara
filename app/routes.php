@@ -71,6 +71,20 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     {
         return View::make('dashboard.assessments');
     }));
+    Route::get('assessment/{id}',array('before'=>'teacher',function($id){
+        $assessment = Assessments::find($id);
+        $user = User::find($assessment->teacherid);
+        if(Sentry::getUser()->id == $user->id){
+            return View::make('dashboard.assessments.update')->with('id',$id);
+        }
+        else
+        {
+            return "UPDATE NOT AUTHORISED";
+        }
+    }));
+    Route::post('assessment/{id}',array('before'=>'teacher','uses'=>'AssessmentController@teacherUpdate'));
+
+
 
     Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
     {
@@ -200,12 +214,34 @@ Route::get('tutorial/{id}/{attachmentname}/download',array('before'=>'student','
 
 
 //Assessments
+Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($id,$hash){
+                        $tutorial =  Tutorials::findOrFail($id);
+                        $sessionvar = "tutorial-".$tutorial->id;
+                        $senc = Session::get($sessionvar);
+                        try
+                        {
+                        $decrypted = Crypt::decrypt($hash);
+                        }
+                        finally{
+
+                        }
+
+                        if($senc == $hash && $decrypted == $sessionvar){
+                            Session::put('tutorialid',$id);
+                            return Redirect::to('assessment/submit');
+                        }
+                        else
+                        {
+                            return "Unauthorised Access";
+                        }
+}));
 Route::get('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submitview'));
 Route::post('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submit'));
 Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
 Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
 Route::post('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@update'));
-
+Route::get('/attachments/assessment-{id}/{filename}/download',array('before'=>'student','uses'=>'AssessmentController@download'));
+Route::get('/attachments/assessment-{id}/{filename}/delete',array('before'=>'student','uses'=>'AssessmentController@attachmentDelete'));
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
