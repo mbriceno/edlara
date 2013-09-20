@@ -52,7 +52,9 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     Route::get('students',array('before'=>'teacher',function(){
         return View::make('dashboard.students');
     }));
-
+    Route::get('teachers',array('before'=>'admin',function(){
+        return View::make('dashboard.teachers');
+    }));
 
 
 
