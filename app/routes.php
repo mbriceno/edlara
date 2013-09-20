@@ -33,7 +33,7 @@ Route::group(array('domain' => 'account.laravel.dev'), function()
 
 
 //Dashboard Subdomain
-Route::group(array('domain' => 'dashboard.laravel.dev'), function()
+Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
 {     
     Route::get('settings',array('before'=>'admin',function()
     {
@@ -229,8 +229,7 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         catch(Exception $e)
                         {
                             echo $e;
-                        }
-                        
+                        }                        
 
                         if($senc == $hash && $decrypted == $sessionvar){
                             Session::put('tutorialid',$id);
