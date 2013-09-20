@@ -226,7 +226,8 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         {
                         $decrypted = Crypt::decrypt($hash);
                         }
-                        catch(Exception $e){
+                        catch(Exception $e)
+                        {
                             echo $e;
                         }
                         finally{
