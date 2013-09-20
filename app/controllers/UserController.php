@@ -110,6 +110,7 @@ class UserController extends BaseController {
                 $fname    = Input::get('fname');
                 $lname    = Input::get('lname');
                 $actype   = Input::get('actype');
+                $subjects = Input::get('subjects');
                 // Let's register a user.
                 $user = Sentry::register(array(
                     'email'    => $email,
@@ -117,6 +118,7 @@ class UserController extends BaseController {
                     'first_name'=>$fname,
                     'last_name'=>$lname
                 ));
+                if($actype == 'students' || $actype == 'teachers'){
                 $group = Sentry::getGroupProvider()->findByName($actype);
 
                 $useract = \Sentry::getUserProvider()->findByLogin($email);
@@ -130,13 +132,24 @@ class UserController extends BaseController {
 
                     //Log the Error of User Group set                
                     Log::error("assigning $useract to $group failed.");
-                }
+                }}
                 // Let's get the activation code
                 $activationcode = $useract->getActivationCode();       
                 $fname = Input::get('fname');
                 $lname = Input::get('lname');
 
-
+                if($actype == 'students'){
+                    $student = new Student;
+                    $student->user_id = $useract->id;
+                    $student->email = $useract->email;
+                    $student->extra = serialize($subjects);
+                }
+                if($actype == 'teachers'){
+                    $teacher = new Teacher;
+                    $teacher->user_id = $useract->id;
+                    $teacher->email = $useract->email;
+                    $teacher->extra = serialize($subjects);
+                }
                 $data = ['activation_code'=>$activationcode,
                     'fname'=> $fname,
                     'lname'=>$lname,
