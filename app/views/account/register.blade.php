@@ -122,7 +122,7 @@
 
                         echo "<div class='row-fluid'><div class='offset1 span6'>";
                         $subjects = Subject::all();
-                        echo "<div>Choose your Subjects</div>"
+                        echo "<div>Choose your Subjects</div>";
                         foreach ($subjects as $subject){
                             echo Form::checkbox('subject',$subject->id,NULL,array());
                             echo $subject->subjectname.'<br>';
