@@ -13,8 +13,8 @@ class TutorialsController extends BaseController {
     public function update($id){
         if($id == 0){
             $validator = Validator::make(Input::all(),
-                            array('title'=>'required|min:3|max:256|alpha',
-                                  'description'=> 'max:1024|alpha',
+                            array('title'=>'required|min:3|max:256',
+                                  'description'=> 'max:1024',
                                   'tutorial'=>'required',
                                   'attachment'=>'mimes:jpeg,JPEG,jpg,JPG,PNG,png,bmp,BMP,gif,GIF,pdf,PDF'
                                 ));
@@ -35,7 +35,7 @@ class TutorialsController extends BaseController {
         else {
             $validator = Validator::make(Input::all(),
                             array('title'=>'required|min:3|max:256',
-                                  'description'=> 'required|max:1024|alpha_dash',
+                                  'description'=> 'required|max:1024',
                                   'tutorial'=>'required',
                                   'attachment'=>'mimes:jpeg,JPEG,jpg,JPG,PNG,png,bmp,BMP,gif,GIF,pdf,PDF'
                                 ));
@@ -142,15 +142,22 @@ class TutorialsController extends BaseController {
         $tutorial->content      =   Input::get('tutorial');
         $tutorial->createdby    =   Sentry::getUser()->id;
         $tutorial->subjectid    =   Input::get('subject');
-            $pub = 1;
-        $tutorial->published    =   $pub;
-        if(Input::hasFile('attachment')){
-                    $name = Input::file('attachment')->getClientOriginalName();
-                   Input::file('attachment')->move(app_path().'/attachments/tutorial-'.$id.'/',$name);                    
+        if(Input::get('published') == 'on'){
+        $tutorial->published    =   1;
+        }
+        else
+        {
+        $tutorial->published    =   0;
         }
         $tutorial->save();
-        $tutorial = DB::table('tutorials')->orderby('id','desc')->first();      
-        $newid = $tutorial->id;
+        $newtutorial = DB::table('tutorials')->orderby('id','desc')->first();  
+        if(Input::hasFile('attachment')){
+                    $name = Input::file('attachment')->getClientOriginalName();
+
+                    $newtutorial = DB::table('tutorials')->orderby('id','desc')->first();  
+                   Input::file('attachment')->move(app_path().'/attachments/tutorial-'.$newtutorial->id.'/',$name);                    
+        }    
+        $newid = $newtutorial->id;
         return $newid;
     }
     private function deleteAttachment($id,$attachment){
