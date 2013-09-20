@@ -230,9 +230,7 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         {
                             echo $e;
                         }
-                        finally{
-
-                        }
+                        
 
                         if($senc == $hash && $decrypted == $sessionvar){
                             Session::put('tutorialid',$id);
