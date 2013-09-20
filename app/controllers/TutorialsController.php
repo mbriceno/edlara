@@ -69,6 +69,22 @@ class TutorialsController extends BaseController {
                 return Redirect::to('/tutorials/');
             case 'view';
                 return View::make('dashboard.tutorials.view')->with('id',$id);
+            case 'delete':
+                $user = Sentry::getUser();
+                // Find the Administrator group
+                $admin = Sentry::findGroupByName('admin');
+
+                // Check if the user is in the administrator group
+                if ($user->inGroup($admin))
+                {
+                    $tutorial->delete();
+                    return Redirect::to(URL::previous());
+                }
+                else
+                {
+                    // User is not in Administrator group
+                    return View::make('access.notauthorised');
+                }
         }
     }
     public function siteAttachmentHandler($id,$attachmentname){
