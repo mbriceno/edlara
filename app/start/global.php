@@ -92,7 +92,7 @@ function autoCompileLess($inputFile, $outputFile) {
 }
 //var_dump(__DIR__);
 $publicdir = __DIR__.'/../../public/';
-autoCompileLess('/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.less','/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.css');
+// autoCompileLess('/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.less','/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.css');
 require app_path().'/filters.php';
 
 /*
