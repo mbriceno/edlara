@@ -16,6 +16,8 @@
                         <li class="nav-header hidden-tablet">Admin</li>
                         
                         <li><a class="ajax-link" href="/settings"><i class="icon-cog"></i><span class="hidden-tablet"> Settings</span></a></li>                        
+                        <li><a class="ajax-link" href="/teachers"><i class="icon-user icon-red"></i><span class="hidden-tablet">Teachers</span></a></li>
+
                         <li><a class="ajax-link" href="/users"><i class="icon-user"></i><span class="hidden-tablet">Users</span></a></li>
                         <?php
                             }
