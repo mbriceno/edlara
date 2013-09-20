@@ -226,8 +226,8 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         {
                         $decrypted = Crypt::decrypt($hash);
                         }
-                        finally{
-
+                        catch(Exception $e){
+                            //Catch Exception
                         }
 
                         if($senc == $hash && $decrypted == $sessionvar){
