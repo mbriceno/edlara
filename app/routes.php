@@ -112,8 +112,8 @@ Route::group([],function(){
     Route::get('/activateuser/{hash}/{email}',function($hash,$email){
         
         $login =$email;
-    try
-    {
+        try
+        {
         // Find the user using the user id
         $user = Sentry::getUserProvider()->findByLogin($email);
 
@@ -121,24 +121,26 @@ Route::group([],function(){
             if ($user->attemptActivation($hash))
             {
                 // User activation passed
-                return \View::make('account.login')->with('loginpass',1);
+                return View::make('account.login')->with('loginpass',1);
             }
             else
             {
                 // User activation failed
-                return \View::make('account.activation')->with('error','codemismatch');
+                return View::make('account.activation')->with('error','codemismatch');
             }
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
         {
             \Log::warning($login.' \'s account wasnt found in the system. Tried to activate the account.');            
-            return \View::make('account.activation')->with('error','notfound');
+            return View::make('account.activation')->with('error','notfound');
         }
         catch (Cartalyst\Sentry\Users\UserAlreadyActivatedException $e)
         {
             \Log::warning($login.' \'s account was already activated');
-            return \View::make('account.activation')->with('error','alreadyactivated');
+            return View::make('account.login')->with('error','Account Already Activated. Please login below with your credentials');
         }
+
+         return View::make('account.login');
     });
     Route::get('forgotpass',function(){
         return View::make('account.forgottenpass');
