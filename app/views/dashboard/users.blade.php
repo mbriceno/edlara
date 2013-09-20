@@ -86,8 +86,24 @@
                                     <a class="btn btn-danger" href="/user/'.$user->id.'/delete">
                                         <i class="icon-trash icon-white"></i> 
                                         Delete
-                                    </a>
-                                    </td>';
+                                    </a>';
+                                    $throttle = Sentry::findThrottlerByUserId($user->id);
+
+                                    if($suspended = $throttle->isSuspended())
+                                    {
+                                       echo '<a class="btn btn-success" href="/user/'.$user->id.'/unsuspend">
+                                        <i class="icon icon-unlocked icon-white"></i> 
+                                        Unsuspend
+                                    </a>';
+                                    }
+                                    else
+                                    {
+                                        echo '<a class="btn btn-warning" href="/user/'.$user->id.'/suspend">
+                                        <i class="icon icon-locked icon-white"></i> 
+                                        Suspend
+                                    </a>';
+                                    }
+                                echo '</td>';
 
             					echo "</tr>";
             				}

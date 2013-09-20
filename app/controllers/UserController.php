@@ -110,6 +110,7 @@ class UserController extends BaseController {
                 $fname    = Input::get('fname');
                 $lname    = Input::get('lname');
                 $actype   = Input::get('actype');
+                $subjects = Input::get('subjects');
                 // Let's register a user.
                 $user = Sentry::register(array(
                     'email'    => $email,
@@ -117,6 +118,7 @@ class UserController extends BaseController {
                     'first_name'=>$fname,
                     'last_name'=>$lname
                 ));
+                if($actype == 'students' || $actype == 'teachers'){
                 $group = Sentry::getGroupProvider()->findByName($actype);
 
                 $useract = \Sentry::getUserProvider()->findByLogin($email);
@@ -130,13 +132,24 @@ class UserController extends BaseController {
 
                     //Log the Error of User Group set                
                     Log::error("assigning $useract to $group failed.");
-                }
+                }}
                 // Let's get the activation code
                 $activationcode = $useract->getActivationCode();       
                 $fname = Input::get('fname');
                 $lname = Input::get('lname');
 
-
+                if($actype == 'students'){
+                    $student = new Student;
+                    $student->user_id = $useract->id;
+                    $student->email = $useract->email;
+                    $student->extra = serialize($subjects);
+                }
+                if($actype == 'teachers'){
+                    $teacher = new Teacher;
+                    $teacher->user_id = $useract->id;
+                    $teacher->email = $useract->email;
+                    $teacher->extra = serialize($subjects);
+                }
                 $data = ['activation_code'=>$activationcode,
                     'fname'=> $fname,
                     'lname'=>$lname,
@@ -195,7 +208,7 @@ class UserController extends BaseController {
         catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
         {
             \Log::warning($login.' \'s account was already activated');
-            return \View::make('account.activationfail')->with('type','alreadyactivated');
+            return \View::make('account.login')->with('error','alreadyactivated');
         }
     }
     public function acceptReset(){
@@ -290,6 +303,41 @@ class UserController extends BaseController {
                 return View::make('dashboard.user.edit');
                 break;
             case 'delete':
+                $user = Sentry::getUser();
+                // Find the Administrator group
+                $admin = Sentry::findGroupByName('admin');
+
+                // Check if the user is in the administrator group
+                if ($user->inGroup($admin))
+                {
+                return Redirect::to(URL::previous());
+                }                
+                else{
+                    return "UNAUTHORISED ACTION";
+                }
+                break;
+            case 'suspend':
+                $user = Sentry::getUser();
+                // Find the Administrator group
+                $admin = Sentry::findGroupByName('admin');
+
+                // Check if the user is in the administrator group
+                if ($user->inGroup($admin))
+                {
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->suspend();
+                return Redirect::to(URL::previous());
+                }
+                else{
+                    return "UNAUTHORISED ACTION";
+                }
+                break;
+            case 'unsuspend':
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->unsuspend();
+                return Redirect::to(URL::previous());
                 break;
         }
     }

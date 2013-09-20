@@ -39,16 +39,17 @@
                         <th>Last Name</th>
                         <th>Date of Birth</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
             <?php
-                $students = Student::all();
-                foreach ($students as $student){
-                    $user = Sentry::findUserByLogin($student->email);
+                $teachers = Teacher::all();
+                foreach ($teachers as $teacher){
+                    $user = Sentry::findUserByLogin($teacher->email);
                     echo "<tr>";
                     echo "<td>";
-                    echo $student->id;
+                    echo $teacher->user_id;
                     echo "</td>";
                     echo "<td>";
                     echo $user->first_name;
@@ -57,7 +58,7 @@
                     echo $user->last_name;
                     echo "</td>";
                     echo "<td>";
-                    echo $student->dob;
+                    echo $teacher->dob;
                     echo "</td>";
                     echo "<td class='center'>";
                                 if($user->activated){
@@ -68,7 +69,20 @@
                                     echo "<span class='label label-failure'>Not Activated</span>";
                                 }
                                 echo "</td>";
-                                
+                                echo '<td class="center">
+                                    <a class="btn btn-success ajax-link" href="/user/'.$user->id.'/view">
+                                        <i class="icon-zoom-in icon-white"></i>  
+                                        View                                            
+                                    </a>
+                                    <a class="btn btn-info" href="/user/'.$user->id.'/edit">
+                                        <i class="icon-edit icon-white"></i>  
+                                        Edit                                            
+                                    </a>
+                                    <a class="btn btn-danger" href="/user/'.$user->id.'/delete">
+                                        <i class="icon-trash icon-white"></i> 
+                                        Delete
+                                    </a>
+                                    </td>';
                     echo "</tr>";
                     
                 }
