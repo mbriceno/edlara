@@ -12,8 +12,10 @@
                 <div id="login-form" class="span-4 offset4">                    
                     <?php
                     //Error message will be shown if user has a failed attempt.
-                    if ($error !== 'OK'){
-                       echo "<div class='alert alert-error error-loginpage-alert'>$error</div>";
+                    if(isset($error)){
+                        if ($error !== 'OK'){
+                            echo "<div class='alert alert-error error-loginpage-alert'>$error</div>";
+                        }
                     }
                     if (isset($loginpass)){
                         echo "<div class='alert alert-success success-loginpage-alert'>You have successfully activated Your account</div>";
