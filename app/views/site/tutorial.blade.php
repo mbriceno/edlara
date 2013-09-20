@@ -55,6 +55,16 @@
                     <br>&nbsp;<br>
                     <br>&nbsp;<br>
                     <br>&nbsp;<br>
+                    <div>
+                        <?php
+                        $tohash = 'tutorial-'.$tutorial->id;
+                        $encrypted = Crypt::encrypt($tohash);
+                        Session::put($tohash,$encrypted);
+                        echo "<a href='/assessment/submit/".$tutorial->id."/".$encrypted."' class='btn btn-info'>Submit a Assessment for this Tutorial</a>";
+                        ?>
+                    </div>
+                    <br>&nbsp;<br>
+                    <br>&nbsp;<br>
                         <h4>Attachments</h4>
                         <table class="table table-striped table-bordered bootstrap-datatable datatable">
                                     <thead>
