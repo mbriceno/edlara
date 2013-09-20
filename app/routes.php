@@ -226,10 +226,9 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         {
                         $decrypted = Crypt::decrypt($hash);
                         }
-                        catch(Exception $e)
-                        {
-                            echo $e;
-                        }                        
+                        catch(Exception $e){
+                            //Catch Exception
+                        }
 
                         if($senc == $hash && $decrypted == $sessionvar){
                             Session::put('tutorialid',$id);
