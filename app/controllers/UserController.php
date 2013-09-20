@@ -303,13 +303,35 @@ class UserController extends BaseController {
                 return View::make('dashboard.user.edit');
                 break;
             case 'delete':
+                $user = Sentry::getUser();
+                // Find the Administrator group
+                $admin = Sentry::findGroupByName('admin');
+
+                // Check if the user is in the administrator group
+                if ($user->inGroup($admin))
+                {
                 return Redirect::to(URL::previous());
+                }                
+                else{
+                    return "UNAUTHORISED ACTION";
+                }
                 break;
             case 'suspend':
+                $user = Sentry::getUser();
+                // Find the Administrator group
+                $admin = Sentry::findGroupByName('admin');
+
+                // Check if the user is in the administrator group
+                if ($user->inGroup($admin))
+                {
                 $throttle = Sentry::findThrottlerByUserId($id);
                 // Suspend the user
                 $throttle->suspend();
                 return Redirect::to(URL::previous());
+                }
+                else{
+                    return "UNAUTHORISED ACTION";
+                }
                 break;
             case 'unsuspend':
                 $throttle = Sentry::findThrottlerByUserId($id);
