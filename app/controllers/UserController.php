@@ -195,7 +195,7 @@ class UserController extends BaseController {
         catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e)
         {
             \Log::warning($login.' \'s account was already activated');
-            return \View::make('account.activationfail')->with('type','alreadyactivated');
+            return \View::make('account.login')->with('error','alreadyactivated');
         }
     }
     public function acceptReset(){
@@ -290,6 +290,19 @@ class UserController extends BaseController {
                 return View::make('dashboard.user.edit');
                 break;
             case 'delete':
+                return Redirect::to(URL::previous());
+                break;
+            case 'suspend':
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->suspend();
+                return Redirect::to(URL::previous());
+                break;
+            case 'unsuspend':
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->unsuspend();
+                return Redirect::to(URL::previous());
                 break;
         }
     }
