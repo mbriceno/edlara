@@ -19,9 +19,6 @@ View::composer('dashboard.content.box.mainbox',function($view)
 {
     $view->nest('contentbox1','dashboard.content.box.1');
     $view->nest('contentbox2','dashboard.content.box.2');
-    $view->nest('contentbox3','dashboard.content.box.3');
-    $view->nest('contentbox4','dashboard.content.box.4');
-    $view->nest('contentbox5','dashboard.content.box.5');
     $view->nest('contentbox6','dashboard.content.box.6');
     return $view;
 });
