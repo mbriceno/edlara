@@ -51,12 +51,15 @@ table {
                         <th>Subject</th>
                         <th>Submitted To</th>
                         <th>Related Tutorial</th>
+                        <th>Submitted On</th>
+                        <th>Last Updated</th>
+                        <th>Marks</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-
-                    $assessments = Assessments::where('studentid','=',Sentry::getUser()->id);
+                    var_dump(Sentry::getUser()->id);
+                    $assessments = Assessments::where('studentid','=',1)->get();
 
                     foreach ($assessments as $assessment){
 
@@ -71,7 +74,7 @@ table {
                         echo $assessment->id;
                         echo "</td>";
                         echo "<td>";
-                        echo "<a href='/assessment/".$assessment->id."'>$assessment->title";
+                        echo "<a href='/assessment/update/".$assessment->id."'>$assessment->title";
                         echo "</td>";
                         echo "<td>";
                         echo $subject->subjectname;
@@ -81,6 +84,15 @@ table {
                         echo "</td>";
                         echo "<td>";
                         echo $tutorial->name;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->created_at;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->updated_at;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $tutorial->marks;
                         echo "</td>";
                         echo "</tr>";
                     }
