@@ -90,6 +90,18 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
 
 
+
+
+
+    Route::get('subjects',array('before'=>'admin',function(){
+        return View::make('dashboard.subjects');
+    }));
+    
+    Route::any('subject/edit/{id}/{mode}',array('before'=>'admin','uses'=>'SubjectController@modder'));
+
+
+
+
     Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
     {
         return View::make('dashboard.index');
