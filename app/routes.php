@@ -19,21 +19,6 @@ Route::get('login',function(){
     return View::make('account.login');
 });
 
-
-
-
-Route::group(array('domain' => 'account.laravel.dev'), function()
-{
-        Route::get('/',function()
-        {
-                return View::make('account.index');
-        });
-})->before('auth');
-
-
-
-
-
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
 {     
@@ -41,7 +26,9 @@ Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
     {
         return View::make('dashboard.settings');
     }));
+
     Route::post('settings',array('before'=>'admin','uses'=>'SettingsController@update'));    
+
     Route::get('users',array('before'=>'teacher',function()
     {
         return View::make('dashboard.users');
@@ -62,7 +49,7 @@ Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
 
 
 
-    Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+');
+    Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+')->before('teacher');
 
     Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
 
@@ -198,12 +185,6 @@ Route::group([],function(){
 
 Route::get('logout','UserController@logout');
 
-
-
-
-Route::get('தமிழ்',function(){
-    return "தமிழ்";
-});
 
 
 

@@ -148,6 +148,7 @@ class UserController extends BaseController {
                     $student = new Student;
                     $student->user_id = $useract->id;
                     $student->email = $useract->email;
+                    $student->dob = Input::get('dob');
                     $student->extra = serialize($subjects);
                     $student->save();
                 }
@@ -155,6 +156,7 @@ class UserController extends BaseController {
                     $teacher = new Teacher;
                     $teacher->user_id = $useract->id;
                     $teacher->email = $useract->email;
+                    $teacher->dob = Input::get('dob');
                     $teacher->extra = serialize($subjects);
                     $teacher->save();
                 }
