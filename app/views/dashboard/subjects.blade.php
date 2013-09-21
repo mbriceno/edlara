@@ -87,7 +87,7 @@
                         $admingroup = Sentry::findGroupByName('admin');
                         if ($cuser->inGroup($admingroup))
                         {
-                            echo '<a class="btn btn-danger" href="/subject/delete/'.$subject->id.'/">
+                            echo '<a class="btn btn-danger" href="/subject/edit/'.$subject->id.'/delete">
                                         <i class="icon-trash icon-white"></i> 
                                         Delete
                                     </a>';

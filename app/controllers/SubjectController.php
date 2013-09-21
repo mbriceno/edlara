@@ -5,6 +5,12 @@ class SubjectController extends BaseController {
 		if(Request::getMethod() == 'GET'){
 			switch ($mode) {
 				case 'delete':
+					$validator = Validator::make(['id'=>$id],
+						['id'=>'required|exists:subjects,id']
+						);
+					if($validator->fails()){
+						return Redirect::to(URL::previous());
+					}
 					self::delete($id);
 					return Redirect::to(URL::previous());
 				case 'update':
@@ -46,6 +52,8 @@ class SubjectController extends BaseController {
 	private function create(){
 	}
 	private function delete($id){
+		$subject =  Subject::find($id);
+		$subject->delete();
 	}
 
 }
