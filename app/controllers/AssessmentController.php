@@ -9,7 +9,16 @@ class AssessmentController extends BaseController {
 		return;
 	}
 	public function submit(){
-		$userid = Sentry::getUser()->id;
+		
+        $userid = Sentry::getUser()->id;
+		$user = Sentry::getUser();
+		$student = Student::findOrFail($user->id);
+        $ssubjects = $student->extra;
+        $subjects = unserialize($ssubjects);
+        $truth = self::subjectValidator($user->id,$subjects,Input::get('subject'));
+        if($truth == 0){
+            return Redirect::to(URL::previous());
+        }
 		$messages = array(
 			'title.required'=>'The :attribute is Required.',
 			'related_tutorial.unique' =>'You have already submitted a Assessment for this tutorial. Please Update it.You can only submit a Assessment Per Tutorial',
@@ -165,4 +174,13 @@ class AssessmentController extends BaseController {
 		$assessment->save();
 		return Redirect::to(URL::previous());
 	}
+
+	private function subjectValidator($id,$subjects,$subject){
+        foreach($subjects as $s){
+            if($s == $subject){
+                return 1;
+            }
+        }
+        return 0;
+    }
 }
