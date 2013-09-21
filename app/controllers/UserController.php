@@ -77,6 +77,11 @@ class UserController extends BaseController {
     }
 
     public function register(){        
+         if (Sentry::check())
+        {
+            // User is logged in   
+            return Redirect::to('/');
+        }
         $captcha_type = Config::get('app.captcha');
         if($captcha_type=="captcha"){
             $captcha_field = "captcha";
@@ -122,17 +127,18 @@ class UserController extends BaseController {
                 $group = Sentry::getGroupProvider()->findByName($actype);
 
                 $useract = \Sentry::getUserProvider()->findByLogin($email);
-                if ($user->addGroup($group))
-                {
+                    if ($user->addGroup($group))
+                    {
                     // Group assigned successfully
-                }
-                else
-                {
+                    }
+                    else
+                    {
                     // Group was not assigned
 
                     //Log the Error of User Group set                
                     Log::error("assigning $useract to $group failed.");
-                }}
+                    }
+                }
                 // Let's get the activation code
                 $activationcode = $useract->getActivationCode();       
                 $fname = Input::get('fname');
@@ -143,12 +149,14 @@ class UserController extends BaseController {
                     $student->user_id = $useract->id;
                     $student->email = $useract->email;
                     $student->extra = serialize($subjects);
+                    $student->save();
                 }
                 if($actype == 'teachers'){
                     $teacher = new Teacher;
                     $teacher->user_id = $useract->id;
                     $teacher->email = $useract->email;
                     $teacher->extra = serialize($subjects);
+                    $teacher->save();
                 }
                 $data = ['activation_code'=>$activationcode,
                     'fname'=> $fname,
@@ -310,7 +318,23 @@ class UserController extends BaseController {
                 // Check if the user is in the administrator group
                 if ($user->inGroup($admin))
                 {
-                return Redirect::to(URL::previous());
+
+                    $deleteuser = Sentry::findUserById($id);
+
+                    $usergroup =  $deleteuser->getGroups();
+                    $usergroupe = json_decode($usergroup,true);
+                    $usergroupe[0]['pivot']['group_id'];
+                    $group = Sentry::findGroupById($usergroupe[0]['pivot']['group_id']);
+                    $groupname = $group->name;
+                    if($groupname == 'teachers'){
+                        Teacher::findOrFail($id)->delete();
+                    }
+                    elseif($groupname == 'students'){
+                        Student::findOrFail($id)->delete();
+                    }
+                    $deleteuser->delete();
+                    
+                    return Redirect::to(URL::previous());
                 }                
                 else{
                     return "UNAUTHORISED ACTION";

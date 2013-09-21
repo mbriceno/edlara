@@ -19,6 +19,7 @@
                         <li><a class="ajax-link" href="/teachers"><i class="icon-user icon-red"></i><span class="hidden-tablet">Teachers</span></a></li>
 
                         <li><a class="ajax-link" href="/users"><i class="icon-user"></i><span class="hidden-tablet">Users</span></a></li>
+                        <li><a class="ajax-link" href="/subjects"><i class="icon-folder-open icon-green"></i><span class="hidden-tablet">Subjects</span></a></li>
                         <?php
                             }
                         ?>

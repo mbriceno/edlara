@@ -46,7 +46,9 @@ Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
     {
         return View::make('dashboard.users');
     }));
+    
     Route::get('user/{id}/{mode}',array('before'=>'admin','uses'=>'UserController@manage'));
+
     Route::get('tutorials',array('before'=>'teacher',function()
     {
         return View::make('dashboard.tutorials');
@@ -87,6 +89,18 @@ Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
         }
     }));
     Route::post('assessment/{id}',array('before'=>'teacher','uses'=>'AssessmentController@teacherUpdate'));
+
+
+
+
+
+
+    Route::get('subjects',array('before'=>'admin',function(){
+        return View::make('dashboard.subjects');
+    }));
+    
+    Route::any('subject/edit/{id}/{mode}',array('before'=>'admin','uses'=>'SubjectController@modder'));
+
 
 
 

@@ -130,6 +130,17 @@ View::composer('dashboard.teachers',function($view)
     $view->nest('noscript','dashboard.warnings.noscript');
     return $view;
 });
+View::composer('dashboard.subjects',function($view)
+{
+    $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
+    $view->nest('topmenu','dashboard.menubar.menu');
+    $view->nest('sidebar','dashboard.sidebar.sidebar');
+    $view->nest('intro','dashboard.content.intro');
+    $view->nest('content','dashboard.content.index');
+    $view->nest('status','dashboard.status.statusbox');
+    $view->nest('noscript','dashboard.warnings.noscript');
+    return $view;
+});
 View::composer('dashboard.user',function($view)
 {
     $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
@@ -164,6 +175,28 @@ View::composer('dashboard.user.edit',function($view)
     return $view;
 });
 View::composer('dashboard.assessments.update',function($view)
+{
+    $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
+    $view->nest('topmenu','dashboard.menubar.menu');
+    $view->nest('sidebar','dashboard.sidebar.sidebar');
+    $view->nest('intro','dashboard.content.intro');
+    $view->nest('content','dashboard.content.index');
+    $view->nest('status','dashboard.status.statusbox');
+    $view->nest('noscript','dashboard.warnings.noscript');
+    return $view;
+});
+View::composer('dashboard.subjects.edit',function($view)
+{
+    $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
+    $view->nest('topmenu','dashboard.menubar.menu');
+    $view->nest('sidebar','dashboard.sidebar.sidebar');
+    $view->nest('intro','dashboard.content.intro');
+    $view->nest('content','dashboard.content.index');
+    $view->nest('status','dashboard.status.statusbox');
+    $view->nest('noscript','dashboard.warnings.noscript');
+    return $view;
+});
+View::composer('dashboard.subjects.view',function($view)
 {
     $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
     $view->nest('topmenu','dashboard.menubar.menu');

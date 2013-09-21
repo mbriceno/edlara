@@ -129,6 +129,9 @@
                         }
                         echo "</div></div>";
 
+                        echo "<div>Choose Your Date of Birth</div>";
+                        echo "<input type='date' name=\"dob\"></input>";
+
                         $captcha_type = Setting::get('app.captcha');
                         if($captcha_type == "captcha"){
                             echo Form::captcha();
