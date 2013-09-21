@@ -152,6 +152,15 @@ class TutorialsController extends BaseController {
     }
 
     private function createtutorial(){
+        $user = Sentry::getUser();
+        $userid = Sentry::getUser()->id;
+        $teacher = Teacher::findOrFail($user->id);
+        $ssubjects = $teacher->extra;
+        $subjects = unserialize($ssubjects);
+        $truth = self::subjectValidator($user->id,$subjects,Input::get('subject'));
+        if($truth == 0){
+            return Redirect::to(URL::previous());
+        }
         $tutorial = new Tutorials;
         $tutorial->name         =   Input::get('title');
         $tutorial->description  =   Input::get('description');
@@ -178,6 +187,15 @@ class TutorialsController extends BaseController {
     }
     private function deleteAttachment($id,$attachment){
        File::delete(app_path().'/attachments/tutorial-'.$id.'/'.$attachment);
+    }
+
+    private function subjectValidator($id,$subjects,$subject){
+        foreach($subjects as $s){
+            if($s == $subject){
+                return 1;
+            }
+        }
+        return 0;
     }
 
 }
