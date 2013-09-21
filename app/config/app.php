@@ -128,7 +128,6 @@ return array(
                 'Cartalyst\Sentry\SentryServiceProvider',
                 'Basset\BassetServiceProvider',
                 'JasonLewis\EnhancedRouter\EnhancedRouterServiceProvider',
-                'Grans\Learn\LearnServiceProvider',
                 'Way\Generators\GeneratorsServiceProvider',
         		'Mews\Captcha\CaptchaServiceProvider',
         		'Greggilbert\Recaptcha\RecaptchaServiceProvider',
