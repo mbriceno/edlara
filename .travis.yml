@@ -5,4 +5,4 @@ php:
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --prefer-source --no-interaction --dev
+  - php ./composer.phar install --prefer-source --no-interaction --dev
