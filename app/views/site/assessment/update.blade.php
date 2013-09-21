@@ -5,6 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans')
+        <style type="text/css">
+        div.dataTables_length label {
+    float: left;
+    text-align: left;
+}
+ 
+div.dataTables_length select {
+    width: 75px;
+    display: inline-block;
+    position:relative;
+    float:left;
+    clear:left;
+}
+ 
+div.dataTables_filter label input {
+display: inline-block;
+width: inherit !important;
+}
+ 
+div.dataTables_info {
+    padding-top: 8px;
+}
+ 
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
+}
+ 
+table {
+    margin: 1em 0;
+}
+
+        </style>
     </head>
     <body>
         {{ $header }}
@@ -66,7 +99,7 @@
                 <div class='span3'>
 
                     <h4>Current Attachments</h4>
-                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                        <table id="attachment" class="table table-striped table-bordered bootstrap-datatable datatable">
                                     <thead>
                                         <tr>
                                             <th>#id</th>
@@ -84,13 +117,14 @@
                                 $folder = app_path().'/attachments/assessment-'.$id;
                                 $it = new RecursiveDirectoryIterator($folder);
                                 $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+                                $n = 0;
                                 foreach ($files as $file) {
                                     if (is_file($file)) {
                                         $attachpath = app_path().'/attachments/assessment-'.$assessment->id.'/';
                                         $filename = str_replace($attachpath, '', $file);
                                              echo "<tr>";
                                              echo "<td>";
-                                             echo "1";
+                                             echo $n +=1;
                                              echo "</td>";
                                              echo "<td>";
                                              echo $filename;
@@ -118,6 +152,14 @@
     <script src='/js/jquery.dataTables.min.js'></script>
         <script type="text/javascript">
             $('#navbar').scrollspy();
+              //datatable
+                $(document).ready(function() {
+    $('#attachment').dataTable({
+                "bJQueryUI": true,
+        "sDom": "<'row'<'span4 offset1'l><'span4'f>r>t<'row'<'span4 offset1'i><'span4'p>>"
+    });
+
+} );
         </script>
     </body>
 </html>
