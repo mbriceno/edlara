@@ -68,31 +68,8 @@ App::down(function()
 {
 	return Response::make("Be right back!", 503);
 });
-/**
- * Custom Less compiling
- */
-
-function autoCompileLess($inputFile, $outputFile) {
-  // load the cache
-  $cacheFile = $inputFile.".cache";
-
-  if (file_exists($cacheFile)) {
-    $cache = unserialize(file_get_contents($cacheFile));
-  } else {
-    $cache = $inputFile;
-  }
-
-  $less = new lessc;
-  $newCache = $less->cachedCompile($cache);
-
-  if (!is_array($cache) || $newCache["updated"] > $cache["updated"]) {
-    file_put_contents($cacheFile, serialize($newCache));
-    file_put_contents($outputFile, $newCache['compiled']);
-  }
-}
 //var_dump(__DIR__);
 $publicdir = __DIR__.'/../../public/';
-// autoCompileLess('/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.less','/home/gnanakeethan/git-projects/laravel/public/css/system/parallax.css');
 require app_path().'/filters.php';
 
 /*

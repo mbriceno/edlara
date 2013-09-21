@@ -114,7 +114,7 @@
                 <div class="span3">
                     <?php
                     // user email
-    $email = "gnanakeethan@gmail.com";
+    $email = $user->email;
 
     // create some gravatarer object 
    $url = Gravatarer::make( [
@@ -125,27 +125,27 @@
     ])->url();
      // get gravatar <img> html code
     // $html = $gravatar->html();
-?>			<h3>
+?>      <h3>
 Profile Picture
-</h3>	
-			<img alt="{{$email}}" class="pull-right" src="{{$url}}"/>
+</h3> 
+      <img alt="{{$email}}" class="pull-right" src="{{$url}}"/>
                 </div>
                 <div class="span12">
 
-		<div class="demo-container">
-			<div id="placeholder" class="demo-placeholder"></div>
-		</div>
-                	<h2>Statistics</h2>
-                	<div class="tabbable"> <!-- Only required for left/right tabs -->
-    					<ul class="nav nav-tabs">
-    						<li class="active"><a href="#tab1" data-toggle="tab">Assessments</a></li>
-    					</ul>
-    					<div class="tab-content">
-    						<div class="tab-pane active" id="tab1">
-    							<div id="chart_div" style="width:400; height:300"></div>
-    						</div>    						
-    					</div>
-    				</div>
+    <div class="demo-container">
+      <div id="placeholder" class="demo-placeholder"></div>
+    </div>
+                  <h2>Statistics</h2>
+                  <div class="tabbable"> <!-- Only required for left/right tabs -->
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">Assessments</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                  <div id="chart_div" style="width:400; height:300"></div>
+                </div>                
+              </div>
+            </div>
                 </div>
             </div>
         </div>
