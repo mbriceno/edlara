@@ -48,7 +48,7 @@
                     $user = Sentry::findUserByLogin($student->email);
                     echo "<tr>";
                     echo "<td>";
-                    echo $student->id;
+                    echo $student->user_id;
                     echo "</td>";
                     echo "<td>";
                     echo $user->first_name;

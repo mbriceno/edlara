@@ -33,9 +33,51 @@
             <div>
         {{$breadcrumbs}}
             </div>
-            <div id="test">
-            
+             <!--TODO: Editing Template  -->
+            <div class="box span12">
+                <div class="box-header well">
+                    <h2><i class="icon-info-sign"></i>Edit Existing Tutorial   </h2>
+                </div>
+                <div class="box-content" style="display: block;">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <?php
+                                $user = User::find($id);
+                                echo "<fieldset>";
+                                echo Form::label('id','ID',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
+                                echo Form::text('id',$id,array('class'=>'pull-right disabled','disabled'=>'','style'=>'margin:10px;'));
+                                echo Form::label('email','e-Mail',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
+                                echo Form::text('email',$user->email,array('class'=>'pull-right disabled','disabled'=>'','style'=>'margin:10px;'));
+                                echo Form::label('accountlevel','Account Level',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
+                                echo Form::select('accountlevel',['student'=>'Student','teacher'=>'Teacher'],'student',array('disabled','class'=>'disabled uneditable-input pull-right','style'=>'clear:right;margin:10px;height:30px;'));
+                                echo "</fieldset>";
+                                ?>
+                            </div>
+                            <div class="span6">
+                                <?php
+                            // user email
+                            $email = $user->email;
+
+                            // create some gravatarer object 
+                            $url = Gravatarer::make( [
+                            'email' => $email, 
+                            'size' => 220, 
+                            'defaultImage' => 'mm',
+                            'rating' => 'g',
+                            ])->url();
+                            // get gravatar <img> html code
+                            // $html = $gravatar->html();
+                            ?>          <h3>
+                            Profile Picture
+                            </h3>   
+                            <img alt="{{$email}}" class="pull-right" src="{{$url}}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <!-- content ends -->
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->
