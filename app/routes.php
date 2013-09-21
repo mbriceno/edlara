@@ -15,7 +15,9 @@ require_once('viewcomposer.php');
 
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf','uses' => 'UserController@authenticate'));
-
+Route::get('login',function(){
+    return View::make('account.login');
+});
 
 
 
@@ -226,8 +228,8 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         {
                         $decrypted = Crypt::decrypt($hash);
                         }
-                        finally{
-
+                        catch(Exception $e){
+                            //Catch Exception
                         }
 
                         if($senc == $hash && $decrypted == $sessionvar){

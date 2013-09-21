@@ -35,9 +35,9 @@ App::after(function($request, $response)
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
+	if (Request::getMethod() != 'GET' && Session::token() != Input::get('_token'))
 	{
-		throw new Illuminate\Session\TokenMismatchException;
+        return View::make('account.login')->with('error','Session Refreshed. Please login again.');
 	}
 });
 

@@ -23,6 +23,7 @@
                     echo Form::open(array('url' => 'login',
                         'method' => 'post'));
                     
+                    echo "<input type='hidden' name='_token' value='".Session::token()."'></input>";
                     //Echo FORM Label for Email address
                     echo Form::label('email', 'E-Mail Address', array(
                         'class' => 'lbl-email-addr-login'));

@@ -6,8 +6,8 @@
                         }
                     }
                     echo Form::open(array('url' => 'login',
-                        'method' => 'post'));
-                    
+                        'method' => 'POST'));
+                    echo "<input type='hidden' name='_token' value='".Session::token()."'></input>";
                     //Echo FORM Label for Email address
                     echo Form::label('email', 'E-Mail Address', array(
                         'class' => 'lbl-email-addr-login'));
@@ -34,6 +34,5 @@
                     echo Form::submit('Login',
                             array('class'=>'btn btn-large btn-info'));
 
-                    echo Form::token();
                     echo Form::close();
                     echo "</li> <li><a href=\"/register\">I Don't Have a Account!!!</a></li>";
