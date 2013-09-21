@@ -5,6 +5,53 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @stylesheets('bootstrap')
         @stylesheets('grans')
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+   
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+     
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+
+      // Callback that creates and populates a data table, 
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Assessments');
+      data.addColumn('number', 'Score');
+      <?php
+      $assessments  = Assessments::where('studentid', '=', $id)->get();
+      echo "data.addRows([";
+        foreach($assessments as $assessment){
+            var_dump($assessment);
+      // echo "['".."',".."],";
+  }
+      echo "]);"
+
+      ?>
+      data.addRows([
+        ['Janua', 3],
+        ['Onions', 1],
+        ['Olives', 1], 
+        ['Zucchini', 1],
+        ['Pepperoni', 2]
+      ]);
+
+      // Set chart options
+      var options = {'title':'How Much Pizza I Ate Last Night',
+                     'width':400,
+                     'height':300};
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
     </head>
     <body>
         {{ $header }}
@@ -14,7 +61,7 @@
                 <?php
                 $user = User::find($id);
                 $userdata = Student::find($id);
-                $userstram = 'student';
+                $userstream = 'student';
                 if($userdata == NULL){
                     $userdata = Teacher::find($id);
                     $userstream = 'teacher';
@@ -68,13 +115,35 @@
     $email = $user->email;
 
     // create some gravatarer object 
-    $gravatar = Gravatarer::user( $email )->size('120');
-
+   $url = Gravatarer::make( [
+        'email' => $email, 
+        'size' => 220, 
+        'defaultImage' => 'mm',
+        'rating' => 'g',
+    ])->url();
      // get gravatar <img> html code
-    $html = $gravatar->html();
-                   var_dump($html)
-?>
+    // $html = $gravatar->html();
+?>          <h3>
+Profile Picture
+</h3>   
+            <img alt="{{$email}}" class="pull-right" src="{{$url}}"/>
+                </div>
+                <div class="span12">
 
+        <div class="demo-container">
+            <div id="placeholder" class="demo-placeholder"></div>
+        </div>
+                    <h2>Statistics</h2>
+                    <div class="tabbable"> <!-- Only required for left/right tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1" data-toggle="tab">Assessments</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div id="chart_div" style="width:400; height:300"></div>
+                            </div>                          
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
