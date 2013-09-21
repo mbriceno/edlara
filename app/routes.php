@@ -15,7 +15,9 @@ require_once('viewcomposer.php');
 
 //Authencticating User with Controller
 Route::post('login',array('before' => 'csrf','uses' => 'UserController@authenticate'));
-
+Route::get('login',function(){
+    return View::make('account.login');
+});
 
 
 
