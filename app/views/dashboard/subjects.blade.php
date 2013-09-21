@@ -33,7 +33,7 @@
             </div>
 
         <div class="sortable pull-right">
-            <a href="/subject/edit/0">
+            <a href="/subject/edit/0/create" class="ajax-link">
              <span class="btn btn-primary">New</span>
             </a>
 
@@ -87,7 +87,7 @@
                         $admingroup = Sentry::findGroupByName('admin');
                         if ($cuser->inGroup($admingroup))
                         {
-                            echo '<a class="btn btn-danger" href="/subject/delete/'.$subject->id.'/">
+                            echo '<a class="btn btn-danger" href="/subject/edit/'.$subject->id.'/delete">
                                         <i class="icon-trash icon-white"></i> 
                                         Delete
                                     </a>';
