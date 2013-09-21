@@ -86,7 +86,7 @@ table {
                         $subjects = unserialize($ssubjects);
                         $truth = checkSubject($subjects,$tutorial->subjectid);
                         if($truth == 0){
-                            return Redirect::to(URL::previous());
+                            continue;
                         }
 
                         $subject = Subject::find($tutorial->subjectid);
