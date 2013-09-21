@@ -35,6 +35,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     }));
     
     Route::get('user/{id}/{mode}',array('before'=>'admin','uses'=>'UserController@manage'));
+    Route::post('user/{id}/update',array('before'=>'admin','uses'=>'UserController@update'));
 
     Route::get('tutorials',array('before'=>'teacher',function()
     {
