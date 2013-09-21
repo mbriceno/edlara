@@ -32,7 +32,9 @@ class SubjectController extends BaseController {
 					if($validator->fails()){
 						return Redirect::to(URL::previous());
 					}
-					return View::make('dashboard.subjects.view')->with('id',$id);				
+					return View::make('dashboard.subjects.view')->with('id',$id);	
+				case 'create':					
+					return View::make('dashboard.subjects.edit')->with('id',$id);			
 				default:
 					return "UNAUTHORISED METHOD";
 					break;
@@ -46,7 +48,7 @@ class SubjectController extends BaseController {
 				case 'create':
 					if($id == 0){
 					self::create();					
-					return Redirect::to(URL::previous());
+					return Redirect::to('/subjects');
 					}					
 					return Redirect::to(URL::previous());
 				default:
