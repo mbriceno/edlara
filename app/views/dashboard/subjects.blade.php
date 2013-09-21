@@ -33,7 +33,7 @@
             </div>
 
         <div class="sortable pull-right">
-            <a href="/subject/edit/0">
+            <a href="/subject/edit/0/create" class="ajax-link">
              <span class="btn btn-primary">New</span>
             </a>
 
