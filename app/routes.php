@@ -46,7 +46,9 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     {
         return View::make('dashboard.users');
     }));
+    
     Route::get('user/{id}/{mode}',array('before'=>'admin','uses'=>'UserController@manage'));
+
     Route::get('tutorials',array('before'=>'teacher',function()
     {
         return View::make('dashboard.tutorials');
