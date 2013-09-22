@@ -130,7 +130,7 @@
                         echo "</div></div>";
 
                         echo "<div>Choose Your Date of Birth</div>";
-                        echo "<input type='date' name=\"dob\"></input>";
+                        echo "<input id='dob' type='date' name=\"dob\"></input><br>";
 
                         $captcha_type = Setting::get('app.captcha');
                         if($captcha_type == "captcha"){
@@ -162,9 +162,8 @@
         @javascripts('bootstrap')
         @javascripts('grans')
         <script type="text/javascript">
-           $(document).ready(function(){
-            var validator =  $("#registration-form").validate({
-                rules: {
+           $("#registration-form").validate({                 
+                 rules: {
                     fname: {
                         required: true,
                         minlength:3
@@ -181,23 +180,26 @@
                         required: true,
                         minlength: 5
                     },
-                    actype:{
-                        required:true;
-                    }
-                    password:{
+                    actype: {
+                        required:true,
+                    },
+                    password: {
                         required: true,
                         minlength: 8,
                     },
-                    password_confirmation:{
+                    password_confirmation: {
                         required:true,
                         equalTo: "#password",
                         minlength:8,
-                    }
-                    ,
-                    captcha:{
+                    },
+                    captcha: {
                         required: true,
                         minlength:5,
                         maxlength:5
+                    },
+                    dob: {
+                        required:true,
+                        date:true
                     }
 
                 },
@@ -222,11 +224,18 @@
                         required: "Repeat your password",
                         minlength: jQuery.format("Enter at least {0} characters"),
                         equalTo: "Enter the same password as above"
+                    },
+                    dob:{
+                        required:"Your Date of Birth is required to provide proper services to you",
+                        date:"Please enter your Date of Birth in format of YYYY-MM-DD."
                     }
+                },
+                 submitHandler: function(form) {
+                    // do other things for a valid form
+                    form.submit();
                 }           
             });             
 
-           });
       
         </script>     
     </body>
