@@ -125,7 +125,7 @@
                         echo "<div>Choose your Subjects</div>";
                         foreach ($subjects as $subject){
                             echo Form::checkbox('subjects[]',$subject->id,NULL,array());
-                            echo $subject->subjectname.'<br>';
+                            echo 'Grade:'.$subject->grade.' '.$subject->subjectname.'<br>';
                         }
                         echo "</div></div>";
 
