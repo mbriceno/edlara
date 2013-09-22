@@ -23,6 +23,8 @@ class SettingsController extends BaseController{
 		 Setting::set('system.schooladdress',Input::get('schooladdress'));
 		 Setting::set('system.logo_src',Input::get('logo'));
 		 Setting::set('system.adminsitename',Input::get('adminsitename'));
+		 Setting::set('app.url',Input::get('url'));
+		 Setting::set('app.captcha',Input::get('captcha'));
 		return View::make('dashboard.settings');
 	}
 }
