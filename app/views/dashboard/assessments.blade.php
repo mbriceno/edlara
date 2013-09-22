@@ -53,6 +53,7 @@
                         $student = User::find($studentid);
                         $teacherid = $assessment->teacherid;
                         $teacher = User::find($teacherid);
+                        if(Sentry::getUser()->id == $teacherid){
                         echo "<tr>";
                         echo "<td>";
                         echo $assessment->id;
@@ -76,6 +77,7 @@
                         echo $student->first_name.' '.$student->last_name;
                         echo "</td>";
                         echo "</tr>";
+                        }
                     }
 
 
