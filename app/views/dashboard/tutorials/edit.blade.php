@@ -68,11 +68,9 @@ $tutorial = Tutorials::find($id);
                             echo Form::text("description",$tutorial->description,array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
                             
                             echo Form::label('subject','Subject',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            $subjects = Subject::all();
-                            $subjectlist = array();
-                            foreach ($subjects as $subject){
+
+                            $subject = Subject::find($tutorial->subjectid);
                                 $subjectlist[$subject->id] = $subject->subjectname;
-                            }
                             echo Form::select('subject',$subjectlist,$tutorial->subjectid,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
                             echo '
                             <div class="control-group" style="clear:left;">';
@@ -97,7 +95,7 @@ $tutorial = Tutorials::find($id);
 
 
                             echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            echo Form::file('attachment', array('class'=>"pull-right",'style'=>'clear:right;margin:20px;padding-top:10px;'));
+                            echo Form::file('attachment[]', array('class'=>"pull-right",'style'=>'clear:right;margin:20px;padding-top:10px;','multiple'=>'true'));
                             
                             echo "</fieldset>";
 

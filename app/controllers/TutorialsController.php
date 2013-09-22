@@ -28,8 +28,15 @@ class TutorialsController extends BaseController {
             } 
             else
             {              
+
+                if(Sentry::getUser()->inGroup(Sentry::findGroupByName('teachers'))){
                     $newid = self::createtutorial($id);
                     return Redirect::to('/tutorial/edit/'.$newid.''); 
+                }
+                Input::flash();
+                // Log::error(Input::get('subject'));
+
+                return Redirect::to('/tutorial/edit/'.$id.'')->withErrors($validator);
             }
         }
         else {
@@ -46,13 +53,18 @@ class TutorialsController extends BaseController {
             {         
                 Input::flash();
                 // Log::error(Input::get('subject'));
-                return Redirect::to('/tutorial/edit/'.$id.'')->withErrors($validator)->with('input',Input::all());
+
+                return Redirect::to('/tutorial/edit/'.$id.'')->withErrors($validator);
             } 
             else
             {       
-                self::updatetutorial($id);
+                $tutorialcheck = Tutorials::find($id);
+                if($tutorialcheck->createdby == Sentry::getUser()->id || Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
+                    self::updatetutorial($id);
+                    return Redirect::to('/tutorial/edit/'.$id.''); 
+                }
+                return Redirect::to(URL::previous());
                 // Log::error(Input::get('subject'));
-                return Redirect::to('/tutorial/edit/'.$id.''); 
             }
         }
     }
@@ -134,8 +146,6 @@ class TutorialsController extends BaseController {
         $tutorial->name         =   Input::get('title') ;
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
-        $tutorial->createdby    =   Sentry::getUser()->id;
-        $tutorial->subjectid    =   Input::get('subject');
         if(Input::get('published') == 'on'){
         $tutorial->published    =   1;
         }
@@ -145,8 +155,13 @@ class TutorialsController extends BaseController {
         }
         Log::error(Input::get('published'));
         if(Input::hasFile('attachment')){
-                    $name = Input::file('attachment')->getClientOriginalName();
-                   Input::file('attachment')->move(app_path().'/attachments/tutorial-'.$id.'/',$name);  
+            $files =  Input::file('attachment');
+            foreach($files as $file){
+                if($file){
+                $name = $file->getClientOriginalName();
+                $file->move(app_path().'/attachments/tutorial-'.$tutorial->id.'/',$name); 
+                }
+            }        
         }
         $tutorial->save();
     }
@@ -177,11 +192,14 @@ class TutorialsController extends BaseController {
         $tutorial->save();
         $newtutorial = DB::table('tutorials')->orderby('id','desc')->first();  
         if(Input::hasFile('attachment')){
-                    $name = Input::file('attachment')->getClientOriginalName();
-
-                    $newtutorial = DB::table('tutorials')->orderby('id','desc')->first();  
-                   Input::file('attachment')->move(app_path().'/attachments/tutorial-'.$newtutorial->id.'/',$name);                    
-        }    
+            $files =  Input::file('attachment');
+            foreach($files as $file){
+                if($file){
+                $name = $file->getClientOriginalName();
+                $file->move(app_path().'/attachments/tutorial-'.$newtutorial->id.'/',$name); 
+                }
+            }        
+        }  
         $newid = $newtutorial->id;
         return $newid;
     }

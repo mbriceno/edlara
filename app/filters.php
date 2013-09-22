@@ -176,7 +176,7 @@ Route::filter('student',function(){
             $admin = Sentry::findGroupByName('admin');
             $students = Sentry::findGroupByName('students');
             // Check if the user is in the administrator group
-            if ($usera->inGroup($admin) || $students->inGroup($students))
+            if ($usera->inGroup($admin) || $usera->inGroup($students))
             {
                 // User is in Administrator group
             }
