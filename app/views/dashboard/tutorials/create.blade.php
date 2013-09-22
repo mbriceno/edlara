@@ -81,8 +81,8 @@
                             if($groupname == 'teachers'){
                                 $user = Teacher::findOrFail($usere->id);
                             }
-                            elseif($groupname == 'students'){
-                                $user = Student::findOrFail($usere->id);
+                            elseif($groupname == 'admin'){
+                                $user = Teacher::findOrFail($usere->id);
                             }
     
                             // $user = Sentry::getUser();
@@ -115,10 +115,6 @@
                             echo '<div style="margin:20px;position:relative;padding-top:10px;"><input 
                             data-no-uniform="true" type="checkbox" '.$checked.' name="published" id="published" class="iphone-toggle"></div>';
 
-
-
-                            echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            echo Form::file('attachment[]', array('class'=>"pull-right",'style'=>'clear:right;margin:20px;padding-top:10px;','multiple'=>'true'));
                              
                             echo "</fieldset>";
                             echo Form::submit('Create',array('class'=>'btn btn-success','value'=>'submit'));
