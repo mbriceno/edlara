@@ -428,20 +428,25 @@ class UserController extends BaseController {
         if($validator->fails()){
             return Redirect::to(URL::previous())->withErrors($validator);
         }
+
+        //finding the user to change
         $user = Sentry::findUserById($id);
+        //getting the groups of changed user
         $usergroup =  $user->getGroups();
+        //decoding the JSON of the group as done before
         $usergroupe = json_decode($usergroup,true);
-        $usergroupe[0]['pivot']['group_id'];
+        //assigning the variable of group object        
         $group = Sentry::findGroupById($usergroupe[0]['pivot']['group_id']);
+        //assigning group name to a variable.
         $groupname = $group->name;
         if($groupname == 'teachers'){
-            $result = self::updateUser($id,$group->name);
+            $result = self::updateUser($user,$group->name);
         }
         elseif($groupname == 'students'){
-            $result = self::updateUser($id,$group->name);
+            $result = self::updateUser($user,$group->name);
         }
         elseif($groupname == 'admin'){
-            $result = self::updateUser($id,$group->name);
+            $result = self::updateUser($user,$group->name);
         }
 
         return Redirect::to('/users');
@@ -449,24 +454,38 @@ class UserController extends BaseController {
 
     private function updateUser($user,$group){
         $accountlevel = Input::get('accountlevel');
-        $user = Sentry::findUserById($user);
+        $useradminupgrade = array();
+        $useradminupgrade['enabled'] = 0;
+        $useradminupgrade['from']='teachers';
         switch ($group){
             case 'teachers':
+                if($accountlevel =='admin'){
+                    $useradminupgrade['enabled'] = 1;
+                    $useradminupgrade['from']='teachers';
+                    break;
+                }
                 $updateableuserid = $user->id;
-                $updateableuser = Teacher::find($user->id);
 
-
+                $user = User::find($user->id);
+                $updateableuser = Student::find($user->id);
+                $userstream = 'student';
+                if($updateableuser == NULL){
+                    $updateableuser = Teacher::find($user->id);
+                    $userstream = 'teacher';
+                }
 
                 $updateduser = self::setAccountLevel($accountlevel);
+
+
                 $updateduser->email = $updateableuser->email;
                 $updateduser->dob = $updateableuser->dob;
+                $updateduser->username = $updateableuser->username;
                 $updateableuser->extra = $updateableuser->extra;
                 $updateduser->user_id = $updateableuser->user_id;
 
-
-                $newuser = Sentry::findUserById($updateableuser->id);
+                $newuser = Sentry::findUserById($user->id);
                 $newusergroup = self::setUserGroup($accountlevel);
-                $oldusergroup = Sentry::findGroupByName($group);
+                $oldusergroup = Sentry::findGroupByName('teachers');
 
                 $newuser->removeGroup($oldusergroup);
                 $newuser->addGroup($newusergroup);
@@ -477,16 +496,31 @@ class UserController extends BaseController {
                 $updateableuser->delete();
                 break;
             case 'students':
+                if($accountlevel =='admin'){
+                    $useradminupgrade['enabled'] = 1;
+                    $useradminupgrade['from']='students';
+                    break;
+                }
                 $updateableuserid = $user->id;
+
+                $user = User::find($user->id);
                 $updateableuser = Student::find($user->id);
+                $userstream = 'student';
+                if($updateableuser == NULL){
+                    $updateableuser = Teacher::find($user->id);
+                    $userstream = 'teacher';
+                }
+
                 $updateduser = self::setAccountLevel($accountlevel);
+
+
                 $updateduser->email = $updateableuser->email;
                 $updateduser->dob = $updateableuser->dob;
+                $updateduser->username = $updateableuser->username;
                 $updateableuser->extra = $updateableuser->extra;
                 $updateduser->user_id = $updateableuser->user_id;
 
-
-                $newuser = Sentry::findUserById($updateableuser->id);
+                $newuser = Sentry::findUserById($user->id);
                 $newusergroup = self::setUserGroup($accountlevel);
                 $oldusergroup = Sentry::findGroupByName('students');
 
@@ -499,6 +533,10 @@ class UserController extends BaseController {
                 $updateableuser->delete();
                 break;
             case 'admin':
+                if($accountlevel =='admin'){
+                    $useradminupgrade['enabled'] = 1;
+                    $useradminupgrade['from']='admin';
+                }
                 $updateableuserid = $user->id;
 
                 $newuser = Sentry::findUserById($updateableuserid);
@@ -507,20 +545,39 @@ class UserController extends BaseController {
 
                 $newuser->removeGroup($oldusergroup);
                 $newuser->addGroup($newusergroup);
-
-                //Save NEW User
-                $updateduser->save();
-                //Delete OLD User
-                $updateableuser->delete();
                 break;
+
+        }
+        if($useradminupgrade['enabled']==1){
+            switch ($useradminupgrade['from']) {
+                case 'teachers':
+
+                    $updateableuserid = $user->id;
+                    $newuser = Sentry::findUserById($updateableuserid);
+                    $newusergroup = self::setUserGroup('admin');
+                    $oldusergroup = Sentry::findGroupByName('students');
+
+                    $newuser->removeGroup($oldusergroup);
+                    $newuser->addGroup($newusergroup);
+                    break;
+                case 'students':
+
+                    $updateableuserid = $user->id;
+                    $newuser = Sentry::findUserById($updateableuserid);
+                    $newusergroup = self::setUserGroup('admin');
+                    $oldusergroup = Sentry::findGroupByName('students');
+
+                    $newuser->removeGroup($oldusergroup);
+                    $newuser->addGroup($newusergroup);
+            }
         }
     }
     private function setAccountLevel($accountlevel){
         switch ($accountlevel){
             case 'teachers':
-                return new Teacher;
+                return new Teacher();
             case 'students':
-                return new Student;
+                return new Student();
         }
     }
 

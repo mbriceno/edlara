@@ -126,12 +126,18 @@ Route::filter('teacher',function(){
             // Get the current active/logged in user
             $usera = Sentry::getUser();
             // Find the Administrator group
-            $admin = Sentry::findGroupByName('teachers');
+            $teacher = Sentry::findGroupByName('teachers');
+            // Find the Administrator group
+            $admin = Sentry::findGroupByName('admin');
 
             // Check if the user is in the administrator group
-            if (!$usera->inGroup($admin))
+            if ($usera->inGroup($admin) || $usera->inGroup($teacher))
             {
                 // User is not in Administrator group
+                
+            }
+            else
+            {
                 return View::make('access.notauthorised');
             }
         }
@@ -167,10 +173,10 @@ Route::filter('student',function(){
             // Get the current active/logged in user
             $usera = Sentry::getUser();
             // Find the Administrator group
-            $admin = Sentry::findGroupByName('students');
-
+            $admin = Sentry::findGroupByName('admin');
+            $students = Sentry::findGroupByName('students');
             // Check if the user is in the administrator group
-            if ($usera->inGroup($admin))
+            if ($usera->inGroup($admin) || $students->inGroup($students))
             {
                 // User is in Administrator group
             }
