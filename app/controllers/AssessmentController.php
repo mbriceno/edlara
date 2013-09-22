@@ -48,7 +48,7 @@ class AssessmentController extends BaseController {
 		$assessment->studentid = Sentry::getUser()->id;
 		$assessment->save();
 		$newassessment = DB::table('assessments')->orderby('id','desc')->first();
-
+		$assessment = Assessments::find($newassessment->id);
 
         if(Input::hasFile('attachments')){
         	$files =  Input::file('attachments');
@@ -61,6 +61,23 @@ class AssessmentController extends BaseController {
         	}
     	
         }
+        $data = array();
+        $data['fname'] = User::find($assessment->studentid)->first_name;
+        $data['lname'] = User::find($assessment->studentid)->last_name;
+        $data['tutorial'] = Tutorials::find($assessment->tutorialid)->name;
+        $data['submittedby']= User::find($assessment->studentid)->first_name .' '.User::find($assessment->studentid)->last_name;
+        $data['submittedon']= $assessment->created_at;
+        Mail::send('emails.assessmentsubmit',$data,function($message) use ($assessment)
+                {
+                    
+                	$userid = $assessment->teacherid;
+                	$user = Sentry::findUserById($userid);
+                	$tutorial = Tutorials::find($assessment->tutorialid);
+                	$submittedby = User::find($assessment->studentid);
+
+                    $fullname = $user->first_name . ' '. $user->last_name;
+                    $message->to($user->getLogin(),$fullname)->subject('New Assessment Submitted by '.$submittedby->first_name.' '.$submittedby->last_name.' on Tutorial '.$tutorial->name);
+                });
 		// Input::file('attachment1')->move(app_path().'/attachments/assessment-'.$assessment->id.'/',$name);  
 
 		return View::make('site.assessment.update')->with('id',$newassessment->id)->nest('header','main.header');
