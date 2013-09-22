@@ -169,9 +169,12 @@ class AssessmentController extends BaseController {
 		if($validator->fails()){
 			return Redirect::to(URL::previous())->withErrors($validator);
 		}
-		$assessment->marks = Input::get('marks');
-		$assessment->result = Input::get('remarks');
-		$assessment->save();
+		$user = Sentry::getUser()->id;
+		if($user == $assessment->teacherid){
+			$assessment->marks = Input::get('marks');
+			$assessment->result = Input::get('remarks');
+			$assessment->save();
+		}
 		return Redirect::to(URL::previous());
 	}
 
