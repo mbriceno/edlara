@@ -29,7 +29,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 
     Route::post('settings',array('before'=>'admin','uses'=>'SettingsController@update'));    
 
-    Route::get('users',array('before'=>'teacher',function()
+    Route::get('users',array('before'=>'admin',function()
     {
         return View::make('dashboard.users');
     }));
