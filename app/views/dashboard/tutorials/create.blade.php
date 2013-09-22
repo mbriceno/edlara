@@ -61,11 +61,47 @@
                             echo Form::text("description","",array('placeholder'=>'Describe the Tutorial Here','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
 
                             echo Form::label('subject','Subject',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            $subjects = Subject::all();
-                            $subjectlist = array();
-                            foreach ($subjects as $subject){
-                                $subjectlist[$subject->id] = $subject->subjectname;
+
+
+                            $subjectsmodel = Subject::all();
+                            function checkSubject($subjects,$subject){
+                            foreach($subjects as $s){
+                                if($s == $subject){
+                                return 1;
+                                }
+                             }
+                            return 0;
                             }
+                            $usere = Sentry::getUser();
+                            $usergroup =  $usere->getGroups();
+                            $usergroupe = json_decode($usergroup,true);
+                            $usergroupe[0]['pivot']['group_id'];
+                            $group = Sentry::findGroupById($usergroupe[0]['pivot']['group_id']);
+                            $groupname = $group->name;
+                            if($groupname == 'teachers'){
+                                $user = Teacher::findOrFail($usere->id);
+                            }
+                            elseif($groupname == 'students'){
+                                $user = Student::findOrFail($usere->id);
+                            }
+    
+                            // $user = Sentry::getUser();
+                            // $student = Student::findOrFail($user->id);
+                            $ssubjects = $user->extra;
+                            $subjects = unserialize($ssubjects);
+                            $subjectlist = array();
+                            foreach ($subjectsmodel as $subject){
+                                $truth = checkSubject($subjects,$subject->id);
+                                if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('teachers'))){
+                                    $subjectlist[$subject->id] = $subject->subjectname;
+                                }
+                                
+                            }
+                            
+
+
+
+                            
                             echo Form::select('subject',$subjectlist,$subject->id,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
                             echo '
                             <div class="control-group" style="clear:left;">';
@@ -78,9 +114,12 @@
                                 $checked = '';
                             echo '<div style="margin:20px;position:relative;padding-top:10px;"><input 
                             data-no-uniform="true" type="checkbox" '.$checked.' name="published" id="published" class="iphone-toggle"></div>';
+
+
+
                             echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-                            echo Form::file('attachment', array('class'=>"pull-right",'style'=>'clear:right;margin:25px;'));
-                            
+                            echo Form::file('attachment[]', array('class'=>"pull-right",'style'=>'clear:right;margin:20px;padding-top:10px;','multiple'=>'true'));
+                             
                             echo "</fieldset>";
                             echo Form::submit('Create',array('class'=>'btn btn-success','value'=>'submit'));
                             echo '
