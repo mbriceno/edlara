@@ -66,7 +66,7 @@ table {
                     foreach ($tutorials as $tutorial){
                         if($tutorial->published == 1){
 
-
+                        if(Sentry::check()){
                         $usere = Sentry::getUser();
                         $usergroup =  $usere->getGroups();
                         $usergroupe = json_decode($usergroup,true);
@@ -88,7 +88,7 @@ table {
                         if($truth == 0){
                             continue;
                         }
-
+                    }
                         $subject = Subject::find($tutorial->subjectid);
                         $teacher = Teacher::find($tutorial->createdby);
                         $username = Sentry::findUserByLogin($teacher->email);

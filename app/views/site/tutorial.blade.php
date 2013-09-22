@@ -60,7 +60,35 @@
                         $tohash = 'tutorial-'.$tutorial->id;
                         $encrypted = Crypt::encrypt($tohash);
                         Session::put($tohash,$encrypted);
-                        echo "<a href='/assessment/submit/".$tutorial->id."/".$encrypted."' class='btn btn-info'>Submit a Assessment for this Tutorial</a>";
+                        function checkSubject($subjects,$subject){
+                            foreach($subjects as $s){
+                                if($s == $subject){
+                                return 1;
+                                }
+                            }
+                            return 0;
+                        }
+                        $usere = Sentry::getUser();
+                        $usergroup =  $usere->getGroups();
+                        $usergroupe = json_decode($usergroup,true);
+                        $usergroupe[0]['pivot']['group_id'];
+                        $group = Sentry::findGroupById($usergroupe[0]['pivot']['group_id']);
+                        $groupname = $group->name;
+                        if($groupname == 'teachers'){
+                            $user = Teacher::findOrFail($usere->id);
+                        }
+                        elseif($groupname == 'students'){
+                            $user = Student::findOrFail($usere->id);
+                        }
+
+                        // $user = Sentry::getUser();
+                        // $student = Student::findOrFail($user->id);
+                        $ssubjects = $user->extra;
+                        $subjects = unserialize($ssubjects);
+                        $truth = checkSubject($subjects,$tutorial->subjectid);
+                        if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('students'))){
+                            echo "<a href='/assessment/submit/".$tutorial->id."/".$encrypted."' class='btn btn-info'>Submit a Assessment for this Tutorial</a>";
+                        }
                         ?>
                     </div>
                     <br>&nbsp;<br>

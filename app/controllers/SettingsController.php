@@ -2,6 +2,10 @@
 
 
 class SettingsController extends BaseController{
+	function __construct(){ 
+		$this->beforeFilter('csrf', array('on' => 'update'));
+      	$this->beforeFilter('admin', array('on' => 'update'));
+	}
 	public function update(){
 		 $validator = Validator::make(Input::all(),array(
 		 	 'schoolname'=>'required|min:3|max:256'
@@ -19,6 +23,8 @@ class SettingsController extends BaseController{
 		 Setting::set('system.schooladdress',Input::get('schooladdress'));
 		 Setting::set('system.logo_src',Input::get('logo'));
 		 Setting::set('system.adminsitename',Input::get('adminsitename'));
+		 Setting::set('app.url',Input::get('url'));
+		 Setting::set('app.captcha',Input::get('captcha'));
 		return View::make('dashboard.settings');
 	}
 }
