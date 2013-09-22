@@ -31,8 +31,7 @@ class AssessmentController extends BaseController {
 			'related_tutorial'=>"required|unique:assessments,tutorialid,NULL,id,studentid,".$userid,
 			'submitted_to'=>'required',
 			'subject'=>'required',
-			'assessment_type'=>'required',
-			'attachments'=>'mimes:pdf,PDF,jpg,JPG,jpeg,JPEG,png,PNG,bmp,BMP,gif,GIF,doc,docx,odt,ppt,pptx'
+			'assessment_type'=>'required'
 			),$messages);
 		if($validator->fails()){
 			Input::flash();
@@ -100,8 +99,7 @@ class AssessmentController extends BaseController {
 			'related_tutorial'=>"required|exists:assessments,tutorialid,studentid,".$userid,
 			'submitted_to'=>'required',
 			'subject'=>'required',
-			'assessment_type'=>'required',
-			'attachments'=>'mimes:pdf,PDF,jpg,JPG,jpeg,JPEG,png,PNG,bmp,BMP,gif,GIF,doc,docx,odt,ppt,pptx',
+			'assessment_type'=>'required'
 			),$messages);
 		if($validator->fails()){
 			Input::flash();
