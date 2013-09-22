@@ -29,12 +29,13 @@ Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
 
     Route::post('settings',array('before'=>'admin','uses'=>'SettingsController@update'));    
 
-    Route::get('users',array('before'=>'teacher',function()
+    Route::get('users',array('before'=>'admin',function()
     {
         return View::make('dashboard.users');
     }));
     
     Route::get('user/{id}/{mode}',array('before'=>'admin','uses'=>'UserController@manage'));
+    Route::post('user/{id}/update',array('before'=>'admin','uses'=>'UserController@update'));
 
     Route::get('tutorials',array('before'=>'teacher',function()
     {

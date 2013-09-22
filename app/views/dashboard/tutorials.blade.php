@@ -60,6 +60,7 @@
                         $subject = Subject::find($tutorial->subjectid);
                         $teacher = Teacher::find($tutorial->createdby);
                         $username = Sentry::findUserByLogin($teacher->email);
+                        if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin')) || Sentry::getUser()->id == $tutorial->createdby){
                         echo "<tr>";
                         echo "<td>";
                         echo $tutorial->id;
@@ -106,7 +107,7 @@
                                         Delete
                                     </a>';
                         }
-                                    
+                        }
                         echo "</td>";
                         echo "</tr>";
                     }

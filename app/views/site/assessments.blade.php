@@ -58,9 +58,8 @@ table {
                 </thead>
                 <tbody>
                     <?php
-                    var_dump(Sentry::getUser()->id);
-                    $assessments = Assessments::where('studentid','=',1)->get();
 
+                    $assessments = Assessments::where('studentid','=',Sentry::getUser()->id)->get();
                     foreach ($assessments as $assessment){
 
                         $subjectid = $assessment->subjectid;
