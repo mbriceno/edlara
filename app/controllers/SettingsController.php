@@ -2,6 +2,10 @@
 
 
 class SettingsController extends BaseController{
+	function __construct(){ 
+		$this->beforeFilter('csrf', array('on' => 'update'));
+      	$this->beforeFilter('admin', array('on' => 'update'));
+	}
 	public function update(){
 		 $validator = Validator::make(Input::all(),array(
 		 	 'schoolname'=>'required|min:3|max:256'
