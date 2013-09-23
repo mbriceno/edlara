@@ -117,7 +117,7 @@
 
 
                         echo "<div class='span4'>";
-                        echo Form::select('actype', array('students' => 'Student', 'teachers' => 'Teacher'), 'S',array('class'=>'actype-reg-box','name'=>'actype'));
+                        echo Form::select('actype', array('students' => 'Student', 'teachers' => 'Teacher'), 'students',array('class'=>'actype-reg-box','name'=>'actype'));
                         echo "</div></div><br>* Required<br><br>";
 
                         echo "<div class='row-fluid'><div class='offset1 span6'>";

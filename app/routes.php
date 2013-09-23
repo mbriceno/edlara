@@ -212,7 +212,8 @@ Route::get('dash',function(){
 //Tutorials
 Route::get('/tutorial/{id}',array('uses'=>'TutorialsController@siteitemview'));
 Route::get('/tutorials',array('uses'=>'TutorialsController@sitelistview'));
-Route::get('tutorial/{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
+Route::get('tutorial-{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
+Route::get('tutorial-{id}/{attachmentname}/view',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentView'));
 
 
 //Assessments
@@ -242,8 +243,10 @@ Route::post('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentCo
 Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
 Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
 Route::post('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@update'));
+
 Route::get('/attachments/assessment-{id}/{filename}/download',array('before'=>'student','uses'=>'AssessmentController@download'));
 Route::get('/attachments/assessment-{id}/{filename}/delete',array('before'=>'student','uses'=>'AssessmentController@attachmentDelete'));
+Route::get('/attachments/assessment-{id}/{filename}/view',array('before'=>'student','uses'=>'AssessmentController@attachmentView'));
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {

@@ -118,6 +118,15 @@ table {
                                 $it = new RecursiveDirectoryIterator($folder);
                                 $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
                                 $n = 0;
+                                function viewMaker($id,$path,$filename){
+                                    $ext = pathinfo($path,PATHINFO_EXTENSION);
+                                    switch ($ext){
+                                        case 'jpg':
+                                            return "<a href='/attachments/assessment-".$id.'/'.$filename."/view/'>View</a>";
+                                        case 'JPG':
+                                            return "<a href='/attachments/assessment-".$id.'/'.$filename."/view/'>View</a>";
+                                    }
+                                }
                                 foreach ($files as $file) {
                                     if (is_file($file)) {
                                         $attachpath = app_path().'/attachments/assessment-'.$assessment->id.'/';
@@ -130,7 +139,9 @@ table {
                                              echo $filename;
                                              echo "</td>";
                                              echo "<td>";
-                                             echo "<a class='btn btn-small' href='/attachments/assessment-".$id.'/'.$filename."/download/'>Download</a><a class='btn btn-small btn-danger' href='/attachments/assessment-".$id.'/'.$filename."/delete/'>Delete</a>";
+                                             echo "<a class='btn btn-small' href='/attachments/assessment-".$id.'/'.$filename."/download/'>Download</a>";                 
+                                             echo viewMaker($id,$file,$filename);
+                                             echo "<a class='btn btn-small btn-danger' href='/attachments/assessment-".$id.'/'.$filename."/delete/'>Delete</a>";
                                              echo "</td>";
                                              echo "</tr>";
                                                 }
