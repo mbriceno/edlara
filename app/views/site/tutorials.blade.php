@@ -49,6 +49,7 @@ table {
                         <th>#ID</th>
                         <th>Title</th>
                         <th>Subject</th>
+                        <th>Grade</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,9 +80,13 @@ table {
                         elseif($groupname == 'students'){
                             $user = Student::findOrFail($usere->id);
                         }
+                        elseif($groupname == 'admin'){
 
-                        // $user = Sentry::getUser();
-                        // $student = Student::findOrFail($user->id);
+                         $userw = Sentry::getUser();
+                         $user = Teacher::findOrFail($userw->id);
+                        }
+
+
                         $ssubjects = $user->extra;
                         $subjects = unserialize($ssubjects);
                         $truth = checkSubject($subjects,$tutorial->subjectid);
@@ -101,7 +106,10 @@ table {
                         echo "</td>";
                         echo "<td>";
                         echo $subject->subjectname;
-                        echo "</td>";                     
+                        echo "</td>";
+                        echo "<td>";
+                        echo $subject->grade;
+                        echo "</td>";
                         echo "</tr>";
                         }
                     }
