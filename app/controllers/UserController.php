@@ -130,8 +130,8 @@ class UserController extends BaseController {
                 if($actype == 'students' || $actype == 'teachers'){
                 $group = Sentry::getGroupProvider()->findByName($actype);
 
-                $useract = \Sentry::getUserProvider()->findByLogin($email);
-                    if ($user->addGroup($group))
+                $useract = Sentry::getUserProvider()->findByLogin($email);
+                    if ($useract->addGroup($group))
                     {
                     // Group assigned successfully
                     }
