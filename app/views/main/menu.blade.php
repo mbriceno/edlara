@@ -14,7 +14,7 @@
                         <!-- .nav, .navbar-search, .navbar-form, etc -->
                     <ul class="nav">
                         <li class="active">
-                            <a href="/#top">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li>
                             <a href="/#gettingstarted">Getting Started</a>
@@ -64,6 +64,7 @@
                                 }
                                 else
                                 {
+                                    if(Sentry::getUser()->inGroup(Sentry::getGroupByName('teachers')) || Sentry::getUser()->inGroup(Sentry::getGroupByName('admin')))
                                     echo "<li><a href='/dash'>Dashboard</a><li>";
                                     echo "<li><a href='/logout'>Logout</a></li>";
                                 }
