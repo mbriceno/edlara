@@ -42,8 +42,7 @@ class TutorialsController extends BaseController {
             $validator = Validator::make(Input::all(),
                             array('title'=>'required|min:3|max:256',
                                   'description'=> 'required|max:1024',
-                                  'tutorial'=>'required',
-                                  'attachment'=>'mimes:jpeg,JPEG,jpg,JPG,PNG,png,bmp,BMP,gif,GIF,pdf,PDF'
+                                  'tutorial'=>'required'
                                 ));
             $messages = array(
                 'required' => 'The :attribute field is required.',
