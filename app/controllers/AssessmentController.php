@@ -150,6 +150,18 @@ class AssessmentController extends BaseController {
 			return "UNAUTHORISED DOWNLOAD";
 		}
 	}
+	public function attachmentView($id,$file){
+		$tutorial = Assessments::find($id);
+		$studentid = $tutorial->studentid;
+		$teacherid = $tutorial->teacherid;
+		if($studentid == Sentry::getUser()->id || $teacherid == Sentry::getUser()->id){
+			return View::make('site.attachment.assessment')->nest('header','main.header');
+		}
+		else
+		{
+			return "UNAUTHORISED VIEWING OF FILE";
+		}
+	}
 	public function attachmentDelete($id,$file){
 		$tutorial = Assessments::find($id);
 		$studentid = $tutorial->studentid;
