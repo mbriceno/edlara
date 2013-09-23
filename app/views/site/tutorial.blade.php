@@ -124,7 +124,8 @@
                                              echo $filename;
                                              echo "</td>";
                                              echo "<td>";
-                                             echo "<a class='btn btn-small' href='/tutorial/".$id.'/'.$filename."/download/'>Download</a>";
+                                             echo "<a class='btn btn-small' href='/tutorial-".$id.'/'.$filename."/download/'>Download</a>";
+                                             echo "<a class='btn btn-small btn-success' href='/tutorial-".$id.'/'.$filename."/view/'>View</a>";
                                              echo "</td>";
                                              echo "</tr>";
                                                 }
