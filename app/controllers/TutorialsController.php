@@ -102,6 +102,15 @@ class TutorialsController extends BaseController {
                 return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
         
     }
+    public function siteAttachmentView($id,$attachmentname){
+        $assessment = Assessments::find($id);
+        $attachpath = app_path().'/attachments/tutorial-'.$assessment->id.'/';
+        $fixpath = $attachpath.$attachmentname;
+        if(self::attachmentViewable($fixpath)){
+        return View::make('site.attachment.tutorial')->nest('header','main.header')->with('attachment',$attachmentname)->with('id',$id)->with('type',pathinfo($fixpath,PATHINFO_EXTENSION));
+        }
+        return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
+    }
     public function attachmentHandler($id,$attachmentname,$mode){
         $tutorial = Tutorials::find($id);
         switch ($mode) {
@@ -112,7 +121,17 @@ class TutorialsController extends BaseController {
                 return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
         }
     }
-
+    private function attachmentViewable($filepath){
+        //set a configuration value
+        $allowed = array('jpeg','JPEG','jpg','JPG','PNG','png','pdf','PDF','swf','SWF','HTML','html','css','CSS','php','PHP','GIF','gif','ini','INI');
+        $ext = pathinfo($filepath,PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     /*
      * Site
