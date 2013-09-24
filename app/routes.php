@@ -212,8 +212,8 @@ Route::get('dash',function(){
 //Tutorials
 Route::get('/tutorial/{id}',array('uses'=>'TutorialsController@siteitemview'));
 Route::get('/tutorials',array('uses'=>'TutorialsController@sitelistview'));
-Route::get('tutorial-{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
-Route::get('tutorial-{id}/{attachmentname}/view',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentView'));
+Route::get('/attachments/tutorial-{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
+Route::get('/attachments/tutorial-{id}/{attachmentname}/view',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentView'));
 
 
 //Assessments
