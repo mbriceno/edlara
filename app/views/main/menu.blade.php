@@ -64,7 +64,7 @@
                                 }
                                 else
                                 {
-                                    if(Sentry::getUser()->inGroup(Sentry::getGroupByName('teachers')) || Sentry::getUser()->inGroup(Sentry::getGroupByName('admin')))
+                                    if(Sentry::getUser()->inGroup(Sentry::findGroupByName('teachers')) || Sentry::getUser()->inGroup(Sentry::findGroupByName('admin')))
                                     echo "<li><a href='/dash'>Dashboard</a><li>";
                                     echo "<li><a href='/logout'>Logout</a></li>";
                                 }
