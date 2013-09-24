@@ -151,12 +151,15 @@ class AssessmentController extends BaseController {
 		}
 	}
 	public function attachmentView($id,$file){
+		$attachmentname = $file;
+        $attachpath = app_path().'/attachments/tutorial-'.$id.'/';
+        $fixpath = $attachpath.$attachmentname;
 		$tutorial = Assessments::find($id);
 		$studentid = $tutorial->studentid;
 		$teacherid = $tutorial->teacherid;
 		if($studentid == Sentry::getUser()->id || $teacherid == Sentry::getUser()->id){
-			return View::make('site.attachment.assessment')->nest('header','main.header');
-		}
+			return View::make('site.attachment.assessment')->nest('header','main.header')->with('attachment',$attachmentname)->with('id',$id)->with('type',pathinfo($fixpath,PATHINFO_EXTENSION));
+        }
 		else
 		{
 			return "UNAUTHORISED VIEWING OF FILE";
