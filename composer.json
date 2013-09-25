@@ -54,13 +54,13 @@
     },
     "scripts": {
         "pre-update-cmd": [
-            "php-cli artisan clear-compiled"
+            "php artisan clear-compiled"
         ],
         "post-install-cmd": [
-            "php-cli artisan optimize"
+            "php artisan optimize"
         ],
         "post-update-cmd": [
-            "php-cli artisan optimize"
+            "php artisan optimize"
         ]
     },
     "config": {
