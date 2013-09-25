@@ -163,6 +163,18 @@ class TutorialsController extends BaseController {
         $tutorial->name         =   Input::get('title') ;
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
+        $examt = array();
+        if(Input::get('examstruth') == 'on'){
+            $examt['true']=true;
+            $examt['id']=Input::get('exams',1);
+        }
+        else
+        {
+            $examt['true']=false;
+        }
+        $examt = serialize($examt);
+        $tutorial->exams = $examt;
+
         if(Input::get('published') == 'on'){
         $tutorial->published    =   1;
         }
