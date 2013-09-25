@@ -13,7 +13,6 @@ class ExampleTest extends TestCase {
 
 		$this->assertTrue($this->client->getResponse()->isOk());
 
-        $this->assertCount(1, $crawler->filter('title:contains("Edulara")'));
 	}
 
 }

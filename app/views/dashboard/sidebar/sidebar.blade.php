@@ -5,7 +5,8 @@
                         <li class="nav-header hidden-tablet">Main</li>
                         <li><a class="ajax-link" href="/"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
                         <li><a class="ajax-link" href="/tutorials"><i class="icon-edit"></i><span class="hidden-tablet"> Tutorials</span></a></li>      
-                        <li><a class="ajax-link" href="/assessments"><i class="icon-edit"></i><span class="hidden-tablet"> Assessments</span></a></li>                       
+                        <li><a class="ajax-link" href="/assessments"><i class="icon-edit"></i><span class="hidden-tablet"> Assessments</span></a></li> 
+                        <li><a class="ajax-link" href="/exams"><i class="icon-list-alt"></i><span class="hidden-tablet"> Exams</span></a></li>                       
                         <li><a class="ajax-link" href="/students"><i class="icon-user icon-blue"></i><span class="hidden-tablet">Students</span></a></li>
 
                         <?php

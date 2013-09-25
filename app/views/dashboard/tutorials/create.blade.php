@@ -20,7 +20,9 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-        
+                
+        <script src="/js/ckeditor/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -107,7 +109,7 @@
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
                             echo "<div class='controls'>";
-                            echo Form::textarea('tutorial',"",array('class'=>'cleditor pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
+                            echo Form::textarea('tutorial',"",array('class'=>'pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
                             echo '</div>';
                             echo '</div>';
                             echo Form::label('published','Published',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
@@ -145,7 +147,13 @@
         </footer>
         
     </div><!--/.fluid-container-->
-
+ <script>
+   window.onload = function() {
+        CKEDITOR.replace( 'tutorial' , {
+    uiColor: '#568432'
+});
+    };
+    </script>
     <!-- external javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

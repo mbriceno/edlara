@@ -91,6 +91,29 @@ Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
 
 
 
+    //Exams
+    Route::get('/exams',array('before'=>'teacher',function()
+    {
+        return View::make('dashboard.exams');
+    }));
+
+
+
+    Route::get('/exam/edit/{id}',array('before'=>'teacher',function ($id){
+        if(Exams::find($id)){
+            return View::make('dashboard.exams.edit')->with('id',$id);
+        }
+        return View::make('dashboard.exams.create')->with('id',0);
+    }));
+    Route::post('/exam/edit/0',array('before'=>'csrf|teacher','uses'=>'ExamController@createExam'));
+    
+    Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
+
+
+//Test
+    Route::get('/up',function(){
+        return serialize([1,2,3,4]);
+    });
 
     Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
     {
@@ -212,8 +235,8 @@ Route::get('dash',function(){
 //Tutorials
 Route::get('/tutorial/{id}',array('uses'=>'TutorialsController@siteitemview'));
 Route::get('/tutorials',array('uses'=>'TutorialsController@sitelistview'));
-Route::get('tutorial-{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
-Route::get('tutorial-{id}/{attachmentname}/view',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentView'));
+Route::get('/attachments/tutorial-{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
+Route::get('/attachments/tutorial-{id}/{attachmentname}/view',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentView'));
 
 
 //Assessments
@@ -247,6 +270,13 @@ Route::post('assessment/update/{id}',array( 'before'=>'student','uses'=>'Assessm
 Route::get('/attachments/assessment-{id}/{filename}/download',array('before'=>'student','uses'=>'AssessmentController@download'));
 Route::get('/attachments/assessment-{id}/{filename}/delete',array('before'=>'student','uses'=>'AssessmentController@attachmentDelete'));
 Route::get('/attachments/assessment-{id}/{filename}/view',array('before'=>'student','uses'=>'AssessmentController@attachmentView'));
+
+
+Route::get('/tutorial-{id}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@validateStudent'));
+Route::get('/tutorial-{id}/exam-{eid}',array('before'=>'student','uses'=>'ExamController@viewExam'));
+Route::post('/tutorial-{id}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
+Route::get('/tutorial-{id}/exam-{eid}/view/{hash}',array('before'=>'student','uses'=>'ExamController@doneExam'));
+
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
