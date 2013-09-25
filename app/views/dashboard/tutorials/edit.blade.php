@@ -26,6 +26,7 @@ $tutorial = Tutorials::find($id);
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
         
+        <script src="/js/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -76,7 +77,7 @@ $tutorial = Tutorials::find($id);
                             <div class="control-group" style="clear:left;">';
                             echo Form::label('tutorial',"Tutorial Content",array('class'=>'pull-left control-label','style'=>''));
                             echo "<div class='controls'>";
-                            echo Form::textarea('tutorial',$tutorial->content,array('class'=>'cleditor pull-right','rows'=>'3','placeholder'=>"Tutorial Explanation Here",'style'=>''));
+                            echo Form::textarea('tutorial',$tutorial->content,array('class'=>'span7','rows'=>'10','placeholder'=>"Tutorial Explanation Here",'style'=>''));
                             echo '</div>';
                             echo '</div>'; 
 
@@ -195,7 +196,14 @@ $tutorial = Tutorials::find($id);
         </footer>
         
     </div><!--/.fluid-container-->
-
+    <script>
+    window.onload = function() {
+        CKEDITOR.replace( 'tutorial' , {
+    toolbar: 'Basic',
+    uiColor: '#9AB8F3'
+});
+    };
+    </script>
     <!-- external javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

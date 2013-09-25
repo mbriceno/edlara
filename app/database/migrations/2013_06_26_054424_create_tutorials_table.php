@@ -22,12 +22,14 @@ class CreateTutorialsTable extends Migration {
             $table->integer('subjectid');
             $table->text('content');
             $table->integer('createdby');
+            $table->text('exams');
             $table->timestamps();            
             $table->softDeletes();
         });
 
         //Setting extra data to LongText to allow much data to be put in
         DB::statement('ALTER TABLE `tutorials` MODIFY `content` LONGTEXT;');
+        DB::statement('ALTER TABLE `tutorials` MODIFY `exams` LONGTEXT;');
     }
 
     /**
