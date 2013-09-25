@@ -240,3 +240,14 @@ View::composer('dashboard.exams.edit',function($view)
     $view->nest('noscript','dashboard.warnings.noscript');
     return $view;
 });
+View::composer('dashboard.exams.view',function($view)
+{
+    $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
+    $view->nest('topmenu','dashboard.menubar.menu');
+    $view->nest('sidebar','dashboard.sidebar.sidebar');
+    $view->nest('intro','dashboard.content.intro');
+    $view->nest('content','dashboard.content.index');
+    $view->nest('status','dashboard.status.statusbox');
+    $view->nest('noscript','dashboard.warnings.noscript');
+    return $view;
+});
