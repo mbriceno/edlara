@@ -120,6 +120,6 @@ return array(
 	|
 	*/
 
-	'domain' => "edlara.gnanakeethan.info",
+	'domain' => "laravel.dev",
 
 );
