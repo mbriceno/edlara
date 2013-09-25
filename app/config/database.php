@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'tamilre1_edlara',
-			'username'  => 'tamilre1_edlara',
-			'password'  => 'SnaH&COe?ddK',
+			'database'  => 'laravel',
+			'username'  => 'root',
+			'password'  => 'admin',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

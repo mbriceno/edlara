@@ -20,7 +20,7 @@ Route::get('login',function(){
 });
 
 //Dashboard Subdomain
-Route::group(array('domain' => 'dashboard.edlara.gnanakeethan.info'), function()
+Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 {     
     Route::get('settings',array('before'=>'admin',function()
     {
