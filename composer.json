@@ -64,7 +64,7 @@
         ]
     },
     "config": {
-        "bin-dir": "bin",
+        "bin-dir": "/usr/local/bin/",
         "preferred-install": "dist"
     },
     "minimum-stability": "dev"
