@@ -59,6 +59,7 @@
                         <?php
                         $tohash = 'tutorial-'.$tutorial->id;
                         $encrypted = Crypt::encrypt($tohash);
+                        $encryptionexam = Crypt::encrypt($tohash);
                         Session::put($tohash,$encrypted);
                         function checkSubject($subjects,$subject){
                             foreach($subjects as $s){
@@ -87,6 +88,7 @@
                         $subjects = unserialize($ssubjects);
                         $truth = checkSubject($subjects,$tutorial->subjectid);
                         if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('students'))){
+                            if($tutorial->exams['true'] == true){
                             echo "<a href='/assessment/submit/".$tutorial->id."/".$encrypted."' class='btn btn-info'>Submit a Assessment for this Tutorial</a>";
                         }
                         ?>
