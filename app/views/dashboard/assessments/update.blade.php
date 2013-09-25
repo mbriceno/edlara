@@ -78,8 +78,13 @@
                     echo Form::label('assessment_type','Assessment Type',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
                     $assessment_types = ['presentation'=>"Presentation",'document'=>'Documentation'];
                     echo Form::select('assessment_type',$assessment_types,'presentation',array('class'=>'pull-right disabled uneditable-input','style'=>'clear:right;margin:5px;height:30px;'));
+                    $tutorial = Tutorials::find($assessment->tutorialid);
+                    $examdata = unserialize($tutorial->exams);
+                    if($assessment->assessmenttype == 'exam'){
+                        echo "<a href='/assessment-".$assessment->id.'/exam-'.$examdata['id'].'/markup\' style="clear:right;margin:10px;" class="btn btn-success btn-small pull-right">MarkUp by Default Answers Provided</a>';
+                    }
                     echo Form::label('marks',"Marks",array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
-                    echo Form::text('marks',$assessment->marks,array('class'=>'pull-right','style'=>'clear:right;margin:5px;'));
+                    echo Form::text('marks',$assessment->marks,array('class'=>'pull-right','style'=>'clear:right;margin:5px;'));                    
                     echo Form::label('remarks','Results',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
                     echo Form::textarea('remarks',$assessment->result,array('class'=>'pull-right','style'=>'clear:right;margin:5px;'));
                     echo "</fieldset>";
