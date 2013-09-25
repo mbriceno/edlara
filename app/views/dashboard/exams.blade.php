@@ -67,7 +67,7 @@
                             echo Subject::find($exam->subjectid)->grade;
                             echo "</td>";
                             echo '<td class="center">
-                                    <a class="btn btn-success" href="/exam/view'.$exam->id.'/">
+                                    <a class="btn btn-success" href="/exam/view/'.$exam->id.'/">
                                         <i class="icon-zoom-in icon-white"></i>  
                                         View                                            
                                     </a>
@@ -85,7 +85,7 @@
                                         Delete
                                     </a>';
                         }
-                            echo "</tr>";
+                            echo "</td></tr>";
                         }
                     }
 

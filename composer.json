@@ -54,17 +54,17 @@
     },
     "scripts": {
         "pre-update-cmd": [
-            "php artisan clear-compiled"
+            "php-cli artisan clear-compiled"
         ],
         "post-install-cmd": [
-            "php artisan optimize"
+            "php-cli artisan optimize"
         ],
         "post-update-cmd": [
-            "php artisan optimize"
+            "php-cli artisan optimize"
         ]
     },
     "config": {
-        "bin-dir": "bin",
+        "bin-dir": "/usr/local/bin/",
         "preferred-install": "dist"
     },
     "minimum-stability": "dev"

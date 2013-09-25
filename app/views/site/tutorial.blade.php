@@ -59,6 +59,8 @@
                         <?php
                         $tohash = 'tutorial-'.$tutorial->id;
                         $encrypted = Crypt::encrypt($tohash);
+                        $encryptionexam = Crypt::encrypt($tohash);
+                        $exams = unserialize($tutorial->exams);
                         Session::put($tohash,$encrypted);
                         function checkSubject($subjects,$subject){
                             foreach($subjects as $s){
@@ -86,8 +88,14 @@
                         $ssubjects = $user->extra;
                         $subjects = unserialize($ssubjects);
                         $truth = checkSubject($subjects,$tutorial->subjectid);
-                        if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('students'))){
-                            echo "<a href='/assessment/submit/".$tutorial->id."/".$encrypted."' class='btn btn-info'>Submit a Assessment for this Tutorial</a>";
+                        $testcount = Assessments::whereRaw('`tutorialid` = ? and `studentid` = ?',[$tutorial->id,Sentry::getUser()->id])->count();
+                        if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('students')) && $testcount ==0){
+                            if($exams['true']){
+                                echo "<a href='/tutorial-".$tutorial->id."/exam-".$exams['id'].'/'.$encrypted."' class='btn btn-info btn-success'>Do Exam</a>";
+                            }
+                            else {
+                                echo "<a href='/assessment/submit/".$tutorial->id."/".$encrypted."' class='btn btn-info'>Submit a Assessment for this Tutorial</a>";
+                            }
                         }
                         ?>
                     </div>

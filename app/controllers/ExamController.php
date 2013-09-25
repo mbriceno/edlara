@@ -3,20 +3,100 @@
 class ExamController extends BaseController
 {
 
-	public function validateStudent($id,$hash){
+	public function validateStudent($id,$eid,$hash){
+        $tutorial =  Tutorials::findOrFail($id);
+                        $sessionvar = "tutorial-".$tutorial->id;
+                        $senc = Session::get($sessionvar);
+                        try
+                        {
+                        $decrypted = Crypt::decrypt($hash);
+                        }
+                        catch(Exception $e){
+                            //Catch Exception
+                        }
+
+                        if($senc == $hash && $decrypted == $sessionvar){
+                            Session::put('examid',$eid);
+                            Session::put('tutorialid',$id);
+                            return Redirect::to('/tutorial-'.$id.'/exam');
+                        }
+                        else
+                        {
+                            return "Unauthorised Access";
+                        }
 		return;
 	}
-	public function viewExam($id,$tid){
-		return;
+	public function viewExam($tid){
+		return View::make('site.exam.do')->nest('header','main.header')->with('id',$tid);
 	}
 	public function doneExam($id,$tid){
 		return;
 	}
-	public function markExam($id,$tid,$aid){
-		return;
+	public function markExam($aid,$eid){
+        $assessment = Assessments::find($aid);
+        $exam       = Exams::find($eid);
+        $tutorial   = Tutorials::find($assessment->tutorialid);
+        //APPLICATION LOGIC TO BE IMPLEMENTED
+		return Redirect::to(URL::previous());
 	}
-	public function doExam($id,$tid){
-		return;
+	public function doExam($tid,$eid,$hash){
+
+        $userid = Sentry::getUser()->id;
+        $decryptedhash = Crypt::decrypt($hash);
+        if($decryptedhash == 'tutorial-'.$tid){
+            Session::put('halt_tutorial_except',0);
+            Session::put('examid',0);
+            $validator = Validator::make(Input::all(),[
+                'related_tutorial'=>"required|unique:assessments,tutorialid,NULL,id,studentid,".$userid,
+                'submitted_to'=>'required|exists:users,id',
+                'subject'=>'required|exists:subjects,id',
+                ]);
+            if($validator->fails()){
+                return "EXAM PAPER HAS BEEN MODIFIED or SUBMITTED AGAIN.Click here to go to <a href='".Setting::get('app.url')."'>HOME PAGE</a>. ANSWERS NOT ACCEPTED.";
+            }
+            $tutorial = Tutorials::findOrFail($tid);
+            $exam = Exams::find($eid);
+            $data = array();
+
+            $assessment = new Assessments;
+            $assessment->title = $tutorial->name.' Exam For '.$exam->title;
+            $assessment->assessmenttype = "exam";
+            $assessment->tutorialid = $tid;
+            $assessment->studentid = Sentry::getUser()->id;
+            $assessment->teacherid = $tutorial->createdby;
+            $assessment->subjectid = $tutorial->subjectid;
+            $assessment->save();
+
+            $questions = $exam->totalquestions - 1;
+            $input = Input::all();
+            for($qc=1;$qc <= $questions;){
+                Session::put('checkboxcount',1);
+                $data['answers']['checkboxdata'][$qc][1]='';
+                $data['answers']['checkboxdata'][$qc][2]='';
+                $data['answers']['checkboxdata'][$qc][3]='';
+                $data['answers']['checkboxdata'][$qc][4]='';
+                foreach($input['checkbox_'.$qc] as $answer){
+                    // var_dump($answer);
+                    $qu = Session::get('checkboxcount',0);                    
+                    $data['answers']['checkboxdata'][$qc][$qu]=$answer;
+                    Session::put('checkboxcount',++$qu);
+                }
+                $qc++;
+            }
+
+            $answerdata = json_encode($data);
+            $nassessment = DB::table('assessments')->orderby('id','desc')->first();
+            $encryptedpath = 'questiondata';
+            // var_dump(app_path().'/files/assessment/'.$nassessment->id.'/exam-'.$tid.'/');
+            File::makeDirectory(app_path().'/files/assessment/'.$nassessment->id.'/exam-'.$eid ,0777,true);
+            file_put_contents(app_path().'/files/assessment/'.$nassessment->id.'/exam-'.$exam->id.'/'.$encryptedpath.'.json',$answerdata);
+            return Redirect::to('/');
+            // var_dump($decryptedhash);
+
+        }
+        else {
+            return "ACTION NOT AUTHORISED";
+        }
 	}
 	public function createExam(){
         $rules = array();

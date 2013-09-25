@@ -194,6 +194,21 @@ Route::filter('student',function(){
         }
     }  
 });
+
+
+Route::filter('block_tutorial',function(){
+    $session_tutorial = Session::get('halt_tutorial_except',0);
+    $session_exam = Session::get('examid',0);
+    if($session_exam){
+        return "SYSTEM RESOURCES ARE INACCESSIBLE WHILE DOING A EXAM";
+    }
+});
+
+Route::filter('exam_check',function(){
+    if(!Session::get('examid')){
+        return Redirect::to(URL::previous());
+    }
+});
 //TODO:create a filter
 
 Route::filter('stutea',function(){
