@@ -63,7 +63,7 @@ table {
                     echo Form::open(array('url' => '/assessment/update/'.$id,'method' => 'POST','class'=>'form-horizontal','files'=>'true'));
                     
                     echo Form::label('id','ID',array('class'=>'pull-left','style'=>'margin:10px;'));
-                    echo Form::text('id',$assessment->id,array('class'=>'pull-right disabled uneditable-input','style'=>'margin:5px;'));
+                    echo Form::text('id',$assessment->id,array('class'=>'pull-right disabled uneditable-input','style'=>'margin:5px;','disabled'));
                     echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
                     echo Form::text('title',$assessment->title,array('class'=>'pull-right','placeholder'=>'Title of the Assessment','style'=>'clear:right;margin:5px;'));
                     echo Form::label('description','Description',array('class'=>'pull-left','style'=>'margin:10px;clear:left;'));
@@ -87,17 +87,19 @@ table {
                     $subject = Subject::findOrFail($subjectid);
                     $subjectlist = [$subjectid => $subject->subjectname];
                     echo Form::select('subject',$subjectlist,$subjectid,array('class'=>'pull-right disabled uneditable-input','style'=>'clear:right;margin:5px;height:30px;'));
-                    echo Form::label('assessment_type','Assessment Type',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
+                    if(!$assessment->assessmenttype == 'exam'){
+                        echo Form::label('assessment_type','Assessment Type',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
                     $assessment_types = ['presentation'=>"Presentation",'document'=>'Documentation'];
                     echo Form::select('assessment_type',$assessment_types,'presentation',array('class'=>'pull-right','style'=>'clear:right;margin:5px;'));
+                    
                     echo Form::label('attachments','Attachments',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
                     echo Form::file('attachments[]',array('multiple'=>'true','class'=>'pull-right','style'=>'clear:right;margin:5px;'));
+                    }
                     echo Form::submit('Submit',array('class'=>' pull-left btn btn-success','value'=>'submit','style'=>'clear:both;'));
                     echo Form::close();
                     ?>
                 </div>
                 <div class='span3'>
-
                     <h4>Current Attachments</h4>
                         <table id="attachment" class="table table-striped table-bordered bootstrap-datatable datatable">
                                     <thead>
@@ -153,7 +155,7 @@ table {
 
                                     </tfoot>
                                 </table>
-                </div>
+                                                </div>
             </div>
         </div>
         {{-- Bootstrap JS Compiled --}}
