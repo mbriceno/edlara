@@ -109,6 +109,14 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     
     Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
 
+    Route::get('/exam/view/{id}',array('before'=>'teacher',function($id){
+        if(Exams::find($id)){
+            return View::make('dashboard.exams.view')->with('id',$id);
+        }
+        return View::make('dashboard.exams.create')->with('id',0);
+    }));
+
+    Route::get('/assessment-{aid}/exam-{eid}/markup',array('before'=>'teacher','uses'=>'ExamController@markExam'));
 
 //Test
     Route::get('/up',function(){
@@ -233,10 +241,10 @@ Route::get('dash',function(){
 
 
 //Tutorials
-Route::get('/tutorial/{id}',array('uses'=>'TutorialsController@siteitemview'));
-Route::get('/tutorials',array('uses'=>'TutorialsController@sitelistview'));
-Route::get('/attachments/tutorial-{id}/{attachmentname}/download',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentHandler'));
-Route::get('/attachments/tutorial-{id}/{attachmentname}/view',array('before'=>'student','uses'=>'TutorialsController@siteAttachmentView'));
+Route::get('/tutorial/{id}',array('before'=>'block_tutorial','uses'=>'TutorialsController@siteitemview'));
+Route::get('/tutorials',array('before'=>'block_tutorial','uses'=>'TutorialsController@sitelistview'));
+Route::get('/attachments/tutorial-{id}/{attachmentname}/download',array('before'=>'student|block_tutorial','uses'=>'TutorialsController@siteAttachmentHandler'));
+Route::get('/attachments/tutorial-{id}/{attachmentname}/view',array('before'=>'student|block_tutorial','uses'=>'TutorialsController@siteAttachmentView'));
 
 
 //Assessments
@@ -273,8 +281,8 @@ Route::get('/attachments/assessment-{id}/{filename}/view',array('before'=>'stude
 
 
 Route::get('/tutorial-{id}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@validateStudent'));
-Route::get('/tutorial-{id}/exam-{eid}',array('before'=>'student','uses'=>'ExamController@viewExam'));
-Route::post('/tutorial-{id}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
+Route::get('/tutorial-{id}/exam',array('before'=>'student|exam_check','uses'=>'ExamController@viewExam'));
+Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
 Route::get('/tutorial-{id}/exam-{eid}/view/{hash}',array('before'=>'student','uses'=>'ExamController@doneExam'));
 
 //HomePage Catcher
