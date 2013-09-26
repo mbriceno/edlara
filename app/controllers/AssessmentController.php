@@ -92,6 +92,9 @@ class AssessmentController extends BaseController {
 			'required'=>'The :attribute is Required'
 			);
 		$assessment = Assessments::find($id);
+		if($assessment->assessmenttype == 'exam'){
+			return Redirect::to(URL::previous());
+		}
 		$validator = Validator::make(Input::all(),array(
 			'id'=>'required',
 			'title'=>'required|max:128|min:5',
@@ -192,17 +195,22 @@ class AssessmentController extends BaseController {
 			'related_tutorial'=>"required|exists:assessments,tutorialid,studentid,".$userid,
 			'submitted_to'=>'required|exists:assessments,teacherid,id,'.$id,
 			'subject'=>'required|exists:assessments,subjectid,id,'.$id,
-			'assessment_type'=>'required|exists:assessments,assessmenttype,id,'.$id,
-			'marks'=>'required|integer|between:0,20',
+			'marks'=>'required|integer|between:0,100',
 			'remarks'=>'required|max:1024|min:4'
 			]);
 		if($validator->fails()){
 			return Redirect::to(URL::previous())->withErrors($validator);
 		}
+
 		$user = Sentry::getUser()->id;
 		if($user == $assessment->teacherid){
+			if($assessment->assessmenttype == 'exam'){
+			}
+			else
+			{				
 			$assessment->marks = Input::get('marks');
-			$assessment->result = Input::get('remarks');
+			}
+			$assessment->result = Input::get('remarks');			
 			$assessment->save();
 		}
 		return Redirect::to(URL::previous());
