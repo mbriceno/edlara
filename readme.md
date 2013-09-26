@@ -10,7 +10,7 @@ This Application has been developed for CODEFEST 2013.http://codefest.lk/
 	2. Make User as a Administrator.
 	3. User Registration Facility
 	4. User Password Reset Facility
-	
+
 2. Tutorial Management
 	1. Create Tutorial
 	2. Update Tutorial
@@ -31,6 +31,11 @@ This Application has been developed for CODEFEST 2013.http://codefest.lk/
 	5. Marks are automatically given by system via Stored Answers of the Exam on request.
 	6. Teacher cannot update marks for a Exam manually.
 	7. Teacher can give reviews on Exam Paper done by Student based on marks. Exam paper views are not incorporated into Assessment Pages.
+
+##Prerequisites  
+1. Apache 2.2.xx or 2.4.xx
+2. PHP 5.4.7 or Greater.(Composer Requires PHP 5.4.7)
+3. MySQL 5.6.xx 
 
 #Instructions for Windows PC
 
