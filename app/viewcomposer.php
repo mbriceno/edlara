@@ -1,4 +1,8 @@
 <?php
+View::composer('site.error.404',function($view){
+    $view->nest('header','main.header');
+    return $view;
+});
 View::composer('main.menu', function($view)
 {
     $view->nest('loginsnippet','account.loginsnippet');
@@ -241,6 +245,17 @@ View::composer('dashboard.exams.edit',function($view)
     return $view;
 });
 View::composer('dashboard.exams.view',function($view)
+{
+    $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
+    $view->nest('topmenu','dashboard.menubar.menu');
+    $view->nest('sidebar','dashboard.sidebar.sidebar');
+    $view->nest('intro','dashboard.content.intro');
+    $view->nest('content','dashboard.content.index');
+    $view->nest('status','dashboard.status.statusbox');
+    $view->nest('noscript','dashboard.warnings.noscript');
+    return $view;
+});
+View::composer('site.error.404dash',function($view)
 {
     $view->nest('breadcrumbs','dashboard.breadcrumbs.top');
     $view->nest('topmenu','dashboard.menubar.menu');
