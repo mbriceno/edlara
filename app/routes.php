@@ -287,3 +287,8 @@ Route::get('/',array('as'=>'home',function()
 {
     return View::make('home')->nest('header','main.header');
 }));
+
+App::missing(function($exception)
+{
+    return Response::view('site.error.404', array(), 404);
+});
