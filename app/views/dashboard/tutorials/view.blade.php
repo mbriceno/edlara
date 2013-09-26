@@ -10,6 +10,7 @@ $tutorial = Tutorials::find($id);
     <title>{{ Setting::get('system.adminsitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <base href="{{Setting::get('system.dashurl')}}"/>
     <!-- The styles -->
     <style type="text/css">      
     </style>
