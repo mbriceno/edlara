@@ -22,7 +22,7 @@ return array(
 
     "logo_src" => "img/logo.png",
 
-    "adminsitename" => "JHC - eLearning Admin"
+    "adminsitename" => "JHC - eLearning Admin",
 
-
+    "dashurl"=>"https://dashboard.laravel.dev"
 );

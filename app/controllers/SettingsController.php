@@ -12,7 +12,9 @@ class SettingsController extends BaseController{
 		 	,'schoolnameabbr'=>'required|alpha|min:2|max:10'
 		 	,'schooladdress'=>'required|min:4|max:512'
 		 	,'logo'=>'required'
-		 	,'adminsitename'=>'required|min:2|max:256'));
+		 	,'adminsitename'=>'required|min:2|max:256',
+		 	'systemurl'=>'required|url|active_url',
+		 	'url'=>'url|required'));
 		 if($validator->fails()){
 		 	Input::flash();
 			return Redirect::to('/settings')->withErrors($validator);
@@ -25,6 +27,7 @@ class SettingsController extends BaseController{
 		 Setting::set('system.adminsitename',Input::get('adminsitename'));
 		 Setting::set('app.url',Input::get('url'));
 		 Setting::set('app.captcha',Input::get('captcha'));
+		 Setting::set('system.dashurl',Input::get('systemurl'));
 		return View::make('dashboard.settings');
 	}
 }

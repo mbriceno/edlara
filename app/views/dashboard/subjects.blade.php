@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>{{ Setting::get('system.adminsitename') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="{{Setting::get('system.dashurl')}}"/>
 
     <!-- The styles -->
     <link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">

@@ -18,7 +18,6 @@ Route::post('login',array('before' => 'csrf','uses' => 'UserController@authentic
 Route::get('login',function(){
     return View::make('account.login');
 });
-
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev'), function()
 {     
