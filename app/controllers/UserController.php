@@ -314,7 +314,12 @@ class UserController extends BaseController {
                 return View::make('dashboard.user.view')->with('id',$id);
                 break;
             case 'edit':
+                if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
                 return View::make('dashboard.user.edit')->with('id',$id);
+                }
+                else {
+                    return "NOT AUTHORISED";
+                }
                 break;
             case 'delete':
                 $user = Sentry::getUser();
