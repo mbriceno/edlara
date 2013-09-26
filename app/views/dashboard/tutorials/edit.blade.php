@@ -103,6 +103,7 @@ $tutorial = Tutorials::find($id);
                             $exams = array();
                             foreach($possibleexams as $possibleexam){
                                 $exams[$possibleexam->id]=$possibleexam->title;
+                                $possibleexamid = $possibleexam->id;
                             }
                             $exame = $tutorial->exams;
                             $exame = unserialize($exame);
@@ -117,7 +118,7 @@ $tutorial = Tutorials::find($id);
                             echo '<div style="margin:20px;position:relative;padding-top:10px;"><input 
                             data-no-uniform="true" type="checkbox" '.$checked.' name="examstruth" id="examstruth" class="iphone-toggle"></div>';
                             echo Form::label('exams','Exams to Use',array('class'=>'pull-left','style'=>'clear:left;'));
-                            echo Form::select('exams',$exams,$possibleexam->id,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                            echo Form::select('exams',$exams,$possibleexamid,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
                             echo "</fieldset>";
 
                             echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit'));
