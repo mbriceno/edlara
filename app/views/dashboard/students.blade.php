@@ -39,6 +39,7 @@
                         <th>Last Name</th>
                         <th>Date of Birth</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,6 +69,11 @@
                                     echo "<span class='label label-failure'>Not Activated</span>";
                                 }
                                 echo "</td>";
+                    echo '<td class="center">
+                                    <a class="btn btn-success" href="/user/'.$user->id.'/view">
+                                        <i class="icon-zoom-in icon-white"></i>  
+                                        View                                            
+                                    </a></td>';
                                 
                     echo "</tr>";
                     

@@ -36,9 +36,112 @@ class ExamController extends BaseController
         $assessment = Assessments::find($aid);
         $exam       = Exams::find($eid);
         $tutorial   = Tutorials::find($assessment->tutorialid);
+
+
+        $questionpath = app_path().'/files/exam-'.$eid.'/'.$exam->hash.'.json';
+        $studentanswer = app_path().'/files/assessment/'.$aid.'/exam-'.$eid.'/questiondata.json';
+        $answers = File::get($questionpath);
+        $bystudent = File::get($studentanswer);
+        unset($studentanswer);
+
+        $realcount = $exam->totalquestions ;
+
+        // echo $answers;
+        // echo "<br><br><br><br><br><br><br>";
+        // echo $bystudent;
+        // echo json_decode($answers);
+        $json = json_decode($answers,true);
+        $markscount = 0;
+        $marksinc = 100/$realcount;
+        $studentanswer = json_decode($bystudent,true);
+        $questioncount = Session::put('questioncount_key',1);
+        // var_dump($studentanswer['answers'][2]);
+        // var_dump($json['questiondata']['question'][1]);
+        for($questioncount = 1; $questioncount <=$realcount;){
+            if($studentanswer['answers'][$questioncount][1]==0 || $studentanswer['answers'][$questioncount][1]=="0"){
+                //Adding 0 Marks if the Question Left Unanswered.
+                $markscount +=0;
+            }
+            else{
+                $ccount = 0;
+                $answerfromstudent = $studentanswer['answers'][$questioncount];
+                if(isset($json['questiondata']['question'][$questioncount]['answers'][0])){
+                    $ccount +=1;
+                    //Setting Simple Variable
+                    $a0=$json['questiondata']['question'][$questioncount]['answers'][0];
+
+                    $acception[] = self::checkAnswer($a0,$answerfromstudent);
+                }
+                if(isset($json['questiondata']['question'][$questioncount]['answers'][1])){
+                    $ccount +=1;
+                    // if()
+                    //Setting Simple Variable
+                    $a1=$json['questiondata']['question'][$questioncount]['answers'][1];
+
+
+                    $acception[] = self::checkAnswer($a1,$answerfromstudent);
+                }
+                if(isset($json['questiondata']['question'][$questioncount]['answers'][2])){
+                    $ccount +=1;
+
+                    //Setting Simple Variable
+                    $a2=$json['questiondata']['question'][$questioncount]['answers'][2];
+
+
+                    $acception[] = self::checkAnswer($a2,$answerfromstudent);
+                }
+                if(isset($json['questiondata']['question'][$questioncount]['answers'][3])){
+                    $ccount +=1;
+
+                    //Setting Simple Variable
+                    $a3=$json['questiondata']['question'][$questioncount]['answers'][3];
+
+
+                    $acception[] = self::checkAnswer($a3,$answerfromstudent);
+                }
+                if(isset($json['questiondata']['question'][$questioncount]['answers'][4])){
+                    $ccount +=1;
+
+                    //Setting Simple Variable
+                    $a4=$json['questiondata']['question'][$questioncount]['answers'][4];
+
+
+                    $acception[] = self::checkAnswer($a4,$answerfromstudent);
+                }
+                    // var_dump($acception);
+                    echo "<br><br><br>";
+                    $resulttt  = array_unique($acception);
+                    $counted =array_count_values($acception);
+                    // var_dump($resulttt);
+                     if($counted[1] == $ccount){
+                        $markscount +=$marksinc;
+                     }
+                    unset($acception);
+                // foreach($acception as $ac){
+                //     echo $ac;
+                // }
+            }
+        
+        $questioncount++;
+        }
+        $assessment->marks = $markscount;
+        $assessment->save();
+        // var_dump($json);
+
+
         //APPLICATION LOGIC TO BE IMPLEMENTED
 		return Redirect::to(URL::previous());
 	}
+    private function checkAnswer($questionanswer,$studentanswer){
+        if(in_array($questionanswer,$studentanswer))
+        {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+        return 0;
+    }
 	public function doExam($tid,$eid,$hash){
 
         $userid = Sentry::getUser()->id;
@@ -67,18 +170,18 @@ class ExamController extends BaseController
             $assessment->subjectid = $tutorial->subjectid;
             $assessment->save();
 
-            $questions = $exam->totalquestions - 1;
+            $questions = $exam->totalquestions;
             $input = Input::all();
             for($qc=1;$qc <= $questions;){
                 Session::put('checkboxcount',1);
-                $data['answers']['checkboxdata'][$qc][1]='';
-                $data['answers']['checkboxdata'][$qc][2]='';
-                $data['answers']['checkboxdata'][$qc][3]='';
-                $data['answers']['checkboxdata'][$qc][4]='';
+                $data['answers'][$qc][1]='';
+                $data['answers'][$qc][2]='';
+                $data['answers'][$qc][3]='';
+                $data['answers'][$qc][4]='';
                 foreach($input['checkbox_'.$qc] as $answer){
                     // var_dump($answer);
                     $qu = Session::get('checkboxcount',0);                    
-                    $data['answers']['checkboxdata'][$qc][$qu]=$answer;
+                    $data['answers'][$qc][$qu]=$answer;
                     Session::put('checkboxcount',++$qu);
                 }
                 $qc++;
@@ -260,7 +363,7 @@ class ExamController extends BaseController
         file_put_contents(app_path().'/files/exam-'.$exam->id.'/'.$encryptedpath.'.json',$encoded);
         
         $exam->hash = $encryptedpath;
-        $exam->totalquestions = $question;
+        $exam->totalquestions = Input::get('questioncount');
         $exam->save();
 		return $encoded;
 	}

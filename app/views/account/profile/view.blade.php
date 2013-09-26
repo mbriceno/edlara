@@ -23,29 +23,23 @@
       // Create the data table.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Assessments');
-      data.addColumn('number', 'Score');
+      data.addColumn('number', 'Marks or Score Gained at the Tutorial');
       <?php
-      $assessments  = Assessments::where('studentid', '=', $id)->get();
+ $assessments  =DB::select(DB::raw('SELECT `title`,`marks` FROM `assessments` WHERE (`created_at` >= CURDATE() - INTERVAL 12 MONTH )AND (`studentid` = '.$id.')'));;
       echo "data.addRows([";
         foreach($assessments as $assessment){
-            var_dump($assessment);
-      // echo "['".."',".."],";
+          // var_dump($assessment);
+      echo "['".$assessment->title."',".$assessment->marks."],";
   }
       echo "]);"
 
       ?>
-      data.addRows([
-        ['Janua', 3],
-        ['Onions', 1],
-        ['Olives', 1], 
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-      ]);
+     
 
       // Set chart options
-      var options = {'title':'How Much Pizza I Ate Last Night',
-                     'width':400,
-                     'height':300};
+      var options = {'title':'User Statistics over Past Exams and Assessments Submitted by Student',
+                     'width':800,
+                     'height':600};
 
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
