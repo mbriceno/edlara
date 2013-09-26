@@ -126,8 +126,6 @@ Route::group(array('domain' => 'dashboard.laravel.dev'), function()
     {
         return View::make('dashboard.index');
     }));    
-    
-
 })->before('auth');
 
 
