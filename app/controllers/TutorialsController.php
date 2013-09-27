@@ -174,7 +174,7 @@ class TutorialsController extends BaseController {
         }
         $examt = serialize($examt);
         $tutorial->exams = $examt;
-
+        unset($examt);
         if(Input::get('published') == 'on'){
         $tutorial->published    =   1;
         }
@@ -182,6 +182,7 @@ class TutorialsController extends BaseController {
         {
         $tutorial->published    =   0;
         }
+        Log::error(Input::get('examstruth'));
         Log::error(Input::get('published'));
         if(Input::hasFile('attachment')){
             $files =  Input::file('attachment');
@@ -203,7 +204,9 @@ class TutorialsController extends BaseController {
         $subjects = unserialize($ssubjects);
         $truth = self::subjectValidator($user->id,$subjects,Input::get('subject'));
         if($truth == 0){
-            return Redirect::to(URL::previous());
+            if(!Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){                
+                return Redirect::to(URL::previous());
+            }
         }
         $tutorial = new Tutorials;
         $tutorial->name         =   Input::get('title');
