@@ -61,7 +61,8 @@ $tutorial = Tutorials::find($id);
                         <div class="row-fluid">
                             <div class="span6">
                             <?php
-                            echo Form::open(array('url' => '/subject/edit/'.$id.'/create', 'method' => 'POST','class'=>'form-horizontal'));
+                            $subject = Subject::find($id);
+                            echo Form::open(array('url' => '/subject/edit/'.$id.'/update', 'method' => 'POST','class'=>'form-horizontal'));
 
                             echo "<fieldset>";
                             echo Form::label('id','id',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
@@ -70,15 +71,15 @@ $tutorial = Tutorials::find($id);
 
                             echo Form::label('name','Name',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-                            echo Form::text("name",'',array('placeholder'=>'Name of The Subject','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                            echo Form::text("name",$subject->subjectname,array('placeholder'=>'Name of The Subject','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
 
                             echo Form::label('code','Subject Code',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-                            echo Form::text("code",'',array('placeholder'=>'Short Code of the Subject to be used on Logs','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                            echo Form::text("code",$subject->subjectcode,array('placeholder'=>'Short Code of the Subject to be used on Logs','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
 
                             echo Form::label('grade','Grade',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-                            echo Form::text("grade",'',array('placeholder'=>'Grade of the Subject','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                            echo Form::text("grade",$subject->grade,array('placeholder'=>'Grade of the Subject','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
 
                             echo "</fieldset>";
                             echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit'));
