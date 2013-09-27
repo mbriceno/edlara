@@ -97,6 +97,9 @@
                                 if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('teachers'))){
                                     $subjectlist[$subject->id] = $subject->subjectname;
                                 }
+                                if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
+                                     $subjectlist[$subject->id] = $subject->subjectname .' Grade '.$subject->grade;
+                                }
                                 
                             }
                             

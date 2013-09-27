@@ -100,6 +100,7 @@
                                 echo Form::text('email',$user->email,array('class'=>'pull-right disabled','disabled'=>'','style'=>'margin:10px;'));
                                 echo Form::label('accountlevel','Account Level',array('class'=>'pull-left','style'=>'clear:left;padding:15px;'));
                                 echo Form::select('accountlevel',['students'=>'Student','teachers'=>'Teacher','admin'=>'Admin'],'student',array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+                                
                                 echo "</fieldset>";
                                 echo Form::submit('Save',array('class'=>'btn btn-success'));
                                 echo Form::close();

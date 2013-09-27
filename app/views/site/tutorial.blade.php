@@ -75,19 +75,21 @@
                         $usergroupe = json_decode($usergroup,true);
                         $usergroupe[0]['pivot']['group_id'];
                         $group = Sentry::findGroupById($usergroupe[0]['pivot']['group_id']);
+                        $truth =0;
                         $groupname = $group->name;
                         if($groupname == 'teachers'){
                             $user = Teacher::findOrFail($usere->id);
+                            $truth = checkSubject($subjects,$tutorial->subjectid);
                         }
                         elseif($groupname == 'students'){
                             $user = Student::findOrFail($usere->id);
+                            $truth = checkSubject($subjects,$tutorial->subjectid);
                         }
 
                         // $user = Sentry::getUser();
                         // $student = Student::findOrFail($user->id);
                         $ssubjects = $user->extra;
                         $subjects = unserialize($ssubjects);
-                        $truth = checkSubject($subjects,$tutorial->subjectid);
                         $testcount = Assessments::whereRaw('`tutorialid` = ? and `studentid` = ?',[$tutorial->id,Sentry::getUser()->id])->count();
                         if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('students')) && $testcount ==0){
                             if($exams['true']){
