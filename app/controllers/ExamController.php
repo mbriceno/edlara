@@ -278,7 +278,6 @@ class ExamController extends BaseController
         }
         // var_dump($data);
         $encoded = json_encode($data);
-        echo $encoded;
         $encryptedpath = Crypt::encrypt('questiondata');
         File::makeDirectory(app_path().'/files/exam-'.$newexam->id);
         file_put_contents(app_path().'/files/exam-'.$newexam->id.'/'.$encryptedpath.'.json',$encoded);
@@ -286,6 +285,8 @@ class ExamController extends BaseController
         $newexame->hash = $encryptedpath;
         $newexame->totalquestions = $question-1;
         $newexame->save();
+
+        return Redirect::to(URL::previous());
 	}
 	public function updateExam($id){
         $rules = array();
@@ -365,7 +366,7 @@ class ExamController extends BaseController
         $exam->hash = $encryptedpath;
         $exam->totalquestions = Input::get('questioncount');
         $exam->save();
-		return $encoded;
+		return Redirect::to(URL::previous());
 	}
 	private function prepareExam(){
 		return;
