@@ -3,26 +3,7 @@ $studentquery = DB::select(DB::raw('SELECT COUNT(`dob`) FROM `students` WHERE `c
 $userquery = DB::select(DB::raw('SELECT COUNT(`email`) FROM `users` WHERE `created_at` >= CURDATE() - INTERVAL 1 DAY'));
 $tutorialquery = DB::select(DB::raw('SELECT COUNT(`id`) FROM `tutorials` WHERE `created_at` >= CURDATE() - INTERVAL 1 DAY'));
 $assessmentquery = DB::select(DB::raw('SELECT COUNT(`id`) FROM `assessments` WHERE `created_at` >= CURDATE() - INTERVAL 1 DAY'));
-function objectToArray($d) {
-        if (is_object($d)) {
-            // Gets the properties of the given object
-            // with get_object_vars function
-            $d = get_object_vars($d);
-        }
- 
-        if (is_array($d)) {
-            /*
-            * Return array converted to object
-            * Using __FUNCTION__ (Magic constant)
-            * for recursive call
-            */
-            return array_map(__FUNCTION__, $d);
-        }
-        else {
-            // Return array
-            return $d;
-        }
-    }
+
 $stresult = objectToArray($studentquery);
 $usresult = objectToArray($userquery);
 $turesult = objectToArray($tutorialquery);
@@ -31,12 +12,10 @@ $asresult = objectToArray($assessmentquery);
 
 $todayusercount = $usresult[0]['COUNT(`email`)'];
 $usercountall = User::all()->count();
-$usercountall -= 1;
 
 
 $todaystudentcount = $stresult[0]['COUNT(`dob`)'];
 $studentcountall = Student::all()->count();
-$studentcountall -=1;
 
 
 $todaytutorialcount = $turesult[0]['COUNT(`id`)'];
