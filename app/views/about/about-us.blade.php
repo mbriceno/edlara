@@ -10,8 +10,9 @@
         {{ $header }}
         <div class='container-fluid'>
             <div class='row-fluid'>
-                <div class=span8>
-                	
+                <div class="span8 offset2">
+                	This is the e-Learning System for {{Setting::get('system.schoolname')}}
+                    thanks for visiting.
                 </div>
             </div>
         </div>

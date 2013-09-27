@@ -12,7 +12,7 @@
             <div class='row-fluid'>
                 <span class="offset2 span6">
                     <h2>500, Server Error.</h2>
-                    <p>A Problem has been encountered on our Servers. We will solve the problem. In the mean time our site's other functions are still unaffected. You can check them out from the menu bar above.</p>
+                    <p>A Problem has been encountered on our Servers. We will solve the problem. In the mean time our site's other functions are still unaffected. You can check them out from our home page. <a href="{{Setting::get('app.url')}}">HOME</a>.</p>
                 </span>
             </div>
         </div>
