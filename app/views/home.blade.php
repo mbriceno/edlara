@@ -10,9 +10,14 @@
         {{ $header }}
         <div class='container-fluid'>
             <div class='row-fluid'>
-                <div class=span4>
+                <div class="span8 offset2">
+                    <h2>Welcome to the e-Learning System of {{Setting::get('system.schoolname')}}.</h2>
+                    This website facilitate you to do online exams and learn interactively via Internet/Intranet.
                 </div>
             </div>
+        </div>
+        <div id='footer' class="pull-right" style="padding:20px;margin:20px;clear:right;">
+            {{Setting::get('system.schoolname')}} &copy; {{date('Y')}}
         </div>
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')

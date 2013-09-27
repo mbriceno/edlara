@@ -75,5 +75,9 @@
 			The page your are looking for is not found.
 			<br/><a href="/">Go Home</a><br/>
 		</div>
+		
+        <div id='footer' class="pull-right" style="padding:20px;margin:20px;clear:right;">
+            {{Setting::get('system.schoolname')}} &copy; {{date('Y')}}
+        </div>
 	</body>
 </html>

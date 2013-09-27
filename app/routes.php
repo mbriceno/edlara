@@ -286,6 +286,16 @@ Route::get('/tutorial-{id}/exam',array('before'=>'student|exam_check','uses'=>'E
 Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
 Route::get('/tutorial-{id}/exam-{eid}/view/{hash}',array('before'=>'student','uses'=>'ExamController@doneExam'));
 
+
+Route::get('/aboutus',function(){
+    return View::make('about.about-us')->nest('header','main.header');
+});
+Route::get('/about/tos',function(){
+    return View::make('about.terms-of-service')->nest('header','main.header');
+});
+Route::get('contactus',function(){
+    return View::make('about.contact-us')->nest('header','main.header');
+});
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
@@ -296,8 +306,8 @@ App::missing(function($exception)
 {
     return Response::view('site.error.404', array(), 404);
 });
-App::error(function(Exception $exception)
-{
-    Log::error($exception);
-    return Response::view('site.error.system',array(),500);
-});
+// App::error(function(Exception $exception)
+// {
+//     Log::error($exception);
+//     return Response::view('site.error.system',array(),500);
+// });
