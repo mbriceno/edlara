@@ -43,7 +43,7 @@ table {
         <div class='container-fluid'>
             <div class='row-fluid'>
                 <span class="span12">
-                <table id="example" class="table table-striped table-bordered bootstrap-datatable datatable">
+                <table id="tutorials" class="table table-striped table-bordered bootstrap-datatable datatable">
                    <thead>
                     <tr>
                         <th>#ID</th>
@@ -130,7 +130,7 @@ table {
             $('#navbar').scrollspy();
                 //datatable
                 $(document).ready(function() {
-    $('#example').dataTable({
+    $('#tutorials').dataTable({
                 "bJQueryUI": true,
         "sDom": "<'row'<'span4 offset1'l><'span4'f>r>t<'row'<'span4 offset1'i><'span4'p>>"
     });
