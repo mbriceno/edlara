@@ -45,6 +45,7 @@
                         <th>#ID</th>
                         <th>Title</th>
                         <th>Subject</th>
+                        <th>Grade</th>
                         <th>Created Date</th>
                         <th>Modified Date</th>
                         <th>Created By</th>
@@ -71,6 +72,9 @@
                         echo "</td>";
                         echo "<td>";
                         echo $subject->subjectname;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $subject->grade;
                         echo "</td>";
                         echo "<td>";
                         echo $tutorial->created_at;
