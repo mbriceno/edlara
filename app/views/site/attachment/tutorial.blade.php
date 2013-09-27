@@ -12,7 +12,7 @@
             <div class='row-fluid'>
                 <div class=span12>
                 	<?php
-                    var_dump($type);
+                    // var_dump($type);
                 	switch($type){
                 		case 'jpg':
                 			echo "<img src='".Setting::get('app.url')."tutorial-".$id."/".$attachment."/download/' height='auto' width='auto' />";
