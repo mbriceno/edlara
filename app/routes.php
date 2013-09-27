@@ -311,3 +311,8 @@ App::error(function(Exception $exception)
     Log::error($exception);
     return Response::view('site.error.system',array(),500);
 });
+App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
+{
+    Log::error($exception);
+    return Response::view('site.error.system',array(),500);
+});
