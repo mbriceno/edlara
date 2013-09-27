@@ -13,7 +13,7 @@ class SettingsController extends BaseController{
 		 	,'schooladdress'=>'required|min:4|max:512'
 		 	,'logo'=>'required'
 		 	,'adminsitename'=>'required|min:2|max:256',
-		 	'systemurl'=>'required|url|active_url',
+		 	'systemurl'=>'required|url',
 		 	'url'=>'url|required'));
 		 if($validator->fails()){
 		 	Input::flash();

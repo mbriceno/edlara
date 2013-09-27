@@ -296,8 +296,8 @@ App::missing(function($exception)
 {
     return Response::view('site.error.404', array(), 404);
 });
-// App::error(function(Exception $exception)
-// {
-//     Log::error($exception);
-//     return Response::view('site.error.system',array(),500);
-// });
+App::error(function(Exception $exception)
+{
+    Log::error($exception);
+    return Response::view('site.error.system',array(),500);
+});
