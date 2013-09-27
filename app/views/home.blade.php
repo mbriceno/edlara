@@ -10,7 +10,9 @@
         {{ $header }}
         <div class='container-fluid'>
             <div class='row-fluid'>
-                <div class=span4>
+                <div class="span8 offset2">
+                    <h2>Welcome to the e-Learning System of {{Setting::get('system.schoolname')}}.</h2>
+                    This website facilitate you to do online exams and learn interactively via Internet/Intranet.
                 </div>
             </div>
         </div>
