@@ -10,6 +10,55 @@
     <link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">
     <style type="text/css">      
     </style>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+   
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+     
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+
+      // Callback that creates and populates a data table, 
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Assessments');
+      data.addColumn('number', 'Marks or Score Gained at the Tutorial');
+      <?php
+ $assessments  =DB::select(DB::raw('SELECT `title`,`marks` FROM `assessments` WHERE (`created_at` >= CURDATE() - INTERVAL 12 MONTH )AND (`studentid` = '.$id.')'));;
+      echo "data.addRows([";
+        foreach($assessments as $assessment){
+          // var_dump($assessment);
+      echo "['".$assessment->title."',".$assessment->marks."],";
+  }
+      echo "]);"
+
+      ?>
+     
+
+      // Set chart options
+      var options = {'title':'User Statistics over Past Exams and Assessments Submitted by Student',
+                     'width':800,
+                     'height':600};
+
+      // Instantiate and draw our chart, passing in some options.
+      function selectHandler() {
+          var selectedItem = chart.getSelection()[0];
+          if (selectedItem) {
+            var topping = data.getValue(selectedItem.row, 0);
+            alert('The user selected ' + topping);
+          }
+        }
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
     @stylesheets('dashboard')
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -79,7 +128,23 @@
                     </div>
                 </div>
             </div>
+<div class="span12">
 
+    <div class="demo-container">
+      <div id="placeholder" class="demo-placeholder"></div>
+    </div>
+                  <h2>Statistics</h2>
+                  <div class="tabbable"> <!-- Only required for left/right tabs -->
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">Assessments</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                  <div id="chart_div" style="width:400; height:300"></div>
+                </div>                
+              </div>
+            </div>
+                </div>
             <!-- content ends -->
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->
