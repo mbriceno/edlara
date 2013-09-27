@@ -12,27 +12,20 @@
 
                 <div class="nav-collapse collapse">
                         <!-- .nav, .navbar-search, .navbar-form, etc -->
-                    <ul class="nav">
+                    <ul class="nav pull-right">
                         <li class="active">
                             <a href="/">Home</a>
                         </li>
                         <li>
-                            <a href="/#gettingstarted">Getting Started</a>
-                        </li>
-                        <li>
-                            <a href="/#aboutus">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/#contactus">Contact Us</a>
-                        </li>
-                        <li>
                             <a href="/tutorials">Tutorials</a>
                         </li>
-                    </ul>
-                    <ul class="nav pull-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assessments<b class="caret"></b></a>
+                            <?php
+                            if(Sentry::check()){
+                             ?>
                             <ul class="dropdown-menu">
+
                                 <li>
                                     <a href="/assessment/submit">Submit a Assessment</a>
                                 </li>
@@ -40,6 +33,7 @@
                                     <a href="/assessment/update">Update a submitted Assessment</a>
                                 </li>
                             </ul>
+                            <?php } ?>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -72,6 +66,25 @@
                             ?>      
                         </ul>
                     </li>
+                    <li class="dropdown">
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">INFO<b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+
+                                <li>
+                            <a href="/aboutus">About Us</a>
+                                    
+                                </li>
+                                <li>
+                            <a href="about/tos">Terms of Service &amp; Privacy Policy</a>
+                                    
+                                </li>
+                                
+                                <li>
+                            <a href="/contactus">Contact Us</a>
+                                    
+                                </li>
+                            </ul>
+                        </li>
                 </ul>
             </div>
         </div>

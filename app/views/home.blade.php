@@ -16,6 +16,9 @@
                 </div>
             </div>
         </div>
+        <div id='footer' class="pull-right" style="padding:20px;margin:20px;clear:right;">
+            {{Setting::get('system.schoolname')}} &copy; {{date('Y')}}
+        </div>
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')
         @javascripts('grans')
