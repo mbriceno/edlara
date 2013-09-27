@@ -103,7 +103,7 @@ class TutorialsController extends BaseController {
         
     }
     public function siteAttachmentView($id,$attachmentname){
-        $assessment = Assessments::find($id);
+        $assessment = Tutorials::find($id);
         $attachpath = app_path().'/attachments/tutorial-'.$assessment->id.'/';
         $fixpath = $attachpath.$attachmentname;
         if(self::attachmentViewable($fixpath)){
@@ -123,7 +123,7 @@ class TutorialsController extends BaseController {
     }
     private function attachmentViewable($filepath){
         //set a configuration value
-        $allowed = array('jpeg','JPEG','jpg','JPG','PNG','png','pdf','PDF','swf','SWF','HTML','html','css','CSS','php','PHP','GIF','gif','ini','INI');
+        $allowed = array('jpeg','JPEG','jpg','JPG','PNG','png','pdf','PDF','GIF','gif');
         $ext = pathinfo($filepath,PATHINFO_EXTENSION);
         if(in_array($ext,$allowed)){
             return true;
