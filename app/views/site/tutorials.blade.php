@@ -90,9 +90,10 @@ table {
                         $ssubjects = $user->extra;
                         $subjects = unserialize($ssubjects);
                         $truth = checkSubject($subjects,$tutorial->subjectid);
-                        if($truth == 0){
+                        if($truth == 0 && !Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
                             continue;
                         }
+                        
                     }
                         $subject = Subject::find($tutorial->subjectid);
                         $teacher = Teacher::find($tutorial->createdby);
