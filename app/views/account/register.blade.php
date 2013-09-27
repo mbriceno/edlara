@@ -123,10 +123,21 @@
                         echo "<div class='row-fluid'><div class='offset1 span6'>";
                         $subjects = Subject::all();
                         echo "<div>Choose your Subjects</div>";
+                        echo '<table id="subjects" class="table table-striped table-bordered bootstrap-datatable datatable">';
+                        echo "<thead><tr><th>Selection</th><th>Grade</th><th>Subject Name</th></tr></thead>";
+                        echo "<tbody>";
                         foreach ($subjects as $subject){
+                            echo "<tr>";
+                            echo "<td>";
                             echo Form::checkbox('subjects[]',$subject->id,NULL,array());
-                            echo 'Grade:'.$subject->grade.' '.$subject->subjectname.'<br>';
+                            echo "</td>";
+                            echo "<td>";
+                            echo $subject->grade.'</td><td>'.$subject->subjectname.'<br>';
+                            echo "</td>";
+                            echo "</tr>";
                         }
+                        echo "</tbody>";
+                        echo "</table>";
                         echo "</div></div>";
 
                         echo "<div>Choose Your Date of Birth</div>";
@@ -237,6 +248,18 @@
             });             
 
       
-        </script>     
+        </script>    
+    <script src='/js/jquery.dataTables.min.js'></script>
+        <script type="text/javascript">
+            $('#navbar').scrollspy();
+                //datatable
+                $(document).ready(function() {
+    $('#subjects').dataTable({
+        "sDom": "<'row'<'span4 offset1'l><'span4'f>r>t<'row'<'span4 offset1'i><'span4'p>>"
+    });
+
+} );
+   
+        </script> 
     </body>
 </html>                

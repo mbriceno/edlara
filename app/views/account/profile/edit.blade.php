@@ -34,14 +34,6 @@
       echo "]);"
 
       ?>
-      data.addRows([
-        ['Janua', 3],
-        ['Onions', 1],
-        ['Olives', 1], 
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-      ]);
-
       // Set chart options
       var options = {'title':'User Statistics over Past Exams and Assessments Submitted by Student',
                      'width':800,
