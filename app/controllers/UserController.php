@@ -484,7 +484,6 @@ class UserController extends BaseController {
 
                 $updateduser->email = $updateableuser->email;
                 $updateduser->dob = $updateableuser->dob;
-                $updateduser->username = $updateableuser->username;
                 $updateableuser->extra = $updateableuser->extra;
                 $updateduser->user_id = $updateableuser->user_id;
 
@@ -521,7 +520,6 @@ class UserController extends BaseController {
 
                 $updateduser->email = $updateableuser->email;
                 $updateduser->dob = $updateableuser->dob;
-                $updateduser->username = $updateableuser->username;
                 $updateableuser->extra = $updateableuser->extra;
                 $updateduser->user_id = $updateableuser->user_id;
 
