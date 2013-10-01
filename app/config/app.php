@@ -133,9 +133,10 @@ return array(
         		'Greggilbert\Recaptcha\RecaptchaServiceProvider',
         		'Grans\Uservalidator\UservalidatorServiceProvider',
         		'Grans\Checkboxcaptcha\CheckboxcaptchaServiceProvider',
-				'Juy\Profiler\Providers\ProfilerServiceProvider',
 				'Artdarek\Gravatarer\GravatarerServiceProvider',
 				'Philf\Setting\SettingServiceProvider',
+				'Teepluss\Theme\ThemeServiceProvider',
+
 
 
 
@@ -207,7 +208,7 @@ return array(
         'Basset'          => 'Basset\Facade',           
         'Basset' => 'Basset\Facade',        
         'Captcha' => 'Mews\Captcha\Facades\Captcha',
-        'Profiler'      => 'Juy\Profiler\Facades\Profiler',
+        'Theme' => 'Teepluss\Theme\Facades\Theme'
 	),
 
 );
