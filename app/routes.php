@@ -32,6 +32,18 @@ Route::group(array('domain' => 'api.laravel.dev'),function(){
 
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
+
+    Route::get('/newdash',array('before'=>'admin',function(){
+        $theme = Theme::uses('dashboard')->layout('default');
+
+        $view = array(
+            'name' => 'Dashboard'
+        );
+
+        // home.index will look up the path 'app/views/home/index.php'
+        return $theme->scope('home', $view)->render();
+    }));
+
     Route::get('settings', array('before'=>'admin',function () {
         return View::make('dashboard.settings');
     }));
