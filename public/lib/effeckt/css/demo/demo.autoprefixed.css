@@ -1,11 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Kite+One);
 
-* {
-  margin: 0;
-  padding: 0;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
 .warning {
   position: fixed;
@@ -53,7 +47,6 @@ body {
 body {
   background: #eeeeee;
   font-family: Sans-serif;
-  overflow: hidden;
 }
 
 @media (max-width: 500px) {

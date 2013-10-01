@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>JHCSS Admin Template</title>
+        <title>{{Theme::place('title')}}</title>
         <meta name="description" content="HTML5 Admin Template">
         <meta name="author" content="Gnanakeethan Balasubramaniam">
 
@@ -10,7 +10,6 @@
         <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap-cerulean.min.css">
 
         <link rel="stylesheet" type="text/css" href="/lib/system/main.css">
-        <link rel="stylesheet" href="/lib/effeckt/css/demo/demo.autoprefixed.css">
         <link rel="stylesheet" href="/lib/effeckt/css/effeckt.autoprefixed.css">
 
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
@@ -35,20 +34,20 @@
         </ul>
         <ul class="nav navbar-nav pull-right">
             <li class='user'>
-            <div class="btn-group">
-              <button type="button" class="btn"><i class="glyphicon glyphicon-user"></i> John Doe</button>
-              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </div>
-            <li>
+                <div class="btn-group">
+                    <button type="button" class="btn">
+                        <i class="glyphicon glyphicon-user"></i> John Doe
+                    </button>
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>           
         <form action="/" class="navbar-form navbar-right" role="search">
           <div class="form-group">
@@ -60,28 +59,21 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                <div class="well sidebar-nav">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="nav-header hidden-tablet">Main</li>
-                    <li class="active"><a href="#"><i class="glyphicon glyphicon-user"></i> Test</a></li>
-                    <li class=""><a href="#"><i class="glyphicon glyphicon-user"></i> Test</a></li>
-                    <li class=""><a href="#"><i class="glyphicon glyphicon-user"></i> Test</a></li>
-                    <li class=""><a href="#"><i class="glyphicon glyphicon-user"></i> Test</a></li>
-                    <li class=""><a href="#"><i class="glyphicon glyphicon-user"></i> Test</a></li>
-                </ul>
-                </div>
+
+            <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+
+                    {{Theme::breadcrumb()->render()}}
             </div>
-            <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                <ol class="breadcrumb">
-                    <li><a href="#">Dashboard</a></li>
-                </ol>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                   {{ Theme::widget('sidebar')->render()}}
             </div>
-            <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+            <div class="col-sm-9 col-md-9 col-lg-9 hidden-xs">
+
+                    {{Theme::breadcrumb()->render()}}
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
                 <div class="container">
-                    <div class="row">
-                   
-                    </div>
+                        {{Theme::place('content')}}
                 </div>
             </div>
         </div>
@@ -91,9 +83,17 @@
     
     <!-- libs -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
     <script>window.jQuery || document.write('<script src="/lib/js/effeckt/libs/jquery-2.0.3.min.js"><\/script>')</script>
-
+<script type="text/javascript">
+   $(document).ready(function(){
+    $('li a').each(function(index) {
+        if(this.href.trim() == window.location)
+            $(this).parent().addClass("active");
+    });
+});
+</script>
     <!-- demo -->
     <script src="/lib/effeckt/js/demo/demo.js"></script>
 
@@ -113,6 +113,8 @@
     <!-- ideally should kick this off in the demo js file itself -->
     <script>
       stroll.bind('.effeckt-demo-list-scroll ul');
+      
+      
     </script>
     </body>
 

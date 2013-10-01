@@ -33,19 +33,32 @@ Route::group(array('domain' => 'api.laravel.dev'),function(){
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
 
-    Route::get('/newdash',array('before'=>'admin',function(){
+    Route::get('/',array('before'=>'admin',function(){
+
         $theme = Theme::uses('dashboard')->layout('default');
 
         $view = array(
-            'name' => 'Dashboard'
+            'name' => 'Dashboard Home'
         );
-
-        // home.index will look up the path 'app/views/home/index.php'
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')]
+        ]);
+        // Session::flush('activedash');
         return $theme->scope('home', $view)->render();
     }));
 
     Route::get('settings', array('before'=>'admin',function () {
-        return View::make('dashboard.settings');
+        $theme = Theme::uses('dashboard')->layout('default');
+
+        $view = array(
+            'name' => 'Dashboard Settings'
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl').'/settings']
+        ]);
+        // Session::flush('activedash');
+        return $theme->scope('settings', $view)->render();
     }));
 
     Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));

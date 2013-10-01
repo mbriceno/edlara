@@ -36,19 +36,19 @@ return array(
         'before' => function($theme)
         {
             // You can remove this line anytime.
-            $theme->setTitle('Copyright ©  2013 - Laravel.in.th');
+            $theme->setTitle(Setting::get('system.schoolname'));
 
             // Breadcrumb template.
             $theme->breadcrumb()->setTemplate('
-                <ul class="breadcrumb">
+                <ol class="breadcrumb">
                 @foreach ($crumbs as $i => $crumb)
                     @if ($i != (count($crumbs) - 1))
-                    <li><a href="{{ $crumb["url"] }}">{{ $crumb["label"] }}</a><span class="divider">/</span></li>
+                    <li><a href="{{ $crumb["url"] }}">{{ $crumb["label"] }}</a></li>
                     @else
                     <li class="active">{{ $crumb["label"] }}</li>
                     @endif
                 @endforeach
-                </ul>
+                </ol>
             ');
         },
 
@@ -58,16 +58,6 @@ return array(
         'beforeRenderTheme' => function($theme)
         {
             
-            // You may use this event to set up your assets.
-            // $theme->asset()->usePath()->add('core', 'core.js');
-            // $theme->asset()->add('jquery', 'vendor/jquery/jquery.min.js');
-            // $theme->asset()->add('jquery-ui', 'vendor/jqueryui/jquery-ui.min.js', array('jquery'));
-
-            // Partial composer.
-            // $theme->partialComposer('header', function($view)
-            // {
-            //     $view->with('auth', Auth::user());
-            // });
         },
 
         // Listen on event before render a layout,
