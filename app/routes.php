@@ -14,36 +14,44 @@ require_once('viewcomposer.php');
 
 
 //Authencticating User with Controller
-Route::post('login',array('before' => 'csrf','uses' => 'UserController@authenticate'));
-Route::get('login',function(){
+Route::post('login', array('before' => 'csrf','uses' => 'UserController@authenticate'));
+Route::get('login', function () {
     return View::make('account.login');
 });
+
+
+
+//API Subdomain
+Route::group(array('domain' => 'api.laravel.dev'),function(){
+    Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
+    // Route::get('/',array('before'=>'api_check','uses'=>'ApiController@start'));
+});
+
+
+
+
 //Dashboard Subdomain
-Route::group(array('domain' => 'dashboard.laravel.dev'), function()
-{     
-    Route::get('settings',array('before'=>'admin',function()
-    {
+Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
+    Route::get('settings', array('before'=>'admin',function () {
         return View::make('dashboard.settings');
     }));
 
-    Route::post('settings',array('before'=>'admin','uses'=>'SettingsController@update'));    
+    Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));
 
-    Route::get('users',array('before'=>'admin',function()
-    {
+    Route::get('users', array('before'=>'admin', function () {
         return View::make('dashboard.users');
     }));
     
-    Route::get('user/{id}/{mode}',array('before'=>'teacher','uses'=>'UserController@manage'));
-    Route::post('user/{id}/update',array('before'=>'admin','uses'=>'UserController@update'));
+    Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'));
+    Route::post('user/{id}/update', array('before'=>'admin','uses'=>'UserController@update'));
 
-    Route::get('tutorials',array('before'=>'teacher',function()
-    {
+    Route::get('tutorials', array('before'=>'teacher',function () {
         return View::make('dashboard.tutorials');
     }));
-    Route::get('students',array('before'=>'teacher',function(){
+    Route::get('students', array('before'=>'teacher', function () {
         return View::make('dashboard.students');
     }));
-    Route::get('teachers',array('before'=>'admin',function(){
+    Route::get('teachers', array('before'=>'admin', function () {
         return View::make('dashboard.teachers');
     }));
 
@@ -302,17 +310,17 @@ Route::get('/',array('as'=>'home',function()
     return View::make('home')->nest('header','main.header');
 }));
 
-App::missing(function($exception)
-{
-    return Response::view('site.error.404', array(), 404);
-});
-App::error(function(Exception $exception)
-{
-    Log::error($exception);
-    return Response::view('site.error.system',array(),500);
-});
-App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
-{
-    Log::error($exception);
-    return Response::view('site.error.system',array(),500);
-});
+// App::missing(function($exception)
+// {
+//     return Response::view('site.error.404', array(), 404);
+// });
+// App::error(function(Exception $exception)
+// {
+//     Log::error($exception);
+//     return Response::view('site.error.system',array(),500);
+// });
+// App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
+// {
+//     Log::error($exception);
+//     return Response::view('site.error.system',array(),500);
+// });
