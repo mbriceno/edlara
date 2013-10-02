@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/lib/effeckt/css/effeckt.autoprefixed.css">
 
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/lib/system/style.css">
     </head>
     <body>      
     <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
@@ -34,12 +35,12 @@
         </ul>
         <ul class="nav navbar-nav pull-right">
             <li class='user'>
-                <div class="btn-group">
+                <div class="btn-group adminbtn">
                     <button type="button" class="btn">
                         <i class="glyphicon glyphicon-user"></i> John Doe
                     </button>
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
+                        <span class="caret black-caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li>
@@ -64,14 +65,13 @@
 
                     {{Theme::breadcrumb()->render()}}
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                    {{ Theme::widget('sidebar')->render()}}
             </div>
-            <div class="col-sm-9 col-md-9 col-lg-9 hidden-xs">
-
+            <div class="col-sm-10 col-md-10 col-lg-10 hidden-xs">
                     {{Theme::breadcrumb()->render()}}
             </div>
-            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                 <div class="container">
                         {{Theme::place('content')}}
                 </div>
@@ -116,6 +116,19 @@
       
       
     </script>
+
+            <script src="/lib/datatables/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+    $('.datatable').dataTable({
+        "sDom": "<'row'<'col-xs-5 col-sm-5 col-md-5'l><'col-xs-5 col-sm-5 col-md-5'f>r>t<'row'<'col-xs-5 col-sm-5 col-md-5'i><'col-xs-5 col-sm-5 col-md-5'p>>",
+            "oLanguage": {
+            "sLengthMenu": "_MENU_ {{Theme::place('Type','Tutorials')}} per page"
+            }
+       
+    } );
+});
+            </script>
     </body>
 
 </html>
