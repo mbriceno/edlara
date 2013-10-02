@@ -36,7 +36,7 @@ return array(
         'before' => function($theme)
         {
             // You can remove this line anytime.
-            $theme->setTitle(Setting::get('system.schoolname'));
+            $theme->setTitle(Setting::get('system.adminsitename'));
 
             // Breadcrumb template.
             $theme->breadcrumb()->setTemplate('
