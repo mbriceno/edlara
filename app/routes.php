@@ -36,6 +36,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     
 
     Route::get('settings', array('before'=>'admin',function () {
+
         $theme = Theme::uses('dashboard')->layout('default');
 
         $view = array(
@@ -43,8 +44,9 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
         );
         $theme->breadcrumb()->add([
             ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
-            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl').'/settings']
+            ['label'=>'Settings','url'=>Setting::get('system.dashurl').'/settings']
         ]);
+        $theme->appendTitle(' - Settings');
         // Session::flush('activedash');
         return $theme->scope('settings', $view)->render();
     }));
@@ -52,7 +54,30 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));
 
     Route::get('users', array('before'=>'admin', function () {
-        return View::make('dashboard.users');
+
+        $theme = Theme::uses('dashboard')->layout('default');
+
+        $view = array(
+            'name' => 'Dashboard Users'
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+            ['label'=>'Users','url'=>Setting::get('system.dashurl').'/users']
+        ]);
+        $theme->appendTitle(' - Users');
+        $theme->asset()->writeStyle('inline-style','
+                @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
+                { 
+                    td:nth-of-type(1):before { content: "#ID :- "; }
+                    td:nth-of-type(2):before { content: "First Name :- "; }
+                    td:nth-of-type(3):before { content: "Last Name :- "; }
+                    td:nth-of-type(4):before { content: "Joined Date :- "; }
+                    td:nth-of-type(5):before { content: "Last Login :- "; }
+                    td:nth-of-type(6):before { content: "Activation:- "; }
+                    td:nth-of-type(7):before { content: "Actions :- "; }
+                }');
+        Session::put('records','Users');
+        return $theme->scope('users', $view)->render();
     }));
     
     Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'));
@@ -164,6 +189,8 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
                     td:nth-of-type(8):before { content: "Published :- "; }
                     td:nth-of-type(9):before { content: "Actions :- "; }
                 }');
+
+        Session::put('records','Tutorials');
         return $theme->scope('tutorials', $view)->render();
     }));
 
@@ -178,6 +205,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
         $theme->breadcrumb()->add([
             ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')]
         ]);
+        $theme->appendTitle(' - Dashboard');
         return $theme->scope('home', $view)->render();
     }));
 })->before('auth');
