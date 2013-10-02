@@ -3,6 +3,7 @@ echo $errors->first();
 echo Form::open(array('url' => '/settings', 'method' => 'POST','class'=>'form-horizontal'));
 ?>
 
+<div class="well">
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
@@ -43,6 +44,7 @@ echo Form::open(array('url' => '/settings', 'method' => 'POST','class'=>'form-ho
                 <?php
     echo Form::submit('Save Changes',array('class'=>'btn btn-success','value'=>'submit'));
                 ?>
+</div>
 </div>
 </div>
 <?php
