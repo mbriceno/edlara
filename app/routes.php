@@ -33,19 +33,7 @@ Route::group(array('domain' => 'api.laravel.dev'),function(){
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
 
-    Route::get('/',array('before'=>'admin',function(){
-
-        $theme = Theme::uses('dashboard')->layout('dash');
-
-        $view = array(
-            'name' => 'Dashboard Home'
-        );
-        $theme->breadcrumb()->add([
-            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')]
-        ]);
-        // Session::flush('activedash');
-        return $theme->scope('home', $view)->render();
-    }));
+    
 
     Route::get('settings', array('before'=>'admin',function () {
         $theme = Theme::uses('dashboard')->layout('default');
@@ -70,35 +58,6 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'));
     Route::post('user/{id}/update', array('before'=>'admin','uses'=>'UserController@update'));
 
-    Route::get('tutorials', array('before'=>'teacher',function () {
-        $theme = Theme::uses('dashboard')->layout('default');
-
-        $view = array(
-            'name' => 'Dashboard Tutorials'
-        );
-        $theme->breadcrumb()->add([
-            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
-            ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials']
-        ]);
-        $theme->setTitle(Setting::get('system.adminsitename').' Tutorials');
-        $theme->setType('Tutorials');
-        $theme->asset()->writeStyle('inline-style','
-                @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
-                { 
-                    td:nth-of-type(1):before { content: "#ID :- "; }
-                    td:nth-of-type(2):before { content: "Title :- "; }
-                    td:nth-of-type(3):before { content: "Subject :- "; }
-                    td:nth-of-type(4):before { content: "Grade :- "; }
-                    td:nth-of-type(5):before { content: "Created Date :- "; }
-                    td:nth-of-type(6):before { content: "Modified Date :- "; }
-                    td:nth-of-type(7):before { content: "Created By :- "; }
-                    td:nth-of-type(8):before { content: "Published :- "; }
-                    td:nth-of-type(9):before { content: "Actions :- "; }
-                }');
-        // Session::flush('activedash');
-        return $theme->scope('tutorials', $view)->render();
-        // return View::make('dashboard.tutorials');
-    }));
     Route::get('students', array('before'=>'teacher', function () {
         return View::make('dashboard.students');
     }));
@@ -180,11 +139,47 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     }));
     Route::get('/assessment-{aid}/exam-{eid}/markup',array('before'=>'teacher','uses'=>'ExamController@markExam'));
 
+    // Tutorials Route
+    Route::get('tutorials', array('before'=>'teacher',function () {
+        $theme = Theme::uses('dashboard')->layout('default');
+        $view = array(
+            'name' => 'Dashboard Tutorials'
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+            ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials']
+        ]);
+        $theme->setTitle(Setting::get('system.adminsitename').' Tutorials');
+        $theme->setType('Tutorials');
+        $theme->asset()->writeStyle('inline-style','
+                @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
+                { 
+                    td:nth-of-type(1):before { content: "#ID :- "; }
+                    td:nth-of-type(2):before { content: "Title :- "; }
+                    td:nth-of-type(3):before { content: "Subject :- "; }
+                    td:nth-of-type(4):before { content: "Grade :- "; }
+                    td:nth-of-type(5):before { content: "Created Date :- "; }
+                    td:nth-of-type(6):before { content: "Modified Date :- "; }
+                    td:nth-of-type(7):before { content: "Created By :- "; }
+                    td:nth-of-type(8):before { content: "Published :- "; }
+                    td:nth-of-type(9):before { content: "Actions :- "; }
+                }');
+        return $theme->scope('tutorials', $view)->render();
+    }));
 
-    Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
-    {
-        return View::make('dashboard.index');
-    }));    
+    //Dashboard Route.
+    Route::get('/',array('before'=>'teacher',function(){
+
+        $theme = Theme::uses('dashboard')->layout('dash');
+
+        $view = array(
+            'name' => 'Dashboard Home'
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')]
+        ]);
+        return $theme->scope('home', $view)->render();
+    }));
 })->before('auth');
 
 
