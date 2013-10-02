@@ -11,7 +11,7 @@
 |
 */
 require_once('viewcomposer.php');
-
+require_once('staticfunctions.php');
 
 //Authencticating User with Controller
 Route::post('login', array('before' => 'csrf','uses' => 'UserController@authenticate'));
@@ -35,7 +35,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
 
     Route::get('/',array('before'=>'admin',function(){
 
-        $theme = Theme::uses('dashboard')->layout('default');
+        $theme = Theme::uses('dashboard')->layout('dash');
 
         $view = array(
             'name' => 'Dashboard Home'
@@ -71,7 +71,20 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     Route::post('user/{id}/update', array('before'=>'admin','uses'=>'UserController@update'));
 
     Route::get('tutorials', array('before'=>'teacher',function () {
-        return View::make('dashboard.tutorials');
+        $theme = Theme::uses('dashboard')->layout('default');
+
+        $view = array(
+            'name' => 'Dashboard Tutorials'
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+            ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials']
+        ]);
+        $theme->setTitle(Setting::get('system.adminsitename').' Tutorials');
+        $theme->setType('Tutorials');
+        // Session::flush('activedash');
+        return $theme->scope('tutorials', $view)->render();
+        // return View::make('dashboard.tutorials');
     }));
     Route::get('students', array('before'=>'teacher', function () {
         return View::make('dashboard.students');
@@ -154,10 +167,6 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     }));
     Route::get('/assessment-{aid}/exam-{eid}/markup',array('before'=>'teacher','uses'=>'ExamController@markExam'));
 
-//Test
-    Route::get('/up',function(){
-        return serialize([1,2,3,4]);
-    });
 
     Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
     {
