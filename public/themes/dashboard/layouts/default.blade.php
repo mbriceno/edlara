@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/lib/system/style.css">
         <link rel="stylesheet" type="text/css" href="/lib/datatables/css/jquery.dataTables.css">
+        {{Theme::asset()->styles();}}
     </head>
     <body>      
     <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
@@ -125,9 +126,10 @@
         "sDom": "<'row'<'col-xs-5 col-sm-5 col-md-5'l><'col-xs-5 col-sm-5 col-md-5'f>r>t<'row'<'col-xs-5 col-sm-5 col-md-5'i><'col-xs-5 col-sm-5 col-md-5'p>>",
             "oLanguage": {
             "sLengthMenu": "_MENU_ {{Theme::place('Type','Tutorials')}} per page"
-            }
+            },
+            "sPagination":"bootstrap"
        
-    } );
+    });
 });
             </script>
     </body>
