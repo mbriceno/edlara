@@ -125,7 +125,7 @@
     $('.datatable').dataTable({
         "sDom": "<'row'<'col-xs-5 col-sm-5 col-md-5'l><'col-xs-5 col-sm-5 col-md-5'f>r>t<'row'<'col-xs-5 col-sm-5 col-md-5'i><'col-xs-5 col-sm-5 col-md-5'p>>",
             "oLanguage": {
-            "sLengthMenu": "_MENU_ {{Theme::place('Type','Tutorials')}} per page"
+            "sLengthMenu": "_MENU_ {{Session::get('records','records')}} per page"
             },
             "sPagination":"bootstrap"
        
