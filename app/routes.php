@@ -82,6 +82,19 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
         ]);
         $theme->setTitle(Setting::get('system.adminsitename').' Tutorials');
         $theme->setType('Tutorials');
+        $theme->asset()->writeStyle('inline-style','
+                @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
+                { 
+                    td:nth-of-type(1):before { content: "#ID :- "; }
+                    td:nth-of-type(2):before { content: "Title :- "; }
+                    td:nth-of-type(3):before { content: "Subject :- "; }
+                    td:nth-of-type(4):before { content: "Grade :- "; }
+                    td:nth-of-type(5):before { content: "Created Date :- "; }
+                    td:nth-of-type(6):before { content: "Modified Date :- "; }
+                    td:nth-of-type(7):before { content: "Created By :- "; }
+                    td:nth-of-type(8):before { content: "Published :- "; }
+                    td:nth-of-type(9):before { content: "Actions :- "; }
+                }');
         // Session::flush('activedash');
         return $theme->scope('tutorials', $view)->render();
         // return View::make('dashboard.tutorials');

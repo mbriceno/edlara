@@ -66,7 +66,7 @@
                                     <a class="btn btn-info" href="/tutorial/edit/'.$tutorial->id.'">
                                         <i class="icon-edit icon-white"></i>  
                                         Edit                                            
-                                    </a>';
+                                    </a>&nbsp;';
 
                         $cuser = Sentry::getUser();
                         $admingroup = Sentry::findGroupByName('admin');
