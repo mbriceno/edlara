@@ -4,7 +4,7 @@
             </a>
 
         </div>
-            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+            <table id="datatable" class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>
                     <tr>
                         <th>#ID</th>

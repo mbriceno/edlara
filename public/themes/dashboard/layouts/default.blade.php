@@ -15,7 +15,8 @@
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/lib/system/style.css">
         <link rel="stylesheet" type="text/css" href="/lib/datatables/css/jquery.dataTables.css">
-        {{Theme::asset()->styles();}}
+        {{Theme::asset()->styles()}}
+        {{Theme::asset()->scripts()}}
     </head>
     <body>      
     <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
@@ -96,6 +97,8 @@
     });
 });
 </script>
+
+ {{Theme::asset()->container('footer')->scripts()}}
     <!-- demo -->
     <script src="/lib/effeckt/js/demo/demo.js"></script>
 
@@ -121,17 +124,10 @@
 
             <script src="/lib/datatables/js/jquery.dataTables.min.js"></script>
             <script type="text/javascript">
-            $(document).ready(function(){
-    $('.datatable').dataTable({
-        "sDom": "<'row'<'col-xs-5 col-sm-5 col-md-5'l><'col-xs-5 col-sm-5 col-md-5'f>r>t<'row'<'col-xs-5 col-sm-5 col-md-5'i><'col-xs-5 col-sm-5 col-md-5'p>>",
-            "oLanguage": {
-            "sLengthMenu": "_MENU_ {{Session::get('records','records')}} per page"
-            },
-            "sPagination":"bootstrap"
-       
-    });
-});
+            
             </script>
+        
+   {{Theme::asset()->container('datatable')->scripts()}}
     </body>
 
 </html>
