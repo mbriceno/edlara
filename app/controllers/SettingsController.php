@@ -28,6 +28,19 @@ class SettingsController extends BaseController{
 		 Setting::set('app.url',Input::get('url'));
 		 Setting::set('app.captcha',Input::get('captcha'));
 		 Setting::set('system.dashurl',Input::get('systemurl'));
-		return View::make('dashboard.settings');
+
+		$theme = Theme::uses('dashboard')->layout('default');
+
+        $view = array(
+            'name' => 'Dashboard Settings'
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl').'/settings']
+        ]);
+
+        $theme->appendTitle(' - Settings');
+
+        return $theme->scope('settings', $view)->render();
 	}
 }
