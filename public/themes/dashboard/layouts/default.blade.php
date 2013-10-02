@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/lib/system/style.css">
+        <link rel="stylesheet" type="text/css" href="/lib/datatables/css/jquery.dataTables.css">
     </head>
     <body>      
     <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
