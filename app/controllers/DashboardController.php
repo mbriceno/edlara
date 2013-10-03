@@ -32,7 +32,7 @@ class DashboardController extends BaseController
     $(\'.datatable\').dataTable({
         "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
             "oLanguage": {
-            "sLengthMenu": "_MENU_ '.Session::get('records','records').'per page"
+            "sLengthMenu": "_MENU_ records per page"
             },
             "sPagination":"bootstrap"
        
@@ -49,7 +49,6 @@ class DashboardController extends BaseController
 		            td:nth-of-type(6):before { content: "Actions :- "; }
 		        }');
 
-		Session::put('records','Teachers');
 		return $theme->scope('teachers', $view)->render();
 
 	}
@@ -69,7 +68,7 @@ class DashboardController extends BaseController
     $(\'.datatable\').dataTable({
         "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
             "oLanguage": {
-            "sLengthMenu": "_MENU_ '.Session::get('records','records').'per page"
+            "sLengthMenu": "_MENU_ Assessments per page"
             },
             "sPagination":"bootstrap"
        
@@ -88,7 +87,6 @@ class DashboardController extends BaseController
                     td:nth-of-type(8):before { content: "Submitted By :- "; }
                 }');
 
-        Session::put('records','Assessments');
         return $theme->scope('assessments', $view)->render();
 	}
 
@@ -107,7 +105,7 @@ class DashboardController extends BaseController
     $(\'.datatable\').dataTable({
         "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
             "oLanguage": {
-            "sLengthMenu": "_MENU_ '.Session::get('records','records').'per page"
+            "sLengthMenu": "_MENU_ Users per page"
             },
             "sPagination":"bootstrap"
        
@@ -124,7 +122,6 @@ class DashboardController extends BaseController
                     td:nth-of-type(6):before { content: "Activation:- "; }
                     td:nth-of-type(7):before { content: "Actions :- "; }
                 }');
-        Session::put('records','Users');
         return $theme->scope('users', $view)->render();
 	}
 	public function settings(){
@@ -139,17 +136,7 @@ class DashboardController extends BaseController
             ['label'=>'Settings','url'=>Setting::get('system.dashurl').'/settings']
         ]);
         $theme->appendTitle(' - Settings');
-        $theme->asset()->container('datatable')->writeScript('inline-script','$(document).ready(function(){
-    $(\'.datatable\').dataTable({
-        "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
-            "oLanguage": {
-            "sLengthMenu": "_MENU_ '.Session::get('records','records').'per page"
-            },
-            "sPagination":"bootstrap"
        
-    });
-});        ');
-        // Session::flush('activedash');
         return $theme->scope('settings', $view)->render();
 
 	}
@@ -168,7 +155,7 @@ class DashboardController extends BaseController
     $(\'.datatable\').dataTable({
         "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
             "oLanguage": {
-            "sLengthMenu": "_MENU_ '.Session::get('records','records').'per page"
+            "sLengthMenu": "_MENU_ Exams per page"
             },
             "sPagination":"bootstrap"
        
@@ -184,7 +171,6 @@ class DashboardController extends BaseController
                     td:nth-of-type(5):before { content: "Actions :- "; }
                 }');
 
-        Session::put('records','Exams');
         return $theme->scope('exams', $view)->render();
 	}
 	public function tutorials(){
@@ -196,12 +182,12 @@ class DashboardController extends BaseController
             ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
             ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials']
         ]);
-        $theme->setTitle(Setting::get('system.adminsitename').' Tutorials');
+        $theme->appendTitle(' - Tutorials');
         $theme->setType('Tutorials');$theme->asset()->container('datatable')->writeScript('inline-script','$(document).ready(function(){
     $(\'.datatable\').dataTable({
         "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
             "oLanguage": {
-            "sLengthMenu": "_MENU_ '.Session::get('records','records').'per page"
+            "sLengthMenu": "_MENU_ Tutorials per page"
             },
             "sPagination":"bootstrap"
        
@@ -221,7 +207,6 @@ class DashboardController extends BaseController
                     td:nth-of-type(9):before { content: "Actions :- "; }
                 }');
 
-        Session::put('records','Tutorials');
         return $theme->scope('tutorials', $view)->render();
 	}
 	public function students(){
@@ -231,7 +216,7 @@ class DashboardController extends BaseController
         );
         $theme->breadcrumb()->add([
             ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
-            ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/students']
+            ['label'=>'Students','url'=>Setting::get('system.dashurl').'/students']
         ]);
         $theme->setTitle(Setting::get('system.adminsitename').' Students');
         $theme->setType('Students');
@@ -239,7 +224,7 @@ class DashboardController extends BaseController
     $(\'.datatable\').dataTable({
         "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
             "oLanguage": {
-            "sLengthMenu": "_MENU_ '.Session::get('records','records').'per page"
+            "sLengthMenu": "_MENU_ records per page"
             },
             "sPagination":"bootstrap"
        
@@ -258,8 +243,6 @@ class DashboardController extends BaseController
                     td:nth-of-type(8):before { content: "Published :- "; }
                     td:nth-of-type(9):before { content: "Actions :- "; }
                 }');
-
-        Session::put('records','Students');
         return $theme->scope('students', $view)->render();
 	}
 }
