@@ -11,7 +11,9 @@ class TutorialsController extends BaseController {
                 'id'=>$id
             );
             $theme->breadcrumb()->add([
-                ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')]
+                ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+                ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials'],
+                ['label'=>$id,'url'=>Setting::get('system.dashurl').'/tutorial/0/edit']
             ]);
             $theme->appendTitle(' - New Tutorial');
             $theme->asset()->add('ckeditor','/js/ckeditor/ckeditor.js');
@@ -28,7 +30,9 @@ class TutorialsController extends BaseController {
                 'id'=>$id
             );
             $theme->breadcrumb()->add([
-                ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')]
+                ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+                ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials'],
+                ['label'=>$id,'url'=>Setting::get('system.dashurl').'/tutorial/'.$id.'/edit']
             ]);
             $theme->appendTitle(' - Edit Tutorial');
             $theme->asset()->container('datatable')->writeScript('inline-script','$(document).ready(function(){
