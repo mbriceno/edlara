@@ -64,17 +64,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
 
 
 
-    Route::get('assessment/{id}',array('before'=>'teacher',function($id){
-        $assessment = Assessments::find($id);
-        $user = User::find($assessment->teacherid);
-        if(Sentry::getUser()->id == $user->id){
-            return View::make('dashboard.assessments.update')->with('id',$id);
-        }
-        else
-        {
-            return "UPDATE NOT AUTHORISED";
-        }
-    }));
+    Route::get('assessment/{id}',array('before'=>'teacher','uses'=>'HttpController@assessmentupdateget'));
     Route::post('assessment/{id}',array('before'=>'teacher','uses'=>'AssessmentController@teacherUpdate'));
 
 
@@ -282,6 +272,15 @@ Route::get('/about/tos',function(){
 Route::get('contactus',function(){
     return View::make('about.contact-us')->nest('header','main.header');
 });
+
+
+Route::get('/test',function(){
+    for($i=1;$i<=50;$i++){
+        $data[]=$i;
+    }
+    return serialize($data); 
+});
+
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
