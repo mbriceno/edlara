@@ -91,7 +91,8 @@ table {
                         $subjects = unserialize($ssubjects);
                         $truth = 0;
                         if($subjects != null){
-                        $truth = checkSubject($subjects,$tutorial->subjectid);}
+                        $truth = checkSubject($subjects,$tutorial->subjectid);
+                        }
 
                         if($truth == 0 && !Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
                             continue;
