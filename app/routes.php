@@ -42,7 +42,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     Route::get('exams',array('before'=>'teacher','uses'=>'DashboardController@exams'));
     Route::get('tutorials', array('before'=>'teacher','uses'=>'DashboardController@tutorials'));
     Route::get('assessments',array('before'=>'teacher','uses'=>'DashboardController@assessments'));
-    Route::get('/',array('before'=>'teacher','uses'=>'DashboardController@dash'));
+    Route::get('/',array('as'=>'dashboard','before'=>'teacher','uses'=>'DashboardController@dash'));
 
     Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));
 
