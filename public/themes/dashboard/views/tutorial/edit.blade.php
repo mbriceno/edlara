@@ -23,7 +23,7 @@ $tutorial = Tutorials::find($id);
 
     $subject = Subject::find($tutorial->subjectid);
     $subjectlist[$subject->id] = $subject->subjectname;
-    echo Form::select('subject',$subjectlist,$tutorial->subjectid,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
+    echo Form::select('subject',$subjectlist,$tutorial->subjectid,array('class'=>'form-control pull-right','style'=>'clear:right;margin:10px;'));
     ?></div>
 
 
