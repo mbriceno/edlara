@@ -35,7 +35,7 @@
         </ul>
         <ul class="nav navbar-nav pull-right">
             <li class='user'>
-                <div class="btn-group">
+                <div class="btn-group adminbtn">
                     <button type="button" class="btn">
                         <i class="glyphicon glyphicon-user"></i> John Doe
                     </button>
