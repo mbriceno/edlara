@@ -16,10 +16,16 @@ src: url("/fonts/Metamorphous-Regular.otf") format("opentype");
 
 #top-header {
     font-family: 'Metamorphous', sans-serif;
-    font-size: 7vmin;
+    font-size: 7.5vmin;
     position: absolute;
     left: 65px;
     top: 50px;
+}
+div.responsive{
+    font-size: 3.5vmin;
+}
+div.responsive h2 {
+    font-size:7.5vmin;
 }
 #clouds {
     padding: 0 0;
@@ -151,7 +157,10 @@ body {
     padding-right: 0px !important;
     padding-left: 0px !important;
 }
-
+.buttonbox{
+    float:none !important;
+    width:20px;
+}
 div#login-form {
     margin-top:25vmin;    
     padding-left:30px;
