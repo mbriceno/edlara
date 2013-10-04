@@ -1,4 +1,8 @@
 <?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><?php
 echo $errors->first();
 echo Form::open(array('url' => '/settings', 'method' => 'POST','class'=>'form-horizontal'));
 ?>

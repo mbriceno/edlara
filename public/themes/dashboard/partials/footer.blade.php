@@ -1,1 +1,5 @@
-<footer>Footer</footer>
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><footer>Footer</footer>

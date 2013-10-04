@@ -1,3 +1,8 @@
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?>
 <!DOCTYPE HTML>
 <html>
     <head>

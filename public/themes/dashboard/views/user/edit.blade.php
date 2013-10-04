@@ -1,4 +1,8 @@
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?>        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
          
       // Load the Visualization API and the piechart package.

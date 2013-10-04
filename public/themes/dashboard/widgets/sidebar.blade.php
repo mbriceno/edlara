@@ -1,4 +1,9 @@
-                <div class="well nav-collapse sidebar-nav">
+
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?>                <div class="well nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
                         <li class="nav-header hidden-sm">Dashboard</li>
                         <li class="">

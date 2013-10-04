@@ -1,4 +1,8 @@
-<div class="sortable pull-right">
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><div class="sortable pull-right">
             <a href="/exam/edit/0">
              <span class="btn btn-primary">New</span>
             </a>

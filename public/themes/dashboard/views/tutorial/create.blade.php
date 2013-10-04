@@ -1,4 +1,8 @@
-            <div class="row well">
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?>            <div class="row well">
                 <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6">
                     <?php
                     echo Form::open(array('url' => '/tutorial/edit/'.$id.'/update', 'method' => 'post','class'=>'form-horizontal'));

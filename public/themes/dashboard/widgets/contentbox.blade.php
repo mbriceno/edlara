@@ -1,3 +1,8 @@
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?>
 <div class="container">
     <div class="row">
      <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 box">

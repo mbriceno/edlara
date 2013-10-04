@@ -1,3 +1,8 @@
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -10,7 +15,6 @@
         <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap-cerulean.min.css">
 
         <link rel="stylesheet" type="text/css" href="/lib/system/main.css">
-        <link rel="stylesheet" href="/lib/effeckt/css/effeckt.autoprefixed.css">
 
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/lib/system/style.css">

@@ -1,4 +1,9 @@
 <?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?>
+<?php
 $studentquery = DB::select(DB::raw('SELECT COUNT(`dob`) FROM `students` WHERE `created_at` >= CURDATE() - INTERVAL 1 DAY'));
 $userquery = DB::select(DB::raw('SELECT COUNT(`email`) FROM `users` WHERE `created_at` >= CURDATE() - INTERVAL 1 DAY'));
 $tutorialquery = DB::select(DB::raw('SELECT COUNT(`id`) FROM `tutorials` WHERE `created_at` >= CURDATE() - INTERVAL 1 DAY'));

@@ -1,4 +1,8 @@
 <?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><?php
 $tutorial = Tutorials::find($id);
 // var_dump($tutorial);?>
 <div class="row">
@@ -79,10 +83,9 @@ $tutorial = Tutorials::find($id);
     echo Form::file('attachment[]', array('class'=>"pull-right",'style'=>'clear:right;','multiple'=>'true'));
     echo "<br>";
     echo "<br>";
-    $checkexams = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE `subjectid` = '.$tutorial->subjectid.''));
-    if(!$checkexams){
+    $checkexams = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE `subjectid` = '.$tutorial->subjectid));
+    if($checkexams){
         $possibleexams = Exams::where('subjectid','=',$tutorial->subjectid)->get();
-        $exams = array();
         foreach($possibleexams as $possibleexam){
             $exams[$possibleexam->id]=$possibleexam->title;
             $possibleexamid = $possibleexam->id;
@@ -95,6 +98,9 @@ $tutorial = Tutorials::find($id);
     }
     $exame = $tutorial->exams;
     $exame = unserialize($exame);
+    // if($exame['id']){
+    //     $possibleexamid = $exame['id'];
+    // }
     echo Form::label('examstruth','Enable Exam',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
     if($exame['true'] == true){
         $checked ='checked="checked"';
@@ -103,7 +109,7 @@ $tutorial = Tutorials::find($id);
     {
         $checked = '';
     }
-    echo '<div class="make-switch pull-right"><input type="checkbox" name="published" id="published" '.$checked.'></div>';
+    echo '<div class="make-switch pull-right"><input value="on" type="checkbox" name="examstruth" id="examstruth" '.$checked.'></div>';
     echo Form::label('exams','Exams to Use',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
     echo Form::select('exams',$exams,$possibleexamid,array('class'=>'pull-right','style'=>'clear:right;margin:5px;'));
     echo "</fieldset>";
