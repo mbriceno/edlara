@@ -11,8 +11,8 @@
 |
 */
 require_once('viewcomposer.php');
-
-
+require_once('staticfunctions.php');
+define('ROOT', 1);
 //Authencticating User with Controller
 Route::post('login', array('before' => 'csrf','uses' => 'UserController@authenticate'));
 Route::get('login', function () {
@@ -32,29 +32,25 @@ Route::group(array('domain' => 'api.laravel.dev'),function(){
 
 //Dashboard Subdomain
 Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
-    Route::get('settings', array('before'=>'admin',function () {
-        return View::make('dashboard.settings');
-    }));
+
+    
+
+    Route::get('settings', array('before'=>'admin','uses'=>'DashboardController@settings'));
+    Route::get('users', array('before'=>'admin','uses'=>'DashboardController@users'));
+    Route::get('teachers', array('before'=>'admin','uses'=>'DashboardController@teachers'));
+    Route::get('students', array('before'=>'admin','uses'=>'DashboardController@students'));
+    Route::get('exams',array('before'=>'teacher','uses'=>'DashboardController@exams'));
+    Route::get('tutorials', array('before'=>'teacher','uses'=>'DashboardController@tutorials'));
+    Route::get('assessments',array('before'=>'teacher','uses'=>'DashboardController@assessments'));
+    Route::get('/',array('as'=>'dashboard','before'=>'teacher','uses'=>'DashboardController@dash'));
 
     Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));
 
-    Route::get('users', array('before'=>'admin', function () {
-        return View::make('dashboard.users');
-    }));
     
     Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'));
     Route::post('user/{id}/update', array('before'=>'admin','uses'=>'UserController@update'));
 
-    Route::get('tutorials', array('before'=>'teacher',function () {
-        return View::make('dashboard.tutorials');
-    }));
-    Route::get('students', array('before'=>'teacher', function () {
-        return View::make('dashboard.students');
-    }));
-    Route::get('teachers', array('before'=>'admin', function () {
-        return View::make('dashboard.teachers');
-    }));
-
+    
 
 
     Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+')->before('teacher');
@@ -68,21 +64,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
 
 
 
-    Route::get('assessments',array('before'=>'teacher',function()
-    {
-        return View::make('dashboard.assessments');
-    }));
-    Route::get('assessment/{id}',array('before'=>'teacher',function($id){
-        $assessment = Assessments::find($id);
-        $user = User::find($assessment->teacherid);
-        if(Sentry::getUser()->id == $user->id){
-            return View::make('dashboard.assessments.update')->with('id',$id);
-        }
-        else
-        {
-            return "UPDATE NOT AUTHORISED";
-        }
-    }));
+    Route::get('assessment/{id}',array('before'=>'teacher','uses'=>'HttpController@assessmentupdateget'));
     Route::post('assessment/{id}',array('before'=>'teacher','uses'=>'AssessmentController@teacherUpdate'));
 
 
@@ -98,20 +80,10 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
 
 
 
-    //Exams
-    Route::get('/exams',array('before'=>'teacher',function()
-    {
-        return View::make('dashboard.exams');
-    }));
+   
 
 
-
-    Route::get('/exam/edit/{id}',array('before'=>'teacher',function ($id){
-        if(Exams::find($id)){
-            return View::make('dashboard.exams.edit')->with('id',$id);
-        }
-        return View::make('dashboard.exams.create')->with('id',0);
-    }));
+    Route::get('/exam/edit/{id}',array('before'=>'teacher','uses'=>'HttpController@examupdateget'));
     Route::post('/exam/edit/0',array('before'=>'csrf|teacher','uses'=>'ExamController@createExam'));
     
     Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
@@ -129,15 +101,6 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     }));
     Route::get('/assessment-{aid}/exam-{eid}/markup',array('before'=>'teacher','uses'=>'ExamController@markExam'));
 
-//Test
-    Route::get('/up',function(){
-        return serialize([1,2,3,4]);
-    });
-
-    Route::get('/',array('before'=>'teacher','as'=>'dashboard',function()
-    {
-        return View::make('dashboard.index');
-    }));    
 })->before('auth');
 
 
@@ -304,6 +267,8 @@ Route::get('/about/tos',function(){
 Route::get('contactus',function(){
     return View::make('about.contact-us')->nest('header','main.header');
 });
+
+
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {

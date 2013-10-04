@@ -311,11 +311,35 @@ class UserController extends BaseController {
     public function manage($id,$mode){
         switch ($mode) {
             case 'view':
-                return View::make('dashboard.user.view')->with('id',$id);
+                        $theme = Theme::uses('dashboard')->layout('default');
+                        $view = array(
+                            'name' => 'Dashboard User',
+                            'id'=>$id
+                        );
+                        $theme->breadcrumb()->add([
+                            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+                            ['label'=>'Users','url'=>Setting::get('system.dashurl').'/users'],
+                            ['label'=>$id,'url'=>Setting::get('system.dashurl').'/user/1/view']
+                        ]);
+                        $theme->setTitle(Setting::get('system.adminsitename').' User');
+                        $theme->setType('User');
+                        return $theme->scope('user.view', $view)->render();
                 break;
             case 'edit':
                 if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
-                return View::make('dashboard.user.edit')->with('id',$id);
+                        $theme = Theme::uses('dashboard')->layout('default');
+                        $view = array(
+                            'name' => 'Dashboard User',
+                            'id'=>$id
+                        );
+                        $theme->breadcrumb()->add([
+                            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+                            ['label'=>'Users','url'=>Setting::get('system.dashurl').'/users'],
+                            ['label'=>$id,'url'=>Setting::get('system.dashurl').'/user/1/edit']
+                        ]);
+                        $theme->setTitle(Setting::get('system.adminsitename').' User');
+                        $theme->setType('User');
+                        return $theme->scope('user.edit', $view)->render();
                 }
                 else {
                     return "NOT AUTHORISED";

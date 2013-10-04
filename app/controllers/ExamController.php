@@ -58,12 +58,22 @@ class ExamController extends BaseController
 // dd($realcount);
 // // dd($marksinc);
 //         dd($markscount);
+
+        // dd($marksinc);
         settype($realcount, 'integer');
+        $questionfailed =[];
         $studentanswer = json_decode($bystudent,true);
         $questioncount = Session::put('questioncount_key',1);
+            // $answerfailed=array();
         // var_dump($studentanswer['answers'][2]);
         // var_dump($json['questiondata']['question'][1]);
-        for($questioncount = 1; $questioncount <=$realcount;){
+        for($questioncount = 0; $questioncount <=$realcount;){
+            $questioncount++;
+            $acception=[];
+            if(isset($studentanswer['answers'][$questioncount][1])){
+                // $questioncount++;
+                // dd($studentanswer['answers'][$questioncount]);
+            $answerfailed=array();
             if($studentanswer['answers'][$questioncount][1]==0 || $studentanswer['answers'][$questioncount][1]=="0"){
                 //Adding 0 Marks if the Question Left Unanswered.
                 $markscount +=0;
@@ -71,12 +81,16 @@ class ExamController extends BaseController
             else{
                 $ccount = 0;
                 $answerfromstudent = $studentanswer['answers'][$questioncount];
+                // $acception = [0];
                 if(isset($json['questiondata']['question'][$questioncount]['answers'][0])){
                     $ccount +=1;
                     //Setting Simple Variable
                     $a0=$json['questiondata']['question'][$questioncount]['answers'][0];
 
                     $acception[] = self::checkAnswer($a0,$answerfromstudent);
+                    if(self::checkAnswer($a0,$answerfromstudent) == 0){
+                        $answerfailed[] = $answerfromstudent;
+                    }
                 }
                 if(isset($json['questiondata']['question'][$questioncount]['answers'][1])){
                     $ccount +=1;
@@ -86,6 +100,9 @@ class ExamController extends BaseController
 
 
                     $acception[] = self::checkAnswer($a1,$answerfromstudent);
+                    if(self::checkAnswer($a1,$answerfromstudent) == 0){
+                        $answerfailed[] = $answerfromstudent;
+                    }
                 }
                 if(isset($json['questiondata']['question'][$questioncount]['answers'][2])){
                     $ccount +=1;
@@ -95,6 +112,9 @@ class ExamController extends BaseController
 
 
                     $acception[] = self::checkAnswer($a2,$answerfromstudent);
+                    if(self::checkAnswer($a2,$answerfromstudent) == 0){
+                        $answerfailed[] = $answerfromstudent;
+                    }
                 }
                 if(isset($json['questiondata']['question'][$questioncount]['answers'][3])){
                     $ccount +=1;
@@ -104,6 +124,9 @@ class ExamController extends BaseController
 
 
                     $acception[] = self::checkAnswer($a3,$answerfromstudent);
+                    if(self::checkAnswer($a3,$answerfromstudent) == 0){
+                        $answerfailed[] = $answerfromstudent;
+                    }
                 }
                 if(isset($json['questiondata']['question'][$questioncount]['answers'][4])){
                     $ccount +=1;
@@ -113,31 +136,47 @@ class ExamController extends BaseController
 
 
                     $acception[] = self::checkAnswer($a4,$answerfromstudent);
+                    if(self::checkAnswer($a4,$answerfromstudent) == 0){
+                        $answerfailed[] = $answerfromstudent;
+                    }
                 }
                     // var_dump($acception);
-                    echo "<br><br><br>";
-                    $resulttt  = array_unique($acception);
-                    $counted =array_count_values($acception);
+                    // echo "<br><br><br>";
+                $resulttt  = array_unique($acception);
+                $counted =array_count_values($acception);
                     // var_dump($resulttt);
-                     if($counted[1] == $ccount){
-                        $markscount +=$marksinc;
-                     }
-                    unset($acception);
+                if(isset($counted[1])){
+                   if($counted[1] == $ccount){                    
+                    $markscount +=$marksinc;
+                } else {
+                    $questionfailed['questions'][$questioncount] =$json['questiondata']['questions'][$questioncount];
+                    $questionfailed['questions_fail'][$questioncount] = $answerfailed;
+                    // dd($answerfailed);
+                    unset($answerfailed);
+                }
+            }
+
+                unset($acception);
                 // foreach($acception as $ac){
                 //     echo $ac;
                 // }
             }
-        
-        $questioncount++;
         }
+        
+        // $questioncount++;
+        }
+        $failedquestions = json_encode($questionfailed);
+                   file_put_contents(app_path().'/files/assessment/'.$assessment->id.'/exam-'.$exam->id.'/questionfailed.json',$failedquestions);
+            // dd($questioncount);
+        // dd($markscount);
         $assessment->marks = $markscount;
         $assessment->save();
         // var_dump($json);
 
 
         //APPLICATION LOGIC TO BE IMPLEMENTED
-		return Redirect::to(URL::previous());
-	}
+        return Redirect::to(URL::previous());
+    }
     private function checkAnswer($questionanswer,$studentanswer){
         if(in_array($questionanswer,$studentanswer))
         {
@@ -203,6 +242,8 @@ class ExamController extends BaseController
             // var_dump(app_path().'/files/assessment/'.$nassessment->id.'/exam-'.$tid.'/');
             File::makeDirectory(app_path().'/files/assessment/'.$nassessment->id.'/exam-'.$eid ,0777,true);
             file_put_contents(app_path().'/files/assessment/'.$nassessment->id.'/exam-'.$exam->id.'/'.$encryptedpath.'.json',$answerdata);
+            $failedquestions = [];
+             file_put_contents(app_path().'/files/assessment/'.$assessment->id.'/exam-'.$exam->id.'/questionfailed.json',$failedquestions);
             return Redirect::to('/');
             // var_dump($decryptedhash);
 
@@ -358,12 +399,15 @@ class ExamController extends BaseController
 
 
         $data = array();
+        $qrealcount=0;
         for($question =1;$question <= $questioncount;){
             // $data['questiondata']['question'][$question]['answers'] = 'answers';
             // echo $input['question_'.$question].'<br>';
             // var_dump($input['checkbox_'.$question]);
             // echo "'<br>';";
             if(isset($input['question_'.$question])){
+
+            $qrealcount++;
             $data['questiondata']['questions'][$question] = $input['question_'.$question];
             for($checkbox=1;$checkbox <=4;$checkbox++){
                 $data['questiondata']['question'][$question]['checkboxdata'][$checkbox] = $input['checkbox_'.$question.'_'.$checkbox];
@@ -402,7 +446,7 @@ class ExamController extends BaseController
         file_put_contents(app_path().'/files/exam-'.$exam->id.'/'.$encryptedpath.'.json',$encoded);
         
         $exam->hash = $encryptedpath;
-        $exam->totalquestions = $question;
+        $exam->totalquestions = $qrealcount;
         $exam->save();
         // var_dump($data)
 		return Redirect::to(URL::previous());
