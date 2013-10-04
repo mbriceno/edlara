@@ -14,32 +14,32 @@ input[type="text"]{
  transition: width 0.5s ease-out;
 }
 input[type="text"]:hover{  
- width: 215px !important;
+ width: 200px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input[type="text"]:focus{  
- width: 215px !important;
+ width: 200px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 
 input#search {
- width: 100px !important;
+ width: 150px !important;
  -moz-transition: width 0.5s ease-out;
  -webkit-transition: width 0.5s ease-out;
  transition: width 0.5s ease-out;
 }
 input#search:hover {
- width: 200px !important;
+ width: 250px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input#search:focus {
- width: 200px !important;
+ width: 250px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
@@ -268,5 +268,65 @@ only screen and (max-width: 760px),
     padding-right: 10px; 
     white-space: nowrap;
   }
+   input[type="text"]{  
+ width: 60%!important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
+  input[type="text"]:focus{  
+ width: 85% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
+  input[type="text"]:hover{  
+ width: 85% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
+
   
+}
+.dataTables_filter input {
+    display: inline-block;
+    margin-bottom: 0px;
+    border:1px solid #cccccc;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+.dataTables_length select{
+  display: inline-block;
+  margin-bottom: 10px;
+  padding:3px;
+  
+}
+
+
+.checkboxdata {
+  padding:10px;
+  margin-bottom: 10px;
+}
+.examquestion {
+  padding:10px;
+  margin-bottom: 10px;
+}
+input[type="text"].checkboxdata{  
+ width: 80% !important;
+ -moz-transition: width 0.5s ease-out;
+ -webkit-transition: width 0.5s ease-out;
+ transition: width 0.5s ease-out;
+}
+input[type="text"].checkboxdata:hover{  
+ width: 93% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
+input[type="text"].checkboxdata:focus{  
+ width: 93% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
 }
