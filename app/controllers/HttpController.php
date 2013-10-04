@@ -31,6 +31,15 @@ class HttpController extends BaseController {
                         "sPagination":"bootstrap"
                    
                 });
+            });$(document).ready(function(){
+                $(\'#questionfail\').dataTable({
+                    "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+                        "oLanguage": {
+                        "sLengthMenu": "_MENU_ '.' Failures per page"
+                        },
+                        "sPagination":"bootstrap"
+                   
+                });
             });');
         	return $theme->scope('assessment.update', $view)->render();
             // return View::make('dashboard.assessments.update')->with('id',$id);
