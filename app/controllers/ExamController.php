@@ -200,7 +200,7 @@ class ExamController extends BaseController
                 'subject'=>'required|exists:subjects,id',
                 ]);
             if($validator->fails()){
-                return "EXAM PAPER HAS BEEN MODIFIED or SUBMITTED AGAIN.Click here to go to <a href='".Setting::get('app.url')."'>HOME PAGE</a>. ANSWERS NOT ACCEPTED.";
+                return "EXAM PAPER HAS BEEN MODIFIED or SUBMITTED AGAIN.Click here to go to <a href='".Setting::get('app.url')."'>HOME PAGE</a>. ANSWERS ARE NOT ACCEPTED.";
             }
             $tutorial = Tutorials::findOrFail($tid);
             $exam = Exams::find($eid);
@@ -208,6 +208,7 @@ class ExamController extends BaseController
 
             $assessment = new Assessments;
             $assessment->title = $tutorial->name.' Exam For '.$exam->title;
+            $assessment->description = $exam->title.' exam done for '.$tutorial->name.' by '.Sentry::getUser()->first_name.' '.Semtry::getUser()->last_name;
             $assessment->assessmenttype = "exam";
             $assessment->tutorialid = $tid;
             $assessment->studentid = Sentry::getUser()->id;
@@ -249,7 +250,7 @@ class ExamController extends BaseController
 
         }
         else {
-            return "ACTION NOT AUTHORISED";
+            return Redirect::to(URL::previous());
         }
 	}
 	public function createExam(){

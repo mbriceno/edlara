@@ -12,7 +12,9 @@
 */
 require_once('viewcomposer.php');
 require_once('staticfunctions.php');
+
 define('ROOT', 1);
+
 //Authencticating User with Controller
 Route::post('login', array('before' => 'csrf','uses' => 'UserController@authenticate'));
 Route::get('login', function () {
@@ -40,54 +42,21 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     Route::get('teachers', array('before'=>'admin','uses'=>'DashboardController@teachers'));
     Route::get('students', array('before'=>'admin','uses'=>'DashboardController@students'));
     Route::get('exams',array('before'=>'teacher','uses'=>'DashboardController@exams'));
+    Route::get('subjects',array('before'=>'admin','uses'=>'DashboardController@subjects'));
     Route::get('tutorials', array('before'=>'teacher','uses'=>'DashboardController@tutorials'));
     Route::get('assessments',array('before'=>'teacher','uses'=>'DashboardController@assessments'));
     Route::get('/',array('as'=>'dashboard','before'=>'teacher','uses'=>'DashboardController@dash'));
 
-    Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));
-
-    
-    Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'));
-    Route::post('user/{id}/update', array('before'=>'admin','uses'=>'UserController@update'));
-
-    
 
 
     Route::get('tutorial/edit/{id?}','TutorialsController@index')->where('id', '[0-9]+')->before('teacher');
-
-    Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
-
     Route::get('tutorial/{mode}/{id}',array('before'=>'teacher','uses'=>'TutorialsController@modder'));
-
     Route::get('tutorial/update/{id}/{attachmentname}/{mode}',array('before'=>'teacher','uses'=>'TutorialsController@attachmentHandler'));
-
-
-
-
     Route::get('assessment/{id}',array('before'=>'teacher','uses'=>'HttpController@assessmentupdateget'));
-    Route::post('assessment/{id}',array('before'=>'teacher','uses'=>'AssessmentController@teacherUpdate'));
-
-
-
-
-
-
-    Route::get('subjects',array('before'=>'admin',function(){
-        return View::make('dashboard.subjects');
-    }));
+    Route::get('/assessment-{aid}/exam-{eid}/markup',array('before'=>'teacher','uses'=>'ExamController@markExam'));
     
-    Route::any('subject/edit/{id}/{mode}',array('before'=>'admin','uses'=>'SubjectController@modder'));
-
-
-
-   
-
 
     Route::get('/exam/edit/{id}',array('before'=>'teacher','uses'=>'HttpController@examupdateget'));
-    Route::post('/exam/edit/0',array('before'=>'csrf|teacher','uses'=>'ExamController@createExam'));
-    
-    Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
-
     Route::get('/exam/view/{id}',array('before'=>'teacher',function($id){
         if(Exams::find($id)){
             return View::make('dashboard.exams.view')->with('id',$id);
@@ -99,8 +68,21 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
         $exam->delete();
         return Redirect::to(URL::previous());
     }));
-    Route::get('/assessment-{aid}/exam-{eid}/markup',array('before'=>'teacher','uses'=>'ExamController@markExam'));
 
+    Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'));
+
+
+    Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
+    Route::post('assessment/{id}',array('before'=>'teacher','uses'=>'AssessmentController@teacherUpdate'));
+
+    Route::post('user/{id}/update', array('before'=>'admin','uses'=>'UserController@update'));
+
+    Route::post('/exam/edit/0',array('before'=>'csrf|teacher','uses'=>'ExamController@createExam'));
+    Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
+    
+    Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));
+
+    Route::any('subject/edit/{id}/{mode}',array('before'=>'admin','uses'=>'SubjectController@modder'));
 })->before('auth');
 
 

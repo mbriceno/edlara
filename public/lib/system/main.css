@@ -14,32 +14,32 @@ input[type="text"]{
  transition: width 0.5s ease-out;
 }
 input[type="text"]:hover{  
- width: 200px !important;
+ width: 215px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input[type="text"]:focus{  
- width: 200px !important;
+ width: 215px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 
 input#search {
- width: 150px !important;
+ width: 100px !important;
  -moz-transition: width 0.5s ease-out;
  -webkit-transition: width 0.5s ease-out;
  transition: width 0.5s ease-out;
 }
 input#search:hover {
- width: 250px !important;
+ width: 200px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input#search:focus {
- width: 250px !important;
+ width: 200px !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
@@ -55,6 +55,7 @@ a:hover {
 }
 .btn {
 	border-radius: 3px;
+  margin:2.5px;
 }
 .adminbtn {
   vertical-align: middle;
@@ -234,11 +235,34 @@ ul.dashboard-list > li {
 .icon16 {
   font-size: 16px;
 }
-
+.checkboxpick{
+    margin:10px;
+  }
 @media 
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
 
+  .checkboxdata{
+    margin:10px;
+  }
+  input[type="text"]{  
+ width: 80% !important;
+ -moz-transition: width 0.5s ease-out;
+ -webkit-transition: width 0.5s ease-out;
+ transition: width 0.5s ease-out;
+}
+input[type="text"]:hover{  
+ width: 90% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
+input[type="text"]:focus{  
+ width: 90% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
   /* Force table to not be like tables anymore */
   table, thead, tbody, th, td, tr { 
     display: block; 
@@ -268,65 +292,65 @@ only screen and (max-width: 760px),
     padding-right: 10px; 
     white-space: nowrap;
   }
-   input[type="text"]{  
- width: 60%!important;
- -moz-transition: width 1s ease-out;
- -webkit-transition: width 1s ease-out;
- transition: width 1s ease-out;
-}
-  input[type="text"]:focus{  
- width: 85% !important;
- -moz-transition: width 1s ease-out;
- -webkit-transition: width 1s ease-out;
- transition: width 1s ease-out;
-}
-  input[type="text"]:hover{  
- width: 85% !important;
- -moz-transition: width 1s ease-out;
- -webkit-transition: width 1s ease-out;
- transition: width 1s ease-out;
-}
-
-  
-}
-.dataTables_filter input {
-    display: inline-block;
-    margin-bottom: 0px;
-    border:1px solid #cccccc;
-    background-color: #ffffff;
-    border-radius: 3px;
-}
-.dataTables_length select{
-  display: inline-block;
-  margin-bottom: 10px;
-  padding:3px;
   
 }
 
+.checkboxpick {
+  float:left;
+  margin:2.5% !important;
+  margin-top: 6% !important;
+  display: inline-block !important;
+}
 
-.checkboxdata {
-  padding:10px;
-  margin-bottom: 10px;
-}
-.examquestion {
-  padding:10px;
-  margin-bottom: 10px;
-}
+/*@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 992px)*/
+
+@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 992px)  
+            {
+              input[type="text"]{  
+               width: 55% !important;
+              }
+              input[type="text"]:hover{  
+               width: 82% !important;
+              }
+              input[type="text"]:focus{  
+               width: 82% !important;
+              }
+
+              .checkboxpick {
+                float:left;
+                margin:2% !important;
+                margin-top: 2.5% !important;
+                display: inline-block !important;
+              }
+
+              .navbar-brand {
+                font-size: 7vmin !important;
+              } 
+              table#questionfail  tr  td:nth-of-type(1):before { content: "Question Number :- "; }
+              table#questionfail  tr  td:nth-of-type(2):before { content: "Question :- "; }
+              table#questionfail  tr  td:nth-of-type(3):before { content: "Answer(s) :- "; }
+            }
+
 input[type="text"].checkboxdata{  
  width: 80% !important;
- -moz-transition: width 0.5s ease-out;
- -webkit-transition: width 0.5s ease-out;
- transition: width 0.5s ease-out;
+ margin:3%;
 }
 input[type="text"].checkboxdata:hover{  
- width: 93% !important;
- -moz-transition: width 1s ease-out;
- -webkit-transition: width 1s ease-out;
- transition: width 1s ease-out;
+ width: 90% !important;
+ margin:3%;
 }
 input[type="text"].checkboxdata:focus{  
- width: 93% !important;
- -moz-transition: width 1s ease-out;
- -webkit-transition: width 1s ease-out;
- transition: width 1s ease-out;
+ width: 90% !important;
+ margin:3%;
+}input[type="text"].examquestion{  
+ width: 80% !important;
+ margin:3%;
+}
+input[type="text"].examquestion:hover{  
+ width: 90% !important;
+ margin:3%;
+}
+input[type="text"].examquestion:focus{  
+ width: 90% !important;
+ margin:3%;
 }

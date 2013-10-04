@@ -82,9 +82,11 @@ class DashboardController extends BaseController
                     td:nth-of-type(3):before { content: "Related Tutorial :- "; }
                     td:nth-of-type(4):before { content: "Subject :- "; }
                     td:nth-of-type(5):before { content: "Grade :- "; }
+
                     td:nth-of-type(6):before { content: "Submitted To :- "; }
                     td:nth-of-type(7):before { content: "Submission Date :- "; }
-                    td:nth-of-type(8):before { content: "Submitted By :- "; }
+                    td:nth-of-type(8):before { content: "Score :- "; }
+                    td:nth-of-type(9):before { content: "Submitted By :- "; }
                 }');
 
         return $theme->scope('assessments', $view)->render();

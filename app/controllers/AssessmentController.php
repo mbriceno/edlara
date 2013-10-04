@@ -96,25 +96,22 @@ class AssessmentController extends BaseController {
 			return Redirect::to(URL::previous());
 		}
 		$validator = Validator::make(Input::all(),array(
-			'id'=>'required',
+			'id'=>'required|exists:assessments,id,studentid,'.$userid,
 			'title'=>'required|max:128|min:5',
 			'description'=>'max:1024',
 			'related_tutorial'=>"required|exists:assessments,tutorialid,studentid,".$userid,
-			'submitted_to'=>'required',
-			'subject'=>'required',
+			'submitted_to'=>'required|exists:users,id',
+			'subject'=>'required|exists:subjects,id',
 			'assessment_type'=>'required'
 			),$messages);
 		if($validator->fails()){
 			Input::flash();
-			return Redirect::to('/assessment/submit')->withErrors($validator);
+			return Redirect::to(URL::previous())->withErrors($validator);
 		}
 		$assessment = Assessments::find($id);
 		$assessment->title = Input::get('title');
 		$assessment->description = Input::get('description');
 		$assessment->assessmenttype = Input::get('assessment_type');
-		$assessment->tutorialid = Input::get('related_tutorial');
-		$assessment->teacherid = Input::get('submitted_to');
-		$assessment->subjectid = Input::get('subject');
 		$assessment->studentid = Sentry::getUser()->id;
 		$assessment->save();
 		$newassessment = DB::table('assessments')->orderby('id','desc')->first();
@@ -145,7 +142,7 @@ class AssessmentController extends BaseController {
 	public function download($id,$file){
 		$tutorial = Assessments::find($id);
 		$studentid = $tutorial->studentid;
-		if($studentid == Sentry::getUser()->id){
+		if($studentid == Sentry::getUser()->id || $tutorial->teacherid = Sentry::getUser()->id){
 			return Response::download(app_path().'/attachments/assessment-'.$id.'/'.$file);
 		}
 		else

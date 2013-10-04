@@ -13,7 +13,7 @@ defined('ROOT' )|| die('Restricted Access');
                         <th>Grade</th>
                         <th>Submitted To</th>
                         <th>Submission Date</th>
-                        <th>Score out of 20</th>
+                        <th>Score out of 100</th>
                         <th>Submitted By</th>
                     </tr>
                 </thead>
@@ -38,7 +38,9 @@ defined('ROOT' )|| die('Restricted Access');
                         echo "<a href='/assessment/".$assessment->id."/'>".$assessment->title.'</a>';
                         echo "</td>";
                         echo "<td>";
+                        echo "<a href='/tutorial/view/".$tutorial->id."''>";
                         echo $tutorial->name;
+                        echo "</a>";
                         echo "</td>";
                         echo "<td>";
                         echo $subject->subjectname;

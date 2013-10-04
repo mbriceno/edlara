@@ -60,10 +60,11 @@ table {
                             echo $errors->first('related_tutorial');
                             echo "</div>";
                     }
+                    echo $errors->first();
                     echo Form::open(array('url' => '/assessment/update/'.$id,'method' => 'POST','class'=>'form-horizontal','files'=>'true'));
                     
                     echo Form::label('id','ID',array('class'=>'pull-left','style'=>'margin:10px;'));
-                    echo Form::text('id',$assessment->id,array('class'=>'pull-right disabled uneditable-input','style'=>'margin:5px;','disabled'));
+                    echo Form::text('id',$assessment->id,array('class'=>'pull-right disabled uneditable-input','style'=>'margin:5px;','readonly'));
                     echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
                     echo Form::text('title',$assessment->title,array('class'=>'pull-right','placeholder'=>'Title of the Assessment','style'=>'clear:right;margin:5px;'));
                     echo Form::label('description','Description',array('class'=>'pull-left','style'=>'margin:10px;clear:left;'));
@@ -87,9 +88,10 @@ table {
                     $subject = Subject::findOrFail($subjectid);
                     $subjectlist = [$subjectid => $subject->subjectname];
                     echo Form::select('subject',$subjectlist,$subjectid,array('class'=>'pull-right disabled uneditable-input','style'=>'clear:right;margin:5px;height:30px;'));
-                    if(!$assessment->assessmenttype == 'exam'){
+                    if($assessment->assessmenttype !== 'exam'){
                         echo Form::label('assessment_type','Assessment Type',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
                     $assessment_types = ['presentation'=>"Presentation",'document'=>'Documentation'];
+                    $examdata = unserialize(Tutorials::find($assessment->tutorialid)->exams);
                     echo Form::select('assessment_type',$assessment_types,'presentation',array('class'=>'pull-right','style'=>'clear:right;margin:5px;'));
                     
                     echo Form::label('attachments','Attachments',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
@@ -156,6 +158,56 @@ table {
                                     </tfoot>
                                 </table>
                                                 </div>
+                                                 <?php
+                             $examdata = unserialize($tutorial->exams);
+                            if($assessment->assessmenttype == 'exam'){
+                            ?>
+                            <div class="clearfix visible-sm visible-xs"></div>
+                            <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <h4>Table of Failed Questions and Answers by Student</h4>
+                            <table id="questionfail" class="table table-striped table-bordered bootstrap-datatable datatable"> 
+                            <thead>
+                                <tr>
+                                    <th>Question No</th>
+                                    <th>Question</th>
+                                    <th>Answer(s)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            
+                            $examdata = unserialize(Tutorials::find($assessment->tutorialid)->exams);
+                            $wronganswers = File::get(app_path().'/files/assessment/'.$assessment->id.'/exam-'.$examdata['id'].'/questionfailed.json');
+                            $examy = Exams::findOrFail($examdata['id']);
+                            $hash = $examy->hash;
+
+                            $wronganswers = json_decode($wronganswers,true);
+                            if(isset($wronganswers['questions'])){
+                            foreach($wronganswers['questions'] as $key =>$value){
+                                echo "<tr><td>".$key."</td>"."<td>".$value."</td>";
+                                echo "<td>";
+
+                                $examdata_encoded =  File::get(app_path().'/files/exam-'.$examy->id.'/'.$hash.'.json');
+                                $examdata = json_decode($examdata_encoded,true);
+                                foreach($wronganswers['questions_fail'][$key][0] as $answerr){
+                                    if($answerr != 0){
+                                        echo "<b>".$answerr."</b>. ";
+                                        echo $examdata['questiondata']['question'][$key]['checkboxdata'][$answerr]."<br>";
+                                    }
+                                }
+                                echo "</td>";
+                                echo "</tr>";
+                            }}
+
+                            ?>
+                                    
+                            </tbody>
+                            </table>
+                            </div>
+                            <?php
+}
+
+                            ?></div>
             </div>
         </div>
         
