@@ -78,25 +78,25 @@ $exam = Exams::find($id);
                 echo '<input class="examquestion form-control" id="examdatac" name="question_'.$qc.'" placeholder="Place the MCQ Question '.$qcc.' Here" type="text" value="'.Input::old('question_'.$qc,$question).'" required>';
                 echo "</div>\n";
                 echo "\n";
-                echo "<div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>";
+                echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
                 echo "\n";
                 echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="1" type="checkbox" '.$checked1.'>
                 <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_1" placeholder="Place the Choice 1 here" type="text" value="'.Input::old('checkbox_'.$qc.'_1',$examdata['questiondata']['question'][$qc]['checkboxdata'][1]).'" required>';
                 echo "</div>";
-                echo "<div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>";
+                echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
                 echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="2" type="checkbox" '.$checked2.'>
                 <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_2" placeholder="Place the Choice 2 here" type="text" value="'.Input::old('checkbox_'.$qc.'_2',$examdata['questiondata']['question'][$qc]['checkboxdata'][2]).'" required>';
                 echo "\n";
                 echo "</div>";
                 echo "\n";
-                echo "<div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>";
+                echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
                 echo "\n";
                 echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="3" type="checkbox" '.$checked3.'>
                 <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_3" placeholder="Place the Choice 3 here" type="text" value="'.Input::old('checkbox_'.$qc.'_3',$examdata['questiondata']['question'][$qc]['checkboxdata'][3]).'" required>';
                 echo "\n";
                 echo "</div>";
                 echo "\n";
-                echo "<div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>";
+                echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
                 echo "\n";
                 echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="4" type="checkbox" '.$checked4.'>
                 <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_4" placeholder="Place the Choice 4 here" type="text" value="'.Input::old('checkbox_'.$qc.'_4',$examdata['questiondata']['question'][$qc]['checkboxdata'][4]).'" required>';
