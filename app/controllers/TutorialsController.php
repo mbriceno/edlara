@@ -3,10 +3,53 @@
 class TutorialsController extends BaseController {
     public function index($id){
         if($id == 0){
-            return View::make('dashboard.tutorials.create')->with('id',$id);
+
+            $theme = Theme::uses('dashboard')->layout('default');
+
+            $view = array(
+                'name' => 'Dashboard Tutorial',
+                'id'=>$id
+            );
+            $theme->breadcrumb()->add([
+                ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+                ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials'],
+                ['label'=>$id,'url'=>Setting::get('system.dashurl').'/tutorial/0/edit']
+            ]);
+            $theme->appendTitle(' - New Tutorial');
+            $theme->asset()->add('ckeditor','/js/ckeditor/ckeditor.js');
+            $theme->asset()->container('footer')->add('boostrap-switch-js','/lib/bswitch/js/bootstrap-switch.min.js');
+            $theme->asset()->add('bootstrap-switch', '/lib/bswitch/css/bootstrap-switch.css');
+            $theme->asset()->add('bootstrap-switch-fonts', '/lib/bswitch/css/flat-ui-fonts.css',array('bootstrap-switch'));
+            return $theme->scope('tutorial.create', $view)->render();
         }
         else{
-            return View::make('dashboard.tutorials.edit')->with('id',$id);
+            $theme = Theme::uses('dashboard')->layout('default');
+
+            $view = array(
+                'name' => 'Dashboard Tutorial',
+                'id'=>$id
+            );
+            $theme->breadcrumb()->add([
+                ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+                ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials'],
+                ['label'=>$id,'url'=>Setting::get('system.dashurl').'/tutorial/'.$id.'/edit']
+            ]);
+            $theme->appendTitle(' - Edit Tutorial');
+            $theme->asset()->container('datatable')->writeScript('inline-script','$(document).ready(function(){
+    $(\'#attachments\').dataTable({
+        "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+            "oLanguage": {
+            "sLengthMenu": "_MENU_ '.' Attachments per page"
+            },
+            "sPagination":"bootstrap"
+       
+    });
+});');
+            $theme->asset()->add('ckeditor','/js/ckeditor/ckeditor.js');
+            $theme->asset()->container('footer')->add('boostrap-switch-js','/lib/bswitch/js/bootstrap-switch.min.js');
+            $theme->asset()->add('bootstrap-switch', '/lib/bswitch/css/bootstrap-switch.css');
+            $theme->asset()->add('bootstrap-switch-fonts', '/lib/bswitch/css/flat-ui-fonts.css',array('bootstrap-switch'));
+            return $theme->scope('tutorial.edit', $view)->render();
         }
     }
 

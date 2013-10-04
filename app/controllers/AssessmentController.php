@@ -199,6 +199,7 @@ class AssessmentController extends BaseController {
 			'remarks'=>'required|max:1024|min:4'
 			]);
 		if($validator->fails()){
+			Input::flash();
 			return Redirect::to(URL::previous())->withErrors($validator);
 		}
 
