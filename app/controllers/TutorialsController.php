@@ -164,11 +164,13 @@ class TutorialsController extends BaseController {
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
         $examt = array();
+        // Log::error(Input::get('examstruth'));
         if(Input::get('examstruth') == 'on'){
             $examt['true']=true;
             $checkexamssubmit = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE  `id` = '.Input::get('exams',0).''));
-            if(!$checkexamssubmit){
-                $examt['id']=Input::get('exams',0);
+            // Log::warning($checkexamssubmit);
+            if($checkexamssubmit){
+                $examt['id']=Input::get('exams');
             }
             else {
                 $examt['true']=false;
@@ -188,8 +190,8 @@ class TutorialsController extends BaseController {
         {
         $tutorial->published    =   0;
         }
-        Log::error(Input::get('examstruth'));
-        Log::error(Input::get('published'));
+        // Log::error(Input::get('examstruth'));
+        // Log::error(Input::get('published'));
         if(Input::hasFile('attachment')){
             $files =  Input::file('attachment');
             foreach($files as $file){
