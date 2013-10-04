@@ -1,26 +1,7 @@
 <?php
 $examid = Session::get('examid');
 $exam = Exams::find($examid);
-function objectToArray($d) {
-        if (is_object($d)) {
-            // Gets the properties of the given object
-            // with get_object_vars function
-            $d = get_object_vars($d);
-        }
- 
-        if (is_array($d)) {
-            /*
-            * Return array converted to object
-            * Using __FUNCTION__ (Magic constant)
-            * for recursive call
-            */
-            return array_map(__FUNCTION__, $d);
-        }
-        else {
-            // Return array
-            return $d;
-        }
-    }
+
     Session::put('halt_tutorial_except',$id);
 $tohash = 'tutorial-'.$id;
 $encrypted = Crypt::encrypt($tohash);
@@ -74,9 +55,8 @@ $encrypted = Crypt::encrypt($tohash);
                             $examdata = json_decode($examdata_encoded);
                             
                             $examdata = objectToArray($examdata);
-                            foreach($examdata['questiondata']['questions'] as $question){
+                            foreach($examdata['questiondata']['questions'] as $qc => $question){
 
-                                $qc = Session::get('questiondata_key',1);
         echo '<div class="container-fluid">
         <div class="row-fluid">
         <div class="span12">

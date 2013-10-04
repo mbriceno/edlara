@@ -70,6 +70,12 @@
                             }
                             return 0;
                         }
+
+
+                        
+                       
+                        $testcount = Assessments::whereRaw('`tutorialid` = ? and `studentid` = ?',[$tutorial->id,Sentry::getUser()->id])->count();
+    
                         $usere = Sentry::getUser();
                         $usergroup =  $usere->getGroups();
                         $usergroupe = json_decode($usergroup,true);
@@ -79,18 +85,20 @@
                         $groupname = $group->name;
                         if($groupname == 'teachers'){
                             $user = Teacher::findOrFail($usere->id);
-                            $truth = checkSubject($subjects,$tutorial->subjectid);
+                            $ssubjects = $user->extra;
+                            $subjectstodo = unserialize($ssubjects);
+                            if($subjectstodo != null){
+                                $truth = checkSubject($subjectstodo,$tutorial->subjectid);
+                            }
                         }
                         elseif($groupname == 'students'){
-                            $user = Student::findOrFail($usere->id);
-                            $truth = checkSubject($subjects,$tutorial->subjectid);
+                            $user = Student::findOrFail($usere->id);                            
+                            $ssubjects = $user->extra;
+                            $subjectstodo = unserialize($ssubjects);
+                            if($subjectstodo != null){
+                                $truth = checkSubject($subjectstodo,$tutorial->subjectid);
+                            }
                         }
-
-                        // $user = Sentry::getUser();
-                        // $student = Student::findOrFail($user->id);
-                        $ssubjects = $user->extra;
-                        $subjects = unserialize($ssubjects);
-                        $testcount = Assessments::whereRaw('`tutorialid` = ? and `studentid` = ?',[$tutorial->id,Sentry::getUser()->id])->count();
                         if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('students')) && $testcount ==0){
                             if($exams['true']){
                                 echo "<a href='/tutorial-".$tutorial->id."/exam-".$exams['id'].'/'.$encrypted."' class='btn btn-info btn-success'>Do Exam</a>";
