@@ -20,7 +20,7 @@ defined('ROOT' )|| die('Restricted Access');
       // Create the data table.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Assessments');
-      data.addColumn('number', 'Marks or Score Gained at the Tutorial');
+      data.addColumn('number', 'Marks or Score Gained at the Exam or Assessment');
       <?php
       $assessments  =DB::select(DB::raw('SELECT `title`,`marks` FROM `assessments` WHERE (`created_at` >= CURDATE() - INTERVAL 12 MONTH )AND (`studentid` = '.$id.')'));;
       echo "data.addRows([";
