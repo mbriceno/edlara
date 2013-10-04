@@ -51,8 +51,14 @@ class ExamController extends BaseController
         // echo $bystudent;
         // echo json_decode($answers);
         $json = json_decode($answers,true);
-        $markscount = 0;
-        $marksinc = 100/$realcount;
+        settype($realcount, 'float');
+        $markscount = 0.0;
+        settype($markscount, 'float');
+        $marksinc = 100.0/$realcount;
+// dd($realcount);
+// // dd($marksinc);
+//         dd($markscount);
+        settype($realcount, 'integer');
         $studentanswer = json_decode($bystudent,true);
         $questioncount = Session::put('questioncount_key',1);
         // var_dump($studentanswer['answers'][2]);
@@ -178,6 +184,10 @@ class ExamController extends BaseController
                 $data['answers'][$qc][2]='';
                 $data['answers'][$qc][3]='';
                 $data['answers'][$qc][4]='';
+                if(!isset($input['checkbox_'.$qc])){
+                    $qc++;
+                    continue;
+                }
                 foreach($input['checkbox_'.$qc] as $answer){
                     // var_dump($answer);
                     $qu = Session::get('checkboxcount',0);                    
@@ -296,19 +306,38 @@ class ExamController extends BaseController
         $questioncount = Input::get('questioncount');
         var_dump($questioncount);
         for($qc = 1;$qc <=$questioncount; $qc++){
-            $rules['question_'.$qc] = 'required|min:4|max:1024';
+            if(Input::get('questionpass'.$qc) == $qc){
+                $qc++;
+                continue;
+            }
+            else {
+                if(Input::get('question_'.$qc) != NULL){
+            $rules['question_'.$qc] = 'min:4|max:1024';            
             $rules['checkbox_'.$qc] = 'required';
             $rules['checkbox_'.$qc.'_1']='required|min:1|max:1024';
             $rules['checkbox_'.$qc.'_2']='required|min:1|max:1024';
             $rules['checkbox_'.$qc.'_3']='required|min:1|max:1024';
             $rules['checkbox_'.$qc.'_4']='required|min:1|max:1024';
+                }
+            }
         }
         for($qc = 1;$qc <=$questioncount; $qc++){
+            if(Input::get('questionpass'.$qc) == $qc){
+
+                $qc++;
+                continue;
+            }
+
+            else {
+                if(Input::get('question_').$qc != NULL){
             $messages['question_'.$qc.'.required'] = 'Question '.$qc." is required";
             $messages['checkbox_'.$qc.'_1'.'.required']='The value for '.$qc.' Checkbox 1 is missing.';
             $messages['checkbox_'.$qc.'_2'.'.required']='The value for '.$qc.' Checkbox 2 is missing.';
             $messages['checkbox_'.$qc.'_3'.'.required']='The value for '.$qc.' Checkbox 3 is missing.';
             $messages['checkbox_'.$qc.'_4'.'.required']='The value for '.$qc.' Checkbox 4 is missing.';
+
+                }
+            }
         }
         $validator = Validator::make(Input::all(),$rules,$messages);
         if($validator->fails()){
@@ -334,6 +363,7 @@ class ExamController extends BaseController
             // echo $input['question_'.$question].'<br>';
             // var_dump($input['checkbox_'.$question]);
             // echo "'<br>';";
+            if(isset($input['question_'.$question])){
             $data['questiondata']['questions'][$question] = $input['question_'.$question];
             for($checkbox=1;$checkbox <=4;$checkbox++){
                 $data['questiondata']['question'][$question]['checkboxdata'][$checkbox] = $input['checkbox_'.$question.'_'.$checkbox];
@@ -355,7 +385,15 @@ class ExamController extends BaseController
             else {
                 $data['questiondata']['question'][$question]['answers'] = $input['checkbox_'.$question][0];
             }
-            $question++;
+
+                $question++;
+            }
+            else {
+                if(Input::get('questionpass'.$question)==$question){
+                    // $question++;
+                }
+                $question++;
+            }
         }
         // var_dump($data);
         $encoded = json_encode($data);
@@ -364,8 +402,9 @@ class ExamController extends BaseController
         file_put_contents(app_path().'/files/exam-'.$exam->id.'/'.$encryptedpath.'.json',$encoded);
         
         $exam->hash = $encryptedpath;
-        $exam->totalquestions = Input::get('questioncount');
+        $exam->totalquestions = $question;
         $exam->save();
+        // var_dump($data)
 		return Redirect::to(URL::previous());
 	}
 	private function prepareExam(){
