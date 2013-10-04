@@ -55,6 +55,7 @@ a:hover {
 }
 .btn {
 	border-radius: 3px;
+  margin:2.5px;
 }
 .adminbtn {
   vertical-align: middle;
@@ -234,11 +235,34 @@ ul.dashboard-list > li {
 .icon16 {
   font-size: 16px;
 }
-
+.checkboxpick{
+    margin:10px;
+  }
 @media 
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
 
+  .checkboxdata{
+    margin:10px;
+  }
+  input[type="text"]{  
+ width: 80% !important;
+ -moz-transition: width 0.5s ease-out;
+ -webkit-transition: width 0.5s ease-out;
+ transition: width 0.5s ease-out;
+}
+input[type="text"]:hover{  
+ width: 90% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
+input[type="text"]:focus{  
+ width: 90% !important;
+ -moz-transition: width 1s ease-out;
+ -webkit-transition: width 1s ease-out;
+ transition: width 1s ease-out;
+}
   /* Force table to not be like tables anymore */
   table, thead, tbody, th, td, tr { 
     display: block; 
@@ -271,9 +295,34 @@ only screen and (max-width: 760px),
   
 }
 
+.checkboxpick {
+  float:left;
+  margin:2.5% !important;
+  margin-top: 6% !important;
+  display: inline-block !important;
+}
 
-@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
+/*@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 992px)*/
+
+@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 992px)  
             {
+              input[type="text"]{  
+               width: 55% !important;
+              }
+              input[type="text"]:hover{  
+               width: 82% !important;
+              }
+              input[type="text"]:focus{  
+               width: 82% !important;
+              }
+
+              .checkboxpick {
+                float:left;
+                margin:2% !important;
+                margin-top: 2.5% !important;
+                display: inline-block !important;
+              }
+
               .navbar-brand {
                 font-size: 7vmin !important;
               } 
@@ -282,4 +331,26 @@ only screen and (max-width: 760px),
               table#questionfail  tr  td:nth-of-type(3):before { content: "Answer(s) :- "; }
             }
 
-              
+input[type="text"].checkboxdata{  
+ width: 80% !important;
+ margin:3%;
+}
+input[type="text"].checkboxdata:hover{  
+ width: 90% !important;
+ margin:3%;
+}
+input[type="text"].checkboxdata:focus{  
+ width: 90% !important;
+ margin:3%;
+}input[type="text"].examquestion{  
+ width: 80% !important;
+ margin:3%;
+}
+input[type="text"].examquestion:hover{  
+ width: 90% !important;
+ margin:3%;
+}
+input[type="text"].examquestion:focus{  
+ width: 90% !important;
+ margin:3%;
+}
