@@ -96,7 +96,7 @@ class AssessmentController extends BaseController {
 			return Redirect::to(URL::previous());
 		}
 		$validator = Validator::make(Input::all(),array(
-			'id'=>'required',
+			'id'=>'required|exists:assessments,id,studentid,'.$userid,
 			'title'=>'required|max:128|min:5',
 			'description'=>'max:1024',
 			'related_tutorial'=>"required|exists:assessments,tutorialid,studentid,".$userid,
