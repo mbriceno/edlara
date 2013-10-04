@@ -3,6 +3,10 @@ View::composer('site.error.404',function($view){
     $view->nest('header','main.header');
     return $view;
 });
+View::composer('site.error.system',function($view){
+    $view->nest('header','main.header');
+    return $view;
+});
 View::composer('main.menu', function($view)
 {
     $view->nest('loginsnippet','account.loginsnippet');

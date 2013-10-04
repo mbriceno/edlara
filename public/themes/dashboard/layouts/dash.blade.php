@@ -30,7 +30,7 @@ defined('ROOT' )|| die('Restricted Access');
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">JHCSS</a>
+        <a class="navbar-brand" href="#">{{Setting::get('system.schoolname')}}</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,7 +42,11 @@ defined('ROOT' )|| die('Restricted Access');
             <li class='user'>
                 <div class="btn-group adminbtn">
                     <button type="button" class="btn">
-                        <i class="glyphicon glyphicon-user"></i> John Doe
+                        <i class="glyphicon glyphicon-user"></i>
+                        <?php
+                        $user = Sentry::getUser();
+                        ?>
+                        {{$user->first_name}} {{$user->last_name}}
                     </button>
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
                         <span class="caret black-caret"></span>
