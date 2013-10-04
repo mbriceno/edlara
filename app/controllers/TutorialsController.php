@@ -121,7 +121,19 @@ class TutorialsController extends BaseController {
                 $tutorial->save();
                 return Redirect::to('/tutorials/');
             case 'view';
-                return View::make('dashboard.tutorials.view')->with('id',$id);
+                $theme = Theme::uses('dashboard')->layout('default');
+                $view = ['id'=>$id];
+                $theme->breadcrumb()->add([
+                ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+                ['label'=>'Tutorials','url'=>Setting::get('system.dashurl').'/tutorials'],
+                ['label'=>$id,'url'=>Setting::get('system.dashurl').'/tutorial/view/'.$id]
+                ]);
+                $theme->appendTitle(' - Tutorial View '.$id);
+                $theme->asset()->container('footer')->add('boostrap-switch-js','/lib/bswitch/js/bootstrap-switch.min.js');
+                $theme->asset()->add('bootstrap-switch', '/lib/bswitch/css/bootstrap-switch.css');
+                $theme->asset()->add('bootstrap-switch-fonts', '/lib/bswitch/css/flat-ui-fonts.css',array('bootstrap-switch'));
+                
+                return $theme->scope('tutorial.view',$view)->render();
             case 'delete':
                 $user = Sentry::getUser();
                 // Find the Administrator group
