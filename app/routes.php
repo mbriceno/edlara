@@ -12,7 +12,7 @@
 */
 require_once('viewcomposer.php');
 require_once('staticfunctions.php');
-
+define('ROOT', 1);
 //Authencticating User with Controller
 Route::post('login', array('before' => 'csrf','uses' => 'UserController@authenticate'));
 Route::get('login', function () {
@@ -83,12 +83,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
    
 
 
-    Route::get('/exam/edit/{id}',array('before'=>'teacher',function ($id){
-        if(Exams::find($id)){
-            return View::make('dashboard.exams.edit')->with('id',$id);
-        }
-        return View::make('dashboard.exams.create')->with('id',0);
-    }));
+    Route::get('/exam/edit/{id}',array('before'=>'teacher','uses'=>'HttpController@examupdateget'));
     Route::post('/exam/edit/0',array('before'=>'csrf|teacher','uses'=>'ExamController@createExam'));
     
     Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
@@ -273,13 +268,6 @@ Route::get('contactus',function(){
     return View::make('about.contact-us')->nest('header','main.header');
 });
 
-
-Route::get('/test',function(){
-    for($i=1;$i<=50;$i++){
-        $data[]=$i;
-    }
-    return serialize($data); 
-});
 
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
