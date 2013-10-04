@@ -70,8 +70,19 @@ class HttpController extends BaseController {
                 ['label'=>$id,'url'=>Setting::get('system.dashurl').'/exam/'.$id]
             ]);
             return $theme->scope('exam.update', $view)->render();
-            // return View::make('dashboard.exams.edit')->with('id',$id);
         }
-        return View::make('dashboard.exams.create')->with('id',0);
+
+        
+        $theme = Theme::uses('dashboard')->layout('default');
+        $view = array(
+            'name' => 'Dashboard Assessment Update',
+            'id'=>$id
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+            ['label'=>'Exams','url'=>Setting::get('system.dashurl').'/exams'],
+            ['label'=>$id,'url'=>Setting::get('system.dashurl').'/exam/'.$id]
+        ]);
+        return $theme->scope('exam.create', $view)->render();
     }
 }
