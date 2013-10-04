@@ -1,5 +1,8 @@
 <?php
 
+defined('ROOT' )|| die('Restricted Access');
+
+
 return array(
 
     /*
