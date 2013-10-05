@@ -41,6 +41,33 @@ class HttpController extends BaseController {
                    
                 });
             });');
+            $theme->asset()->container('footer')->writeScript('inline-script','$(document).ready(function(){
+                $("#examsheader").hide();
+                $("div#exams").hide();
+                $("div#examslock").hide();
+                $(".hidequestions").hide();
+                $(".hidequestions").click(function(){
+                    $("div#exams").hide(2000);
+                     $(\'html, body\').animate({
+                        scrollTop: $("#top").offset().top
+                    }, 2000);
+                    $("#examsheader").hide(1200);
+                    $("#examslock").hide(1200);
+                    $(".hidequestions").hide(1000);
+                    $("#showquestions").show(1000);
+                });
+                $("#showquestions").click(function(){
+                    $("div#exams").show(2000);
+                    $("div#examslock").show(100);
+                    $(\'html, body\').animate({
+                        scrollTop: $("#examslock").offset().top
+                    }, 2000);
+                    $("#examsheader").show(1000);
+                    $(".hidequestions").show(1000);
+                    $("#showquestions").hide(1000);
+                });
+            });');
+            
         	return $theme->scope('assessment.update', $view)->render();
             // return View::make('dashboard.assessments.update')->with('id',$id);
         }
