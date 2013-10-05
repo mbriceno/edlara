@@ -22,7 +22,8 @@ defined('ROOT' )|| die('Restricted Access');
         {{Theme::asset()->styles()}}
         {{Theme::asset()->scripts()}}
     </head>
-    <body>      
+    <body> 
+    <div id="top"></div>    
     <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
