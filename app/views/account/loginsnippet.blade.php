@@ -5,7 +5,7 @@
                             echo "<div class='alert alert-error error-loginpage-alert'>$error</div>";
                         }
                     }
-                    echo Form::open(array('url' => 'login',
+                    echo Form::open(array('url' => '/login',
                         'method' => 'POST'));
                     echo "<input type='hidden' name='_token' value='".Session::token()."'></input>";
                     //Echo FORM Label for Email address

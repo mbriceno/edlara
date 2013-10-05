@@ -336,21 +336,31 @@ input[type="text"].checkboxdata{
  margin:3%;
 }
 input[type="text"].checkboxdata:hover{  
- width: 90% !important;
+ width: 85% !important;
  margin:3%;
 }
 input[type="text"].checkboxdata:focus{  
- width: 90% !important;
+ width: 85% !important;
  margin:3%;
 }input[type="text"].examquestion{  
  width: 80% !important;
  margin:3%;
 }
 input[type="text"].examquestion:hover{  
- width: 90% !important;
+ width: 85% !important;
  margin:3%;
 }
 input[type="text"].examquestion:focus{  
- width: 90% !important;
+ width: 85% !important;
  margin:3%;
+}
+.affix {
+  width: inherit; //helped keep the content the same size on fluid layouts
+  position: fixed;
+  top: 50px;  //height of the nav
+}
+.affix-bottom {
+  width: inherit;
+  position: fixed;
+  float:right;
 }
