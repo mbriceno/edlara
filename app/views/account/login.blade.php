@@ -20,7 +20,7 @@
                     if (isset($loginpass)){
                         echo "<div class='alert alert-success success-loginpage-alert'>You have successfully activated Your account</div>";
                     }
-                    echo Form::open(array('url' => 'login',
+                    echo Form::open(array('url' => '/login',
                         'method' => 'post'));
                     
                     echo "<input type='hidden' name='_token' value='".Session::token()."'></input>";
