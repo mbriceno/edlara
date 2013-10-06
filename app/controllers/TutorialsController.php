@@ -45,6 +45,13 @@ class TutorialsController extends BaseController {
        
     });
 });');
+            if(URL::previous()==Setting::get('system.dashurl').'/tutorial/edit/'.$id.'/presentation'){
+                $theme->asset()->container('footer')->writeScript('inline-script',
+                    ' $(\'html, body\').animate({
+        scrollTop: $("#attachments").offset().top
+    }, 2000);'
+                    );
+            }
             $theme->asset()->add('ckeditor','/js/ckeditor/ckeditor.js');
             $theme->asset()->container('footer')->add('boostrap-switch-js','/lib/bswitch/js/bootstrap-switch.min.js');
             $theme->asset()->add('bootstrap-switch', '/lib/bswitch/css/bootstrap-switch.css');
@@ -154,17 +161,33 @@ class TutorialsController extends BaseController {
     }
     public function siteAttachmentHandler($id,$attachmentname){
         $tutorial = Tutorials::find($id);           
-                return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
         
+                return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
     }
     public function siteAttachmentView($id,$attachmentname){
         $assessment = Tutorials::find($id);
         $attachpath = app_path().'/attachments/tutorial-'.$assessment->id.'/';
         $fixpath = $attachpath.$attachmentname;
-        if(self::attachmentViewable($fixpath)){
-        return View::make('site.attachment.tutorial')->nest('header','main.header')->with('attachment',$attachmentname)->with('id',$id)->with('type',pathinfo($fixpath,PATHINFO_EXTENSION));
+        if(self::attachmentViewable($fixpath)==1){
+            return View::make('site.attachment.tutorial')->nest('header','main.header')->with('attachment',$attachmentname)->with('id',$id)->with('type',pathinfo($fixpath,PATHINFO_EXTENSION));
         }
-        return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
+        elseif(self::attachmentViewable($fixpath)=='display'){
+            return self::attachmentViewmaker($id,$attachmentname);
+        }
+        elseif(self::attachmentViewable($fixpath)==0) {
+            return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
+        }   
+    }
+    private function attachmentViewmaker($id,$attachmentname){
+        $tutorial = Tutorials::find($id);
+        $attachpath = app_path().'/attachments/tutorial-'.$tutorial->id.'/';
+        $fixpath = $attachpath.$attachmentname;
+        if(self::attachmentViewable($fixpath)=='display'){
+            $contents = File::get(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
+            $response = Response::make($contents);
+            $response->header('Content-Type','text/html');
+            return $response;
+        }
     }
     public function attachmentHandler($id,$attachmentname,$mode){
         $tutorial = Tutorials::find($id);
@@ -174,17 +197,23 @@ class TutorialsController extends BaseController {
                 return Redirect::to('/tutorial/edit/'.$id.'');
             case 'download':            
                 return Response::download(app_path().'/attachments/tutorial-'.$id.'/'.$attachmentname);
+            break;
         }
     }
     private function attachmentViewable($filepath){
         //set a configuration value
         $allowed = array('jpeg','JPEG','jpg','JPG','PNG','png','pdf','PDF','GIF','gif');
+        $display = ['html','HTML','htm'];
         $ext = pathinfo($filepath,PATHINFO_EXTENSION);
+        // dd(in_array($ext, $allowed));
         if(in_array($ext,$allowed)){
-            return true;
+            return 1;
+        }
+        elseif (in_array($ext,$display)){
+            return 'display';
         }
         else {
-            return false;
+            return 0;
         }
     }
 
