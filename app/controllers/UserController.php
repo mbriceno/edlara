@@ -290,21 +290,21 @@ class UserController extends BaseController {
                     if ($user->attemptResetPassword($resetcode,$newpass))
                     {
                         // Password reset passed
-                        return  "Success";
+                        return View::make('account.onreset');
                     }
                     else
                     {
                         // Password reset failed
-                       return  "Fail";
+                       return  Redirect::to('gohome');
                     }
                 }
                 else
                 {
-                    return  "CodeFail";
                     // The provided password reset code is Invalid
+                       return  Redirect::to('gohome');
                 }
-            }
-            return "Complete Fail";
+            }            
+            return  Redirect::to('gohome');
         
     }
     public function manage($id,$mode){
