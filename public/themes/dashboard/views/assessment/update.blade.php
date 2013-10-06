@@ -146,9 +146,104 @@ echo $errors->first();
                                     
                             </tbody>
                             </table>
-                            </div>
-                            <?php
-}
+                            <a id="showquestions" class="btn btn-success ">Show Questions</a>
 
-                            ?></div>
+                            <a class="hidequestions btn btn-warning">Hide Questions</a>
+                            </div>
+
+                           
+                            <div class="clearfix"></div>
+                            <div id="examslock" style="height:40px;">
+                            </div>
+                                <h3 id="examsheader">Questions</h3>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <?php
+
+                             $examdata = unserialize($tutorial->exams);
+
+                            $exam = Exams::find($examdata['id']);
+                            $hash = $exam->hash;
+                            $examdata_encoded =  File::get(app_path().'/files/exam-'.$exam->id.'/'.$hash.'.json');
+                            Session::put('questiondata_key',1);
+                            $examdata = json_decode($examdata_encoded);
+
+                            $examdata = objectToArray($examdata);
+                            echo "\n<div id='exams' style='clear:both;'>";
+
+                            $qcc = 0;
+                            foreach($examdata['questiondata']['questions'] as $qc => $question){
+                                if(isset($examdata['questiondata']['questions'][$qc])){
+                                    $qcc++;
+                                }
+
+                                if(isset($examdata['questiondata']['questions'][$qc])){
+                                    $checked1='';
+                                    $checked2='';
+                                    $checked3='';
+                                    $checked4='';
+
+                                    if(isset($examdata['questiondata']['question'][$qc]['answers'])){
+                                        $answers=$examdata['questiondata']['question'][$qc]['answers'];
+                                        if(in_array("1",$answers)){
+                                            $checked1='checked';
+                                        }
+                                        if(in_array("2",$answers)){
+                                            $checked2='checked';
+                                        }
+                                        if(in_array("3",$answers)){
+                                            $checked3='checked';
+                                        }
+                                        if(in_array("4",$answers)){
+                                            $checked4='checked';
+                                        }
+                                    }
+
+                                    echo "<div id='examdata' class='container'>\n";
+
+                                    echo "<div class='row'>\n";
+
+                                    echo "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>\n";
+            //Question
+                                    echo '<label for="examdatac">MCQ Question '.$qcc.'</label>';
+                                    echo "\n";
+                                    echo '<input class="examquestion form-control" id="examdatac" name="question_'.$qc.'" placeholder="Place the MCQ Question '.$qcc.' Here" type="text" value="'.Input::old('question_'.$qc,$question).'" required readonly>';
+                                    echo "</div>\n";
+                                    echo "\n";
+                                    echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
+                                    echo "\n";
+                                    echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="1" type="checkbox" '.$checked1.'  readonly>
+                                    <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_1" placeholder="Place the Choice 1 here" type="text" value="'.Input::old('checkbox_'.$qc.'_1',$examdata['questiondata']['question'][$qc]['checkboxdata'][1]).'" required readonly>';
+                                    echo "</div>";
+                                    echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
+                                    echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="2" type="checkbox" '.$checked2.' readonly>
+                                    <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_2" placeholder="Place the Choice 2 here" type="text" value="'.Input::old('checkbox_'.$qc.'_2',$examdata['questiondata']['question'][$qc]['checkboxdata'][2]).'" required readonly>';
+                                    echo "\n";
+                                    echo "</div>";
+                                    echo "\n";
+                                    echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
+                                    echo "\n";
+                                    echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="3" type="checkbox" '.$checked3.' readonly>
+                                    <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_3" placeholder="Place the Choice 3 here" type="text" value="'.Input::old('checkbox_'.$qc.'_3',$examdata['questiondata']['question'][$qc]['checkboxdata'][3]).'" required readonly>';
+                                    echo "\n";
+                                    echo "</div>";
+                                    echo "\n";
+                                    echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>";
+                                    echo "\n";
+                                    echo '<input style="" id="examdatac" class="checkboxpick pull-left form-control" name="checkbox_'.$qc.'[]" value="4" type="checkbox" '.$checked4.' readonly>
+                                    <input  class="form-control checkboxdata"  name="checkbox_'.$qc.'_4" placeholder="Place the Choice 4 here" type="text" value="'.Input::old('checkbox_'.$qc.'_4',$examdata['questiondata']['question'][$qc]['checkboxdata'][4]).'" required readonly>';
+                                    echo "\n";
+                                    echo "</div>";
+                                    echo "\n";
+                                    echo "</div>\n"; 
+
+                                    echo '<a class="hidequestions btn btn-warning">Hide Questions</a>';
+                                }   
+                                echo "</div>";       
+                            }
+
+                            }
+
+                            ?>
+                            </div>
+                            </div>
                         

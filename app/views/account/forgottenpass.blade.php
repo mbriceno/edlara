@@ -19,7 +19,7 @@
                             echo $errors->first('email');                            
                             echo "</div>";
                     }
-                    echo Form::open(array('url' => 'acceptreset',
+                    echo Form::open(array('url' => '/acceptreset',
                         'method' => 'post'));
                     
                     //Echo FORM Label for Password address

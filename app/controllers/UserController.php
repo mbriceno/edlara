@@ -256,12 +256,11 @@ class UserController extends BaseController {
 
                 Mail::send('emails.resetpass',$data,function($message) use ($user)
                 {
-                    $usermail = DB::table('users')->where('email', $user->getLogin())->first();
-                    $fullname = $usermail->first_name . ' '. $usermail->last_name;
-                    $message->to($user->getLogin(),$fullname)->subject('EdLara - Reset Password');
+                    $fullname = $user->first_name . ' '. $user->last_name;
+                    $message->to($user->email,$fullname)->subject('EdLara - Reset Password');
                 });
                 Input::flash();
-                return Redirect::to('account.acceptreset')->withInput();
+                return Redirect::to('acceptreset')->withInput();
         }
         return Redirect::to('forgotpass');
     }
