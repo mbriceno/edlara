@@ -282,7 +282,6 @@ Route::get('dash',function(){
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
-    SystemLogger::logUser();
     return View::make('home')->nest('header','main.header');
 }));
 
