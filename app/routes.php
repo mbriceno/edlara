@@ -21,6 +21,7 @@ Route::get('login', function () {
     return View::make('account.login');
 });
 
+Route::get('logout','UserController@logout');
 
 
 //API Subdomain
@@ -135,13 +136,21 @@ Route::group([],function(){
 
          return View::make('account.login');
     });
+
+    // Forgotten Password Get Link Page.
     Route::get('forgotpass',function(){
         return View::make('account.forgottenpass');
     });
+
+    // Accept Reset POST
     Route::post('acceptreset',['before'=>'csrf','uses'=>'UserController@acceptReset']);
+    
+    // Accept Reset GET
     Route::get('acceptreset',function(){
         return View::make('account.acceptreset');
     });
+
+    // Accept Forgotten Password Reset Request. and Allow reset Password.
     Route::get('forgottenpass/{key}/{username}',function($key,$username){
          $user = Sentry::getUserProvider()->findByResetPasswordCode($key);
          if($user->getLogin() == $username){
@@ -151,9 +160,9 @@ Route::group([],function(){
          }
          return View::make('account.login');
     });
+
+    // Reset Password Accept
     Route::post('resetpass',['before'=>'csrf','uses'=>'UserController@resetPass']);
-
-
 });
 
 
@@ -163,47 +172,34 @@ Route::group([],function(){
     Route::get('profiles',function(){
         return;
     });
+    
+    // User Show Profile
     Route::get('profile/{id?}','UserController@showProfile')->where('id', '[0-9]+');
-
+    
+    // User Profile Edit
     Route::get('profile/{id?}?edit=true',array('uses'=>'UserController@editProfile','before'=>'auth'));
 
 });
 
 
-
-Route::get('logout','UserController@logout');
-
-
-
-
-Route::get('phpinfo', function(){
-    return phpinfo();
-});
-
-
-
-Route::post('api/searchuser', 'UserController@checkUser');
-
-
-
-
-Route::get('gohome',function(){
-    return Redirect::route('home');
-}); 
-
-Route::get('dash',function(){
-    return Redirect::route('dashboard');
-});
-
-
 //Tutorials
+
+// Tutorial Item View
 Route::get('/tutorial/{id}',array('before'=>'block_tutorial','uses'=>'TutorialsController@siteitemview'));
+
+// Tutorials List View
 Route::get('/tutorials',array('before'=>'block_tutorial','uses'=>'TutorialsController@sitelistview'));
+
+// Tutorial Attachment Download
 Route::get('/attachments/tutorial-{id}/{attachmentname}/download',array('before'=>'student|block_tutorial','uses'=>'TutorialsController@siteAttachmentHandler'));
+
+// Tutorial Attachment View
 Route::get('/attachments/tutorial-{id}/{attachmentname}/view',array('before'=>'student|block_tutorial','uses'=>'TutorialsController@siteAttachmentView'));
 
 
 //Assessments
+
+// Providing Assessment Submit Securely hashed page.
 Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($id,$hash){
                         $tutorial =  Tutorials::findOrFail($id);
                         $sessionvar = "tutorial-".$tutorial->id;
@@ -225,39 +221,71 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                             return "Unauthorised Access";
                         }
 }));
+
+// Submit Assessment GET
 Route::get('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submitview'));
+
+// Submit Assessment POST
 Route::post('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submit'));
+
+// Updatable Assessment List
 Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
+
+// Update Assessment View - Student Only.
 Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
+
+// Update Assessment- Student Only.
 Route::post('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@update'));
 
+// Download Assessment Attachment
 Route::get('/attachments/assessment-{id}/{filename}/download',array('before'=>'student','uses'=>'AssessmentController@download'));
+
+// Delete Assessment Attachment
 Route::get('/attachments/assessment-{id}/{filename}/delete',array('before'=>'student','uses'=>'AssessmentController@attachmentDelete'));
+
+// View Assessment Attachment
 Route::get('/attachments/assessment-{id}/{filename}/view',array('before'=>'student','uses'=>'AssessmentController@attachmentView'));
 
-
+// Validate the Exam
 Route::get('/tutorial-{id}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@validateStudent'));
+
+//Exam View
 Route::get('/tutorial-{id}/exam',array('before'=>'student|exam_check','uses'=>'ExamController@viewExam'));
+
+//Validating Exam Work
 Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
-Route::get('/tutorial-{id}/exam-{eid}/view/{hash}',array('before'=>'student','uses'=>'ExamController@doneExam'));
 
-
+// Get About Us page
 Route::get('/aboutus',function(){
     return View::make('about.about-us')->nest('header','main.header');
 });
+
+// Get About TOS page.
 Route::get('/about/tos',function(){
     return View::make('about.terms-of-service')->nest('header','main.header');
 });
+
+//Get Contact Us Page.
 Route::get('contactus',function(){
     return View::make('about.contact-us')->nest('header','main.header');
 });
 
+// Go Home Redirect
+Route::get('gohome',function(){
+    return Redirect::route('home');
+}); 
+// Go Dashboard Redirect
+Route::get('dash',function(){
+    return Redirect::route('dashboard');
+});
 
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
+    SystemLogger::logUser();
     return View::make('home')->nest('header','main.header');
 }));
+
 
 // App::missing(function($exception)
 // {
