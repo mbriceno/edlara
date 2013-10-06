@@ -68,21 +68,23 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
         $exam->delete();
         return Redirect::to(URL::previous());
     }));
+    Route::get('/tutorial/edit/{id}/presentation',array('before'=>'teacher','uses'=>'PresentationController@view'))->where('id', '[0-9]+');
+    Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'))->where('id', '[0-9]+');
 
-    Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'));
 
+    Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'))->where('id', '[0-9]+');
+    Route::post('tutorial/edit/{id}/create-presentation',array('before'=>'csrf|teacher','uses'=>'PresentationController@create'))->where('id', '[0-9]+');
 
-    Route::post('tutorial/edit/{id}/update',array('before'=>'csrf|teacher','uses'=>'TutorialsController@update'));
-    Route::post('assessment/{id}',array('before'=>'teacher','uses'=>'AssessmentController@teacherUpdate'));
+    Route::post('assessment/{id}',array('before'=>'csrf|teacher','uses'=>'AssessmentController@teacherUpdate'));
 
-    Route::post('user/{id}/update', array('before'=>'admin','uses'=>'UserController@update'));
+    Route::post('user/{id}/update', array('before'=>'csrf|admin','uses'=>'UserController@update'));
 
     Route::post('/exam/edit/0',array('before'=>'csrf|teacher','uses'=>'ExamController@createExam'));
     Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
     
-    Route::post('settings', array('before'=>'admin', 'uses'=>'SettingsController@update'));
+    Route::post('settings', array('before'=>'csrf|admin', 'uses'=>'SettingsController@update'));
 
-    Route::any('subject/edit/{id}/{mode}',array('before'=>'admin','uses'=>'SubjectController@modder'));
+    Route::any('subject/edit/{id}/{mode}',array('before'=>'csrf|admin','uses'=>'SubjectController@modder'));
 })->before('auth');
 
 
