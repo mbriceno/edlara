@@ -24,7 +24,17 @@ class SubjectController extends BaseController {
 					if($validator->fails()){
 						return Redirect::to(URL::previous());
 					}
-					return View::make('dashboard.subjects.edit')->with('id',$id);
+					$theme = Theme::uses('dashboard')->layout('default');
+					$view =[
+						'id'=>$id
+					];					
+					$theme->setTitle(Setting::get('system.adminsitename').' Subjects');
+					$theme->breadcrumb()->add([
+					    ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+					    ['label'=>'Subjects','url'=>Setting::get('system.dashurl').'/subjects'],
+					    ['label'=>$id,'url'=>Setting::get('system.dashurl').'/subject/edit/'.$id.'/update']
+					]);
+					return $theme->scope('subject.update',$view)->render();
 				case 'view':
 					$validator = Validator::make(['id'=>$id],
 						['id'=>'required|exists:subjects,id']
@@ -32,9 +42,29 @@ class SubjectController extends BaseController {
 					if($validator->fails()){
 						return Redirect::to(URL::previous());
 					}
-					return View::make('dashboard.subjects.view')->with('id',$id);	
-				case 'create':					
-					return View::make('dashboard.subjects.edit')->with('id',$id);			
+					$theme = Theme::uses('dashboard')->layout('default');
+					$view =[
+						'id'=>$id
+					];					
+					$theme->setTitle(Setting::get('system.adminsitename').' Subjects');
+					$theme->breadcrumb()->add([
+					    ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+					    ['label'=>'Subjects','url'=>Setting::get('system.dashurl').'/subjects'],
+					    ['label'=>$id,'url'=>Setting::get('system.dashurl').'/subject/edit/'.$id.'/update']
+					]);
+					return $theme->scope('subject.view',$view)->render();
+				case 'create':	
+					$theme = Theme::uses('dashboard')->layout('default');
+					$view =[
+						'id'=>0
+					];					
+					$theme->setTitle(Setting::get('system.adminsitename').' Subjects');
+					$theme->breadcrumb()->add([
+					    ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+					    ['label'=>'Subjects','url'=>Setting::get('system.dashurl').'/subjects'],
+					    ['label'=>$id,'url'=>Setting::get('system.dashurl').'/subject/edit/0/update']
+					]);
+					return $theme->scope('subject.create',$view)->render();		
 				default:
 					return "UNAUTHORISED METHOD";
 					break;
@@ -44,7 +74,7 @@ class SubjectController extends BaseController {
 			switch($mode){
 				case 'update':
 					self::update($id);
-					return Redirect::to(URL::previous());
+					return Redirect::to('/subjects');
 				case 'create':
 					if($id == 0){
 					self::create();					
@@ -52,7 +82,8 @@ class SubjectController extends BaseController {
 					}					
 					return Redirect::to(URL::previous());
 				default:
-					return "UNAUTHORISED METHOD";
+					Log::error('UnAuthorised Access at Subjects Page.');
+					return Redirect::to('dash');
 			}
 		}
 	}
