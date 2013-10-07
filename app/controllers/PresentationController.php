@@ -22,7 +22,13 @@ class PresentationController extends BaseController
 	}
 	public function create($tid){
 		$title = Input::get('title',rand(5, 250000));
+        if($title ==''){
+            $title=rand(5, 250000);
+        }
 		$presentation = Input::get('presentationc');
+        if(!is_dir(app_path().'/attachments/tutorial-'.$tid.'/')){
+            File::makeDirectory(app_path().'/attachments/tutorial-'.$tid.'/');
+        }
 		file_put_contents(app_path().'/attachments/tutorial-'.$tid.'/'.$title.'.html', $presentation);
 		return Redirect::to('/tutorial/edit/'.$tid);
 	}
