@@ -56,8 +56,10 @@ $tutorial = Tutorials::find($id);
                 ?>
             </span>
         </div><br>
+        <?php
+        echo "<a href='/tutorial/edit/".$tutorial->id."/presentation' class='btn btn-success'>Create Presentation</a>" ?>
     </div>
-    <div class="clearfix visible-xs visible-sm"></div>
+    <div class="clearfix"></div>
 
 
 
@@ -120,7 +122,6 @@ $tutorial = Tutorials::find($id);
         echo '
         <a class=" btn btn-danger" href="/tutorials">Close</a>';
         echo Form::close();
-        echo "<a href='/tutorial/edit/".$tutorial->id."/presentation' class='btn btn-success'>Create Presentation</a>"
         ?><br><br>
         <div class="clearfix"></div>
         <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
