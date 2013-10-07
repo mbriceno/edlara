@@ -58,7 +58,6 @@ Route::filter('auth',function(){
 });
 
 //Admin Authentication Filter
-//TODO: create a filter to allow only admins to access sensitive parts of dashboard.
 Route::filter('admin',function(){
     if ( ! Sentry::check())
     {
