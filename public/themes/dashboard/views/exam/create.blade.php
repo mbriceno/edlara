@@ -145,9 +145,6 @@ $qc = $i;
             i++;
             return false;
         });
-// $('#removeMCQ').click(function(){
-//     $(this).('#examdata').remove();
-// });
         $('.removeMCQ').click(function(){ 
             // if( i >= 4 ) {
                 $(this).parents('div#examdata').remove();
@@ -161,28 +158,6 @@ $qc = $i;
             return false;
             });
     });
-//         $(function() {
-//             var exams = $('#exam2s');
-//             var i = $('#exam3s div#examdata').size()+1;
 
-//             $('#addM3CQ').live('click', function() {
-//                 $(this).parents('#questioncount').remove();
-//                 $('<div id="examdata"><label for="examdata">MCQ Question ' + i + '</label><input type="text" required="" style="width:50%;" placeholder="Place the MCQ Question ' + i + ' Here" value="" name="question_' + i + '" id="examdata" required><br>&nbsp;<br>&nbsp;<div class="checker" id="uniform-examdata"><span><div class="checker" id="uniform-examdata"><span><input type="checkbox" value="1" name="checkbox_' + i + '[]" id="examdata" style="opacity: 0;"></span></div></span></div><input type="text" value="" placeholder="Place the Choice 1 here" name="checkbox_' + i + '_1" required><div class="checker" id="uniform-examdata"><span><div class="checker" id="uniform-examdata"><span><input type="checkbox" value="2" name="checkbox_' + i + '[]" id="examdata" style="opacity: 0;"></span></div></span></div><input type="text" value="" placeholder="Place the Choice 2 here" name="checkbox_' + i + '_2" required><div class="checker" id="uniform-examdata"><span><div class="checker" id="uniform-examdata"><span><input type="checkbox" value="3" name="checkbox_' + i + '[]" id="examdata" style="opacity: 0;"></span></div></span></div><input type="text" value="" placeholder="Place the Choice 3 here" name="checkbox_' + i + '_3" required><div class="checker" id="uniform-examdata"><span><div class="checker" id="uniform-examdata"><span><input type="checkbox" value="4" name="checkbox_' + i + '[]" id="examdata" style="opacity: 0;"></span></div></span></div><input type="text" value="" placeholder="Place the Choice 4 here" name="checkbox_' + i + '_4" required><br>&nbsp;<br>&nbsp;<br><input type="hidden" value="0" name="checkbox_' + i + '[]"><a href="#" id="removeMCQ">Remove</a></div><input id="questioncount" name="questioncount" type="hidden" value="' + i + '">').appendTo(exams);
-//                 i++;
-//                 return false;
-//             });
-
-// $('#remo3veMCQ').live('click', function() { 
-//     if( i > 5 ) {
-//         $(this).parents('div#ex3amdata').remove();
-//         $(this).parents('#questio3ncount').remove();
-
-//         i--;
-
-//         $('<in3put id="questioncount" name="questioncount" type="hidden" value="' + i + '">').appendTo(exams);
-//     }
-//     return false;
-// });
-// });
 
 </script>

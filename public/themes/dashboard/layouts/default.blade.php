@@ -39,7 +39,7 @@ defined('ROOT' )|| die('Restricted Access');
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-          <li class="tosite"><a href="#">Visit Site</a></li>          
+          <li class="tosite"><a href="{{Setting::get('app.url')}}">Visit Site</a></li>          
         </ul>
         <ul class="nav navbar-nav pull-right">
             <li class='user'>

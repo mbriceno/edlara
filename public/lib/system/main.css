@@ -8,38 +8,38 @@ body{
 	padding-top:70px;
 }
 input[type="text"]{  
- width: 150px !important;
+ width: 45% !important;
  -moz-transition: width 0.5s ease-out;
  -webkit-transition: width 0.5s ease-out;
  transition: width 0.5s ease-out;
 }
 input[type="text"]:hover{  
- width: 215px !important;
+ width: 75% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input[type="text"]:focus{  
- width: 215px !important;
+ width: 75% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 
 input#search {
- width: 100px !important;
+ width: 25% !important;
  -moz-transition: width 0.5s ease-out;
  -webkit-transition: width 0.5s ease-out;
  transition: width 0.5s ease-out;
 }
 input#search:hover {
- width: 200px !important;
+ width: 65% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input#search:focus {
- width: 200px !important;
+ width: 65% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
@@ -246,19 +246,19 @@ only screen and (max-width: 760px),
     margin:10px;
   }
   input[type="text"]{  
- width: 80% !important;
+ width: 55% !important;
  -moz-transition: width 0.5s ease-out;
  -webkit-transition: width 0.5s ease-out;
  transition: width 0.5s ease-out;
 }
 input[type="text"]:hover{  
- width: 90% !important;
+ width: 75% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input[type="text"]:focus{  
- width: 90% !important;
+ width: 75% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
@@ -310,10 +310,10 @@ input[type="text"]:focus{
                width: 55% !important;
               }
               input[type="text"]:hover{  
-               width: 82% !important;
+               width: 75% !important;
               }
               input[type="text"]:focus{  
-               width: 82% !important;
+               width: 75% !important;
               }
 
               .checkboxpick {
