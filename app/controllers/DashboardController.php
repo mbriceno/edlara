@@ -191,10 +191,7 @@ class DashboardController extends BaseController
             "oLanguage": {
             "sLengthMenu": "_MENU_ Tutorials per page"
             },
-            "sPagination":"bootstrap"
-       
-    });
-});        ');
+            "sPagination":"bootstrap" }); });');
         $theme->asset()->writeStyle('inline-style','
                 @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
                 { 
@@ -211,8 +208,8 @@ class DashboardController extends BaseController
 
         return $theme->scope('tutorials', $view)->render();
 	}
-	public function students(){
-		$theme = Theme::uses('dashboard')->layout('default');
+    public function students(){
+        $theme = Theme::uses('dashboard')->layout('default');
         $view = array(
             'name' => 'Dashboard Students'
         );
@@ -223,15 +220,14 @@ class DashboardController extends BaseController
         $theme->setTitle(Setting::get('system.adminsitename').' Students');
         $theme->setType('Students');
         $theme->asset()->container('datatable')->writeScript('inline-script','$(document).ready(function(){
-    $(\'.datatable\').dataTable({
-        "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
-            "oLanguage": {
-            "sLengthMenu": "_MENU_ records per page"
-            },
-            "sPagination":"bootstrap"
-       
-    });
-});        ');
+            $(\'.datatable\').dataTable({
+                "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page"
+                },
+                "sPagination":"bootstrap" });
+            });
+        ');
         $theme->asset()->writeStyle('inline-style','
                 @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
                 { 
@@ -246,5 +242,38 @@ class DashboardController extends BaseController
                     td:nth-of-type(9):before { content: "Actions :- "; }
                 }');
         return $theme->scope('students', $view)->render();
-	}
+    }   
+    public function subjects(){
+        $theme = Theme::uses('dashboard')->layout('default');
+        $view = array(
+            'name' => 'Dashboard Subjects'
+        );
+        $theme->breadcrumb()->add([
+            ['label'=>'Dashboard','url'=>Setting::get('system.dashurl')],
+            ['label'=>'Subjects','url'=>Setting::get('system.dashurl').'/subjects']
+        ]);
+        $theme->setTitle(Setting::get('system.adminsitename').' Subjects');
+        $theme->setType('Subjects');
+        $theme->asset()->container('datatable')->writeScript('inline-script','$(document).ready(function(){
+            $(\'.datatable\').dataTable({
+                "sWrapper": "dataTables_wrapper form-control",
+                "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page"
+                },
+                "sPagination":"bootstrap" });
+            });
+        ');
+        $theme->asset()->writeStyle('inline-style','
+                @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  
+                { 
+                    td:nth-of-type(1):before { content: "#ID :- "; }
+                    td:nth-of-type(2):before { content: "Subject :- "; }
+                    td:nth-of-type(3):before { content: "Subject Code:- "; }
+                    td:nth-of-type(4):before { content: "Created Date :- "; }
+                    td:nth-of-type(5):before { content: "Modified Date :- "; }
+                    td:nth-of-type(6):before { content: "Actions :- "; }
+                }');
+        return $theme->scope('subjects', $view)->render();
+    }
 }
