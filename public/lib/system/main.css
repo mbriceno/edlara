@@ -364,3 +364,29 @@ input[type="text"].examquestion:focus{
   position: fixed;
   float:right;
 }
+
+
+/*Datatables Styling*/
+
+
+
+div.dataTables_length label {
+  float: left;
+  text-align: left;
+}
+
+div.dataTables_length select {
+  width: 75px;
+
+}
+
+div.dataTables_filter label {
+  float: right;
+}
+div.dataTables_filter label input {
+  float: right;
+  border:1px solid #cccccc;
+  border-radius: 3px;
+  background-color: #ffffff;
+  height:25px;
+}
