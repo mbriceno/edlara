@@ -108,7 +108,29 @@ defined('ROOT' )|| die('Restricted Access');
             $(this).parent().addClass("active");
     });
 });
-</script>   
+</script>
+    <!-- demo -->
+    <script src="/lib/effeckt/js/demo/demo.js"></script>
+
+    <!-- Individual module JS files here -->
+    <!-- Should we combine or not combine? -->
+    <!-- Should we provide minified versions? -->
+    <script src="/lib/effeckt/js/Effeckt.js"></script>
+    <script src="/lib/effeckt/js/modules/modals.js"></script>
+    <script src="/lib/effeckt/js/modules/buttons.js"></script>
+    <script src="/lib/effeckt/js/modules/list-items.js"></script>
+    <script src="/lib/effeckt/js/modules/off-screen-nav.js"></script>
+    <script src="/lib/effeckt/js/modules/page-transitions.js"></script>
+    <script src="/lib/effeckt/js/modules/list-scroll.js"></script>
+    <script src="/lib/effeckt/js/modules/tabs.js"></script>
+    <script src="/lib/effeckt/js/modules/positional-modals.js"></script>
+
+    <!-- ideally should kick this off in the demo js file itself -->
+    <script>
+      stroll.bind('.effeckt-demo-list-scroll ul');
+      
+      
+    </script>
     </body>
 
 </html>
