@@ -1,3 +1,0 @@
-[submodule "public/js/ckeditor"]
-	path = public/js/ckeditor
-	url = https://github.com/ckeditor/ckeditor-dev
