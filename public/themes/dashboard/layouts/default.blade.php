@@ -97,7 +97,7 @@ defined('ROOT' )|| die('Restricted Access');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/lib/js/effeckt/libs/jquery-2.0.3.min.js"><\/script>')</script>
+     <script>window.jQuery || document.write('\<script src\=\"\/js\/jquery\-2\.0\.2\.min.js\"\>\<\/script\>')</script>
 <script type="text/javascript">
    $(document).ready(function(){
     $('li a').each(function(index) {

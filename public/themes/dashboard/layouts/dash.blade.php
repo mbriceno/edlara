@@ -15,7 +15,6 @@ defined('ROOT' )|| die('Restricted Access');
         <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap-cerulean.min.css">
 
         <link rel="stylesheet" type="text/css" href="/lib/system/main.css">
-        <link rel="stylesheet" href="/lib/effeckt/css/effeckt.autoprefixed.css">
 
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/lib/system/style.css">
@@ -101,7 +100,7 @@ defined('ROOT' )|| die('Restricted Access');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/lib/js/effeckt/libs/jquery-2.0.3.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="/js/jquery-2.0.2.min.js"><\/script>')</script>
 <script type="text/javascript">
    $(document).ready(function(){
     $('li a').each(function(index) {
