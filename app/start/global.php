@@ -85,9 +85,6 @@ require app_path().'/filters.php';
 
 Basset::collection('bootstrap', function($collection)
 {
-    // Collection definition.  
-    $collection->add('../public/js/jquery-1.9.0.min.js');
-    // $collection->add('../public/js/jquery-migrate-1.2.0.min.js');
     $collection->add('../public/css/bootstrap.min.css');
     $collection->add('../public/css/bootstrap-responsive.min.css');
     $collection->add('../public/js/bootstrap.min.js');
@@ -99,62 +96,4 @@ Basset::collection('grans', function($collection)
 {
     // Collection definition.
     $collection->add('../public/css/system/main.css');
-    $collection->add('../public/css/system/parallax.css');
-    $collection->add('../public/js/jquery.fittext.js');    
-    $collection->add('../public/js/system/parallax.js');
-});
-
-Basset::collection('dashboard',function($collection)
-{
-    $collection->add('../public/css/bootstrap-cerulean.css');
-    $collection->add('../public/css/bootstrap-responsive.css');
-    $collection->add('../public/css/charisma-app.css');
-    $collection->add('../public/css/jquery-ui-1.8.21.custom.css');
-    $collection->add('../public/css/fullcalendar.css');
-    $collection->add('../public/css/fullcalendar.print.css');
-    $collection->add('../public/css/chosen.css');
-    $collection->add('../public/css/uniform.default.css');
-    $collection->add('../public/css/colorbox.css');
-    $collection->add('../public/css/jquery.cleditor.css');
-    $collection->add('../public/css/jquery.noty.css');
-    $collection->add('../public/css/noty_theme_default.css');
-    $collection->add('../public/css/elfinder.min.css');
-    $collection->add('../public/css/elfinder.theme.css');
-    $collection->add('../public/css/jquery.iphone.toggle.css');
-    $collection->add('../public/css/opa-icons.css');
-    $collection->add('../public/css/uploadify.css');
-    $collection->add('../public/js/jquery-1.7.2.min.js');
-    $collection->add('../public/js/jquery-ui-1.8.21.custom.min.js');
-    $collection->add('../public/js/bootstrap-transition.js');
-    $collection->add('../public/js/bootstrap-alert.js');
-    $collection->add('../public/js/bootstrap-modal.js');
-    $collection->add('../public/js/bootstrap-dropdown.js');
-    $collection->add('../public/js/bootstrap-scrollspy.js');
-    $collection->add('../public/js/bootstrap-tab.js');
-    $collection->add('../public/js/bootstrap-tooltip.js');
-    $collection->add('../public/js/bootstrap-popover.js');
-    $collection->add('../public/js/bootstrap-button.js');
-    $collection->add('../public/js/bootstrap-collapse.js');
-    $collection->add('../public/js/bootstrap-carousel.js');
-    $collection->add('../public/js/bootstrap-typeahead.js');
-    $collection->add('../public/js/bootstrap-tour.js');
-    $collection->add('../public/js/jquery.cookie.js');
-    $collection->add('../public/js/fullcalendar.min.js');
-    $collection->add('../public/js/excanvas.js');
-    $collection->add('../public/js/jquery.flot.min.js');
-    $collection->add('../public/js/jquery.flot.pie.min.js');
-    $collection->add('../public/js/jquery.flot.stack.min.js');
-    $collection->add('../public/js/jquery.flot.resize.min.js');
-    $collection->add('../public/js/jquery.chosen.min.js');
-    $collection->add('../public/js/jquery.uniform.min.js');
-    $collection->add('../public/js/jquery.colorbox.min.js');
-    $collection->add('../public/js/jquery.cleditor.min.js');
-    $collection->add('../public/js/jquery.noty.js');
-    $collection->add('../public/js/jquery.elfinder.min.js');
-    $collection->add('../public/js/jquery.raty.min.js');
-    $collection->add('../public/js/jquery.iphone.toggle.js');
-    $collection->add('../public/js/jquery.autogrow-textarea.js');
-    $collection->add('../public/js/jquery.uploadify-3.1.min.js');
-    $collection->add('../public/js/jquery.history.js');
-    $collection->add('../public/js/charisma.js');
 });
