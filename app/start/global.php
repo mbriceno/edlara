@@ -68,7 +68,6 @@ App::down(function()
 {
 	return Response::make("Be right back!", 503);
 });
-//var_dump(__DIR__);
 $publicdir = __DIR__.'/../../public/';
 require app_path().'/filters.php';
 
