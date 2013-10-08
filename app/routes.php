@@ -27,7 +27,6 @@ Route::get('logout','UserController@logout');
 //API Subdomain
 Route::group(array('domain' => 'api.laravel.dev'),function(){
     Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
-    // Route::get('/',array('before'=>'api_check','uses'=>'ApiController@start'));
 });
 
 
@@ -286,17 +285,17 @@ Route::get('/',array('as'=>'home',function()
 }));
 
 
-// App::missing(function($exception)
-// {
-//     return Response::view('site.error.404', array(), 404);
-// });
-// App::error(function(Exception $exception)
-// {
-//     Log::error($exception);
-//     return Response::view('site.error.system',array(),500);
-// });
-// App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
-// {
-//     Log::error($exception);
-//     return Response::view('site.error.system',array(),500);
-// });
+App::missing(function($exception)
+{
+    return Response::view('site.error.404', array(), 404);
+});
+App::error(function(Exception $exception)
+{
+    Log::error($exception);
+    return Response::view('site.error.system',array(),500);
+});
+App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
+{
+    Log::error($exception);
+    return Response::view('site.error.system',array(),500);
+});
