@@ -214,11 +214,15 @@ table {
         <div id='footer' class="pull-right" style="padding:20px;margin:20px;clear:right;">
             {{Setting::get('system.schoolname')}} &copy; {{date('Y')}}
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <script>window.jQuery || document.write('\<script src\=\"\/js\/jquery\-2\.0\.2\.min.js\"\>\<\/script\>')</script>
         {{-- Bootstrap JS Compiled --}}
         @javascripts('bootstrap')
         @javascripts('grans')
 
-    <script src='/js/jquery.dataTables.min.js'></script>
+    <script src='/lib/datatables/js/jquery.dataTables.min.js'></script>
         <script type="text/javascript">
             $('#navbar').scrollspy();
               //datatable
