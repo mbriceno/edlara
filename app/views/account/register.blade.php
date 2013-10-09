@@ -249,7 +249,7 @@
 
       
         </script>    
-    <script src='/js/jquery.dataTables.min.js'></script>
+    <script src='/lib/datatables/js/jquery.dataTables.min.js'></script>
         <script type="text/javascript">
             $('#navbar').scrollspy();
                 //datatable
