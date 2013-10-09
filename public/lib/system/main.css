@@ -25,21 +25,35 @@ input[type="text"]:focus{
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
-
+input.col-lg-6-input:hover  {
+  width:65% !important;
+}
+input.col-lg-6-input:focus  {
+  width:65% !important;
+}
+input.col-lg-6-input-small  {
+  width:25% !important;
+}
+input.col-lg-6-input-small:hover  {
+  width:40% !important;
+}
+input.col-lg-6-input-small:focus  {
+  width:40% !important;
+}
 input#search {
- width: 25% !important;
+ width: 65% !important;
  -moz-transition: width 0.5s ease-out;
  -webkit-transition: width 0.5s ease-out;
  transition: width 0.5s ease-out;
 }
 input#search:hover {
- width: 65% !important;
+ width: 85% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
 }
 input#search:focus {
- width: 65% !important;
+ width: 85% !important;
  -moz-transition: width 1s ease-out;
  -webkit-transition: width 1s ease-out;
  transition: width 1s ease-out;
