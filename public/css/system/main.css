@@ -18,14 +18,27 @@ src: url("/fonts/Metamorphous-Regular.otf") format("opentype");
     font-family: 'Metamorphous', sans-serif;
     font-size: 7.5vmin;
     position: absolute;
-    left: 65px;
-    top: 50px;
+    left: 15%;
+    top:15%;
+}
+
+@media 
+only screen and (max-width: 400px),
+(min-device-width: 200px) and (max-device-width: 400px)  {
+
+    #top-header {
+        font-family: 'Metamorphous', sans-serif;
+        font-size: 7.5vmin;
+        position: absolute;
+        left:10%;
+        top:10%;
+    }
 }
 div.responsive{
-    font-size: 3.5vmin;
+    font-size: 2.5vmin;
 }
 div.responsive h2 {
-    font-size:7.5vmin;
+    font-size:5.5vmin;
 }
 #clouds {
     padding: 0 0;
