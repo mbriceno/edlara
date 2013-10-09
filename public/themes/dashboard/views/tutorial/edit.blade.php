@@ -87,8 +87,12 @@ $tutorial = Tutorials::find($id);
         echo Form::file('attachment[]', array('class'=>"pull-right",'style'=>'clear:right;','multiple'=>'true'));
         echo "<br>";
         echo "<br>";
+        $exams=[];
+        $possibleexamid=0;
         $checkexams = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE `subjectid` = '.$tutorial->subjectid));
-        if($checkexams){
+            $checkexams = objectToArray($checkexams);
+            // dd($checkexams[0]['exists']);
+        if($checkexams[0]['exists'] !== 0){
             $possibleexams = Exams::where('subjectid','=',$tutorial->subjectid)->get();
             foreach($possibleexams as $possibleexam){
                 $exams[$possibleexam->id]=$possibleexam->title;
@@ -96,7 +100,7 @@ $tutorial = Tutorials::find($id);
             }
 
         }
-        else {                                
+        elseif (!isset($checkexams) || $checkexams==0) {                                
             $exams[0]="No Matched Exams found. Please create a Exam before attaching it.";
             $possibleexamid = 0;
         }
