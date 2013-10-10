@@ -281,7 +281,9 @@ Route::get('dash',function(){
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
-    return View::make('home')->nest('header','main.header');
+    $theme = Theme::uses('site')->layout('default');
+    $theme->setTitle('Home');
+    return $theme->scope('index')->render();
 }));
 
 
