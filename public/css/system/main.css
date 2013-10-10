@@ -33,6 +33,23 @@ only screen and (max-width: 400px),
         left:10%;
         top:10%;
     }
+    #main-nav {
+  top:-35vmin;
+}
+}@media 
+only screen and (max-width: 768px),
+(min-device-width: 400px) and (max-device-width: 768px)  {
+
+    #top-header {
+        font-family: 'Metamorphous', sans-serif;
+        font-size: 7.5vmin;
+        position: absolute;
+        left:10%;
+        top:10%;
+    }
+    #main-nav {
+  top:50px;
+}
 }
 div.responsive{
     font-size: 2.5vmin;
@@ -169,6 +186,7 @@ div.responsive h2 {
 body {
     padding-right: 0px !important;
     padding-left: 0px !important;
+    margin:0px !important;
 }
 .buttonbox{
     float:none !important;
@@ -184,10 +202,11 @@ div#login-form {
     margin-bottom:50px;
 }
 /* Making Menu Bar Transparent */
-div#main-nav {
+#main-nav {
+    /*position: relative;*/
   position:absolute;
   left:75vmin;
-  top:10vmin;
+  top:15vmin;
   background:none !important;
   border:none !important;
   box-shadow:none !important;
@@ -195,7 +214,7 @@ div#main-nav {
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
     color: rgb(85, 85, 85);
     text-decoration: none;
-    background-color: transparent !important;
+    background-color:rgba(0,0,0,0) !important;
     box-shadow:none !important;
 }
 input#search{ 
