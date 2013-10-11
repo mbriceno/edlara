@@ -234,7 +234,18 @@ class TutorialsController extends BaseController {
         return View::make('site.tutorial')->with('id',$id)->nest('header','main.header');
     }
     public function sitelistview(){
-        return View::make('site.tutorials')->nest('header','main.header');
+        $theme = Theme::uses('site')->layout('default');
+        $style = 'div.dataTables_length label {float: left;text-align: left;}div.dataTables_length select {width: 75px;display: inline-block;position:relative;} div.dataTables_filter label {float: right;display: inline-block;} div.dataTables_info {padding-top: 8px;} div.dataTables_paginate {float: right; margin: 0;} table {    margin: 1em 0;}';
+        $theme->asset()->writeStyle('inline-style',$style);
+        $theme->asset()->container('footer')->writeScript('inline-script',"$(document).ready(function() {
+                    $('#tutorials').dataTable({
+                        \"bJQueryUI\": true,
+                        \"sDom\": \"<'row'<'col-xs-4 col-md-4'l><'col-xs-4 col-md-4'f>r>t<'row'<'col-xs-4 col-md-4'i><'col-xs-4 col-md-4'p>>\"
+                    });
+
+                });");
+        $theme->appendTitle(' - Tutorials');
+        return $theme->scope('tutorials')->render();
     }
 
 
