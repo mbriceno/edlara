@@ -35,7 +35,7 @@ return array(
         // you want inheriting.
         'before' => function($theme)
         {
-            $theme->setTitle(Setting::get('system.adminsitename'));
+            $theme->setTitle(Setting::get('system.schoolname'));
 
         },
 
@@ -44,16 +44,7 @@ return array(
         // breadcrumb template.
         'beforeRenderTheme' => function($theme)
         {
-            // You may use this event to set up your assets.
-            // $theme->asset()->usePath()->add('core', 'core.js');
-            // $theme->asset()->add('jquery', 'vendor/jquery/jquery.min.js');
-            // $theme->asset()->add('jquery-ui', 'vendor/jqueryui/jquery-ui.min.js', array('jquery'));
-
-            // Partial composer.
-            // $theme->partialComposer('header', function($view)
-            // {
-            //     $view->with('auth', Auth::user());
-            // });
+            //BEFORE RENDER THEME
         },
 
         // Listen on event before render a layout,
@@ -66,7 +57,7 @@ return array(
                 $theme->asset()->container('footer')->add('bootstrapjs','/lib/bootstrap/js/bootstrap.min.js');
                 $theme->asset()->add('core','/css/system/main.css');
                 $theme->asset()->add('bootstrap', '/lib/bootstrap/css/bootstrap.min.css');
-                // $theme->asset()->usePath()->add('ipad', 'css/layouts/ipad.css');
+                $theme->asset()->container('footer')->add('datatables','/lib/datatables/js/jquery.dataTables.min.js');
             }
 
         )
