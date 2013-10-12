@@ -235,12 +235,12 @@ class TutorialsController extends BaseController {
     }
     public function sitelistview(){
         $theme = Theme::uses('site')->layout('default');
-        $style = 'div.dataTables_length label {float: left;text-align: left;}div.dataTables_length select {width: 75px;display: inline-block;position:relative;} div.dataTables_filter label {float: right;display: inline-block;} div.dataTables_info {padding-top: 8px;} div.dataTables_paginate {float: right; margin: 0;} table {    margin: 1em 0;}';
+        $style = 'div.dataTables_length label {float: left;text-align: left;}div.dataTables_length select { float:right;width: 75px;display: inline-block;position:relative;clear:right;} div.dataTables_filter label {float: right;display:block;clear:left;} div.dataTables_info {padding-top: 8px;} div.dataTables_paginate {float: right; margin: 0;} table {    margin: 1em 0;}';
         $theme->asset()->writeStyle('inline-style',$style);
-        $theme->asset()->container('footer')->writeScript('inline-script',"$(document).ready(function() {
+        $theme->asset()->container('datatables')->writeScript('inline-script',"$(document).ready(function() {
                     $('#tutorials').dataTable({
                         \"bJQueryUI\": true,
-                        \"sDom\": \"<'row'<'col-xs-4 col-md-4'l><'col-xs-4 col-md-4'f>r>t<'row'<'col-xs-4 col-md-4'i><'col-xs-4 col-md-4'p>>\"
+                        \"sDom\": \"<'row'<'col-xs-12 col-md-6'l><'col-xs-12 col-md-6'f>r>t<'row'<'col-xs-12 col-md-6'i><'col-xs-12 col-md-6'p>>\"
                     });
 
                 });");

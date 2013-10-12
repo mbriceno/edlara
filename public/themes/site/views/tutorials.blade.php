@@ -1,6 +1,5 @@
 
 <div class='row'>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <table id="tutorials" class="table table-striped table-bordered bootstrap-datatable datatable">
          <thead>
             <tr>
@@ -82,7 +81,6 @@
 
 </table>
 </span>
-</div>
 </div>
 
 <div id='footer' class="pull-right" style="padding:20px;margin:20px;clear:right;">
