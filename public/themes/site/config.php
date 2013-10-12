@@ -57,7 +57,7 @@ return array(
                 $theme->asset()->container('footer')->add('bootstrapjs','/lib/bootstrap/js/bootstrap.min.js');
                 $theme->asset()->add('core','/css/system/main.css');
                 $theme->asset()->add('bootstrap', '/lib/bootstrap/css/bootstrap.min.css');
-                $theme->asset()->container('footer')->add('datatables','/lib/datatables/js/jquery.dataTables.min.js');
+                $theme->asset()->container('footer')->add('datatables','/lib/datatables/js/jquery.dataTables.min.js',['jquery']);
             }
 
         )
