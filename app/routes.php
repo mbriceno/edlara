@@ -255,18 +255,24 @@ Route::get('/tutorial-{id}/exam',array('before'=>'student|exam_check','uses'=>'E
 Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
 
 // Get About Us page
-Route::get('/aboutus',function(){
-    return View::make('about.about-us')->nest('header','main.header');
+Route::get('/aboutus',function(){   
+    $theme = Theme::uses('site')->layout('default');
+    $theme->appendTitle('- About Us');
+    return $theme->scope('about.about')->render();
 });
 
 // Get About TOS page.
 Route::get('/about/tos',function(){
-    return View::make('about.terms-of-service')->nest('header','main.header');
+    $theme = Theme::uses('site')->layout('default');
+    $theme->appendTitle('- Terms of Service');
+    return $theme->scope('about.terms')->render();
 });
 
 //Get Contact Us Page.
 Route::get('contactus',function(){
-    return View::make('about.contact-us')->nest('header','main.header');
+    $theme = Theme::uses('site')->layout('default');
+    $theme->appendTitle('- Contact Us');
+    return $theme->scope('about.contact')->render();
 });
 
 // Go Home Redirect
@@ -287,17 +293,17 @@ Route::get('/',array('as'=>'home',function()
 }));
 
 
-App::missing(function($exception)
-{
-    return Response::view('site.error.404', array(), 404);
-});
-App::error(function(Exception $exception)
-{
-    Log::error($exception);
-    return Response::view('site.error.system',array(),500);
-});
-App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
-{
-    Log::error($exception);
-    return Response::view('site.error.system',array(),500);
-});
+// App::missing(function($exception)
+// {
+//     return Response::view('site.error.404', array(), 404);
+// });
+// App::error(function(Exception $exception)
+// {
+//     Log::error($exception);
+//     return Response::view('site.error.system',array(),500);
+// });
+// App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
+// {
+//     Log::error($exception);
+//     return Response::view('site.error.system',array(),500);
+// });
