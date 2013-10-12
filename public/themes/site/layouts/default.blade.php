@@ -17,5 +17,6 @@
         </div>
 
         {{ Theme::asset()->container('footer')->scripts() }}
+        {{ Theme::asset()->container('datatables')->scripts() }}
     </body>
 </html>
