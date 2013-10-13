@@ -87,7 +87,7 @@ $tutorial = Tutorials::find($id);
         echo Form::file('attachment[]', array('class'=>"pull-right",'style'=>'clear:right;','multiple'=>'true'));
         echo "<br>";
         echo "<br>";
-        $exams=[];
+        $exams[0]='';
         $possibleexamid=0;
         $checkexams = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE `subjectid` = '.$tutorial->subjectid));
             $checkexams = objectToArray($checkexams);

@@ -264,7 +264,7 @@ class TutorialsController extends BaseController {
             $examt['true']=true;
             $checkexamssubmit = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE  `id` = '.Input::get('exams',0).''));
             // Log::warning($checkexamssubmit);
-            if($checkexamssubmit){
+            if($checkexamssubmit[0]->exists){
                 $examt['id']=Input::get('exams');
             }
             else {
