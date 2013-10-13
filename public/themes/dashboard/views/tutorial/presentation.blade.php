@@ -120,7 +120,7 @@
     			var dataxrotate = $('#slide'+i+'_data_rotate_x').val();
     			var datayrotate = $('#slide'+i+'_data_rotate_y').val();
     			var datazrotate = $('#slide'+i+'_data_rotate_z').val();
-    			contentto += '\<div class\=\"step slide\" data-x="'+datax+'"  data-y="'+datay+'"  data-z="'+dataz+'" data-rotate-x="'+dataxrotate+'" data-rotate-z="'+datayrotate+'" data-rotate-z="'+datazrotate+'">';
+    			contentto += '\<div class\=\"step slide\" data-x="'+datax+'"  data-y="'+datay+'"  data-z="'+dataz+'" data-rotate-x="'+dataxrotate+'" data-rotate-y="'+datayrotate+'" data-rotate-z="'+datazrotate+'">';
     			contentto += slidecontent;
     			contentto +='\<\/div>'
 
