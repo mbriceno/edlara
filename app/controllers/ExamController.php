@@ -27,7 +27,14 @@ class ExamController extends BaseController
 		return;
 	}
 	public function viewExam($tid){
-		return View::make('site.exam.do')->nest('header','main.header')->with('id',$tid);
+		$theme = Theme::uses('site')->layout('default');
+        $theme->appendTitle('- Do Exam');
+        $view = [
+        'id'=>$tid
+        ];
+        return $theme->scope('exam.view',$view)->render();
+
+        return View::make('site.exam.do')->nest('header','main.header')->with('id',$tid);
 	}
 	public function doneExam($id,$tid){
 		return;
@@ -208,7 +215,7 @@ class ExamController extends BaseController
 
             $assessment = new Assessments;
             $assessment->title = $tutorial->name.' Exam For '.$exam->title;
-            $assessment->description = $exam->title.' exam done for '.$tutorial->name.' by '.Sentry::getUser()->first_name.' '.Semtry::getUser()->last_name;
+            $assessment->description = $exam->title.' exam done for '.$tutorial->name.' by '.Sentry::getUser()->first_name.' '.Sentry::getUser()->last_name;
             $assessment->assessmenttype = "exam";
             $assessment->tutorialid = $tid;
             $assessment->studentid = Sentry::getUser()->id;
@@ -331,7 +338,10 @@ class ExamController extends BaseController
         // var_dump($data);
         $encoded = json_encode($data);
         $encryptedpath = Crypt::encrypt('questiondata');
+        $encryptedpath = substr($encryptedpath, strlen($encryptedpath)/2);
+        if(!is_dir(app_path().'/files/exam-'.$newexam->id)){
         File::makeDirectory(app_path().'/files/exam-'.$newexam->id);
+}
         file_put_contents(app_path().'/files/exam-'.$newexam->id.'/'.$encryptedpath.'.json',$encoded);
         $newexame = Exams::find($newexam->id);
         $newexame->hash = $encryptedpath;
@@ -444,6 +454,8 @@ class ExamController extends BaseController
         $encoded = json_encode($data);
         echo $encoded;
         $encryptedpath = Crypt::encrypt('questiondata');
+        $encryptedpath = substr($encryptedpath, strlen($encryptedpath)/2);
+        
         file_put_contents(app_path().'/files/exam-'.$exam->id.'/'.$encryptedpath.'.json',$encoded);
         
         $exam->hash = $encryptedpath;
