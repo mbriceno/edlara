@@ -221,20 +221,17 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         }
 }));
 
-// Submit Assessment GET
-Route::get('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submitview'));
-
 // Submit Assessment POST
 Route::post('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submit'));
 
-// Updatable Assessment List
-Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
-
-// Update Assessment View - Student Only.
-Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
-
 // Update Assessment- Student Only.
 Route::post('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@update'));
+
+//Validating Exam Work
+Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
+
+// Submit Assessment GET
+Route::get('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submitview'));
 
 // Download Assessment Attachment
 Route::get('/attachments/assessment-{id}/{filename}/download',array('before'=>'student','uses'=>'AssessmentController@download'));
@@ -251,8 +248,11 @@ Route::get('/tutorial-{id}/exam-{eid}/{hash}',array('before'=>'student','uses'=>
 //Exam View
 Route::get('/tutorial-{id}/exam',array('before'=>'student|exam_check','uses'=>'ExamController@viewExam'));
 
-//Validating Exam Work
-Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
+// Updatable Assessment List
+Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
+
+// Update Assessment View - Student Only.
+Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
 
 // Get About Us page
 Route::get('/aboutus',function(){   
