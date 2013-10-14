@@ -33,8 +33,6 @@ class ExamController extends BaseController
         'id'=>$tid
         ];
         return $theme->scope('exam.view',$view)->render();
-
-        return View::make('site.exam.do')->nest('header','main.header')->with('id',$tid);
 	}
 	public function doneExam($id,$tid){
 		return;
