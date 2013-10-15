@@ -100,8 +100,6 @@ class TutorialsController extends BaseController {
             if ($validator->fails())
             {         
                 Input::flash();
-                // Log::error(Input::get('subject'));
-
                 return Redirect::to('/tutorial/edit/'.$id.'')->withErrors($validator);
             } 
             else
@@ -112,7 +110,6 @@ class TutorialsController extends BaseController {
                     return Redirect::to('/tutorial/edit/'.$id.''); 
                 }
                 return Redirect::to(URL::previous());
-                // Log::error(Input::get('subject'));
             }
         }
     }
