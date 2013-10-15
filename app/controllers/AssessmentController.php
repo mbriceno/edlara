@@ -79,7 +79,21 @@ class AssessmentController extends BaseController {
                 });
         // Input::file('attachment1')->move(app_path().'/attachments/assessment-'.$assessment->id.'/',$name);  
 
-        return View::make('site.assessment.update')->with('id',$newassessment->id)->nest('header','main.header');
+        $theme = Theme::uses('site')->layout('default');
+        $view = [
+        'id'=>$newassessment->id
+        ];
+        $theme->asset()->container('datatables')->writeScript('inline-script','$(document).ready(function(){
+            $(\'#attachment\').dataTable({
+                "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ '.' Attachments per page"
+                },
+                "sPagination":"bootstrap"
+
+            });
+        });');
+        return $theme->scope('assessment.update',$view)->render();
     }
     public function submitview(){
         $theme = Theme::uses('site')->layout('default');
