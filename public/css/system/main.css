@@ -167,16 +167,16 @@ div.responsive h2 {
 }
 
 @-webkit-keyframes moveclouds {
-0% {margin-left: 1200px;}
-100% {margin-left: -1200px;}
+0% {margin-left: 110%;}
+100% {margin-left: -20%;}
 }
 @-moz-keyframes moveclouds {
-0% {margin-left: 1200px;}
-100% {margin-left: -1200px;}
+0% {margin-left: 110%;}
+100% {margin-left: -20%;}
 }
 @-o-keyframes moveclouds {
-0% {margin-left: 1200px;}
-100% {margin-left: -1200px;}
+0% {margin-left: 110%;}
+100% {margin-left: -20%;}
 }
 .container-fluid#top-heading {
     padding-right: 0px !important;
@@ -241,4 +241,8 @@ input#search{
 }
 #pwd-reset-form {
     margin-top:50px;
+}
+
+div.home {
+    left:0px;right:0px;
 }
