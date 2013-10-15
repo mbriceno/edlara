@@ -53,6 +53,8 @@
             echo Form::label('attachments','Attachments',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
             echo Form::file('attachments[]',array('multiple'=>'true','class'=>'pull-right','style'=>'clear:right;margin:5px;'));
         }
+        echo Form::label('marks','Marks',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
+        echo Form::text('marks',$assessment->marks,array('class'=>'pull-right','style'=>'clear:right;margin:5px;','readonly'));
         echo Form::submit('Submit',array('class'=>' pull-left btn btn-success','value'=>'submit','style'=>'clear:both;'));
         echo Form::close();
         ?>
