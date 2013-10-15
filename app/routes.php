@@ -289,7 +289,7 @@ Route::get('/',array('as'=>'home',function()
 {
     $theme = Theme::uses('site')->layout('default');
     $theme->setTitle('Home');
-    return $theme->scope('index')->render();
+    return $theme->scope('index')->content();
 }));
 
 
