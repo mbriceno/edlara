@@ -48,7 +48,7 @@
                 echo $tutorial->updated_at;
                 echo "</td>";
                 echo "<td>";
-                echo $tutorial->marks;
+                echo $assessment->marks;
                 echo "</td>";
                 echo "</tr>";
             }
