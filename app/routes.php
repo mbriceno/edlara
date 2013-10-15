@@ -221,20 +221,17 @@ Route::get('assessment/submit/{id}/{hash}',array('before'=>'student',function($i
                         }
 }));
 
-// Submit Assessment GET
-Route::get('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submitview'));
-
 // Submit Assessment POST
 Route::post('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submit'));
 
-// Updatable Assessment List
-Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
-
-// Update Assessment View - Student Only.
-Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
-
 // Update Assessment- Student Only.
 Route::post('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@update'));
+
+//Validating Exam Work
+Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
+
+// Submit Assessment GET
+Route::get('assessment/submit',array( 'before'=>'student','uses'=>'AssessmentController@submitview'));
 
 // Download Assessment Attachment
 Route::get('/attachments/assessment-{id}/{filename}/download',array('before'=>'student','uses'=>'AssessmentController@download'));
@@ -251,22 +248,31 @@ Route::get('/tutorial-{id}/exam-{eid}/{hash}',array('before'=>'student','uses'=>
 //Exam View
 Route::get('/tutorial-{id}/exam',array('before'=>'student|exam_check','uses'=>'ExamController@viewExam'));
 
-//Validating Exam Work
-Route::post('/tutorial-{tid}/exam-{eid}/{hash}',array('before'=>'student','uses'=>'ExamController@doExam'));
+// Updatable Assessment List
+Route::get('assessment/update',array( 'before'=>'student','uses'=>'AssessmentController@updateList'));
+
+// Update Assessment View - Student Only.
+Route::get('assessment/update/{id}',array( 'before'=>'student','uses'=>'AssessmentController@updateView'));
 
 // Get About Us page
-Route::get('/aboutus',function(){
-    return View::make('about.about-us')->nest('header','main.header');
+Route::get('/aboutus',function(){   
+    $theme = Theme::uses('site')->layout('default');
+    $theme->appendTitle('- About Us');
+    return $theme->scope('about.about')->render();
 });
 
 // Get About TOS page.
 Route::get('/about/tos',function(){
-    return View::make('about.terms-of-service')->nest('header','main.header');
+    $theme = Theme::uses('site')->layout('default');
+    $theme->appendTitle('- Terms of Service');
+    return $theme->scope('about.terms')->render();
 });
 
 //Get Contact Us Page.
 Route::get('contactus',function(){
-    return View::make('about.contact-us')->nest('header','main.header');
+    $theme = Theme::uses('site')->layout('default');
+    $theme->appendTitle('- Contact Us');
+    return $theme->scope('about.contact')->render();
 });
 
 // Go Home Redirect
@@ -281,21 +287,23 @@ Route::get('dash',function(){
 //HomePage Catcher
 Route::get('/',array('as'=>'home',function()
 {
-    return View::make('home')->nest('header','main.header');
+    $theme = Theme::uses('site')->layout('default');
+    $theme->setTitle('Home');
+    return $theme->scope('index')->content();
 }));
 
 
-App::missing(function($exception)
-{
-    return Response::view('site.error.404', array(), 404);
-});
-App::error(function(Exception $exception)
-{
-    Log::error($exception);
-    return Response::view('site.error.system',array(),500);
-});
-App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
-{
-    Log::error($exception);
-    return Response::view('site.error.system',array(),500);
-});
+// App::missing(function($exception)
+// {
+//     return Response::view('site.error.404', array(), 404);
+// });
+// App::error(function(Exception $exception)
+// {
+//     Log::error($exception);
+//     return Response::view('site.error.system',array(),500);
+// });
+// App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
+// {
+//     Log::error($exception);
+//     return Response::view('site.error.system',array(),500);
+// });

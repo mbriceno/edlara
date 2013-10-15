@@ -100,8 +100,6 @@ class TutorialsController extends BaseController {
             if ($validator->fails())
             {         
                 Input::flash();
-                // Log::error(Input::get('subject'));
-
                 return Redirect::to('/tutorial/edit/'.$id.'')->withErrors($validator);
             } 
             else
@@ -112,7 +110,6 @@ class TutorialsController extends BaseController {
                     return Redirect::to('/tutorial/edit/'.$id.''); 
                 }
                 return Redirect::to(URL::previous());
-                // Log::error(Input::get('subject'));
             }
         }
     }
@@ -234,7 +231,18 @@ class TutorialsController extends BaseController {
         return View::make('site.tutorial')->with('id',$id)->nest('header','main.header');
     }
     public function sitelistview(){
-        return View::make('site.tutorials')->nest('header','main.header');
+        $theme = Theme::uses('site')->layout('default');
+        $style = 'div.dataTables_length label {float: left;text-align: left;}div.dataTables_length select { float:right;width: 75px;display: inline-block;position:relative;clear:right;} div.dataTables_filter label {float: right;display:block;clear:left;} div.dataTables_info {padding-top: 8px;} div.dataTables_paginate {float: right; margin: 0;} table {    margin: 1em 0;}';
+        $theme->asset()->writeStyle('inline-style',$style);
+        $theme->asset()->container('datatables')->writeScript('inline-script',"$(document).ready(function() {
+                    $('#tutorials').dataTable({
+                        \"bJQueryUI\": true,
+                        \"sDom\": \"<'row'<'col-xs-12 col-md-6'l><'col-xs-12 col-md-6'f>r>t<'row'<'col-xs-12 col-md-6'i><'col-xs-12 col-md-6'p>>\"
+                    });
+
+                });");
+        $theme->appendTitle(' - Tutorials');
+        return $theme->scope('tutorials')->render();
     }
 
 
@@ -253,7 +261,7 @@ class TutorialsController extends BaseController {
             $examt['true']=true;
             $checkexamssubmit = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE  `id` = '.Input::get('exams',0).''));
             // Log::warning($checkexamssubmit);
-            if($checkexamssubmit){
+            if($checkexamssubmit[0]->exists){
                 $examt['id']=Input::get('exams');
             }
             else {

@@ -27,7 +27,12 @@ class ExamController extends BaseController
 		return;
 	}
 	public function viewExam($tid){
-		return View::make('site.exam.do')->nest('header','main.header')->with('id',$tid);
+		$theme = Theme::uses('site')->layout('default');
+        $theme->appendTitle('- Do Exam');
+        $view = [
+        'id'=>$tid
+        ];
+        return $theme->scope('exam.view',$view)->render();
 	}
 	public function doneExam($id,$tid){
 		return;
@@ -46,33 +51,19 @@ class ExamController extends BaseController
 
         $realcount = $exam->totalquestions ;
 
-        // echo $answers;
-        // echo "<br><br><br><br><br><br><br>";
-        // echo $bystudent;
-        // echo json_decode($answers);
         $json = json_decode($answers,true);
         settype($realcount, 'float');
         $markscount = 0.0;
         settype($markscount, 'float');
         $marksinc = 100.0/$realcount;
-// dd($realcount);
-// // dd($marksinc);
-//         dd($markscount);
-
-        // dd($marksinc);
         settype($realcount, 'integer');
         $questionfailed =[];
         $studentanswer = json_decode($bystudent,true);
         $questioncount = Session::put('questioncount_key',1);
-            // $answerfailed=array();
-        // var_dump($studentanswer['answers'][2]);
-        // var_dump($json['questiondata']['question'][1]);
         for($questioncount = 0; $questioncount <=$realcount;){
             $questioncount++;
             $acception=[];
             if(isset($studentanswer['answers'][$questioncount][1])){
-                // $questioncount++;
-                // dd($studentanswer['answers'][$questioncount]);
             $answerfailed=array();
             if($studentanswer['answers'][$questioncount][1]==0 || $studentanswer['answers'][$questioncount][1]=="0"){
                 //Adding 0 Marks if the Question Left Unanswered.
@@ -81,7 +72,6 @@ class ExamController extends BaseController
             else{
                 $ccount = 0;
                 $answerfromstudent = $studentanswer['answers'][$questioncount];
-                // $acception = [0];
                 if(isset($json['questiondata']['question'][$questioncount]['answers'][0])){
                     $ccount +=1;
                     //Setting Simple Variable
@@ -94,7 +84,6 @@ class ExamController extends BaseController
                 }
                 if(isset($json['questiondata']['question'][$questioncount]['answers'][1])){
                     $ccount +=1;
-                    // if()
                     //Setting Simple Variable
                     $a1=$json['questiondata']['question'][$questioncount]['answers'][1];
 
@@ -140,41 +129,27 @@ class ExamController extends BaseController
                         $answerfailed[] = $answerfromstudent;
                     }
                 }
-                    // var_dump($acception);
-                    // echo "<br><br><br>";
                 $resulttt  = array_unique($acception);
                 $counted =array_count_values($acception);
-                    // var_dump($resulttt);
                 if(isset($counted[1])){
                    if($counted[1] == $ccount){                    
                     $markscount +=$marksinc;
                 } else {
                     $questionfailed['questions'][$questioncount] =$json['questiondata']['questions'][$questioncount];
                     $questionfailed['questions_fail'][$questioncount] = $answerfailed;
-                    // dd($answerfailed);
                     unset($answerfailed);
                 }
             }
 
                 unset($acception);
-                // foreach($acception as $ac){
-                //     echo $ac;
-                // }
             }
         }
         
-        // $questioncount++;
         }
         $failedquestions = json_encode($questionfailed);
                    file_put_contents(app_path().'/files/assessment/'.$assessment->id.'/exam-'.$exam->id.'/questionfailed.json',$failedquestions);
-            // dd($questioncount);
-        // dd($markscount);
         $assessment->marks = $markscount;
         $assessment->save();
-        // var_dump($json);
-
-
-        //APPLICATION LOGIC TO BE IMPLEMENTED
         return Redirect::to(URL::previous());
     }
     private function checkAnswer($questionanswer,$studentanswer){
@@ -208,7 +183,7 @@ class ExamController extends BaseController
 
             $assessment = new Assessments;
             $assessment->title = $tutorial->name.' Exam For '.$exam->title;
-            $assessment->description = $exam->title.' exam done for '.$tutorial->name.' by '.Sentry::getUser()->first_name.' '.Semtry::getUser()->last_name;
+            $assessment->description = $exam->title.' exam done for '.$tutorial->name.' by '.Sentry::getUser()->first_name.' '.Sentry::getUser()->last_name;
             $assessment->assessmenttype = "exam";
             $assessment->tutorialid = $tid;
             $assessment->studentid = Sentry::getUser()->id;
@@ -331,7 +306,10 @@ class ExamController extends BaseController
         // var_dump($data);
         $encoded = json_encode($data);
         $encryptedpath = Crypt::encrypt('questiondata');
+        $encryptedpath = substr($encryptedpath, strlen($encryptedpath)/2);
+        if(!is_dir(app_path().'/files/exam-'.$newexam->id)){
         File::makeDirectory(app_path().'/files/exam-'.$newexam->id);
+}
         file_put_contents(app_path().'/files/exam-'.$newexam->id.'/'.$encryptedpath.'.json',$encoded);
         $newexame = Exams::find($newexam->id);
         $newexame->hash = $encryptedpath;
@@ -444,6 +422,8 @@ class ExamController extends BaseController
         $encoded = json_encode($data);
         echo $encoded;
         $encryptedpath = Crypt::encrypt('questiondata');
+        $encryptedpath = substr($encryptedpath, strlen($encryptedpath)/2);
+        
         file_put_contents(app_path().'/files/exam-'.$exam->id.'/'.$encryptedpath.'.json',$encoded);
         
         $exam->hash = $encryptedpath;
