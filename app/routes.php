@@ -285,12 +285,7 @@ Route::get('dash',function(){
 });
 
 //HomePage Catcher
-Route::get('/',array('as'=>'home',function()
-{
-    $theme = Theme::uses('site')->layout('default');
-    $theme->setTitle('Home');
-    return $theme->scope('index')->content();
-}));
+Route::get('/',array('as'=>'home','uses'=>'HomeController@index'));
 
 
 // App::missing(function($exception)
