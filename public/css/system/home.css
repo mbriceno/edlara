@@ -1,0 +1,68 @@
+/*
+	This is a main CSS file for homepage styling.
+*/
+
+/*@import url(http://fonts.googleapis.com/css?family=Bubbler+One);*/
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:200);
+/*font-family: 'Bubbler One', sans-serif;*/
+div.tutorials_title ,div.latest_tutorials_title,div.topstudents_title{
+	font-family: 'Titillium Web',sans-serif;
+	font-size: 32px;
+	display: inline-block;
+	position: relative;
+	left:10%;
+	text-shadow: 0 1px 0 #ccc,
+	               0 2px 0 #c9c9c9,
+	               0 3px 0 #bbb,
+	               0 4px 0 #b9b9b9,
+	               0 5px 0 #aaa,
+	               0 6px 1px rgba(0,0,0,.1),
+	               0 0 5px rgba(0,0,0,.1),
+	               0 1px 3px rgba(0,0,0,.3),
+	               0 3px 5px rgba(0,0,0,.2),
+	               0 5px 10px rgba(0,0,0,.25),
+	               0 10px 10px rgba(0,0,0,.2),
+	               0 20px 20px rgba(0,0,0,.15);
+}
+div.tutorials_title{
+	animation:tutorials_header 7s infinite linear;
+}
+div.latest_tutorials_title {
+	animation:tutorials_header 6s infinite linear;
+}
+div.topstudents_title{
+	animation:tutorials_header 5.5s infinite linear;
+}
+@-moz-keyframes tutorials_header {
+	0%{
+		left:0;		
+	}
+	50%{
+		left:40%;
+	}
+	100%{
+		left:0;
+	}
+}
+a.tutorial {
+	text-decoration: none;
+}
+a.latest_tutorial {
+	text-decoration: none;
+}
+a.tutorial .right {
+	position:absolute;
+	float:right;
+	right:0px;
+	top:300px;
+	clear:right;
+	font-size: 400%;
+}
+a.tutorial .left {
+	position: absolute;
+	float: left;
+	left:0px;
+	top:-300px;
+	clear:left;
+	font-size: 400%;
+}
