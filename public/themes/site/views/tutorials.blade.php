@@ -1,26 +1,27 @@
 
 <div class='row'>
-        <table id="tutorials" class="table table-striped table-bordered bootstrap-datatable datatable">
-         <thead>
-            <tr>
-                <th>#ID</th>
-                <th>Title</th>
-                <th>Subject</th>
-                <th>Grade</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            function checkSubject($subjects,$subject){
-                foreach($subjects as $s){
-                    if($s == $subject){
-                        return 1;
-                    }
+    <table id="tutorials" class="table table-striped table-bordered bootstrap-datatable datatable">
+       <thead>
+        <tr>
+            <th>#ID</th>
+            <th>Title</th>
+            <th>Subject</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        function checkSubject($subjects,$subject){
+            foreach($subjects as $s){
+                if($s == $subject){
+                    return 1;
                 }
-                return 0;
             }
+            return 0;
+        }
+        $tutorialdata = Cache::remember('tutorialdata',30,function(){
+            $out='';
             $tutorials = Tutorials::all();
-
             foreach ($tutorials as $tutorial){
                 if($tutorial->published == 1){
 
@@ -39,15 +40,15 @@
                         }
                         elseif($groupname == 'admin'){
 
-                           $userw = Sentry::getUser();
-                           $user = Teacher::findOrFail($userw->id);
-                       }
+                         $userw = Sentry::getUser();
+                         $user = Teacher::findOrFail($userw->id);
+                     }
 
 
-                       $ssubjects = $user->extra;
-                       $subjects = unserialize($ssubjects);
-                       $truth = 0;
-                       if($subjects != null){
+                     $ssubjects = $user->extra;
+                     $subjects = unserialize($ssubjects);
+                     $truth = 0;
+                     if($subjects != null){
                         $truth = checkSubject($subjects,$tutorial->subjectid);
                     }
 
@@ -59,25 +60,29 @@
                 $subject = Subject::find($tutorial->subjectid);
                 $teacher = Teacher::find($tutorial->createdby);
                 $username = Sentry::findUserByLogin($teacher->email);
-                echo "<tr>";
-                echo "<td>";
-                echo $tutorial->id;
-                echo "</td>";
-                echo "<td>";
-                echo "<a href='/tutorial/".$tutorial->id."'>$tutorial->name";
-                echo "</td>";
-                echo "<td>";
-                echo $subject->subjectname;
-                echo "</td>";
-                echo "<td>";
-                echo $subject->grade;
-                echo "</td>";
-                echo "</tr>";
+                $out .= "<tr>";
+                $out .= "<td>";
+                $out .= $tutorial->id;
+                $out .= "</td>";
+                $out .= "<td>";
+                $out .= "<a href='/tutorial/".$tutorial->id."'>$tutorial->name";
+                $out .= "</td>";
+                $out .= "<td>";
+                $out .= $subject->subjectname;
+                $out .= "</td>";
+                $out .= "<td>";
+                $out .= $subject->grade;
+                $out .= "</td>";
+                $out .= "</tr>";
             }
-        }
-        ?>
 
-    </tbody>
+        }
+        return $out;
+        });
+        echo $tutorialdata;
+    ?>
+
+</tbody>
 
 </table>
 </span>
