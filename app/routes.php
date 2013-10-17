@@ -83,7 +83,11 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
     Route::post('/exam/edit/{id}',array('before'=>'csrf|teacher','uses'=>'ExamController@updateExam'));
     
     Route::post('settings', array('before'=>'csrf|admin', 'uses'=>'SettingsController@update'));
-
+    Route::get('clearcache',array('before'=>'admin',function(){
+        Artisan::call('cache:clear');
+        Cache::flush();
+        return Redirect::to(URL::previous());
+    }));
     Route::any('subject/edit/{id}/{mode}',array('before'=>'csrf|admin','uses'=>'SubjectController@modder'));
 })->before('auth');
 
