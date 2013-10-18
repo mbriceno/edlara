@@ -28,7 +28,8 @@ class SettingsController extends BaseController{
 		 Setting::set('app.url',Input::get('url'));
 		 Setting::set('app.captcha',Input::get('captcha'));
 		 Setting::set('system.dashurl',Input::get('systemurl'));
-
+		 Setting::set('system.dashurlshort',Input::get('systemurlshort'));
+		 Setting::set('system.siteurlshort',Input::get('siteurlshort'));
 		$theme = Theme::uses('dashboard')->layout('default');
 
         $view = array(

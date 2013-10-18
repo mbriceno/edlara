@@ -39,6 +39,10 @@ echo Form::open(array('url' => '/settings', 'method' => 'POST','class'=>'form-ho
 
     echo Form::label('systemurl','Dashboard Domain',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
     echo Form::text('systemurl',Setting::get('system.dashurl'),array('class'=>'col-lg-6-input form-control input-sm pull-right','style'=>'width:240px;'));
+    echo Form::label('systemurlshort','Dashboard Domain Short',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
+    echo Form::text('systemurlshort',Setting::get('system.dashurlshort'),array('class'=>'col-lg-6-input form-control input-sm pull-right','style'=>'width:240px;'));
+    echo Form::label('siteurlshort','Site Domain Short',array('class'=>'pull-left','style'=>'clear:left;margin:10px;'));
+    echo Form::text('siteurlshort',Setting::get('system.siteurlshort'),array('class'=>'col-lg-6-input form-control input-sm pull-right','style'=>'width:240px;'));
     echo "</fieldset>";
                 ?>
 </div>
