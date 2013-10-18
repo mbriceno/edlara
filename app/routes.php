@@ -24,16 +24,20 @@ Route::get('login', function () {
 Route::get('logout','UserController@logout');
 
 
-//API Subdomain
-Route::group(array('domain' => 'api.laravel.dev'),function(){
-    Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
-});
+// //API Subdomain
+// Route::group(array('domain' => 'api.laravel.dev'),function(){
+//     Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
+//     Route::get('/tutorials',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
+//     Route::get('/tutorial/{id}',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
+//     Route::get('/exams',array('before'=>'api_check','uses'=>'ApiController@exams'));
+//     Route::get('/exam/{id}',array('before'=>'api_check','uses'=>'ApiController@exam'));
+// });
 
 
 
 
 //Dashboard Subdomain
-Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
+Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
 
     
 
@@ -89,7 +93,7 @@ Route::group(array('domain' => 'dashboard.laravel.dev' ), function () {
         return Redirect::to(URL::previous());
     }));
     Route::any('subject/edit/{id}/{mode}',array('before'=>'csrf|admin','uses'=>'SubjectController@modder'));
-})->before('auth');
+})->before('auth')->where('dashboard',Setting::get('system.dashurlshort'));
 
 
 
@@ -285,7 +289,7 @@ Route::get('gohome',function(){
 }); 
 // Go Dashboard Redirect
 Route::get('dash',function(){
-    return Redirect::route('dashboard');
+    return Redirect::to('http://'.Setting::get('system.dashurlshort','dashboard').'.'.Setting::get('system.siteurlshort'));
 });
 
 //HomePage Catcher
