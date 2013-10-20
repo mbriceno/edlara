@@ -1,7 +1,7 @@
 <?php
 
 class TutorialsController extends BaseController {
-    public function index($id){
+    public function index($dash,$id){
         if($id == 0){
 
             $theme = Theme::uses('dashboard')->layout('default');
@@ -60,7 +60,7 @@ class TutorialsController extends BaseController {
         }
     }
 
-    public function update($id){
+    public function update($dash,$id){
         if($id == 0){
             $validator = Validator::make(Input::all(),
                             array('title'=>'required|min:3|max:256',
@@ -113,7 +113,7 @@ class TutorialsController extends BaseController {
             }
         }
     }
-    public function modder($mode,$id){
+    public function modder($dash,$mode,$id){
         $tutorial = Tutorials::find($id);
         switch ($mode) {
             case 'pub':
@@ -256,11 +256,9 @@ class TutorialsController extends BaseController {
         $tutorial->description  =   Input::get('description');
         $tutorial->content      =   Input::get('tutorial');
         $examt = array();
-        // Log::error(Input::get('examstruth'));
         if(Input::get('examstruth') == 'on'){
             $examt['true']=true;
             $checkexamssubmit = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE  `id` = '.Input::get('exams',0).''));
-            // Log::warning($checkexamssubmit);
             if($checkexamssubmit[0]->exists){
                 $examt['id']=Input::get('exams');
             }
@@ -282,8 +280,6 @@ class TutorialsController extends BaseController {
         {
         $tutorial->published    =   0;
         }
-        // Log::error(Input::get('examstruth'));
-        // Log::error(Input::get('published'));
         if(Input::hasFile('attachment')){
             $files =  Input::file('attachment');
             foreach($files as $file){
