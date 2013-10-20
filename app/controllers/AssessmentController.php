@@ -243,7 +243,7 @@ class AssessmentController extends BaseController {
     }
 
 
-    public function teacherUpdate($id){
+    public function teacherUpdate($dash,$id){
         $assessmentid = $id;
 
         $assessment = Assessments::findOrFail($assessmentid);
