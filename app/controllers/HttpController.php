@@ -5,7 +5,7 @@ class HttpController extends BaseController {
 	public function assessmentget(){
 
 	}
-	public function assessmentupdateget($id){		
+	public function assessmentupdateget($dash,$id){		
         $assessment = Assessments::find($id);
         $user = User::find($assessment->teacherid);
         if(Sentry::getUser()->id == $user->id){
@@ -83,7 +83,7 @@ class HttpController extends BaseController {
 	public function userget(){
 
 	}
-    public function examupdateget($id){
+    public function examupdateget($dash,$id){
 
         if(Exams::find($id)){
             $theme = Theme::uses('dashboard')->layout('default');
