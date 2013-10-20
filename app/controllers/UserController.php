@@ -307,7 +307,7 @@ class UserController extends BaseController {
             return  Redirect::to('gohome');
         
     }
-    public function manage($id,$mode){
+    public function manage($dash,$id,$mode){
         switch ($mode) {
             case 'view':
                         $theme = Theme::uses('dashboard')->layout('default');
@@ -447,7 +447,7 @@ class UserController extends BaseController {
         return View::make('account.profile.view');
     }
 
-    public function update($id){
+    public function update($dash,$id){
         $validator = Validator::make(Input::all(),
             [
             'email'=>'exists:users,email,id,'.$id,
