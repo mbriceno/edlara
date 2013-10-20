@@ -3,7 +3,7 @@
 class PresentationController extends BaseController
 {
 
-	public function view($tid){
+	public function view($dash,$tid){
 		$theme = Theme::uses('dashboard')->layout('default');
 
         $view = array(
@@ -20,7 +20,7 @@ class PresentationController extends BaseController
         $theme->asset()->add('ckeditor-jquery','/js/ckeditor/adapters/jquery.js');
         return $theme->scope('tutorial.presentation', $view)->render();
 	}
-	public function create($tid){
+	public function create($dash,$tid){
 		$title = Input::get('title',rand(5, 250000));
         if($title ==''){
             $title=rand(5, 250000);

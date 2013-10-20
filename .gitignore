@@ -3,3 +3,5 @@
 composer.phar
 /nbproject/
 **.cache
+/bin/*
+/bin/!.gitkeep

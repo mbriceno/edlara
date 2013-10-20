@@ -253,7 +253,6 @@ class ExamController extends BaseController
         $validator = Validator::make(Input::all(),$rules,$messages);
         if($validator->fails()){
             Input::flash();
-            // return Redirect::to('/exam/edit/0')->withErrors($validator)->withInput();
             return View::make('dashboard.exams.create')->with('errors',$validator->getMessageBag())->with('id',0);
         }
 
@@ -268,24 +267,13 @@ class ExamController extends BaseController
         $exam->save();
 
         $newexam = DB::table('exams')->orderby('id','desc')->first();
-        $data= array();
-        $data['id']=12;
-        $data['title'] ="Test";
-        $data['subjectid']=4;
-
 
         $data = array();
         for($question =1;$question <= $questioncount;){
-        	// $data['questiondata']['question'][$question]['answers'] = 'answers';
-            // echo $input['question_'.$question].'<br>';
-            // var_dump($input['checkbox_'.$question]);
-            // echo "'<br>';";
         	$data['questiondata']['questions'][$question] = $input['question_'.$question];
             for($checkbox=1;$checkbox <=4;$checkbox++){
             	$data['questiondata']['question'][$question]['checkboxdata'][$checkbox] = $input['checkbox_'.$question.'_'.$checkbox];
-            	// echo $input['checkbox_'.$question.'_'.$checkbox].'<br>';
             }
-            // var_dump($input['checkbox_'.$question]);
             if(is_array($input['checkbox_'.$question])){
                 if(isset($input['checkbox_'.$question][0]) && $input['checkbox_'.$question][0] > 0 && $input['checkbox_'.$question][0] <= 4)
                 $data['questiondata']['question'][$question]['answers'][0]=$input['checkbox_'.$question][0];
@@ -303,7 +291,6 @@ class ExamController extends BaseController
             }
             $question++;
         }
-        // var_dump($data);
         $encoded = json_encode($data);
         $encryptedpath = Crypt::encrypt('questiondata');
         $encryptedpath = substr($encryptedpath, strlen($encryptedpath)/2);
