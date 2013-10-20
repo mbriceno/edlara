@@ -38,38 +38,36 @@
         </div>&nbsp;<br>&nbsp;<br>&nbsp;<br>
         <div class="row">
             <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+            <?php if($tutorialslides !== ''){ ?>
                 <a class="tutorial left pull-left" id="prev_btn" style="font-size:200%;">&laquo;</a>
+            <?php } ?>
             </div>
-            <div id='tutorial_wrapper' class="col-xs-12 col-sm-12 col-md-10" style="border-bottom:1px solid #000000;border-radius:20px;">
-                <div class="tutorials_title" style="overflow:hidden;">
-                    Latest Trending Tutorials
-                </div>
-                <div id="tutorials" class="latest_trending_tutorials">
-                    <?php
-                    echo $tutorialslides;
+            <div id='tutorial_wrapper' class="col-xs-12 col-sm-12 col-md-10" 
+            <?php if($tutorialslides !== ''){ ?>
+            style="border-bottom:1px solid #000000;border-radius:20px;">
+
+            <?php }                    echo $tutorialslides;
                     ?>
-                </div>
-            </div>
-            <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
-                <a class="tutorial right pull-right" id="next_btn" style="font-size:200%;">&raquo;</a>
             </div>
         </div>&nbsp;<br>&nbsp;<br>&nbsp;<br>
         <div class="row">
             <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+            <?php if($tutorialslides !== ''){ ?>
                 <a class="topstudent left pull-left" id="prev_btn" style="font-size:200%;">&laquo;</a>
+            <?php } ?>
             </div>
-            <div id='topstudent_wrapper' class="col-xs-12 col-sm-12 col-md-10" style="border-bottom:1px solid #000000;border-radius:20px;">
-                <div class="topstudents_title" style="overflow:hidden;">
-                    Top Students of System
-                </div>
-                <div id="topstudents" class="topstudents">
-                    <?php
+            <div id='topstudent_wrapper' class="col-xs-12 col-sm-12 col-md-10"
+            <?php if($tutorialslides !== ''){ ?>
+
+             style="border-bottom:1px solid #000000;border-radius:20px;">
+            <?php } 
                     echo $topstudents
                     ?>
-                </div>
             </div>
             <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+            <?php if($tutorialslides !== ''){ ?>
                 <a class="topstudent right pull-right" id="next_btn" style="font-size:200%;">&raquo;</a>
+            <?php } ?>
             </div>
         </div>
     </div>
