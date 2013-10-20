@@ -20,7 +20,6 @@ class HomeController extends BaseController {
 		$theme = Theme::uses('site')->layout('default');
 		$theme->setTitle('Home');
 		
-		// var_dump($tutorials);
 		Cache::forget('latest_tr_slides');
 		Cache::forget('tutorials');
 		Cache::forget('latest_tutorials');
@@ -32,7 +31,14 @@ class HomeController extends BaseController {
 			{
 			    return DB::select(DB::raw('SELECT tutorialid FROM assessments GROUP BY tutorialid HAVING(COUNT(*)) ORDER BY COUNT(*) DESC LIMIT 5 ;'));
 			});
-			$out='';
+			$out ='';
+			if($tutorials == null) {
+				return $out;
+			}
+			$out.='<div class="tutorials_title" style="overflow:hidden;">
+                    Latest Trending Tutorials
+                </div>
+                <div id="tutorials" class="latest_trending_tutorials">';
 			foreach ($tutorials as $tutorial_t){
 				$out .= "<div style='text-align:justify;text-justify:inter-word;'>";
 				$tutorial = Tutorials::find($tutorial_t->tutorialid);
@@ -47,6 +53,10 @@ class HomeController extends BaseController {
 				$out .="&nbsp;<br><a class='btn btn-large' href='/tutorial/".$tutorial->id."/'>Read More ...</a>&nbsp;<br>&nbsp;<br>&nbsp;<br>";
 				$out .='</div>';
 			}
+			// $out.='</div>';
+			$out.='</div>
+            <div class=\'col-md-1 hidden-sm hidden-xs\'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+                <a class="tutorial right pull-right" id="next_btn" style="font-size:200%;">&raquo;</a>';
 			return $out;
         });
 		$latest_tutorials = Cache::remember('latest_tutorials',20,function(){
@@ -54,10 +64,14 @@ class HomeController extends BaseController {
 				return DB::select(DB::raw('SELECT id from tutorials ORDER BY `created_at` DESC LIMIT 5;'));
 			});
 			$out ='';
+			
 			foreach ($tutorials as $tutorial_t){
 				$out .= "<div style='text-align:justify;text-justify:inter-word;'>";
 				$tutorial = Tutorials::find($tutorial_t->id);
 				$string = $tutorial->content;
+				$string = preg_replace("/<img[^>]+\>/i", "", $string); 
+				$images = self::getTutorialImages($tutorial->content);
+				// dd($images);
 				$string = (strlen($string) > 753) ? substr($string,0,750).'...' : $string;
 				$string = wordwrap($string,200,"<br>\n");
 				$out.='<h2>'.$tutorial->name.'</h2>';
@@ -65,6 +79,7 @@ class HomeController extends BaseController {
 				<label class="label label-success">Subject
 				</label>'.Subject::find($tutorial->subjectid)->subjectname.'&nbsp;&nbsp;&nbsp;&nbsp;<label class="label label-success">Grade</label> :- '.Subject::find($tutorial->subjectid)->grade.'</p>';
 				$out.="&nbsp;<br>&nbsp;<br>".$string;
+				$out.="<img src='".$images[rand(0,count($images)-1)]."' class='' style='clear:right;position:relative;right:0px;top:0px;'/>";
 				$out.="&nbsp;<br><a class='btn btn-large' href='/tutorial/".$tutorial->id."/'>Read More ...</a>&nbsp;<br>&nbsp;<br>&nbsp;<br>";
 				$out.='</div>';
 			}
@@ -73,9 +88,19 @@ class HomeController extends BaseController {
 		$topstudents = Cache::remember('topstudents',20,function(){
 			$out='';
 			$topstudentlist = Cache::remember('topstudentlist',20,function(){
+				$result =  DB::select(DB::raw('SELECT studentid as sid,AVG(marks) as average
+				 FROM assessments WHERE `created_at` >= CURDATE() - INTERVAL 7 DAY  GROUP BY studentid ORDER BY average DESC LIMIT 0,5;'));
+							
 				return DB::select(DB::raw('SELECT studentid as sid,AVG(marks) as average
 				 FROM assessments WHERE `created_at` >= CURDATE() - INTERVAL 7 DAY  GROUP BY studentid ORDER BY average DESC LIMIT 0,5;'));
 			});
+			if($topstudentlist == null){
+				return $out;
+			}
+			$out .='<div class="topstudents_title" style="overflow:hidden;">
+                    Top Students of System
+                </div>
+                <div id="topstudents" class="topstudents">';
 			foreach ($topstudentlist as $student){
 				$user = User::find($student->sid);
 				$url = Gravatarer::make( [
@@ -90,6 +115,7 @@ class HomeController extends BaseController {
 				$out .= "<br><label class='label label-success'>Average Score</label> is ".(int)$student->average."";
 				$out .= "</div>";			
 			}
+			$out.="</div>";
 			return $out;
 		});
 		$add = [
@@ -97,7 +123,20 @@ class HomeController extends BaseController {
 		'latesttutorialslides'=>$latest_tutorials,
 		'topstudents'=>$topstudents
 		];
+
 		return $theme->scope('index',$add)->content();
 	}
+	private function getTutorialImages($content) {
+	    $HTMLDOM = new DOMDocument();
+	    $HTMLDOM->loadHTML($content);
+	    $arrContentImages = array();
 
+	    foreach ($HTMLDOM->getElementsByTagName("img") as $objImage) {
+	        $arrContentImages[] = $objImage->getAttribute("src");
+
+	    }
+
+	    return (!empty($arrContentImages)) ? $arrContentImages : false;
+
+	}
 }
