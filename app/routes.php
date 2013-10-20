@@ -24,14 +24,15 @@ Route::get('login', function () {
 Route::get('logout','UserController@logout');
 
 
-// //API Subdomain
-// Route::group(array('domain' => 'api.laravel.dev'),function(){
-//     Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
-//     Route::get('/tutorials',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
-//     Route::get('/tutorial/{id}',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
-//     Route::get('/exams',array('before'=>'api_check','uses'=>'ApiController@exams'));
-//     Route::get('/exam/{id}',array('before'=>'api_check','uses'=>'ApiController@exam'));
-// });
+//API Subdomain
+Route::group(array('domain' => 'api.laravel.dev'),function(){
+    Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
+    Route::get('/tutorials',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
+    Route::get('/tutorial/{id}',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
+    Route::get('/exams',array('before'=>'api_check','uses'=>'ApiController@exams'));
+    Route::get('/exam/{id}',array('before'=>'api_check','uses'=>'ApiController@exam'));
+
+});
 
 
 
