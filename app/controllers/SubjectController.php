@@ -5,7 +5,7 @@ class SubjectController extends BaseController {
       $this->beforeFilter('csrf', array('on' => 'update'));
       $this->beforeFilter('csrf', array('on' => 'create'));
     }
-	public function modder($id,$mode){
+	public function modder($dash,$id,$mode){
 		if(Request::getMethod() == 'GET'){
 			switch ($mode) {
 				case 'delete':
