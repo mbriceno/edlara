@@ -19,4 +19,18 @@ class ApiController extends BaseController
 	
 	}
 
+
+	public function tutorials()
+	{
+		return Tutorials::all();
+	}
+	public function exams()
+	{
+		return Exams::all();
+	}
+	public function exam($id){
+		$exam = Exams::findOrFail($id);
+		$examdata = File::get(app_path().'/files/exam-'.$id.'/'.$exam->hash.'.json');
+		return $examdata;
+	}
 }
