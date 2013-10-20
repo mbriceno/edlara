@@ -37,7 +37,7 @@ class ExamController extends BaseController
 	public function doneExam($id,$tid){
 		return;
 	}
-	public function markExam($aid,$eid){
+	public function markExam($dash,$aid,$eid){
         $assessment = Assessments::find($aid);
         $exam       = Exams::find($eid);
         $tutorial   = Tutorials::find($assessment->tutorialid);
@@ -318,7 +318,7 @@ class ExamController extends BaseController
 
         return Redirect::to(URL::previous());
 	}
-	public function updateExam($id){
+	public function updateExam($dash,$id){
         $rules = array();
         $rules['questioncount'] = 'required|integer|min:5|max:100';
         $rules['title']='required|min:6|max:1024';
