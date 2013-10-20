@@ -209,4 +209,18 @@ Route::filter('exam_check',function(){
         return Redirect::to(URL::previous());
     }
 });
+
+
+
 //TODO:create a filter
+// ApiCheck Filter
+
+// Route::filter('api_check',function(){
+//     if(Request::method()=='GET'{
+//         Config::set('session.driver','native');
+//         $toencrypt = "api_session_key";
+//         $encrypted = Crypter::encrypt($toencrypt);
+//         Session::put('session_api_key',$encrypted);
+//     }
+//     elseif(Request::method() == '')
+// })
