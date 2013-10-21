@@ -22,15 +22,10 @@
             <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
                 <a class="latest_tutorial left pull-left" id="prev_btn" style="font-size:200%;">&laquo;</a>
             </div>
-            <div id='latest_tutorial_wrapper' class="col-xs-12 col-sm-12 col-md-10" style="border-bottom:1px solid #000000;border-radius:20px;">
-                <div class="latest_tutorials_title" style="overflow:hidden;">
-                    Latest Tutorials
-                </div>
-                <div id="latest_tutorials" class="latest_tutorials">
-                    <?php
-                    echo $latesttutorialslides
-                    ?>
-                </div>
+            <div id='latest_tutorial_wrapper' class="col-xs-12 col-sm-12 col-md-10">
+                <?php
+                echo $latesttutorialslides
+                ?>
             </div>
             <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
                 <a class="latest_tutorial right pull-right" id="next_btn" style="font-size:200%;">&raquo;</a>
@@ -38,39 +33,39 @@
         </div>&nbsp;<br>&nbsp;<br>&nbsp;<br>
         <div class="row">
             <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
-            <?php if($tutorialslides !== ''){ ?>
+                <?php if($tutorialslides !== ''){ ?>
                 <a class="tutorial left pull-left" id="prev_btn" style="font-size:200%;">&laquo;</a>
-            <?php } ?>
+                <?php } ?>
             </div>
             <div id='tutorial_wrapper' class="col-xs-12 col-sm-12 col-md-10" 
             <?php if($tutorialslides !== ''){ ?>
             style="border-bottom:1px solid #000000;border-radius:20px;">
 
             <?php }                    echo $tutorialslides;
-                    ?>
-            </div>
-        </div>&nbsp;<br>&nbsp;<br>&nbsp;<br>
-        <div class="row">
-            <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
-            <?php if($tutorialslides !== ''){ ?>
-                <a class="topstudent left pull-left" id="prev_btn" style="font-size:200%;">&laquo;</a>
-            <?php } ?>
-            </div>
-            <div id='topstudent_wrapper' class="col-xs-12 col-sm-12 col-md-10"
-            <?php if($tutorialslides !== ''){ ?>
-
-             style="border-bottom:1px solid #000000;border-radius:20px;">
-            <?php } 
-                    echo $topstudents
-                    ?>
-            </div>
-            <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
-            <?php if($tutorialslides !== ''){ ?>
-                <a class="topstudent right pull-right" id="next_btn" style="font-size:200%;">&raquo;</a>
-            <?php } ?>
-            </div>
+            ?>
         </div>
+    </div>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+    <div class="row">
+        <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+            <?php if($tutorialslides !== ''){ ?>
+            <a class="topstudent left pull-left" id="prev_btn" style="font-size:200%;">&laquo;</a>
+            <?php } ?>
+        </div>
+        <div id='topstudent_wrapper' class="col-xs-12 col-sm-12 col-md-10"
+        <?php if($tutorialslides !== ''){ ?>
+
+        style="border-bottom:1px solid #000000;border-radius:20px;">
+        <?php } 
+        echo $topstudents
+        ?>
     </div>
+    <div class='col-md-1 hidden-sm hidden-xs'>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+        <?php if($tutorialslides !== ''){ ?>
+        <a class="topstudent right pull-right" id="next_btn" style="font-size:200%;">&raquo;</a>
+        <?php } ?>
+    </div>
+</div>
+</div>
 </div>
 <div class="clearfix"></div>
 <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
