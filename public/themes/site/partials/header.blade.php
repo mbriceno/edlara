@@ -1,5 +1,5 @@
-<div class="container-fluid" id='top-heading'>
-    <div class="row-fluid" >
+<div class="container cloud-container" id='top-heading'>
+    <div class="row" >
         <div id="clouds">
             <div class="cloud x1"></div>
             <div class="cloud x2"></div>

@@ -39,8 +39,8 @@
         "pda/pheanstalk": "dev-master",
         "artdarek/gravatarer": "dev-master",
         "philf/setting": "dev-master",
-        "teepluss/theme": "dev-master"
-    
+        "teepluss/theme": "dev-master",
+        "fzaninotto/faker": "1.2.*@dev"
     },
     "autoload": {
         "classmap": [

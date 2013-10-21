@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "19a04e09218e315edb18a7b53b5ab863",
+    "hash": "72875fdd415919abd7981cd08ec964e9",
     "packages": [
         {
             "name": "artdarek/gravatarer",
@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/sentry.git",
-                "reference": "2de4b536dcd0ce7ee761e5c896228308d388d178"
+                "reference": "2cedb29a128a3c2c1c289550b8e66c464741985c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/2de4b536dcd0ce7ee761e5c896228308d388d178",
-                "reference": "2de4b536dcd0ce7ee761e5c896228308d388d178",
+                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/2cedb29a128a3c2c1c289550b8e66c464741985c",
+                "reference": "2cedb29a128a3c2c1c289550b8e66c464741985c",
                 "shasum": ""
             },
             "require": {
@@ -155,7 +155,7 @@
                 "laravel",
                 "security"
             ],
-            "time": "2013-10-13 18:46:24"
+            "time": "2013-10-19 15:12:54"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -727,6 +727,52 @@
             "time": "2013-06-10 12:22:13"
         },
         {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "2355fcf8d19de6eaa562f809150e4ddace90d985"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2355fcf8d19de6eaa562f809150e4ddace90d985",
+                "reference": "2355fcf8d19de6eaa562f809150e4ddace90d985",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/",
+                    "Faker\\PHPUnit": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2013-10-10 13:40:29"
+        },
+        {
             "name": "grans/checkboxcaptcha",
             "version": "dev-master",
             "source": {
@@ -1106,12 +1152,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ff7feea50a741b5ccc8deda44c874af4555f4ca6"
+                "reference": "2a549d0dfe583a6f0e1a0d6585e7757469f72cb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ff7feea50a741b5ccc8deda44c874af4555f4ca6",
-                "reference": "ff7feea50a741b5ccc8deda44c874af4555f4ca6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2a549d0dfe583a6f0e1a0d6585e7757469f72cb8",
+                "reference": "2a549d0dfe583a6f0e1a0d6585e7757469f72cb8",
                 "shasum": ""
             },
             "require": {
@@ -1169,10 +1215,10 @@
                 "illuminate/workbench": "self.version"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "2.2.*",
-                "iron-io/iron_mq": "1.4.4",
+                "aws/aws-sdk-php": "2.4.*",
+                "iron-io/iron_mq": "1.4.*",
                 "mockery/mockery": "0.8.0",
-                "pda/pheanstalk": "2.0.*",
+                "pda/pheanstalk": "2.1.*",
                 "phpunit/phpunit": "3.7.*"
             },
             "type": "library",
@@ -1211,7 +1257,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2013-10-12 18:57:01"
+            "time": "2013-10-20 18:36:57"
         },
         {
             "name": "monolog/monolog",
@@ -1219,12 +1265,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "8e5a671eef6e1096d764e6f3524e6f732afa53b4"
+                "reference": "620922356a36d8903d213c986568fe159b530747"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/8e5a671eef6e1096d764e6f3524e6f732afa53b4",
-                "reference": "8e5a671eef6e1096d764e6f3524e6f732afa53b4",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/620922356a36d8903d213c986568fe159b530747",
+                "reference": "620922356a36d8903d213c986568fe159b530747",
                 "shasum": ""
             },
             "require": {
@@ -1274,7 +1320,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-10-11 16:18:40"
+            "time": "2013-10-16 16:27:10"
         },
         {
             "name": "mustache/mustache",
@@ -1798,12 +1844,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0a354eecbfe509d674879bbed29d711d45eee454"
+                "reference": "052a1ccf7152c94a585f9399badcc9c0c507f8b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0a354eecbfe509d674879bbed29d711d45eee454",
-                "reference": "0a354eecbfe509d674879bbed29d711d45eee454",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/052a1ccf7152c94a585f9399badcc9c0c507f8b3",
+                "reference": "052a1ccf7152c94a585f9399badcc9c0c507f8b3",
                 "shasum": ""
             },
             "require": {
@@ -1867,7 +1913,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-10-13 23:42:33"
+            "time": "2013-10-18 09:39:20"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -2632,12 +2678,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "ae8f725b270b670fb431ce6c01d30d242e5df943"
+                "reference": "8f383fa5e4b66b66ba2d09e502e8bf73bdd04901"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/ae8f725b270b670fb431ce6c01d30d242e5df943",
-                "reference": "ae8f725b270b670fb431ce6c01d30d242e5df943",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/8f383fa5e4b66b66ba2d09e502e8bf73bdd04901",
+                "reference": "8f383fa5e4b66b66ba2d09e502e8bf73bdd04901",
                 "shasum": ""
             },
             "require": {
@@ -2673,7 +2719,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-13 06:32:10"
+            "time": "2013-10-17 11:48:01"
         },
         {
             "name": "symfony/http-kernel",
@@ -2913,12 +2959,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "ef4878bcca171ebe7466be0505b85a710818d788"
+                "reference": "1f7cabb841e62ec49615bd965ac780fd994b3f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/ef4878bcca171ebe7466be0505b85a710818d788",
-                "reference": "ef4878bcca171ebe7466be0505b85a710818d788",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/1f7cabb841e62ec49615bd965ac780fd994b3f64",
+                "reference": "1f7cabb841e62ec49615bd965ac780fd994b3f64",
                 "shasum": ""
             },
             "require": {
@@ -2951,7 +2997,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-22 18:04:51"
+            "time": "2013-10-17 11:48:11"
         },
         {
             "name": "teepluss/theme",
@@ -2959,12 +3005,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/teepluss/laravel4-theme.git",
-                "reference": "f24128ba46848857f555cf232a8b22fb3e3697ef"
+                "reference": "e5afb85ca438d11210979319610ac91c83cb272d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/teepluss/laravel4-theme/zipball/f24128ba46848857f555cf232a8b22fb3e3697ef",
-                "reference": "f24128ba46848857f555cf232a8b22fb3e3697ef",
+                "url": "https://api.github.com/repos/teepluss/laravel4-theme/zipball/e5afb85ca438d11210979319610ac91c83cb272d",
+                "reference": "e5afb85ca438d11210979319610ac91c83cb272d",
                 "shasum": ""
             },
             "require": {
@@ -3008,7 +3054,7 @@
                 "twig",
                 "widget"
             ],
-            "time": "2013-10-14 08:24:00"
+            "time": "2013-10-18 18:50:40"
         },
         {
             "name": "twig/twig",
@@ -3172,7 +3218,8 @@
         "pda/pheanstalk": 20,
         "artdarek/gravatarer": 20,
         "philf/setting": 20,
-        "teepluss/theme": 20
+        "teepluss/theme": 20,
+        "fzaninotto/faker": 20
     },
     "platform": [
 
