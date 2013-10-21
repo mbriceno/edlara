@@ -8,6 +8,7 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('tutorials')->delete();
         Eloquent::unguard();
        try
         {
