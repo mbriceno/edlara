@@ -65,37 +65,32 @@ $latest_tutorials = Cache::remember('latest_tutorials',20,function(){
 	if($tutorials == null){
 		return $out;
 	}
-	$out.='<div class="latest_tutorials_title" style="overflow:hidden;">Latest Tutorials
-			</div><div id="latest_tutorials" class="latest_tutorials">';
+	$out.='';
 	foreach ($tutorials as $tutorial_t){
 		$tutorial = Tutorials::find($tutorial_t->id);
 		$string = $tutorial->content;
 		$string = preg_replace("/<img[^>]+\>/i", "", $string); 
 		$images = self::getTutorialImages($tutorial->content);
 		if($images == null) {
-			continue;
+			// continue;
 		}
 		$string = (strlen($string) > 753) ? substr($string,0,750).'...' : $string;
 		$string = wordwrap($string,200,"<br>\n");
-		$out .= "<div style='text-align:justify;text-justify:inter-word;'>";
-		$out.='<h2>'.$tutorial->name.'</h2>';
+		$out .= "<div>";
+		$out.='<h2 class="title">'.$tutorial->name.'</h2>';
 		$out.='<p style="display:inline-block;">
 		<label class="label label-success">Subject
 		</label>'.Subject::find($tutorial->subjectid)->subjectname.'&nbsp;&nbsp;&nbsp;&nbsp;<label class="label label-success">Grade</label> :- '.Subject::find($tutorial->subjectid)->grade.'</p>';
 		$out.="&nbsp;<br>&nbsp;<br>".$string;
-		$out.="<img src='".$images[rand(0,count($images)-1)]."' class='' style='height:100%;'/>";
+		// $out.="<img src='".$images[rand(0,count($images)-1)]."' class='' style='height:100%;'/>";
 		$out.="&nbsp;<br><a class='btn btn-large' href='/tutorial/".$tutorial->id."/'>Read More ...</a>&nbsp;<br>&nbsp;<br>&nbsp;<br>";
 		$out.='</div>';
 	}
-	$out.='</div>';
 	return $out;
 });
 $topstudents = Cache::remember('topstudents',20,function(){
 	$out='';
 	$topstudentlist = Cache::remember('topstudentlist',20,function(){
-		$result =  DB::select(DB::raw('SELECT studentid as sid,AVG(marks) as average
-			FROM assessments WHERE `created_at` >= CURDATE() - INTERVAL 7 DAY  GROUP BY studentid ORDER BY average DESC LIMIT 0,5;'));
-
 		return DB::select(DB::raw('SELECT studentid as sid,AVG(marks) as average
 			FROM assessments WHERE `created_at` >= CURDATE() - INTERVAL 7 DAY  GROUP BY studentid ORDER BY average DESC LIMIT 0,5;'));
 	});
