@@ -25,44 +25,45 @@ defined('ROOT' )|| die('Restricted Access');
                 <tbody>
                     <?php
 
+                    $tutorial_list = Cache::remember('tutorial_listing_dash',20,function(){
                     $tutorials = Tutorials::all();
-
+                    $out ='';
                     foreach ($tutorials as $tutorial){
                         $subject = Subject::find($tutorial->subjectid);
                         $teacher = Teacher::find($tutorial->createdby);
                         $username = Sentry::findUserByLogin($teacher->email);
                         if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin')) || Sentry::getUser()->id == $tutorial->createdby){
-                        echo "<tr>";
-                        echo "<td>";
-                        echo $tutorial->id;
-                        echo "</td>";
-                        echo "<td>";
-                        echo $tutorial->name;
-                        echo "</td>";
-                        echo "<td>";
-                        echo $subject->subjectname;
-                        echo "</td>";
-                        echo "<td>";
-                        echo $subject->grade;
-                        echo "</td>";
-                        echo "<td>";
-                        echo $tutorial->created_at;
-                        echo "</td>";
-                        echo "<td>";
-                        echo $tutorial->updated_at;
-                        echo "</td>";
-                        echo "<td>";
-                        echo $username->first_name.' '.$username->last_name;
-                        echo "</td>";
-                        echo "<td>";
+                        $out .= "<tr>";
+                        $out .= "<td>";
+                        $out .= $tutorial->id;
+                        $out .= "</td>";
+                        $out .= "<td>";
+                        $out .= $tutorial->name;
+                        $out .= "</td>";
+                        $out .= "<td>";
+                        $out .= $subject->subjectname;
+                        $out .= "</td>";
+                        $out .= "<td>";
+                        $out .= $subject->grade;
+                        $out .= "</td>";
+                        $out .= "<td>";
+                        $out .= $tutorial->created_at;
+                        $out .= "</td>";
+                        $out .= "<td>";
+                        $out .= $tutorial->updated_at;
+                        $out .= "</td>";
+                        $out .= "<td>";
+                        $out .= $username->first_name.' '.$username->last_name;
+                        $out .= "</td>";
+                        $out .= "<td>";
                         if($tutorial->published){
-                            echo "<a class='ajax-link' href='/tutorial/unpub/$tutorial->id/'><div class='btn btn-success'>Published</div></a>";
+                        $out .= "<a class='ajax-link' href='/tutorial/unpub/$tutorial->id/'><div class='btn btn-success'>Published</div></a>";
                         }
                         else {
-                            echo "<a class='ajax-link' href='/tutorial/pub/$tutorial->id/'><div class='btn btn-warning'>Unpublished</div></a>";
+                        $out .= "<a class='ajax-link' href='/tutorial/pub/$tutorial->id/'><div class='btn btn-warning'>Unpublished</div></a>";
                         }
-                        echo "</td>";
-                        echo '<td class="center">
+                        $out .= "</td>";
+                        $out .= '<td class="center">
                                     <a class="btn btn-success" href="/tutorial/view/'.$tutorial->id.'/">
                                         <i class="icon-zoom-in icon-white"></i>  
                                         View                                            
@@ -76,15 +77,18 @@ defined('ROOT' )|| die('Restricted Access');
                         $admingroup = Sentry::findGroupByName('admin');
                         if ($cuser->inGroup($admingroup))
                         {
-                            echo '<a class="btn btn-danger" href="/tutorial/delete/'.$tutorial->id.'/">
+                        $out .= '<a class="btn btn-danger" href="/tutorial/delete/'.$tutorial->id.'/">
                                         <i class="icon-trash icon-white"></i> 
                                         Delete
                                     </a>';
                         }
                         }
-                        echo "</td>";
-                        echo "</tr>";
+                        $out .= "</td>";
+                        $out .= "</tr>";
                     }
+                    return $out;
+                    });
+echo $tutorial_list;
                     ?>
 
                 </tbody>

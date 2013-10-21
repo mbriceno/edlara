@@ -19,7 +19,8 @@
             }
             return 0;
         }
-        $tutorialdata = Cache::remember('tutorialdata',30,function(){
+        Cache::forget('tutorialdata'.Sentry::getUser()->id);
+        $tutorialdata = Cache::remember('tutorialdata'.Sentry::getUser()->id,30,function(){
             $out='';
             $tutorials = Tutorials::all();
             foreach ($tutorials as $tutorial){
