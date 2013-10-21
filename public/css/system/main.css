@@ -16,7 +16,7 @@ src: url("/fonts/Metamorphous-Regular.otf") format("opentype");
 
 #top-header {
     font-family: 'Metamorphous', sans-serif;
-    font-size: 7.5vmin;
+    font-size: 65px;
     position: absolute;
     left: 15%;
     top:15%;
@@ -58,7 +58,8 @@ div.responsive h2 {
     font-size:5.5vmin;
 }
 #clouds {
-    padding: 0 0;
+    padding: 0 0 0 0;
+    margin:0 0 0 0;
     background: #c9dbe9;
     background: -webkit-linear-gradient(top, #c9dbe9 0%, #fff 100%);
     background: -linear-gradient(top, #c9dbe9 0%, #fff 100%);
@@ -67,7 +68,9 @@ div.responsive h2 {
     width: 100%;
     overflow: hidden;
 }
-
+.cloud-container {
+    width: 100% !important;
+}
 /*Time to finalise the cloud shape*/
 .cloud {
     width: 200px;
