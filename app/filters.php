@@ -214,7 +214,7 @@ Route::filter('cache', function( $response = null )
 {   
     if(Setting::get('system.cache')!=0){
     $uri = URI::full() == '/' ? 'home' : Str::slug( URI::full() );
-    $cached_filename = "response-$uri";
+    $cached_filename = "response-$uri_".Sentry::getUser()->id;
     if ( is_null($response) )
     {
         return Cache::get( $cached_filename );
