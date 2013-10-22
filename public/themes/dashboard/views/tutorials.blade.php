@@ -25,12 +25,12 @@ defined('ROOT' )|| die('Restricted Access');
                 <tbody>
                     <?php
 
-                    $tutorial_list = Cache::remember('tutorial_listing_dash',20,function(){
+                    $tutorial_list = Cache::remember('tutorial_listing_dash'.Sentry::getUser()->id,20,function(){
                     $tutorials = Tutorials::all();
                     $out ='';
                     foreach ($tutorials as $tutorial){
                         $subject = Subject::find($tutorial->subjectid);
-                        $teacher = Teacher::find($tutorial->createdby);
+                        $teacher = User::find($tutorial->createdby);
                         $username = Sentry::findUserByLogin($teacher->email);
                         if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin')) || Sentry::getUser()->id == $tutorial->createdby){
                         $out .= "<tr>";
