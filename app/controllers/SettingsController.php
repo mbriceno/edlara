@@ -14,7 +14,8 @@ class SettingsController extends BaseController{
 		 	,'logo'=>'required'
 		 	,'adminsitename'=>'required|min:2|max:256',
 		 	'systemurl'=>'required|url',
-		 	'url'=>'url|required'));
+		 	'url'=>'url|required',
+		 	'cache'=>"required|integer"));
 		 if($validator->fails()){
 		 	Input::flash();
 			return Redirect::to('/settings')->withErrors($validator);
@@ -30,6 +31,7 @@ class SettingsController extends BaseController{
 		 Setting::set('system.dashurl',Input::get('systemurl'));
 		 Setting::set('system.dashurlshort',Input::get('systemurlshort'));
 		 Setting::set('system.siteurlshort',Input::get('siteurlshort'));
+		 Setting::set('system.cache',Input::get('cache'));
 		$theme = Theme::uses('dashboard')->layout('default');
 
         $view = array(
