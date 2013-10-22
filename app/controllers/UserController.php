@@ -553,10 +553,10 @@ class UserController extends BaseController {
                 $newuser->removeGroup($oldusergroup);
                 $newuser->addGroup($newusergroup);
 
-                //Save NEW User
-                $updateduser->save();
                 //Delete OLD User
                 $updateableuser->delete();
+                //Save NEW User
+                $updateduser->save();
                 break;
             case 'admin':
                 if($accountlevel =='admin'){
