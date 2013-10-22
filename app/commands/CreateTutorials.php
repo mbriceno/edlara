@@ -38,7 +38,7 @@ class CreateTutorials extends Command {
 	public function fire()
 	{
 		//
-
+		DB::table('tutorials')->delete();
 		$faker = Faker\Factory::create();
 		$minimum = $this->option('minimum');
 		for($i=1;$i<=$minimum;$i++){
