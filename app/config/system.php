@@ -24,5 +24,7 @@ return array(
 
     "adminsitename" => "JHC - eLearning Admin",
 
-    "dashurl"=>"https://dashboard.laravel.dev"
+    "dashurl"=>"https://dashboard.laravel.dev",
+
+    "cache"=>'30'
 );

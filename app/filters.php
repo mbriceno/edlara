@@ -210,6 +210,24 @@ Route::filter('exam_check',function(){
     }
 });
 
+Route::filter('cache', function( $response = null )
+{   
+    if(Setting::get('system.cache')!=0){
+    $uri = URI::full() == '/' ? 'home' : Str::slug( URI::full() );
+    $cached_filename = "response-$uri";
+    if ( is_null($response) )
+    {
+        return Cache::get( $cached_filename );
+    }
+    else if ( $response->status == 200 )
+    {
+        $cache_time = Setting::get('system.cache'); // 30 minutes
+        if ( $cache_time > 0 ) {
+            Cache::put( $cached_filename , $response , $cache_time );
+        }
+    }
+}
+});
 
 
 //TODO:create a filter
