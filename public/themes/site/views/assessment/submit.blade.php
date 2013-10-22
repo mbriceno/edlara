@@ -1,4 +1,8 @@
-<div class='row'>
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><div class='row'>
     <div class="col-md-6 col-xs-12 offset-md-2" style="padding:30px;">
         <?php
         if($errors->first('title')){

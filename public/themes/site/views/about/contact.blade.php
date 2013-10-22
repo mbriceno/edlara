@@ -1,4 +1,8 @@
-<div class='row'>
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><div class='row'>
                 <div class="col-md-6 offset-md-3">
                     <h5>If Any Problems persist. Contact our team at </h5>
                         <?php

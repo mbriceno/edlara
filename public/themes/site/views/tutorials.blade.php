@@ -1,4 +1,8 @@
+<?php
 
+defined('ROOT' )|| die('Restricted Access');
+
+?>
 <div class='row'>
     <table id="tutorials" class="table table-striped table-bordered bootstrap-datatable datatable">
        <thead>

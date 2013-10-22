@@ -1,4 +1,8 @@
-<div class='row'>
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><div class='row'>
 <div class="col-md-10 offset-md-2">
         <table id="assessments" class="table table-striped table-bordered bootstrap-datatable datatable">
          <thead>

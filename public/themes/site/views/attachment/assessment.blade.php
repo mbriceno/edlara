@@ -1,4 +1,8 @@
-<div class='row'>
+<?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><div class='row'>
     <div class="col-md-12">
        <?php
 

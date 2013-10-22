@@ -1,4 +1,8 @@
 <?php
+
+defined('ROOT' )|| die('Restricted Access');
+
+?><?php
 $examid = Session::get('examid');
 $exam = Exams::find($examid);
 
