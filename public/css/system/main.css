@@ -16,7 +16,7 @@ src: url("/fonts/Metamorphous-Regular.otf") format("opentype");
 
 #top-header {
     font-family: 'Metamorphous', sans-serif;
-    font-size: 65px;
+    font-size: 8vmin;
     position: absolute;
     left: 15%;
     top:15%;
