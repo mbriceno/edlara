@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new CreateTutorials);
+Artisan::add(new CreateUsersTable);
