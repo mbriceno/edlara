@@ -27,7 +27,7 @@ Route::get('logout','UserController@logout');
 //API Subdomain
 Route::group(array('domain' => 'api.laravel.dev'),function(){
     Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
-    Route::get('/tutorials',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
+    Route::get('/tutorials.json',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
     Route::get('/tutorial/{id}',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
     Route::get('/exams',array('before'=>'api_check','uses'=>'ApiController@exams'));
     Route::get('/exam/{id}',array('before'=>'api_check','uses'=>'ApiController@exam'));
@@ -94,7 +94,7 @@ Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
         return Redirect::to(URL::previous());
     }));
     Route::any('subject/edit/{id}/{mode}',array('before'=>'csrf|admin','uses'=>'SubjectController@modder'));
-})->before('auth')->where('dashboard',Setting::get('system.dashurlshort'));
+})->before('auth|cache')->where('dashboard',Setting::get('system.dashurlshort'));
 
 
 
