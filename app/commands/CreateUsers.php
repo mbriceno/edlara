@@ -44,7 +44,7 @@ class CreateUsersTable extends Command {
 		for($is=1;$is<=$minimum;$is++){
 			$first_name = $faker->firstname;
 			$last_name = $faker->lastname;
-			$email = $faker->email;
+			$email = $faker->safeEmail;
 			$password="user123456";
 			$usergroup = rand(1,3);
 			$subjects = self::createSubjects();
@@ -74,7 +74,7 @@ class CreateUsersTable extends Command {
 				$student->user_id = $user->id;
 				$student->email=$email;
 				$student->extra = $subjects;
-				$student->dob = self::randDate('10th January 1950',date('d-m-Y'));
+				$student->dob = self::randDate('10th January 1995','10th January 2005');
 				$student->created_at=self::randDate('10th January 2013',date('jS F o'));
 				$student->save();
 			}

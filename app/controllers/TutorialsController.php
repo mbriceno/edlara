@@ -80,6 +80,7 @@ class TutorialsController extends BaseController {
 
                 if(Sentry::getUser()->inGroup(Sentry::findGroupByName('teachers'))){
                     $newid = self::createtutorial($id);
+                    Cache::forget("tutorial_listing_dash".Sentry::getUser()->id);                    
                     return Redirect::to('/tutorial/edit/'.$newid.''); 
                 }
                 Input::flash();
@@ -119,10 +120,13 @@ class TutorialsController extends BaseController {
             case 'pub':
                 $tutorial->published = 1;
                 $tutorial->save();
+                Cache::forget("tutorial_listing_dash".Sentry::getUser()->id);
+
                 return Redirect::to('/tutorials/');
             case 'unpub':
                 $tutorial->published = 0;
                 $tutorial->save();
+                Cache::forget("tutorial_listing_dash".Sentry::getUser()->id);
                 return Redirect::to('/tutorials/');
             case 'view';
                 $theme = Theme::uses('dashboard')->layout('default');
@@ -147,6 +151,7 @@ class TutorialsController extends BaseController {
                 if ($user->inGroup($admin))
                 {
                     $tutorial->delete();
+                    Cache::forget("tutorial_listing_dash".Sentry::getUser()->id);
                     return Redirect::to(URL::previous());
                 }
                 else
@@ -329,10 +334,12 @@ class TutorialsController extends BaseController {
             }        
         }  
         $newid = $newtutorial->id;
+        Cache::forget("tutorial_listing_dash");
         return $newid;
     }
     private function deleteAttachment($id,$attachment){
        File::delete(app_path().'/attachments/tutorial-'.$id.'/'.$attachment);
+       return;
     }
 
     private function subjectValidator($id,$subjects,$subject){
