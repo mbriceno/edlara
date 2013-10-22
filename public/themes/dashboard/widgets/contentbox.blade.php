@@ -14,7 +14,7 @@ defined('ROOT' )|| die('Restricted Access');
             <div class="box-content">
                 <ul class="dashboard-list-user">
                     <?php
-                    $users =  DB::select(DB::raw('SELECT id,email,first_name,last_name,created_at,activated FROM `users` WHERE (`created_at` >= CURDATE() - INTERVAL 7 DAY) ORDER BY `id` DESC LIMIT 5'));
+                    $users =  DB::select(DB::raw('SELECT id,email,first_name,last_name,created_at,activated FROM `users` WHERE (`created_at` >= CURDATE() - INTERVAL 7 DAY) ORDER BY `created_at` DESC LIMIT 5'));
                     foreach($users as $user){
                                             // user email
                         $email = $user->email;
