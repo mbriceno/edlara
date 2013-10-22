@@ -22,7 +22,9 @@ class ApiController extends BaseController
 
 	public function tutorials()
 	{
-		return Tutorials::all();
+		return Cache::remember('tutorials_api_list',60,function(){
+			return Tutorials::all();
+		});
 	}
 	public function exams()
 	{
