@@ -60,12 +60,21 @@ class CreateUsersTable extends Command {
 			// Find the group using the group id
 			$adminGroup = Sentry::getGroupProvider()->findById($usergroup);
 			$user->addGroup($adminGroup);
+			if($usergroup == 1){
+				$teacher = new Teacher;
+				$teacher->user_id = $user->id;
+				$teacher->email=$email;
+				$teacher->extra = $subjects;
+				$teacher->dob = self::randDate('10th January 1950','10th January 1995');
+				$teacher->created_at=self::randDate('10th January 2013',date('jS F o'));
+				$teacher->save();
+			}
 			if($usergroup == 2){
 				$teacher = new Teacher;
 				$teacher->user_id = $user->id;
 				$teacher->email=$email;
 				$teacher->extra = $subjects;
-				$teacher->dob = self::randDate('10th January 1950',date('d-m-Y'));
+				$teacher->dob = self::randDate('10th January 1950','10th January 1995');
 				$teacher->created_at=self::randDate('10th January 2013',date('jS F o'));
 				$teacher->save();
 			}
