@@ -53,7 +53,7 @@ class HomeController extends BaseController {
 			});
 $latest_tutorials = Cache::remember('latest_tutorials',20,function(){
 	$tutorials = Cache::remember('latest_tutes',20,function(){
-		return DB::select(DB::raw('SELECT id from tutorials ORDER BY `created_at` DESC LIMIT 5;'));
+		return DB::select(DB::raw('SELECT id from tutorials WHERE published= 1 ORDER BY `created_at` DESC LIMIT 5;'));
 	});
 	$out ='';
 	if($tutorials == null){
