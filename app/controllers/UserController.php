@@ -397,6 +397,29 @@ class UserController extends BaseController {
                 $throttle->unsuspend();
                 return Redirect::to(URL::previous());
                 break;
+            case 'ban':
+                $user = Sentry::getUser();
+                // Find the Administrator group
+                $admin = Sentry::findGroupByName('admin');
+
+                // Check if the user is in the administrator group
+                if ($user->inGroup($admin))
+                {
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->ban();
+                return Redirect::to(URL::previous());
+                }
+                else{
+                    return "UNAUTHORISED ACTION";
+                }
+                break;
+            case 'unban':
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->unban();
+                return Redirect::to(URL::previous());
+                break;
         }
     }
     public function showProfile($id){
