@@ -55,6 +55,11 @@ Route::filter('auth',function(){
         Session::put('url.intended',$currentURL);
         return View::make('account.login',array('error'=>'OK'));
     }
+            $usera = Sentry::getUser();
+            $throttle = Sentry::findThrottlerByUserId($usera->id);
+    if(!$throttle->isBanned() && !$throttle->isSuspended()){        
+        return View::make('account.login',array('error'=>'Suspended or Banned'));
+    }
 });
 
 //Admin Authentication Filter
@@ -80,11 +85,12 @@ Route::filter('admin',function(){
             $usera = Sentry::getUser();
             // Find the Administrator group
             $admin = Sentry::findGroupByName('admin');
-
+            $throttle = Sentry::findThrottlerByUserId($usera->id);
             // Check if the user is in the administrator group
-            if ($usera->inGroup($admin))
+            if ($usera->inGroup($admin) && !$throttle->isBanned() && !$throttle->isSuspended())
             {
                 // User is in Administrator group
+               
             }
             else
             {
@@ -214,7 +220,7 @@ Route::filter('cache', function( $response = null )
 {   
     if(Setting::get('system.cache')!=0){
     $uri = URI::full() == '/' ? 'home' : Str::slug( URI::full() );
-    $cached_filename = "response-$uri";
+    $cached_filename = "response-$uri_".Sentry::getUser()->id;
     if ( is_null($response) )
     {
         return Cache::get( $cached_filename );

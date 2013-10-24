@@ -44,7 +44,7 @@ class CreateUsersTable extends Command {
 		for($is=1;$is<=$minimum;$is++){
 			$first_name = $faker->firstname;
 			$last_name = $faker->lastname;
-			$email = $faker->email;
+			$email = $faker->safeEmail;
 			$password="user123456";
 			$usergroup = rand(1,3);
 			$subjects = self::createSubjects();
@@ -60,12 +60,21 @@ class CreateUsersTable extends Command {
 			// Find the group using the group id
 			$adminGroup = Sentry::getGroupProvider()->findById($usergroup);
 			$user->addGroup($adminGroup);
+			if($usergroup == 1){
+				$teacher = new Teacher;
+				$teacher->user_id = $user->id;
+				$teacher->email=$email;
+				$teacher->extra = $subjects;
+				$teacher->dob = self::randDate('10th January 1950','10th January 1995');
+				$teacher->created_at=self::randDate('10th January 2013',date('jS F o'));
+				$teacher->save();
+			}
 			if($usergroup == 2){
 				$teacher = new Teacher;
 				$teacher->user_id = $user->id;
 				$teacher->email=$email;
 				$teacher->extra = $subjects;
-				$teacher->dob = self::randDate('10th January 1950',date('d-m-Y'));
+				$teacher->dob = self::randDate('10th January 1950','10th January 1995');
 				$teacher->created_at=self::randDate('10th January 2013',date('jS F o'));
 				$teacher->save();
 			}
@@ -74,7 +83,7 @@ class CreateUsersTable extends Command {
 				$student->user_id = $user->id;
 				$student->email=$email;
 				$student->extra = $subjects;
-				$student->dob = self::randDate('10th January 1950',date('d-m-Y'));
+				$student->dob = self::randDate('10th January 1995','10th January 2005');
 				$student->created_at=self::randDate('10th January 2013',date('jS F o'));
 				$student->save();
 			}

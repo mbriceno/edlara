@@ -39,20 +39,21 @@ defined('ROOT' )|| die('Restricted Access');
                     $groupname = $group->name;
                     if($groupname == 'teachers'){
                         $user = Teacher::findOrFail($usere->id);
+                        $ssubjects = $user->extra;
                     }
                     elseif($groupname == 'admin'){
-                        $user = Teacher::findOrFail($usere->id);
+                        $ssubjects = serialize([]);
+                        // $user = Teacher::findOrFail($usere->id);
                     }
 
                             // $user = Sentry::getUser();
                             // $student = Student::findOrFail($user->id);
-                    $ssubjects = $user->extra;
                     $subjects = unserialize($ssubjects);
                     $subjectlist = array();
                     foreach ($subjectsmodel as $subject){
                         $truth = checkSubject($subjects,$subject->id);
                         if($truth == 1 && Sentry::getUser()->inGroup(Sentry::findGroupByName('teachers'))){
-                            $subjectlist[$subject->id] = $subject->subjectname;
+                            $subjectlist[$subject->id] = $subject->subjectname .' Grade '.$subject->grade;
                         }
                         if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
                            $subjectlist[$subject->id] = $subject->subjectname .' Grade '.$subject->grade;

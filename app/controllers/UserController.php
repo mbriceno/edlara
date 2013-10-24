@@ -397,6 +397,29 @@ class UserController extends BaseController {
                 $throttle->unsuspend();
                 return Redirect::to(URL::previous());
                 break;
+            case 'ban':
+                $user = Sentry::getUser();
+                // Find the Administrator group
+                $admin = Sentry::findGroupByName('admin');
+
+                // Check if the user is in the administrator group
+                if ($user->inGroup($admin))
+                {
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->ban();
+                return Redirect::to(URL::previous());
+                }
+                else{
+                    return "UNAUTHORISED ACTION";
+                }
+                break;
+            case 'unban':
+                $throttle = Sentry::findThrottlerByUserId($id);
+                // Suspend the user
+                $throttle->unban();
+                return Redirect::to(URL::previous());
+                break;
         }
     }
     public function showProfile($id){
@@ -543,7 +566,7 @@ class UserController extends BaseController {
 
                 $updateduser->email = $updateableuser->email;
                 $updateduser->dob = $updateableuser->dob;
-                $updateableuser->extra = $updateableuser->extra;
+                $updateduser->extra = $updateableuser->extra;
                 $updateduser->user_id = $updateableuser->user_id;
 
                 $newuser = Sentry::findUserById($user->id);
@@ -553,10 +576,10 @@ class UserController extends BaseController {
                 $newuser->removeGroup($oldusergroup);
                 $newuser->addGroup($newusergroup);
 
-                //Save NEW User
-                $updateduser->save();
                 //Delete OLD User
                 $updateableuser->delete();
+                //Save NEW User
+                $updateduser->save();
                 break;
             case 'admin':
                 if($accountlevel =='admin'){

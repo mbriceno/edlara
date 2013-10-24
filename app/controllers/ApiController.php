@@ -28,7 +28,9 @@ class ApiController extends BaseController
 	}
 	public function exams()
 	{
-		return Exams::all();
+		return Cache::remember('exams_api_list',60,function(){
+			return Exams::all();
+		});
 	}
 	public function exam($id){
 		$exam = Exams::findOrFail($id);

@@ -18,17 +18,26 @@ defined('ROOT' )|| die('Restricted Access');
     {{ Theme::partial('header') }}
     {{ Theme::partial('menu') }}
     &nbsp;<br>&nbsp;<br>&nbsp;<br>
+            @if($latesttutorialslides)
+            <h2 style="text-align:center;">Latest Tutorials</h2>
+            @endif;
             <div id='latest_tutorial_wrapper' class="liquid-slider">
                 <?php
                 echo $latesttutorialslides
                 ?>
             </div>
-            <div id='tutorial_wrapper' class="">
+            @if($tutorialslides)
+            <h2 style="text-align:center;">Latest Trending Tutorials</h2>
+            @endif;
+            <div id='tutorial_wrapper' class="liquid-slider">
                 <?php      
                 echo $tutorialslides;
                 ?>
             </div>
-            <div id='topstudent_wrapper' class="">
+            @if($topstudents)
+            <h2 style="text-align:center;">Top Students</h2>
+            @endif;
+            <div id='topstudent_wrapper' class="liquid-slider">
                 <?php 
                 echo $topstudents
                 ?>
@@ -48,7 +57,29 @@ defined('ROOT' )|| die('Restricted Access');
     autoSlide:true,    
   dynamicTabs:          false,
   dynamicTabsHtml:      false,
+  autoSlideInterval:  6000,
+  animateIn:                  "bounceInTop",
+  animateOut:                 "bounceOutRight",
+  continuous:                 true,
    });
-   </script>
+   $('#tutorial_wrapper').liquidSlider({
+    autoSlide:true,    
+  dynamicTabs:          false,
+  dynamicTabsHtml:      false,
+  autoSlideInterval:  4000,
+  animateIn:                  "bounceInBottom",
+  animateOut:                 "bounceOutRight",
+  continuous:                 true,
+   });
+    $('#topstudent_wrapper').liquidSlider({
+    autoSlide:true,    
+  dynamicTabs:          false,
+  dynamicTabsHtml:      false,
+  autoSlideInterval:  5000,
+  animateIn:                  "bounceInLeft",
+  animateOut:                 "bounceOutLeft",
+  continuous:                 true,
+   });
+  </script>
 </body>
 </html>
