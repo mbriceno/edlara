@@ -16,8 +16,9 @@
 
         echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
-        echo Form::text("title",'',array('placeholder'=>'Title of the Tutorial','class'=>'pull-right form-control','style'=>'clear:right;margin:10px;'));                           
-
+        echo Form::text("title",'',array('placeholder'=>'Title of the Exam','class'=>'pull-right form-control','style'=>'clear:right;margin:10px;'));                           
+        echo Form::label('timing','Max Time',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+        echo Form::text('timing','0',array('placeholder'=>'Maximum Time to do the Exam','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
         echo Form::label('subject','Subject',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
         $subjectsmodel = Subject::all();
         function checkSubject($subjects,$subject){
