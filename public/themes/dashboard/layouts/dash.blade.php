@@ -51,6 +51,11 @@ defined('ROOT' )|| die('Restricted Access');
                         <span class="caret black-caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
+                    <?php
+                    if(Sentry::getUser()->inGroup(Sentry::findGroupByName('admin'))){
+                        echo "<li><a href='/clearcache'>Clear Cache</a></li>";
+                    }
+                    ?>
                         <li>
                             <a href="/logout">Logout</a>
                         </li>
