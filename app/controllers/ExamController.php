@@ -232,6 +232,7 @@ class ExamController extends BaseController
         $rules = array();
         $rules['questioncount'] = 'required|integer|min:5|max:100';
         $rules['title']='required|min:6|max:1024';
+        $rules['timing']='required';
         $messages = array();
         $questioncount = Input::get('questioncount');
 
@@ -269,6 +270,7 @@ class ExamController extends BaseController
         $newexam = DB::table('exams')->orderby('id','desc')->first();
 
         $data = array();
+        $data['maxtime']= Input::get('timing', '30');
         for($question =1;$question <= $questioncount;){
         	$data['questiondata']['questions'][$question] = $input['question_'.$question];
             for($checkbox=1;$checkbox <=4;$checkbox++){
@@ -365,6 +367,7 @@ class ExamController extends BaseController
 
 
         $data = array();
+        $data['maxtime']= Input::get('timing', '30');
         $qrealcount=0;
         for($question =1;$question <= $questioncount;){
             // $data['questiondata']['question'][$question]['answers'] = 'answers';

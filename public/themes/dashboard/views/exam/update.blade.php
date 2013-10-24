@@ -1,5 +1,11 @@
 <?php
 $exam = Exams::findOrFail($id);
+$hash = $exam->hash;
+$examdata_encoded =  File::get(app_path().'/files/exam-'.$id.'/'.$hash.'.json');
+Session::put('questiondata_key',1);
+$examdata = json_decode($examdata_encoded);
+
+$examdata = objectToArray($examdata);
 ?>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
@@ -20,18 +26,14 @@ $exam = Exams::findOrFail($id);
         echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
 
         echo Form::text("title",$exam->title,array('placeholder'=>'Title of the Tutorial','class'=>'pull-right form-control','style'=>'clear:right;margin:10px;'));                           
-
+                           
+        echo Form::label('timing','Max Time',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+        echo Form::text('timing',$examdata['maxtime'],array('placeholder'=>'Maximum Time to do the Exam','class'=>'pull-right','style'=>'clear:right;margin:10px;'));
         echo Form::label('subject','Subject',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
         $subject = Subject::find(Exams::find($id)->subjectid);
         $subjectlist[$subject->id] = $subject->subjectname;
 
         echo Form::select('subject',$subjectlist,$subject->id,array('class'=>'pull-right','style'=>'clear:right;margin:10px;'));
-        $hash = $exam->hash;
-        $examdata_encoded =  File::get(app_path().'/files/exam-'.$id.'/'.$hash.'.json');
-        Session::put('questiondata_key',1);
-        $examdata = json_decode($examdata_encoded);
-
-        $examdata = objectToArray($examdata);
 
         echo "\n<div id='exams' style='clear:both;'>";
 

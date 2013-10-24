@@ -566,7 +566,7 @@ class UserController extends BaseController {
 
                 $updateduser->email = $updateableuser->email;
                 $updateduser->dob = $updateableuser->dob;
-                $updateableuser->extra = $updateableuser->extra;
+                $updateduser->extra = $updateableuser->extra;
                 $updateduser->user_id = $updateableuser->user_id;
 
                 $newuser = Sentry::findUserById($user->id);

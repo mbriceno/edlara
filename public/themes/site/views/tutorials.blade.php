@@ -23,8 +23,17 @@ defined('ROOT' )|| die('Restricted Access');
             }
             return 0;
         }
-        Cache::forget('tutorialdata'.Sentry::getUser()->id);
-        $tutorialdata = Cache::remember('tutorialdata'.Sentry::getUser()->id,30,function(){
+        if(Sentry::check()){
+            Cache::forget('tutorialdata'.Sentry::getUser()->id);
+            $tutorialcache = 'tutorialdata'.Sentry::getUser()->id;
+        }
+        else {
+            Cache::forget('tutorialdata');
+            $tutorialcache = 'tutorialdata';
+
+        }
+        $tutorialdata = Cache::remember($tutorialcache,30,function(){
+
             $out='';
             $tutorials = Tutorials::all();
             foreach ($tutorials as $tutorial){
