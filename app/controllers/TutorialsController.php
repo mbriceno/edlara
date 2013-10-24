@@ -191,7 +191,7 @@ class TutorialsController extends BaseController {
             return $response;
         }
     }
-    public function attachmentHandler($id,$attachmentname,$mode){
+    public function attachmentHandler($dash,$id,$attachmentname,$mode){
         $tutorial = Tutorials::find($id);
         switch ($mode) {
             case 'delete':
