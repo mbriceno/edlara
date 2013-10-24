@@ -29,7 +29,7 @@ Route::group(array('domain' => 'api.laravel.dev'),function(){
     Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
     Route::get('/tutorials.json',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
     Route::get('/tutorial/{id}',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
-    Route::get('/exams',array('before'=>'api_check','uses'=>'ApiController@exams'));
+    Route::get('/exams.json',array('before'=>'api_check','uses'=>'ApiController@exams'));
     Route::get('/exam/{id}',array('before'=>'api_check','uses'=>'ApiController@exam'));
 
 });
