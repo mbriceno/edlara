@@ -30,9 +30,9 @@ class HomeController extends BaseController {
 				$string = (strlen($string) > 753) ? substr($string,0,750).'...' : $string;
 				$string = wordwrap($string,200,"<br>\n");
 				$out .='<h2 class="title">'.$tutorial->name.'</h2>';
-				$out .='<div style="display:inline-block;">
-				<label class="label label-success">Subject
-				</label>'.Subject::find($tutorial->subjectid)->subjectname.'&nbsp;&nbsp;&nbsp;&nbsp;<label class="label label-success">Grade</label> :- '.Subject::find($tutorial->subjectid)->grade.'</div>';
+				$out .='<label class="label label-success">Subject
+				</label>'.Subject::find($tutorial->subjectid)->subjectname.'&nbsp;&nbsp;&nbsp;&nbsp;
+				<label class="label label-success">Grade</label> :- '.Subject::find($tutorial->subjectid)->grade;
 				$out .="&nbsp;<br>&nbsp;<br>".$string;
 				$out .="&nbsp;<br><a class='btn btn-large' href='/tutorial/".$tutorial->id."/'>Read More ...</a>&nbsp;<br>&nbsp;<br>&nbsp;<br>";
 				$out .='</div>';
@@ -47,7 +47,6 @@ $latest_tutorials = Cache::remember('latest_tutorials',20,function(){
 	if($tutorials == null){
 		return $out;
 	}
-	$out.='';
 	foreach ($tutorials as $tutorial_t){
 		$tutorial = Tutorials::find($tutorial_t->id);
 		$string = $tutorial->content;
@@ -59,14 +58,14 @@ $latest_tutorials = Cache::remember('latest_tutorials',20,function(){
 		$string = (strlen($string) > 753) ? substr($string,0,750).'...' : $string;
 		$string = wordwrap($string,200,"<br>\n");
 		$out .= "<div>";
-		$out.='<h2 class="title">'.$tutorial->name.'</h2>';
-		$out.='<p style="display:inline-block;">
+		$out .='<h2 class="title">'.$tutorial->name.'</h2>';
+		$out .='<p style="display:inline-block;">
 		<label class="label label-success">Subject
 		</label>'.Subject::find($tutorial->subjectid)->subjectname.'&nbsp;&nbsp;&nbsp;&nbsp;<label class="label label-success">Grade</label> :- '.Subject::find($tutorial->subjectid)->grade.'</p>';
-		$out.="&nbsp;<br>&nbsp;<br>".$string;
-		$out.="<img src='".$images[rand(0,count($images)-1)]."' class='' style='height:100%;'/>";
-		$out.="&nbsp;<br><a class='btn btn-large' href='/tutorial/".$tutorial->id."/'>Read More ...</a>&nbsp;<br>&nbsp;<br>&nbsp;<br>";
-		$out.='</div>';
+		$out .="&nbsp;<br>&nbsp;<br>".$string;
+		$out .="<img src='".$images[rand(0,count($images)-1)]."' class='' style='height:100%;'/>";
+		$out .="&nbsp;<br><a class='btn btn-large' href='/tutorial/".$tutorial->id."/'>Read More ...</a>&nbsp;<br>&nbsp;<br>&nbsp;<br>";
+		$out .='</div>';
 	}
 	return $out;
 });
