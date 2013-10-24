@@ -62,16 +62,39 @@ Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
     
 
     Route::get('/exam/edit/{id}',array('before'=>'teacher','uses'=>'HttpController@examupdateget'));
-    Route::get('/exam/view/{id}',array('before'=>'teacher',function($id){
+    Route::get('/exam/view/{id}',array('before'=>'teacher',function($dash,$id){
         if(Exams::find($id)){
             return View::make('dashboard.exams.view')->with('id',$id);
         }
         return View::make('dashboard.exams.create')->with('id',0);
     }));
-    Route::get('/exam/delete/{id}',array('before'=>'admin',function($id){
+    Route::get('/exam/delete/{id}',array('before'=>'admin',function($dash,$id){
         $exam = Exams::findOrFail($id);
-        $exam->delete();
-        return Redirect::to(URL::previous());
+        $examdata = DB::select(DB::raw('SELECT exams FROM tutorials'));
+        $examdata = objectToArray($examdata);
+        // dd($examdata);
+        $pass=[];
+        foreach($examdata as $exam){
+            if($exam["exams"]!= NULL){
+                // dd($exam);
+                // dd(unserialize($exam["exams"]));
+                $exam = unserialize($exam["exams"]);
+                // dd((int)$exam["id"]);
+                if((int)$exam["id"] !== (int)$id){
+                    $pass[]=true;
+                }
+                elseif((int)$exam["id"] == (int)$id) {
+                    $pass[]=false;
+                }
+            }
+        }
+        // dd($pass);
+        if (in_array(false, $pass, true)) {
+        }
+        else {
+            $exam->delete();
+        }
+        return Redirect::to("/exams");
     }));
     Route::get('/tutorial/edit/{id}/presentation',array('before'=>'teacher','uses'=>'PresentationController@view'))->where('id', '[0-9]+');
     Route::get('user/{id}/{mode}', array('before'=>'teacher','uses'=>'UserController@manage'))->where('id', '[0-9]+');
