@@ -80,6 +80,9 @@ $tutorial = Tutorials::find($id);
 
     echo "<br>";
     echo "<br>";
+    
+        $exams[0]='';
+        $possibleexamid=0;
     $checkexams = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE `subjectid` = '.$tutorial->subjectid));
     if($checkexams){
         $possibleexams = Exams::where('subjectid','=',$tutorial->subjectid)->get();
