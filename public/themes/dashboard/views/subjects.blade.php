@@ -13,6 +13,7 @@ defined('ROOT' )|| die('Restricted Access');
                     <tr>
                         <th>#ID</th>
                         <th>Subject Name</th>
+                        <th>Grade</th>
                         <th>Subject Code</th>
                         <th>Created Date</th>
                         <th>Modified Date</th>
@@ -32,6 +33,9 @@ defined('ROOT' )|| die('Restricted Access');
                         echo "</td>";
                         echo "<td style='width:auto;'>";
                         echo $subject->subjectname;
+                        echo "</td>";
+                        echo "<td style='width:auto;'>";
+                        echo $subject->grade;
                         echo "</td>";
                         echo "<td style='width:auto;'>";
                         echo $subject->subjectcode;

@@ -13,12 +13,10 @@ echo $errors->first();
                     echo Form::label('title','Title',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
                     echo Form::text('title',$assessment->title,array('class'=>'form-control pull-right disabled uneditable-input','placeholder'=>'Title of the Assessment','style'=>'clear:right;margin:5px;','readonly'));
                     echo Form::label('description','Description',array('class'=>'pull-left','style'=>'margin:15px;clear:left;'));
-                    echo Form::text('description',$assessment->description,array('class'=>'form-control pull-right disabled uneditable-input','placeholder'=>'Small Description of the Assessment','style'=>'clear:right;margin:5px;','readonly'));
+                    echo Form::text('description',$assessment->description,array('class'=>'form-control pull-right disabled uneditable-input','placeholder'=>'Small Description of the Assessment','style'=>'clear:right;margin:5px;max-width:70%;','readonly'));
                     echo Form::label('related_tutorial','Related Tutorial',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
                     $tutorialid = $assessment->tutorialid;
                     $tutoriallist = array();
-                    // $tutorial = Tutorials::where('id','=',$tutorialid);
-                    // var_dump($tutorial);
                     if($tutorialid !== NULL){
                         $tutorial= Tutorials::findOrFail($tutorialid);
                         $tutoriallist[$tutorial->id] = $tutorial->name;
@@ -35,7 +33,10 @@ echo $errors->first();
                     echo Form::select('subject',$subjectlist,$subjectid,array('class'=>'form-control pull-right disabled uneditable-input','style'=>'clear:right;margin:5px;width:200px;','readonly'));
                     echo Form::label('assessment_type','Assessment Type',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
                     $assessment_types = ['presentation'=>"Presentation",'document'=>'Documentation'];
-                    echo Form::select('assessment_type',$assessment_types,'presentation',array('class'=>'pull-right disabled uneditable-input','style'=>'clear:right;margin:5px;height:30px;','readonly'));
+                    if($assessment->assessmenttype=="exam"){
+                        $assessment_types=array("exam"=>"Exam");
+                    }
+                    echo Form::select('assessment_type',$assessment_types,'',array('class'=>'pull-right disabled uneditable-input','style'=>'clear:right;margin:5px;height:30px;','readonly'));
                     $tutorial = Tutorials::find($assessment->tutorialid);
                     $examdata = unserialize($tutorial->exams);
                     if($assessment->assessmenttype == 'exam'){
@@ -53,6 +54,7 @@ echo $errors->first();
                     echo Form::close();
                     ?>
                 </div>
+                @if($assessment->assessmenttype!=="exam")
                 <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
 
                     <h4>Current Attachments</h4>
@@ -103,6 +105,7 @@ echo $errors->first();
                             <br>&nbsp;
                             <br>&nbsp;
                             <br>
+                            @endif
                             <?php
                              $examdata = unserialize($tutorial->exams);
                             if($assessment->assessmenttype == 'exam'){

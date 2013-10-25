@@ -53,12 +53,13 @@ class AssessmentController extends BaseController {
             $files =  Input::file('attachments');
             foreach($files as $file){
                 if($file){
-                $name = $file->getClientOriginalName();
-                $file->move(app_path().'/attachments/assessment-'.$newassessment->id.'/',$name);                    
-        
+                    $name = $file->getClientOriginalName();
+                    File::makeDirectory(app_path().'/attachments/assessment-'.$newassessment->id.'/', 777);
+                    $file->move(app_path().'/attachments/assessment-'.$newassessment->id.'/',$name);                    
+                    
                 }
             }
-        
+            
         }
         $data = array();
         $data['fname'] = User::find($assessment->studentid)->first_name;
@@ -67,16 +68,16 @@ class AssessmentController extends BaseController {
         $data['submittedby']= User::find($assessment->studentid)->first_name .' '.User::find($assessment->studentid)->last_name;
         $data['submittedon']= $assessment->created_at;
         Mail::send('emails.assessmentsubmit',$data,function($message) use ($assessment)
-                {
-                    
-                    $userid = $assessment->teacherid;
-                    $user = Sentry::findUserById($userid);
-                    $tutorial = Tutorials::find($assessment->tutorialid);
-                    $submittedby = User::find($assessment->studentid);
+        {
+            
+            $userid = $assessment->teacherid;
+            $user = Sentry::findUserById($userid);
+            $tutorial = Tutorials::find($assessment->tutorialid);
+            $submittedby = User::find($assessment->studentid);
 
-                    $fullname = $user->first_name . ' '. $user->last_name;
-                    $message->to($user->getLogin(),$fullname)->subject('New Assessment Submitted by '.$submittedby->first_name.' '.$submittedby->last_name.' on Tutorial '.$tutorial->name);
-                });
+            $fullname = $user->first_name . ' '. $user->last_name;
+            $message->to($user->getLogin(),$fullname)->subject('New Assessment Submitted by '.$submittedby->first_name.' '.$submittedby->last_name.' on Tutorial '.$tutorial->name);
+        });
         // Input::file('attachment1')->move(app_path().'/attachments/assessment-'.$assessment->id.'/',$name);  
 
         $theme = Theme::uses('site')->layout('default');
@@ -92,7 +93,7 @@ class AssessmentController extends BaseController {
                 "sPagination":"bootstrap"
 
             });
-        });');
+    });');
         return $theme->scope('assessment.update',$view)->render();
     }
     public function submitview(){
@@ -134,156 +135,160 @@ class AssessmentController extends BaseController {
         $assessment->save();
         $newassessment = DB::table('assessments')->orderby('id','desc')->first();
 
-        if(Input::hasFile('attachments')){
-            $files =  Input::file('attachments');
-            foreach($files as $file){
-                if($file){
-                $name = $file->getClientOriginalName();
-                $file->move(app_path().'/attachments/assessment-'.$newassessment->id.'/',$name);                    
-        
-                }
+        // if(Input::hasFile('attachments')){
+        $files =  Input::file('attachments');
+        foreach($files as $file){
+            Log::error($file); 
+            if($file){
+             $name = $file->getClientOriginalName();
+             if(!is_dir(app_path().'/attachments/assessment-'.$newassessment->id.'/')){
+                File::makeDirectory(app_path().'/attachments/assessment-'.$newassessment->id.'/', 777);
             }
-        
+            $file->move(app_path().'/attachments/assessment-'.$newassessment->id.'/',$name);                    
+            
         }
+            // }
+        
+    }
         // Input::file('attachment1')->move(app_path().'/attachments/assessment-'.$assessment->id.'/',$name);  
-        $theme = Theme::uses('site')->layout('default');
-        $view = [
-        'id'=>$id
-        ];
-        $theme->asset()->container('datatables')->writeScript('inline-script','$(document).ready(function(){
-            $(\'#attachment\').dataTable({
-                "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ '.' Attachments per page"
-                },
-                "sPagination":"bootstrap"
+    $theme = Theme::uses('site')->layout('default');
+    $view = [
+    'id'=>$id
+    ];
+    $theme->asset()->container('datatables')->writeScript('inline-script','$(document).ready(function(){
+        $(\'#attachment\').dataTable({
+            "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ '.' Attachments per page"
+            },
+            "sPagination":"bootstrap"
 
-            });
-        });');
-        return $theme->scope('assessment.update',$view)->render();
-    }
-    
+        });
+});');
+    return $theme->scope('assessment.update',$view)->render();
+}
 
-    public function updateview($id){
-        $theme = Theme::uses('site')->layout('default');
-        $view = [
-        'id'=>$id
-        ];
-        $theme->asset()->container('datatables')->writeScript('inline-script','$(document).ready(function(){
-            $(\'#attachment\').dataTable({
-                "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ '.' Attachments per page"
-                },
-                "sPagination":"bootstrap"
 
-            });
-        });');
-        return $theme->scope('assessment.update',$view)->render();
-    }
-    public function updatelist(){
-        $theme = Theme::uses('site')->layout('default');
-        $view = [
-        ];
-        $theme->asset()->container('datatables')->writeScript('inline-script','$(document).ready(function(){
-            $(\'#assessments\').dataTable({
-                "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ '.' Assessments per page"
-                },
-                "sPagination":"bootstrap"
+public function updateview($id){
+    $theme = Theme::uses('site')->layout('default');
+    $view = [
+    'id'=>$id
+    ];
+    $theme->asset()->container('datatables')->writeScript('inline-script','$(document).ready(function(){
+        $(\'#attachment\').dataTable({
+            "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ '.' Attachments per page"
+            },
+            "sPagination":"bootstrap"
 
-            });
-        });');
-        return $theme->scope('assessments')->render();
+        });
+});');
+    return $theme->scope('assessment.update',$view)->render();
+}
+public function updatelist(){
+    $theme = Theme::uses('site')->layout('default');
+    $view = [
+    ];
+    $theme->asset()->container('datatables')->writeScript('inline-script','$(document).ready(function(){
+        $(\'#assessments\').dataTable({
+            "sDom": "<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'l><\'col-xs-5 col-sm-5 col-md-5\'f>r>t<\'row\'<\'col-xs-5 col-sm-5 col-md-5\'i><\'col-xs-5 col-sm-5 col-md-5\'p>>",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ '.' Assessments per page"
+            },
+            "sPagination":"bootstrap"
+
+        });
+});');
+    return $theme->scope('assessments')->render();
         // return View::make('site.assessments')->nest('header','main.header');
+}
+public function download($id,$file){
+    $tutorial = Assessments::find($id);
+    $studentid = $tutorial->studentid;
+    if($studentid == Sentry::getUser()->id || $tutorial->teacherid = Sentry::getUser()->id){
+        return Response::download(app_path().'/attachments/assessment-'.$id.'/'.$file);
     }
-    public function download($id,$file){
-        $tutorial = Assessments::find($id);
-        $studentid = $tutorial->studentid;
-        if($studentid == Sentry::getUser()->id || $tutorial->teacherid = Sentry::getUser()->id){
-            return Response::download(app_path().'/attachments/assessment-'.$id.'/'.$file);
-        }
-        else
-        {
-            return "UNAUTHORISED DOWNLOAD";
-        }
+    else
+    {
+        return "UNAUTHORISED DOWNLOAD";
     }
-    public function attachmentView($id,$file){
-        $attachmentname = $file;
-        $attachpath = app_path().'/attachments/assessment-'.$id.'/';
-        $fixpath = $attachpath.$attachmentname;
-        $tutorial = Assessments::find($id);
-        $studentid = $tutorial->studentid;
-        $teacherid = $tutorial->teacherid;
-        if($studentid == Sentry::getUser()->id || $teacherid == Sentry::getUser()->id){
-            $theme = Theme::uses('site')->layout('default');
-            $view = [ 
-            'attachment'=>$attachmentname,
-            'type'=>pathinfo($fixpath,PATHINFO_EXTENSION)
-            ];
-            return $theme->scope('attachment.assessment',$view)->render();
-        }
-        else
-        {
-            return "UNAUTHORISED VIEWING OF FILE";
-        }
+}
+public function attachmentView($id,$file){
+    $attachmentname = $file;
+    $attachpath = app_path().'/attachments/assessment-'.$id.'/';
+    $fixpath = $attachpath.$attachmentname;
+    $tutorial = Assessments::find($id);
+    $studentid = $tutorial->studentid;
+    $teacherid = $tutorial->teacherid;
+    if($studentid == Sentry::getUser()->id || $teacherid == Sentry::getUser()->id){
+        $theme = Theme::uses('site')->layout('default');
+        $view = [ 
+        'attachment'=>$attachmentname,
+        'type'=>pathinfo($fixpath,PATHINFO_EXTENSION)
+        ];
+        return $theme->scope('attachment.assessment',$view)->render();
     }
-    public function attachmentDelete($id,$file){
-        $tutorial = Assessments::find($id);
-        $studentid = $tutorial->studentid;
-        if($studentid == Sentry::getUser()->id){
-            File::delete(app_path().'/attachments/assessment-'.$id.'/'.$file);
-            return Redirect::to(URL::previous());
-        }
-        else
-        {
-            return "UNAUTHORISED DELETE OPERATION";
-        }
+    else
+    {
+        return "UNAUTHORISED VIEWING OF FILE";
     }
-
-
-    public function teacherUpdate($dash,$id){
-        $assessmentid = $id;
-
-        $assessment = Assessments::findOrFail($assessmentid);
-        $userid = $assessment->studentid;
-        $validator = Validator::make(Input::all(),
-            [
-            'id'=>'required|exists:assessments,id',
-            'title'=>'required|max:128|min:5|exists:assessments,title,id,'.$id,
-            'description'=>'max:1024|exists:assessments,description,id,'.$id,
-            'related_tutorial'=>"required|exists:assessments,tutorialid,studentid,".$userid,
-            'submitted_to'=>'required|exists:assessments,teacherid,id,'.$id,
-            'subject'=>'required|exists:assessments,subjectid,id,'.$id,
-            'marks'=>'required|integer|between:0,100',
-            'remarks'=>'required|max:1024|min:4'
-            ]);
-        if($validator->fails()){
-            Input::flash();
-            return Redirect::to(URL::previous())->withErrors($validator);
-        }
-
-        $user = Sentry::getUser()->id;
-        if($user == $assessment->teacherid){
-            if($assessment->assessmenttype == 'exam'){
-            }
-            else
-            {               
-            $assessment->marks = Input::get('marks');
-            }
-            $assessment->result = Input::get('remarks');            
-            $assessment->save();
-        }
+}
+public function attachmentDelete($id,$file){
+    $tutorial = Assessments::find($id);
+    $studentid = $tutorial->studentid;
+    if($studentid == Sentry::getUser()->id){
+        File::delete(app_path().'/attachments/assessment-'.$id.'/'.$file);
         return Redirect::to(URL::previous());
     }
-
-    private function subjectValidator($id,$subjects,$subject){
-        foreach($subjects as $s){
-            if($s == $subject){
-                return 1;
-            }
-        }
-        return 0;
+    else
+    {
+        return "UNAUTHORISED DELETE OPERATION";
     }
+}
+
+
+public function teacherUpdate($dash,$id){
+    $assessmentid = $id;
+
+    $assessment = Assessments::findOrFail($assessmentid);
+    $userid = $assessment->studentid;
+    $validator = Validator::make(Input::all(),
+        [
+        'id'=>'required|exists:assessments,id',
+        'title'=>'required|max:128|min:5|exists:assessments,title,id,'.$id,
+        'description'=>'max:1024|exists:assessments,description,id,'.$id,
+        'related_tutorial'=>"required|exists:assessments,tutorialid,studentid,".$userid,
+        'submitted_to'=>'required|exists:assessments,teacherid,id,'.$id,
+        'subject'=>'required|exists:assessments,subjectid,id,'.$id,
+        'marks'=>'required|integer|between:0,100',
+        'remarks'=>'required|max:1024|min:4'
+        ]);
+    if($validator->fails()){
+        Input::flash();
+        return Redirect::to(URL::previous())->withErrors($validator);
+    }
+
+    $user = Sentry::getUser()->id;
+    if($user == $assessment->teacherid){
+        if($assessment->assessmenttype == 'exam'){
+        }
+        else
+        {               
+            $assessment->marks = Input::get('marks');
+        }
+        $assessment->result = Input::get('remarks');            
+        $assessment->save();
+    }
+    return Redirect::to(URL::previous());
+}
+
+private function subjectValidator($id,$subjects,$subject){
+    foreach($subjects as $s){
+        if($s == $subject){
+            return 1;
+        }
+    }
+    return 0;
+}
 }

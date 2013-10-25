@@ -72,14 +72,10 @@ Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
         $exam = Exams::findOrFail($id);
         $examdata = DB::select(DB::raw('SELECT exams FROM tutorials'));
         $examdata = objectToArray($examdata);
-        // dd($examdata);
         $pass=[];
         foreach($examdata as $exam){
             if($exam["exams"]!= NULL){
-                // dd($exam);
-                // dd(unserialize($exam["exams"]));
                 $exam = unserialize($exam["exams"]);
-                // dd((int)$exam["id"]);
                 if((int)$exam["id"] !== (int)$id){
                     $pass[]=true;
                 }
@@ -88,7 +84,6 @@ Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
                 }
             }
         }
-        // dd($pass);
         if (in_array(false, $pass, true)) {
         }
         else {
