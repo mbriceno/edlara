@@ -18,7 +18,6 @@ defined('ROOT' )|| die('Restricted Access');
 
         <link rel="stylesheet" type="text/css" href="/lib/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/lib/system/style.css">
-        <link rel="stylesheet" type="text/css" href="/lib/datatables/css/jquery.dataTables.css">
         {{Theme::asset()->styles()}}
         {{Theme::asset()->scripts()}}
     </head>
