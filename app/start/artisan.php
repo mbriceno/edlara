@@ -13,3 +13,4 @@
 
 Artisan::add(new CreateTutorials);
 Artisan::add(new CreateUsersTable);
+Artisan::add(new CreateAssessments);

@@ -86,7 +86,7 @@ class TutorialsController extends BaseController {
                 Input::flash();
                 // Log::error(Input::get('subject'));
 
-                return Redirect::to('/tutorial/edit/'.$id.'')->withErrors($validator);
+                return Redirect::to('/tutorial/edit/'.$id.'');
             }
         }
         else {
@@ -110,7 +110,7 @@ class TutorialsController extends BaseController {
                     self::updatetutorial($id);
                     return Redirect::to('/tutorial/edit/'.$id.''); 
                 }
-                return Redirect::to(URL::previous());
+                return Redirect::to("/");
             }
         }
     }
@@ -191,8 +191,9 @@ class TutorialsController extends BaseController {
             return $response;
         }
     }
-    public function attachmentHandler($id,$attachmentname,$mode){
+    public function attachmentHandler($dash,$id,$attachmentname,$mode){
         $tutorial = Tutorials::find($id);
+        Log::error("test");
         switch ($mode) {
             case 'delete':
                 self::deleteAttachment($id,$attachmentname);
@@ -285,19 +286,19 @@ class TutorialsController extends BaseController {
         {
         $tutorial->published    =   0;
         }
-        if(Input::hasFile('attachment')){
-            $files =  Input::file('attachment');
+        // if(Input::hasFile('attachments')){
+            $files =  Input::file('attachments');
             foreach($files as $file){
                 if($file){
                 $name = $file->getClientOriginalName();
                 $file->move(app_path().'/attachments/tutorial-'.$tutorial->id.'/',$name); 
-                }
             }        
         }
         $tutorial->save();
+        return;
     }
 
-    private function createtutorial(){
+    private function createtutorial($dash){
         $user = Sentry::getUser();
         $userid = Sentry::getUser()->id;
         $teacher = Teacher::findOrFail($user->id);
@@ -324,8 +325,8 @@ class TutorialsController extends BaseController {
         }
         $tutorial->save();
         $newtutorial = DB::table('tutorials')->orderby('id','desc')->first();  
-        if(Input::hasFile('attachment')){
-            $files =  Input::file('attachment');
+        if(Input::hasFile('attachments')){
+            $files =  Input::file('attachments');
             foreach($files as $file){
                 if($file){
                 $name = $file->getClientOriginalName();

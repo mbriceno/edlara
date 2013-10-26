@@ -1,6 +1,8 @@
 <?php
 
 defined('ROOT' )|| die('Restricted Access');
+        $exams[0]='';
+        $possibleexamid=0;
 
 ?><?php
 $tutorial = Tutorials::find($id);
@@ -83,12 +85,10 @@ $tutorial = Tutorials::find($id);
 
 
 
-        echo Form::label('attachment','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
-        echo Form::file('attachment[]', array('class'=>"pull-right",'style'=>'clear:right;','multiple'=>'true'));
+        echo Form::label('attachments','Attachment',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
+        echo Form::file('attachments[]', array('class'=>"pull-right",'style'=>'clear:right;','multiple'=>'multiple'));
         echo "<br>";
         echo "<br>";
-        $exams[0]='';
-        $possibleexamid=0;
         $checkexams = DB::select(DB::raw('SELECT COUNT(`id`) as `exists` FROM `exams` WHERE `subjectid` = '.$tutorial->subjectid));
             $checkexams = objectToArray($checkexams);
             // dd($checkexams[0]['exists']);
@@ -118,6 +118,7 @@ $tutorial = Tutorials::find($id);
             $checked = '';
         }
         echo '<div class="make-switch pull-right"><input value="on" type="checkbox" name="examstruth" id="examstruth" '.$checked.'></div>';
+        $exams[]='';
         echo Form::label('exams','Exams to Use',array('class'=>'pull-left','style'=>'clear:left;margin:15px;'));
         echo Form::select('exams',$exams,$possibleexamid,array('class'=>'pull-right','style'=>'clear:right;margin:5px;'));
         echo "</fieldset>";

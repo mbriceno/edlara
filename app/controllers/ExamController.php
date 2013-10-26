@@ -305,7 +305,7 @@ class ExamController extends BaseController
         $newexame->totalquestions = $question-1;
         $newexame->save();
 
-        return Redirect::to(URL::previous());
+        return Redirect::to("/exams");
 	}
 	public function updateExam($dash,$id){
         $rules = array();
