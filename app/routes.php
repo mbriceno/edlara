@@ -25,7 +25,7 @@ Route::get('logout','UserController@logout');
 
 
 //API Subdomain
-Route::group(array('domain' => 'api.laravel.dev'),function(){
+Route::group(array('domain' => 'api.'.Setting::get('system.siteurlshort')),function(){
     Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
     Route::get('/tutorials.json',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
     Route::get('/tutorial/{id}',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
