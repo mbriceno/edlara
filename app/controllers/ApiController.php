@@ -37,4 +37,9 @@ class ApiController extends BaseController
 		$examdata = File::get(app_path().'/files/exam-'.$id.'/'.$exam->hash.'.json');
 		return $examdata;
 	}
+	public function tutorial($id){
+		return Cache::remember('tutorial'.$id,60,function() use ($id){
+			return Tutorials::find($id);
+		});
+	}
 }
