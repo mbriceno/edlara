@@ -26,5 +26,9 @@ return array(
 
     "dashurl"=>"https://dashboard.laravel.dev",
 
-    "cache"=>'30'
+    "cache"=>'30',
+
+    "dashurlshort"=>'dashboard',
+
+    "siteurlshort"=>'laravel'
 );
