@@ -29,10 +29,9 @@ Route::group(array('domain' => 'api.'.Setting::get('system.siteurlshort')),funct
     header('Access-Control-Allow-Origin: *');  
     Route::get('/',array('before'=>'api_check','uses'=>'ApiController@index'));
     Route::get('/tutorials.json',array('before'=>'api_check','uses'=>'ApiController@tutorials'));
-    Route::get('/tutorial/{id}',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
+    Route::get('/tutorial/{id}.json',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
     Route::get('/exams.json',array('before'=>'api_check','uses'=>'ApiController@exams'));
     Route::get('/exam/{id}',array('before'=>'api_check','uses'=>'ApiController@exam'));
-
 });
 
 
@@ -40,8 +39,6 @@ Route::group(array('domain' => 'api.'.Setting::get('system.siteurlshort')),funct
 
 //Dashboard Subdomain
 Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
-
-    
 
     Route::get('settings', array('before'=>'admin','uses'=>'DashboardController@settings'));
     Route::get('users', array('before'=>'admin','uses'=>'DashboardController@users'));
