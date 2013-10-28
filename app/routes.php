@@ -32,7 +32,6 @@ Route::group(array('domain' => 'api.'.Setting::get('system.siteurlshort')),funct
     Route::get('/tutorial/{id}.json',array('before'=>'api_check','uses'=>'ApiController@tutorial'));
     Route::get('/exams.json',array('before'=>'api_check','uses'=>'ApiController@exams'));
     Route::get('/exam/{id}',array('before'=>'api_check','uses'=>'ApiController@exam'));
-
 });
 
 
@@ -40,8 +39,6 @@ Route::group(array('domain' => 'api.'.Setting::get('system.siteurlshort')),funct
 
 //Dashboard Subdomain
 Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
-
-    
 
     Route::get('settings', array('before'=>'admin','uses'=>'DashboardController@settings'));
     Route::get('users', array('before'=>'admin','uses'=>'DashboardController@users'));
