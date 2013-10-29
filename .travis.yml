@@ -7,3 +7,8 @@ php:
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --prefer-source --no-interaction --dev
+  - php artisan migrate --package="cartalyst/sentry" --env=testing
+  - php artisan migrate --env=testing
+  - php artisan db:seed
+  - php artisan createusers:create --minimum="100"
+  - php artisan createtutorials:create --minimum="100"
