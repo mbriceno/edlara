@@ -74,6 +74,8 @@ $tutorialcontent = $tutorialcontent.$tutorialcontent.$tutorialcontent;
 			$tutorial->published=1;
 			$tutorial->content = self::spintax($tutorialcontent);
 			$tutorial->created_at=self::randDate('10th January 2013',date('jS F o'));
+			$this->info("Tutorial Title :-".$tutorial->name);
+			$this->info("Subject        :-".Subject::find($tutorial->subjectid)->subjectname);
 			$tutorial->save();
 		}
 	}

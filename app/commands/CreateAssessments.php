@@ -48,17 +48,26 @@ class CreateAssessments extends Command {
 		$assessmenttitle="This is a {title|heading|header} for Assessment.";
 		$assessmentdesc = "This is a sample {data|words|description} for Assessment.";
 		for($i=1;$i<=$minimum;$i++){
+			$this->info("Generated  :-".$i."\n");
 			$assessment = new Assessments;
 			$assessment->title= self::spintax($assessmenttitle);
 			$assessment->description=self::spintax($assessmentdesc);
 			$assessment->assessmenttype="presentation";
-			$assessment->tutorialid=rand(1,100);
-			$assessment->teacherid=array_rand($teachers);
-			$assessment->subjectid=rand(1,55);
-			$assessment->studentid=array_rand($students);
+			$assessment->tutorialid=$tutorials[array_rand($tutorials)];
+			$assessment->teacherid=$teachers[array_rand($teachers)];
+			$assessment->subjectid=Tutorials::find($assessment->tutorialid)->subjectid;
+			$assessment->studentid=$students[array_rand($students)];
 			$assessment->marks = rand(75,100);
 			$assessment->created_at=self::randDate('10th January 2013',date('jS F o'));
 			$assessment->save();
+			$this->info("ID         :- ".$assessment->id);
+			$this->info("Title      :- ".$assessment->title);
+			$this->info("Teacher ID :- ".$assessment->teacherid);
+			$this->info("Subject ID :- ".$assessment->subjectid);
+			$this->info("Student ID :- ".$assessment->studentid);
+			$this->info("Marks      :- ".$assessment->marks);
+
+			echo "\n";
 		}
 	}
 
