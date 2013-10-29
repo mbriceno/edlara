@@ -8,8 +8,8 @@ before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --prefer-source --no-interaction --dev
   - mysql -e 'create database laravel;'
-  - php artisan migrate --package="cartalyst/sentry" --env=testing
-  - php artisan migrate --env=testing
-  - php artisan db:seed
-  - php artisan createusers:create --minimum="100"
-  - php artisan createtutorials:create --minimum="100"
+  - php artisan --env=testing migrate --package="cartalyst/sentry"
+  - php artisan --env=testing migrate
+  - php artisan --env=testing db:seed
+  - php artisan --env=testing createusers:create --minimum="100"
+  - php artisan --env=testing createtutorials:create --minimum="100"
