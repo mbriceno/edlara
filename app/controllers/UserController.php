@@ -104,6 +104,7 @@ class UserController extends BaseController {
                                 'lname'=>'required|min:3|alpha|different:fname',
                                 'email'=>'required|min:5|email|usercheck',
                                 'password'=>'required|min:8|different:lname|different:fname|different:email|confirmed',
+                                'dob'=>'before:2005-01-01|after:1900-01-01',
                                 'actype'=>'required',
                                 $captcha_field =>$captcha_validation));
         if ($validator->fails())
