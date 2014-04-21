@@ -7,7 +7,7 @@ return array(
 	| Application Base URL
 	|--------------------------------------------------------------------------
 	*/
-	'baseurl'=> 'laravel.dev',
+	'baseurl'=> 'edlara.tk',
 	/*
 	|--------------------------------------------------------------------------
 	| Captcha Type Used in the System.
@@ -38,7 +38,7 @@ return array(
 	|
 	*/
 
-	'url' => 'https://laravel.dev/',
+	'url' => 'https://edlara.tk/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -131,9 +131,7 @@ return array(
                 'Way\Generators\GeneratorsServiceProvider',
         		'Mews\Captcha\CaptchaServiceProvider',
         		'Greggilbert\Recaptcha\RecaptchaServiceProvider',
-        		'Grans\Uservalidator\UservalidatorServiceProvider',
-        		'Grans\Checkboxcaptcha\CheckboxcaptchaServiceProvider',
-				'Artdarek\Gravatarer\GravatarerServiceProvider',
+                'Artdarek\Gravatarer\GravatarerServiceProvider',
 				'Philf\Setting\SettingServiceProvider',
 				'Teepluss\Theme\ThemeServiceProvider',
 

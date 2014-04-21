@@ -1,3 +1,4 @@
+
 {
     "name": "grans/edulara",
     "description": "e-Learning System using Laravel Framework",
@@ -13,18 +14,6 @@
         }
     ],
     "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/gnanakeethan/recaptcha"
-        },
-        {
-            "type":"git",
-            "url":"https://github.com/gnanakeethan/checkboxcaptcha"
-        },
-        {
-            "type":"git",
-            "url":"https://github.com/gnanakeethan/uservalidator"
-        }
     ],
     "require": {
         "laravel/framework": "4.0.*",        
@@ -32,10 +21,7 @@
         "cartalyst/sentry": "2.0.*",
         "jasonlewis/basset": "4.0.*@dev",
         "jasonlewis/enhanced-router": "dev-master",
-        "phpunit/phpunit": "3.8.*",
         "greggilbert/recaptcha": "dev-master",
-        "grans/checkboxcaptcha":"dev-master",
-        "grans/uservalidator":"dev-master",
         "pda/pheanstalk": "dev-master",
         "artdarek/gravatarer": "dev-master",
         "philf/setting": "dev-master",
@@ -53,9 +39,7 @@
         ]
     },
     "scripts": {
-        "pre-update-cmd": [
-            "php artisan clear-compiled"
-        ],
+        
         "post-install-cmd": [
             "php artisan optimize"
         ],

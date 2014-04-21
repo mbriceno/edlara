@@ -41,7 +41,7 @@ Route::group(array('domain' => 'api.'.Setting::get('system.siteurlshort')),funct
 
 
 //Dashboard Subdomain
-Route::group(array('domain' => '{dashboard}.laravel.dev'), function () {
+Route::group(array('domain' => '{dashboard}.edlara.tk'), function () {
 
     Route::get('settings', array('before'=>'admin','uses'=>'DashboardController@settings'));
     Route::get('users', array('before'=>'admin','uses'=>'DashboardController@users'));
