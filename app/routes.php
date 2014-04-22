@@ -25,7 +25,7 @@ Route::get('logout','UserController@logout');
 
 
 //API Subdomain
-Route::group(array('domain' => 'api.edlara.lk'),function(){
+Route::group(array('domain' => 'api.edlara.tk'),function(){
     $environment = App::environment();
     if($environment == 'production'){
         header('Access-Control-Allow-Origin: *');  
