@@ -31,6 +31,7 @@ class ApiController extends BaseController
 	}
 	public function exams()
 	{
+        return Exams::paginate(10)->toJson();
 		return Cache::remember('exams_api_list',60,function(){
 			return Exams::all();
 		});
