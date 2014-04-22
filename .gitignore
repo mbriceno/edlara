@@ -5,3 +5,4 @@ composer.phar
 **.cache
 /bin/*
 /bin/!.gitkeep
+/.idea

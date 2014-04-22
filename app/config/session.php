@@ -120,6 +120,6 @@ return array(
 	|
 	*/
 
-	'domain' => "edlara.lk",
+	'domain' => "edlara.tk",
 
 );
