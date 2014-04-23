@@ -315,18 +315,18 @@ Route::get('dash',function(){
 //HomePage Catcher
 Route::get('/',array('as'=>'home','uses'=>'HomeController@index'));
 
-//
-// App::missing(function($exception)
-// {
-//     return Response::view('site.error.404', array(), 404);
-// });
-// App::error(function(Exception $exception)
-// {
-//     Log::error($exception);
-//     return Response::view('site.error.system',array(),500);
-// });
-// App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
-// {
-//     Log::error($exception);
-//     return Response::view('site.error.system',array(),500);
-// });
+
+ App::missing(function($exception)
+ {
+     return Response::view('site.error.404', array(), 404);
+ });
+ App::error(function(Exception $exception)
+ {
+     Log::error($exception);
+     return Response::view('site.error.system',array(),500);
+ });
+ App::error(function(Illuminate \ Database \ Eloquent \ ModelNotFoundException $exception)
+ {
+     Log::error($exception);
+     return Response::view('site.error.system',array(),500);
+ });

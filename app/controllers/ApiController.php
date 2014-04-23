@@ -15,6 +15,7 @@ class ApiController extends BaseController
 	public function start(){		
 		Config::set('session.driver','native');
 		$api_key = Session::get('api_key');
+        $user = Input::get();
 		return Response::json(array('status'=>'OK','_token'=>$api_key));
 	
 	}
