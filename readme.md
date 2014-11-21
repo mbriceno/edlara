@@ -2,7 +2,7 @@
 ####/*Code Your Way to Smarter World*/
 This Application has been developed for CODEFEST 2013.http://codefest.lk/
 
-####The Application has successfully won 2nd Place at the Finals @SLIIT Cambus held on 25th October 2013.
+####The Application has successfully won 2nd Place at the Finals @SLIIT Campus held on 25th October 2013.
 
 ###The Features of The Application
 
